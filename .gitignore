@@ -10,3 +10,14 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
+
+#pictures and images
+.png
+.jpg
+.gif
+.bmp
+.svg
+
+#environment
+config.js
+.env
