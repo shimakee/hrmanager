@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import signup from './modules/signup';//importing modules
 
 Vue.use(Vuex);
 
@@ -31,16 +32,10 @@ export const store = new Vuex.Store({
             setTimeout(()=>{
                 commit('increasesBy');
             },500);
-        },
-        inc:({commit}, payload)=>{ //access to only commit mutations + PAYLOAD
-            setTimeout(()=>{
-                commit('increasesBy', payload);
-            },500);
-        },
-        withPayloadObj:({commit}, payload)=>{ //access to only commit mutations + PAYLOAD
-            setTimeout(()=>{
-                commit('increasesBy', payload.amount);
-            },payload.time);
         }
+        
+    },
+    modules:{
+        signup: signup
     }
-});
+}); 
