@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 //axios
 
-//importing routes frontend
-import {routes} from '../routes/front/router.js';
+//importing routes & store frontend
+import {store} from './store/store';
+import {routes} from '../routes/front/router';
 
 
 Vue.use(VueRouter);
@@ -16,5 +17,6 @@ const router = new VueRouter({ //creating router instance
 new Vue({
   el: '#app',
   router: router,
+  store: store,
   render: h => h(App)
 });
