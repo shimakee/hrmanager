@@ -41,10 +41,14 @@
             </div>
 
             <button @click="submit">Send</button>
+
         </form>
+            {{getData}}
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     data(){
         return{
@@ -60,15 +64,21 @@ export default {
                 },
                 gender:'male',
                 civilStatus:'single'
-            }
+            },
+            submitted: false
         }
     },
     methods:{
         submit(event){
             event.preventDefault();
-            var vm=this;
-            console.log(this.identity);
+            this.$store.dispatch('signup');
+            this.submitted = true;
         }
+    },
+    computed:{
+        ...mapGetters([
+            'getData'
+        ])
     }
 }
 </script>

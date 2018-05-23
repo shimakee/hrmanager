@@ -32,6 +32,11 @@ export const store = new Vuex.Store({
             setTimeout(()=>{
                 commit('increasesBy');
             },500);
+        },
+        withPayloadObj:({commit}, payload)=>{ //access to only commit mutations + PAYLOAD
+            setTimeout(()=>{
+                commit('increasesBy', payload.amount);
+            },payload.time);
         }
         
     },

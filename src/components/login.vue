@@ -17,15 +17,17 @@ export default {
             user:{
                 name: '',
                 password:''
-            }
+            },
+            submitted: false
         }
     },
     methods:{
         submit(event){
             event.preventDefault();
-            
-            var vm=this;
-            console.log(this.user);
+
+            //perform submit action here
+
+            this.submitted = true;
         }
     }
 }

@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
-//axios
 
 //importing routes & store frontend
 import {store} from './store/store';
-import {routes} from '../routes/front/router';
-
+import {routes} from './routes/router';
 
 Vue.use(VueRouter);
 const router = new VueRouter({ //creating router instance

@@ -5,7 +5,6 @@
     <button @click="methodWIthObjPayload({amount:2, time:500})">click</button>
     {{sampleState}}
     {{doubleSampleState}}
-    {{sampleComputed}}
   </div>
 </template>
 

@@ -1,22 +1,28 @@
+import axios from 'axios';
+
 const state = {
-    
+    data:null
 }
 const getters = {
-
+    getData:(state)=>{
+        return state.data;
+    }
 }
 const mutations = {
-
+    setData:(state, payload)=>{
+        state.data = payload;
+    }
 }
 const actions = {
-    inc:({commit}, payload)=>{ //access to only commit mutations + PAYLOAD
-        setTimeout(()=>{
-            commit('increasesBy', payload);
-        },500);
-    },
-    withPayloadObj:({commit}, payload)=>{ //access to only commit mutations + PAYLOAD
-        setTimeout(()=>{
-            commit('increasesBy', payload.amount);
-        },payload.time);
+    signup:({commit})=>{
+        axios.get('/signup')
+        .then(res=>{
+            console.log(res.data);
+            commit('setData', res.data);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
     }
 }
 
