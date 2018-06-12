@@ -1,11 +1,13 @@
 <template>
     <div>
-        <h1>Login</h1>
+        <h1>Settings</h1>
+
+        <h2>Change Password</h2>
         <form>
-            <label for="username">username</label>
-            <input type="text" v-model="user.name" placeholder="Username">
             <label for="password">password</label>
-            <input type="password" v-model="user.password" placeholder="Password">
+            <input type="password" v-model="password.old" placeholder="Old password">
+            <input type="password" v-model="password.new" placeholder="New password">
+            <input type="password" v-model="password.newConfirm" placeholder="New password confirm">
             <button @click="submit">Send</button>
         </form>
     </div>
@@ -14,9 +16,10 @@
 export default {
     data(){
         return{
-            user:{
-                name: '',
-                password:''
+            password:{
+                old:'',
+                new:'',
+                newConfirm:''
             },
             submitted: false
         }
@@ -24,8 +27,6 @@ export default {
     methods:{
         submit(event){
             event.preventDefault();
-
-            //perform submit action here
 
             this.submitted = true;
         }
