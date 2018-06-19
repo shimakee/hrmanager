@@ -19,5 +19,6 @@ yarn-error.log
 .svg
 
 #environment
+config/
 config.js
 .env

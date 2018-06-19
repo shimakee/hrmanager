@@ -1,3 +1,4 @@
+const config = require('config');
 const   express = require('express'),
         router = express.Router({mergeParams: true});
 //model
@@ -35,13 +36,13 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
         await newUser.hashPassword();
         
         const task = new Fawn.Task();//save to database
-        task.save('profiles', newProfile)
+        await task.save('profiles', newProfile)
         .save('users', newUser)
         .run();
 
         const token = newUser.genAuthToken();//generate token
 
-        return res.status(201).header(process.env.RESPONSETOKENHEADER, token).send('Success');//return sucess
+        return res.status(201).header(config.get('token_header'), token).send('Success');//return sucess
 });
 
 router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
@@ -49,7 +50,7 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
     const {error} = User.validate(userReq); //validate user
     if(error) {return res.status(400).send(error);}
 
-        const user = await User.findOne({username: userReq.username}).exec();//username exist
+        const user = await User.findOne({username: userReq.username});//username exist
         if(!user) {return res.status(400).send('Invalid username or password.');}
 
         const isValidPassword = await user.matchPassword(userReq.password);//match password
@@ -57,17 +58,22 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
 
         const token = user.genAuthToken();//generate token
 
-        return res.status(200).header(process.env.RESPONSETOKENHEADER, token).send(_.pick(user,['username']));   
+        return res.status(200)
+            .header(config.get('token_header'), token)
+            .send(_.pick(user,['username']));   
 });
 
-router.route('/reset').post(async (req,res,next)=>{
+router.route('/reset').get(function(req,res,next){
+    res.status(200).send({message: 'sample'});
+    next();
+}).post(async (req,res,next)=>{
     //validate-valid 
     let {error} = User.validateUser(req.body);//validate username
     if(error){ return res.status(400).send(error);}
         //check if user exist - exist
         const user = await User.findOne({username: req.body.username});
         if(!user){return res.status(400).send('Bad request.');}
-        
+
             //check if email is available
                 //check for main email && is valid
                     //create password hash with date/time validity
@@ -83,27 +89,35 @@ router.route('/reset').post(async (req,res,next)=>{
     next();
 });
 
-router.route('/user/me').get(auth.isAuth, async (req,res,bext)=>{
+router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     return res.status(200).send(req.user.username);
 
-}).put(auth.isAuth, async (req,res,bext)=>{
-    let user = req.user;
+}).put(auth.isAuth, async (req,res,next)=>{
     let data = req.body;
 
     let {error} = User.validate(data);//validate
     if(error){return  res.status(400).send(error);}
 
-    //if doesnt exist - return 404 error
-        data = _.omit(data, ['_id']); //prevent id change
-        if(data.password){ data.password = await User.hashPassword(data.password);}//hash password
-        user = await User.updateOne({_id: user._id}, data);
-        res.status(200).send('Success');
+    
+    let user = await User.findOne({_id: req.user._id});
+    if(!user){return res.status(404).send('Bad request');}//if doesnt exist - return 404 error
+
+    data = _.omit(data, ['_id']); //prevent id change
+    if(data.password){ 
+        user.password = data.password
+        data.password = await user.hashPassword();//hash password
+    }
+
+    await User.updateOne({_id: user._id}, data);//update
+
+    res.status(200).send('Success');
 }).delete(auth.isAuth,async (req,res,next)=>{
     let user = req.user;
 
     const userExist = await User.findOne({_id: user._id});
     if(!userExist) {return res.status(400).send('Sever error: Could not delete account');}
-        const task = new Fawn.Task();//save to database
+
+        const task = new Fawn.Task();
         task.remove('profiles', {_id: user.profile})
         .remove('users', {_id: user._id})
         .run();

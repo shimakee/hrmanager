@@ -1,4 +1,6 @@
+const config = require('config');
 const   Joi = require('joi');//validator
+    Joi.objectId = require('joi-objectid')(Joi);
 const PassComplexity = require('joi-password-complexity'); //password complexity joi object
 const bcrypt = require('bcrypt');//password hashing
 const jwt = require('jsonwebtoken');
@@ -40,14 +42,12 @@ user.statics.validateUser = function(data){
     return validateUser(data);
 }
 
-user.statics.validateSignup = function(data){
-    return validateUserSignup(data);
+user.statics.validatePassword = function(data){
+    return validatePassword(data);
 }
 
-user.statics.hashPassword= async function(password, saltRounds = 10){
-
-    const salt = await bcrypt.genSalt(saltRounds);
-    return await bcrypt.hash(password, salt);
+user.statics.validateSignup = function(data){
+    return validateUserSignup(data);
 }
 
 user.methods.hashPassword= async function(saltRounds = 10){
@@ -64,20 +64,20 @@ user.methods.genAuthToken = function(){
     const token = jwt.sign({_id:this._id, 
                             username: this.username,
                             profile: this.profile}, 
-    process.env.TOKENKEY,
+    config.get('token'),
     {expiresIn:'1h'});
     return token;
 }
 
+// const skipInit = process.env.NODE_ENV === 'test';
 module.exports = mongoose.model('Users', user);
 
 function validateUser(data){
-    const userSchema = Joi.object().keys({//to be tested
-        username:Joi.string().alphanum().min(8).max(30).required()
-    });
+    return Joi.validate(data, Joi.string().alphanum().min(8).max(30).required());
+}
 
-    return userSchema.validate(data);
-
+function validatePassword(data){
+    return Joi.validate(data, new PassComplexity(passwordConfig));
 }
 
 function validate(data){
@@ -94,13 +94,10 @@ function validate(data){
     return userSchema.validate(data);
 }
 
-function validatePassword(data){
-    return Joi.validate(data, new PassComplexity(passwordConfig));
-}
-
 function validateUserSignup(data){
     const userSchema = Joi.object().keys({//to be tested
-        activity:Joi.boolean(),
+        _id: Joi.objectId().allow(''),
+        activity:Joi.boolean().allow(''),
         username:Joi.string().alphanum().min(8).max(30).required(),
         password:Joi.string().min(10).max(72).required(),
         passConfirm:Joi.string().min(10).max(72).required(),

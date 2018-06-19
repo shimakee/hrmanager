@@ -8,10 +8,8 @@ const errorHandler = require('../middleware/err');
 module.exports = function(app){
     app.use(express.json());//using body parser
 
-    app.use('/', userRoutes);//using routes
-    app.use('/profile', profileRoutes);
-
-    app.use(express.static(__dirname));//using directory to serve static index file for vue
+    app.use('/user', userRoutes);//using routes
+    app.use('/profile', profileRoutes);//profile routes
 
     app.use(errorHandler);//handling errors within express
 }

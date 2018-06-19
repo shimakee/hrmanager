@@ -89,7 +89,7 @@ function validateProfile(data){
             suffix: Joi.string().max(50).regex(regex.common).allow('')
         },
         gender:Joi.string().valid(validDataLib.gender).insensitive().required(),
-        birthdate:Joi.date().min('1-1-1918').max('now').allow('').required(),
+        birthdate:Joi.date().min('1-1-1900').max('now').required(),
         nationality:Joi.string().max(30).regex(regex.common).allow(''),
         civilStatus:Joi.string().valid(validDataLib.civilStatus).insensitive().required(),
         spouse:Joi.objectId().allow(''),
@@ -125,37 +125,5 @@ profile.methods.getFullName = function(){
     return fullName.join(' ');
 }
 
+// const skipInit = process.env.NODE_ENV === 'test';
 module.exports = mongoose.model('Profile', profile);
-
-const sampleData = {//export to unit testing
-    name:{
-        first: 'asdasdasdasdas',
-        middle: 'asdasda asd asd asda',
-        maiden: 'asdasd asd asd',
-        last: 'asdasd asd asd',
-        suffix: 'asdasd asdasda'
-    },
-    gender:'male',
-    birthdate:'10-18-1989',
-    nationality:'filipino',
-    civilStatus:'s',
-    spouse:new mongoose.Types.ObjectId().toHexString(),
-    parents:{
-        mother:new mongoose.Types.ObjectId().toHexString(),
-        father:new mongoose.Types.ObjectId().toHexString()
-    },
-    contact:[{
-        main:true,
-        description:'',
-        countryCode:'',
-        areaCode:'',
-        number:'12312312312',
-    },
-    {
-        main:true,
-        description:'',
-        countryCode:'',
-        areaCode:'',
-        number:'1231231212',
-    }]
-}

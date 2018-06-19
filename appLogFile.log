@@ -3,3 +3,439 @@
 {"level":"info","message":"listening on port 3000...","timestamp":"2018-06-12T17:40:20.171Z"}
 {"level":"info","message":"listening on port 3000...","timestamp":"2018-06-12T17:40:21.689Z"}
 {"level":"info","message":"Connected to database...","timestamp":"2018-06-12T17:40:22.729Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:48:54.465Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:48:59.774Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:49:53.393Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:51:02.386Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:52:38.355Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-13T07:52:39.513Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:53:35.470Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-13T07:53:36.604Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:53:42.930Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-13T07:53:44.102Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:54:12.383Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-13T07:54:13.527Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:54:29.701Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-13T07:54:30.837Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-13T07:54:38.644Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-13T07:54:39.775Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:20:42.946Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:20:46.976Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-15T16:20:48.085Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:22:02.324Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:22:06.919Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-15T16:22:08.052Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:25:48.302Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-15T16:25:49.451Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:26:19.180Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-15T16:26:20.306Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:27:15.866Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-15T16:27:17.007Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-15T16:29:21.250Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-15T16:29:22.402Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T05:37:53.729Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T05:37:54.995Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-17T05:37:56.037Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T05:39:21.466Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-17T05:39:22.506Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T05:39:37.927Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-17T05:39:38.972Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T06:50:39.733Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T06:50:41.006Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-17T06:50:42.081Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T06:51:00.990Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-17T06:51:02.051Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T06:51:34.492Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-17T06:51:36.117Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-17T06:51:37.156Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-18T15:31:54.265Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T16:22:40.107Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-18T16:22:41.185Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T16:22:53.607Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-18T16:22:54.683Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T16:23:37.542Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-18T16:23:38.636Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T16:55:07.167Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T16:55:07.171Z"}
+{"level":"info","message":"Connected to database...","timestamp":"2018-06-18T16:55:08.242Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:00:15.667Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:00:15.670Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:00:16.804Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T17:04:00.607Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:04:00.611Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:04:00.612Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:04:01.778Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T17:20:27.782Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:20:27.783Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:20:27.783Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:20:28.829Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T17:25:32.797Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:25:32.798Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:25:32.798Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:25:33.819Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T17:26:15.695Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:26:15.696Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:26:15.696Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:26:16.767Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T17:26:55.794Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:26:55.795Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:26:55.797Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:26:56.859Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T17:52:53.034Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T17:52:53.035Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T17:52:53.035Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T17:52:54.084Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:05:12.272Z"}
+{"level":"info","message":"NODE_ENV: poduction","timestamp":"2018-06-18T18:05:12.273Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:05:12.273Z"}
+{"level":"info","message":"Connected to database GSM...","timestamp":"2018-06-18T18:05:13.342Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:08:42.077Z"}
+{"level":"info","message":"NODE_ENV: poduction","timestamp":"2018-06-18T18:08:42.077Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:08:42.077Z"}
+{"level":"info","message":"Connected to database GSM...","timestamp":"2018-06-18T18:08:43.116Z"}
+{"level":"info","message":"App: My web App produced","timestamp":"2018-06-18T18:09:11.437Z"}
+{"level":"info","message":"NODE_ENV: production","timestamp":"2018-06-18T18:09:11.439Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:09:11.439Z"}
+{"level":"info","message":"Connected to database GSM...","timestamp":"2018-06-18T18:09:12.486Z"}
+{"level":"info","message":"token used = secretTOKEN","timestamp":"2018-06-18T18:10:20.673Z"}
+{"level":"info","message":"App: My web App produced","timestamp":"2018-06-18T18:10:20.674Z"}
+{"level":"info","message":"NODE_ENV: production","timestamp":"2018-06-18T18:10:20.674Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:10:20.675Z"}
+{"level":"info","message":"Connected to database GSM...","timestamp":"2018-06-18T18:10:21.696Z"}
+{"level":"info","message":"token used = secretTOKEN","timestamp":"2018-06-18T18:18:01.748Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:18:01.749Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-18T18:18:01.749Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:18:01.749Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:18:02.788Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:21:12.002Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:21:12.003Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:21:12.003Z"}
+{"level":"info","message":"Connected to database GSM...","timestamp":"2018-06-18T18:21:13.069Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:23:09.101Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:23:09.102Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:23:09.102Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:23:10.122Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:23:50.417Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:23:50.418Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:23:50.418Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:23:51.453Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:32:31.110Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:32:31.110Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:32:31.110Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:32:32.140Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:39:57.116Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:39:57.117Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:39:57.117Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:39:58.173Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:40:57.840Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:40:57.840Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:40:57.840Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:40:58.867Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:42:38.345Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:42:38.347Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:42:38.347Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:42:39.433Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:46:07.349Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:46:07.350Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:46:07.350Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:46:08.399Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:49:02.687Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:49:02.688Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:49:02.688Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:49:03.735Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:50:32.114Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:50:32.115Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:50:32.116Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:50:33.193Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:54:36.784Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:54:36.786Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:54:36.786Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:54:37.870Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T18:57:14.902Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T18:57:14.904Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T18:57:14.904Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T18:57:15.983Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:01:47.962Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:01:47.963Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:01:47.964Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:01:49.041Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:04:26.141Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:04:26.143Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:04:26.143Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:04:27.232Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:09:13.852Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:09:13.854Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:09:13.854Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:09:14.900Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:11:08.117Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:11:08.118Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:11:08.118Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:13:04.782Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:13:04.782Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:13:04.782Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:21:36.155Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:21:36.157Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:21:36.157Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:21:37.203Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:24:19.852Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:24:19.853Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:24:19.853Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:24:20.897Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:25:35.760Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:25:35.762Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:25:35.762Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:25:36.819Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:35:41.524Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:35:41.524Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:35:41.524Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:35:42.583Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:37:04.033Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:37:04.033Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:37:04.033Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:37:05.097Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:37:17.013Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:37:17.014Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:37:17.014Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:37:18.035Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:39:28.258Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:39:28.258Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:39:28.259Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:39:29.338Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:40:26.725Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:40:26.725Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:40:26.725Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:40:27.753Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:40:44.643Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:40:44.644Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:40:44.644Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:40:45.671Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:41:29.380Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:41:29.381Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:41:29.381Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:41:30.413Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:42:03.889Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:42:03.890Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:42:03.890Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:42:04.918Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:42:57.847Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:42:57.849Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:42:57.849Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:42:58.914Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:44:21.935Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:44:21.936Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:44:21.936Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:44:23.031Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-18T19:47:36.389Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-18T19:47:36.391Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-18T19:47:36.391Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:47:37.478Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:51:27.896Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:53:18.027Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:54:32.965Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-18T19:55:05.988Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T04:41:26.404Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T04:41:45.187Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T04:42:25.024Z"}
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-06-19T05:34:56.456Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T05:34:56.457Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T05:34:56.457Z"}
+{"level":"info","message":"Connected to database GSM...","timestamp":"2018-06-19T05:34:57.581Z"}
+{"level":"info","message":"Database connection info: undefined","timestamp":"2018-06-19T05:34:57.582Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T05:36:27.932Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T05:36:27.933Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T05:36:27.933Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T05:38:13.981Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T05:38:13.982Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T05:38:13.982Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T05:38:15.114Z"}
+{"level":"info","message":"Database connection info: undefined","timestamp":"2018-06-19T05:38:15.115Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T05:39:33.078Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T05:39:33.079Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T05:39:33.080Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T05:39:34.157Z"}
+{"level":"info","message":"Database connection info: undefined","timestamp":"2018-06-19T05:39:34.159Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T05:39:34.204Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T05:42:26.524Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T05:42:26.526Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T05:42:26.526Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T05:42:27.640Z"}
+{"level":"info","message":"Database connection info: undefined","timestamp":"2018-06-19T05:42:27.640Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T05:42:27.661Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:00:16.193Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:00:16.193Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:00:16.193Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:20:24.742Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:20:24.742Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:20:24.742Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:22:47.989Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:22:47.993Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:22:47.993Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:53:10.245Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:53:10.246Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:53:10.246Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:55:29.523Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:55:29.523Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:55:29.523Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:55:56.486Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:55:56.486Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:55:56.486Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T15:55:57.508Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T15:56:15.423Z"}
+{"connections":[{"base":{"$ref":"$"},"collections":{"users":{"collection":{"s":{"db":{"domain":null,"_events":{},"_eventsCount":3,"s":{"databaseName":"GSM_test","dbCache":{},"children":[],"topology":{"domain":null,"_events":{"joined":[null,null],"left":[null,null],"error":[null,null],"timeout":[null,null],"close":[null,null],"parseError":[null,null],"open":[null,null],"fullsetup":[null,null,null],"all":[null,null],"reconnect":[null,null]},"_eventsCount":26,"_maxListeners":null,"clientInfo":{"driver":{"name":"nodejs","version":"3.0.9"},"os":{"type":"Windows_NT","name":"win32","architecture":"x64","version":"10.0.17134"},"platform":"Node.js v8.11.2, LE"},"s":{"coreTopology":{"domain":null,"_events":{},"_eventsCount":20,"id":0,"s":{"options":{"host":"localhost","port":27017,"disconnectHandler":{"s":{"storedOps":[],"storeOptions":{"force":false,"bufferMaxEntries":-1},"topology":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"]"}},"length":0},"reconnect":true,"emitError":true,"size":5,"monitorCommands":false,"socketOptions":{},"socketTimeout":360000,"connectionTimeout":30000,"clientInfo":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"clientInfo\"]"},"bson":{}},"logger":{"className":"Server"},"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"pool":{"domain":null,"_events":{},"_eventsCount":10,"topology":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"]"},"options":{"host":"localhost","port":27017,"size":5,"minSize":0,"connectionTimeout":30000,"socketTimeout":360000,"keepAlive":true,"keepAliveInitialDelay":300000,"noDelay":true,"ssl":false,"checkServerIdentity":true,"ca":null,"crl":null,"cert":null,"key":null,"passPhrase":null,"rejectUnauthorized":false,"promoteLongs":true,"promoteValues":true,"promoteBuffers":false,"reconnect":true,"reconnectInterval":1000,"reconnectTries":30,"domainsEnabled":false,"disconnectHandler":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"disconnectHandler\"]"},"emitError":true,"monitorCommands":false,"socketOptions":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"socketOptions\"]"},"clientInfo":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"clientInfo\"]"},"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"}},"id":0,"retriesLeft":30,"reconnectId":null,"logger":{"className":"Pool"},"state":"connected","availableConnections":[{"domain":null,"_events":{},"_eventsCount":4,"options":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"pool\"][\"options\"]"},"id":0,"logger":{"className":"Connection"},"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"maxBsonMessageSize":67108864,"port":27017,"host":"localhost","keepAlive":true,"keepAliveInitialDelay":300000,"noDelay":true,"connectionTimeout":30000,"socketTimeout":360000,"destroyed":false,"domainSocket":false,"singleBufferSerializtion":true,"serializationFunction":"toBinUnified","ca":null,"crl":null,"cert":null,"key":null,"passphrase":null,"ciphers":null,"ecdhCurve":null,"ssl":false,"rejectUnauthorized":false,"checkServerIdentity":true,"responseOptions":{"promoteLongs":true,"promoteValues":true,"promoteBuffers":false},"flushing":false,"queue":[],"connection":{"connecting":false,"_hadError":false,"_handle":{"reading":true,"owner":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"pool\"][\"availableConnections\"][0][\"connection\"]"},"onconnection":null,"writeQueueSize":0},"_parent":null,"_host":"localhost","_readableState":{"objectMode":false,"highWaterMark":16384,"buffer":{"head":null,"tail":null,"length":0},"length":0,"pipes":null,"pipesCount":0,"flowing":true,"ended":false,"endEmitted":false,"reading":true,"sync":false,"needReadable":true,"emittedReadable":false,"readableListening":false,"resumeScheduled":false,"destroyed":false,"defaultEncoding":"utf8","awaitDrain":0,"readingMore":false,"decoder":null,"encoding":null},"readable":true,"domain":null,"_events":{},"_eventsCount":7,"_writableState":{"objectMode":false,"highWaterMark":16384,"finalCalled":false,"needDrain":false,"ending":false,"ended":false,"finished":false,"destroyed":false,"decodeStrings":false,"defaultEncoding":"utf8","length":0,"writing":false,"corked":0,"sync":false,"bufferProcessing":false,"writecb":null,"writelen":0,"bufferedRequest":null,"lastBufferedRequest":null,"pendingcb":0,"prefinished":false,"errorEmitted":false,"bufferedRequestCount":0,"corkedRequestsFree":{"next":null,"entry":null}},"writable":true,"allowHalfOpen":false,"_bytesDispatched":282,"_sockname":null,"_pendingData":null,"_pendingEncoding":"","server":null,"_server":null,"_idleTimeout":360000,"_idleNext":{"_idleNext":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"pool\"][\"availableConnections\"][0][\"connection\"]"},"_idlePrev":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"pool\"][\"availableConnections\"][0][\"connection\"]"},"_timer":{"_list":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"pool\"][\"availableConnections\"][0][\"connection\"][\"_idleNext\"]"}},"_unrefed":true,"msecs":360000,"nextTick":false},"_idlePrev":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"pool\"][\"availableConnections\"][0][\"connection\"][\"_idleNext\"]"},"_idleStart":8852,"_destroyed":false},"writeStream":null,"hashedName":"29bafad3b32b11dc7ce934204952515ea5984b3c","workItems":[],"buffer":null,"sizeOfMessage":0,"bytesRead":0,"stubBuffer":null}],"inUseConnections":[],"connectingConnections":[],"executing":false,"queue":[],"authProviders":{"mongocr":{"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"authStore":[]},"x509":{"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"authStore":[]},"plain":{"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"authStore":[]},"gssapi":{"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"authStore":[]},"sspi":{"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"authStore":[]},"scram-sha-1":{"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"authStore":[],"id":0}},"reconnectConnection":null,"authenticating":false,"loggingout":false,"nonAuthenticatedConnections":[],"authenticatingTimestamp":null,"numberOfConsecutiveTimeouts":0,"connectionIndex":1},"disconnectHandler":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"disconnectHandler\"]"},"monitoring":true,"inTopology":false,"monitoringInterval":5000,"topologyId":-1,"compression":{"compressors":[]},"clusterTime":null,"serverDescription":{"topologyType":"Single","servers":[{"address":"localhost:27017","arbiters":[],"hosts":[],"passives":[],"type":"Standalone"}]},"topologyDescription":{"topologyType":"Unknown","servers":[{"address":"localhost:27017","arbiters":[],"hosts":[],"passives":[],"type":"Unknown"}]}},"ismaster":{"ismaster":true,"maxBsonObjectSize":16777216,"maxMessageSizeBytes":48000000,"maxWriteBatchSize":1000,"localTime":"2018-06-19T15:57:19.194Z","maxWireVersion":5,"minWireVersion":0,"readOnly":false,"ok":1},"lastIsMasterMS":10,"initialConnect":false,"wireProtocolHandler":{"legacyWireProtocol":{}},"_type":"server","clientInfo":{"driver":{"name":"nodejs","version":"3.0.9"},"os":{"type":"Windows_NT","name":"win32","architecture":"x64","version":"10.0.17134"},"platform":"Node.js v8.11.2, LE, mongodb-core: 3.0.8"},"lastUpdateTime":0,"lastWriteDate":0,"staleness":0},"sCapabilities":null,"clonedOptions":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"]"},"reconnect":true,"emitError":true,"poolSize":5,"storeOptions":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"disconnectHandler\"][\"s\"][\"storeOptions\"]"},"store":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"disconnectHandler\"]"},"host":"localhost","port":27017,"options":{"host":"localhost","port":27017,"disconnectHandler":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"disconnectHandler\"]"},"reconnect":true,"emitError":true,"size":5,"monitorCommands":false,"socketOptions":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"socketOptions\"]"},"socketTimeout":360000,"connectionTimeout":30000,"clientInfo":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"clientInfo\"]"}},"sessionPool":{"topology":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"]"},"sessions":[]},"sessions":[]}},"options":{"readPreference":{"mode":"primary"}},"logger":{"className":"Db"},"bson":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"bson\"]"},"readPreference":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"options\"][\"readPreference\"]"},"bufferMaxEntries":-1,"parentDb":null,"noListener":false},"serverConfig":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"]"},"bufferMaxEntries":-1,"databaseName":"GSM_test"},"topology":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"]"},"dbName":"GSM_test","options":{"readPreference":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"options\"][\"readPreference\"]"}},"namespace":"GSM_test.users","readPreference":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"options\"][\"readPreference\"]"},"slaveOk":true,"internalHint":null,"collectionHint":null,"name":"users"}},"opts":{"bufferCommands":true,"capped":false},"name":"users","collectionName":"users","conn":{"$ref":"$[\"connections\"][0]"},"queue":[],"buffer":false,"emitter":{"domain":null,"_events":{},"_eventsCount":0}},"profiles":{"collection":{"s":{"db":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"]"},"topology":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"]"},"dbName":"GSM_test","options":{"readPreference":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"options\"][\"readPreference\"]"}},"namespace":"GSM_test.profiles","readPreference":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"options\"][\"readPreference\"]"},"slaveOk":true,"internalHint":null,"collectionHint":null,"name":"profiles"}},"opts":{"bufferCommands":true,"capped":false},"name":"profiles","collectionName":"profiles","conn":{"$ref":"$[\"connections\"][0]"},"queue":[],"buffer":false,"emitter":{"domain":null,"_events":{},"_eventsCount":0}}},"models":{},"config":{"autoIndex":true},"replica":false,"options":null,"otherDbs":[],"relatedDbs":{},"states":{"0":"disconnected","1":"connected","2":"connecting","3":"disconnecting","99":"uninitialized","disconnected":0,"connected":1,"connecting":2,"disconnecting":3,"uninitialized":99},"_readyState":1,"_closeCalled":false,"_hasOpened":true,"_listening":false,"_connectionOptions":{},"client":{"domain":null,"_events":{},"_eventsCount":0,"s":{"url":"mongodb://localhost/GSM_test","options":{"socketOptions":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"socketOptions\"]"},"read_preference_tags":null,"readPreference":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"options\"][\"readPreference\"]"},"dbName":"GSM_test","servers":[{"host":"localhost","port":27017}],"server_options":{"socketOptions":{}},"db_options":{"read_preference_tags":null,"readPreference":"primary"},"rs_options":{"socketOptions":{}},"mongos_options":{"socketOptions":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"][\"s\"][\"coreTopology\"][\"s\"][\"options\"][\"socketOptions\"]"}},"socketTimeoutMS":360000,"connectTimeoutMS":30000},"dbCache":{"GSM_test":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"]"}},"sessions":[]},"topology":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"][\"s\"][\"topology\"]"}},"name":"GSM_test","$initialConnection":{},"db":{"$ref":"$[\"connections\"][0][\"collections\"][\"users\"][\"collection\"][\"s\"][\"db\"]"}}],"models":{"$ref":"$[\"connections\"][0][\"models\"]"},"modelSchemas":{"Users":{"obj":{"activity":{"default":true},"username":{"min":8,"max":30,"required":[true,"Username required"],"unique":true,"dropDups":true},"password":{"max":1024,"required":[true,"Password required"]},"profile":{"ref":"Profile","required":[true,"Profile information required"]}},"paths":{"activity":{"path":"activity","instance":"Boolean","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"obj\"][\"activity\"]"},"_index":null,"defaultValue":true},"username":{"enumValues":[],"regExp":null,"path":"username","instance":"String","validators":[{"message":"Username required","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"obj\"][\"username\"]"},"_index":{"unique":true},"isRequired":true,"originalRequiredValue":true},"password":{"enumValues":[],"regExp":null,"path":"password","instance":"String","validators":[{"message":"Password required","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"obj\"][\"password\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true},"profile":{"path":"profile","instance":"ObjectID","validators":[{"message":"Profile information required","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"obj\"][\"profile\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true},"_id":{"path":"_id","instance":"ObjectID","validators":[],"setters":[null],"getters":[],"options":{"auto":true},"_index":null},"__v":{"path":"__v","instance":"Number","validators":[],"setters":[],"getters":[],"options":{},"_index":null}},"aliases":{},"subpaths":{},"virtuals":{"id":{"path":"id","getters":[null],"setters":[],"options":{}}},"singleNestedPaths":{},"nested":{},"inherits":{},"callQueue":[],"_indexes":[],"methods":{},"methodOptions":{},"statics":{},"tree":{"activity":{"default":true},"username":{"min":8,"max":30,"required":[true,"Username required"],"unique":true,"dropDups":true},"password":{"max":1024,"required":[true,"Password required"]},"profile":{"ref":"Profile","required":[true,"Profile information required"]},"_id":{"auto":true},"id":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"virtuals\"][\"id\"]"}},"query":{},"childSchemas":[],"plugins":[{"opts":{"deduplicate":true}},{"opts":{"deduplicate":true}},{"opts":{"deduplicate":true}},{"opts":{"deduplicate":true}},{"opts":{"deduplicate":true}}],"s":{"hooks":{"_pres":{"save":[{"isAsync":false},{"isAsync":false},{"isAsync":false}],"remove":[{"isAsync":false}]},"_posts":{"init":[null],"save":[null]}}},"_userProvidedOptions":{},"options":{"typeKey":"type","id":true,"noVirtualId":false,"_id":true,"noId":false,"validateBeforeSave":true,"read":null,"shardKey":null,"autoIndex":null,"minimize":true,"discriminatorKey":"__t","versionKey":"__v","capped":false,"bufferCommands":true,"strict":true,"pluralization":true},"$globalPluginsApplied":true},"Profile":{"obj":{"alive":{"required":true,"default":true},"name":{"first":{"required":[true,"Need first name"]},"middle":{},"maiden":{"required":[null,"Maiden name is required for non single female"]},"last":{"required":[true,"Need last name"]},"suffix":{}},"gender":{"enum":["male","female","m","f"],"required":[true,"Need to select gender"]},"birthdate":{},"nationality":{},"civilStatus":{"required":true,"default":"single","enum":["single","s","widowed","widow","w","married","m","annulled","a","divorced","d"]},"spouse":{"ref":"Profile"},"parents":{"mother":{"ref":"Profile"},"father":{"ref":"Profile"}},"contact":[{"main":{"default":false},"description":{},"countryCode":{"min":0,"max":999999},"areaCode":{"min":0,"max":999999},"number":{"min":0,"max":999999999999999}}],"email":[{"main":{"default":false},"address":{}}],"address":[{"main":{"default":false},"description":{},"street":{},"city":{},"province":{},"zipcode":{"min":1000,"max":9999}}],"government":[{"key":{},"number":{"max":100000000000000000000}}]},"paths":{"alive":{"path":"alive","instance":"Boolean","validators":[{"message":"Path `{PATH}` is required.","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"alive\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true,"defaultValue":true},"name.first":{"enumValues":[],"regExp":null,"path":"name.first","instance":"String","validators":[{"message":"Need first name","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"name\"][\"first\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true},"name.middle":{"enumValues":[],"regExp":null,"path":"name.middle","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"name\"][\"middle\"]"},"_index":null},"name.maiden":{"enumValues":[],"regExp":null,"path":"name.maiden","instance":"String","validators":[{"message":"Maiden name is required for non single female","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"name\"][\"maiden\"]"},"_index":null,"isRequired":true},"name.last":{"enumValues":[],"regExp":null,"path":"name.last","instance":"String","validators":[{"message":"Need last name","type":"required"}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"name\"][\"last\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true},"name.suffix":{"enumValues":[],"regExp":null,"path":"name.suffix","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"name\"][\"suffix\"]"},"_index":null},"gender":{"enumValues":["male","female","m","f"],"regExp":null,"path":"gender","instance":"String","validators":[{"message":"Need to select gender","type":"required"},{"message":"`{VALUE}` is not a valid enum value for path `{PATH}`.","type":"enum","enumValues":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"gender\"][\"enumValues\"]"}}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"gender\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true},"birthdate":{"path":"birthdate","instance":"Date","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"birthdate\"]"},"_index":null},"nationality":{"enumValues":[],"regExp":null,"path":"nationality","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"nationality\"]"},"_index":null},"civilStatus":{"enumValues":["single","s","widowed","widow","w","married","m","annulled","a","divorced","d"],"regExp":null,"path":"civilStatus","instance":"String","validators":[{"message":"Path `{PATH}` is required.","type":"required"},{"message":"`{VALUE}` is not a valid enum value for path `{PATH}`.","type":"enum","enumValues":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"civilStatus\"][\"enumValues\"]"}}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"civilStatus\"]"},"_index":null,"isRequired":true,"originalRequiredValue":true,"defaultValue":"single"},"spouse":{"path":"spouse","instance":"ObjectID","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"spouse\"]"},"_index":null},"parents.mother":{"path":"parents.mother","instance":"ObjectID","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"parents\"][\"mother\"]"},"_index":null},"parents.father":{"path":"parents.father","instance":"ObjectID","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"parents\"][\"father\"]"},"_index":null},"contact":{"$isMongooseArray":true,"path":"contact","instance":"Array","validators":[],"setters":[],"getters":[],"options":{"type":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"]"}},"_index":null,"schema":{"obj":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"][0]"},"paths":{"main":{"path":"main","instance":"Boolean","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"][0][\"main\"]"},"_index":null,"defaultValue":false},"description":{"enumValues":[],"regExp":null,"path":"description","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"][0][\"description\"]"},"_index":null},"countryCode":{"path":"countryCode","instance":"Number","validators":[{"message":"Path `{PATH}` ({VALUE}) is less than minimum allowed value (0).","type":"min","min":0},{"message":"Path `{PATH}` ({VALUE}) is more than maximum allowed value (999999).","type":"max","max":999999}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"][0][\"countryCode\"]"},"_index":null},"areaCode":{"path":"areaCode","instance":"Number","validators":[{"message":"Path `{PATH}` ({VALUE}) is less than minimum allowed value (0).","type":"min","min":0},{"message":"Path `{PATH}` ({VALUE}) is more than maximum allowed value (999999).","type":"max","max":999999}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"][0][\"areaCode\"]"},"_index":null},"number":{"path":"number","instance":"Number","validators":[{"message":"Path `{PATH}` ({VALUE}) is less than minimum allowed value (0).","type":"min","min":0},{"message":"Path `{PATH}` ({VALUE}) is more than maximum allowed value (999999999999999).","type":"max","max":999999999999999}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"contact\"][0][\"number\"]"},"_index":null},"_id":{"path":"_id","instance":"ObjectID","validators":[],"setters":[null],"getters":[],"options":{"auto":true},"_index":null}},"aliases":{},"subpaths":{},"virtuals":{"id":{"path":"id","getters":[null],"setters":[],"options":{}}},"singleNestedPaths":{},"nested":{},"inherits":{},"callQueue":[],"_indexes":[],"methods":{},"methodOptions":{},"statics":{},"tree":{"main":{"default":false},"description":{},"countryCode":{"min":0,"max":999999},"areaCode":{"min":0,"max":999999},"number":{"min":0,"max":999999999999999},"_id":{"auto":true},"id":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"contact\"][\"schema\"][\"virtuals\"][\"id\"]"}},"query":{},"childSchemas":[],"plugins":[{"opts":{"deduplicate":true}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][0][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][1][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][2][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][3][\"opts\"]"}}],"s":{"hooks":{"_pres":{"save":[{"isAsync":false},{"isAsync":false},{"isAsync":false}],"remove":[{"isAsync":false}]},"_posts":{"init":[null],"save":[null]}}},"_userProvidedOptions":{"minimize":true,"typeKey":"type","strict":true},"options":{"minimize":true,"typeKey":"type","strict":true,"id":true,"noVirtualId":false,"_id":true,"noId":false,"validateBeforeSave":true,"read":null,"shardKey":null,"autoIndex":null,"discriminatorKey":"__t","versionKey":"__v","capped":false,"bufferCommands":true},"$implicitlyCreated":true,"$globalPluginsApplied":true},"schemaOptions":{},"$isMongooseDocumentArray":true},"email":{"$isMongooseArray":true,"path":"email","instance":"Array","validators":[],"setters":[],"getters":[],"options":{"type":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"email\"]"}},"_index":null,"schema":{"obj":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"email\"][0]"},"paths":{"main":{"path":"main","instance":"Boolean","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"email\"][0][\"main\"]"},"_index":null,"defaultValue":false},"address":{"enumValues":[],"regExp":null,"path":"address","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"email\"][0][\"address\"]"},"_index":null},"_id":{"path":"_id","instance":"ObjectID","validators":[],"setters":[null],"getters":[],"options":{"auto":true},"_index":null}},"aliases":{},"subpaths":{},"virtuals":{"id":{"path":"id","getters":[null],"setters":[],"options":{}}},"singleNestedPaths":{},"nested":{},"inherits":{},"callQueue":[],"_indexes":[],"methods":{},"methodOptions":{},"statics":{},"tree":{"main":{"default":false},"address":{},"_id":{"auto":true},"id":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"email\"][\"schema\"][\"virtuals\"][\"id\"]"}},"query":{},"childSchemas":[],"plugins":[{"opts":{"deduplicate":true}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][0][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][1][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][2][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][3][\"opts\"]"}}],"s":{"hooks":{"_pres":{"save":[{"isAsync":false},{"isAsync":false},{"isAsync":false}],"remove":[{"isAsync":false}]},"_posts":{"init":[null],"save":[null]}}},"_userProvidedOptions":{"minimize":true,"typeKey":"type","strict":true},"options":{"minimize":true,"typeKey":"type","strict":true,"id":true,"noVirtualId":false,"_id":true,"noId":false,"validateBeforeSave":true,"read":null,"shardKey":null,"autoIndex":null,"discriminatorKey":"__t","versionKey":"__v","capped":false,"bufferCommands":true},"$implicitlyCreated":true,"$globalPluginsApplied":true},"schemaOptions":{},"$isMongooseDocumentArray":true},"address":{"$isMongooseArray":true,"path":"address","instance":"Array","validators":[],"setters":[],"getters":[],"options":{"type":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"]"}},"_index":null,"schema":{"obj":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0]"},"paths":{"main":{"path":"main","instance":"Boolean","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0][\"main\"]"},"_index":null,"defaultValue":false},"description":{"enumValues":[],"regExp":null,"path":"description","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0][\"description\"]"},"_index":null},"street":{"enumValues":[],"regExp":null,"path":"street","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0][\"street\"]"},"_index":null},"city":{"enumValues":[],"regExp":null,"path":"city","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0][\"city\"]"},"_index":null},"province":{"enumValues":[],"regExp":null,"path":"province","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0][\"province\"]"},"_index":null},"zipcode":{"path":"zipcode","instance":"Number","validators":[{"message":"Path `{PATH}` ({VALUE}) is less than minimum allowed value (1000).","type":"min","min":1000},{"message":"Path `{PATH}` ({VALUE}) is more than maximum allowed value (9999).","type":"max","max":9999}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"address\"][0][\"zipcode\"]"},"_index":null},"_id":{"path":"_id","instance":"ObjectID","validators":[],"setters":[null],"getters":[],"options":{"auto":true},"_index":null}},"aliases":{},"subpaths":{},"virtuals":{"id":{"path":"id","getters":[null],"setters":[],"options":{}}},"singleNestedPaths":{},"nested":{},"inherits":{},"callQueue":[],"_indexes":[],"methods":{},"methodOptions":{},"statics":{},"tree":{"main":{"default":false},"description":{},"street":{},"city":{},"province":{},"zipcode":{"min":1000,"max":9999},"_id":{"auto":true},"id":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"address\"][\"schema\"][\"virtuals\"][\"id\"]"}},"query":{},"childSchemas":[],"plugins":[{"opts":{"deduplicate":true}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][0][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][1][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][2][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][3][\"opts\"]"}}],"s":{"hooks":{"_pres":{"save":[{"isAsync":false},{"isAsync":false},{"isAsync":false}],"remove":[{"isAsync":false}]},"_posts":{"init":[null],"save":[null]}}},"_userProvidedOptions":{"minimize":true,"typeKey":"type","strict":true},"options":{"minimize":true,"typeKey":"type","strict":true,"id":true,"noVirtualId":false,"_id":true,"noId":false,"validateBeforeSave":true,"read":null,"shardKey":null,"autoIndex":null,"discriminatorKey":"__t","versionKey":"__v","capped":false,"bufferCommands":true},"$implicitlyCreated":true,"$globalPluginsApplied":true},"schemaOptions":{},"$isMongooseDocumentArray":true},"government":{"$isMongooseArray":true,"path":"government","instance":"Array","validators":[],"setters":[],"getters":[],"options":{"type":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"government\"]"}},"_index":null,"schema":{"obj":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"government\"][0]"},"paths":{"key":{"enumValues":[],"regExp":null,"path":"key","instance":"String","validators":[],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"government\"][0][\"key\"]"},"_index":null},"number":{"path":"number","instance":"Number","validators":[{"message":"Path `{PATH}` ({VALUE}) is more than maximum allowed value (100000000000000000000).","type":"max","max":100000000000000000000}],"setters":[],"getters":[],"options":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"obj\"][\"government\"][0][\"number\"]"},"_index":null},"_id":{"path":"_id","instance":"ObjectID","validators":[],"setters":[null],"getters":[],"options":{"auto":true},"_index":null}},"aliases":{},"subpaths":{},"virtuals":{"id":{"path":"id","getters":[null],"setters":[],"options":{}}},"singleNestedPaths":{},"nested":{},"inherits":{},"callQueue":[],"_indexes":[],"methods":{},"methodOptions":{},"statics":{},"tree":{"key":{},"number":{"max":100000000000000000000},"_id":{"auto":true},"id":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"government\"][\"schema\"][\"virtuals\"][\"id\"]"}},"query":{},"childSchemas":[],"plugins":[{"opts":{"deduplicate":true}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][0][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][1][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][2][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][3][\"opts\"]"}}],"s":{"hooks":{"_pres":{"save":[{"isAsync":false},{"isAsync":false},{"isAsync":false}],"remove":[{"isAsync":false}]},"_posts":{"init":[null],"save":[null]}}},"_userProvidedOptions":{"minimize":true,"typeKey":"type","strict":true},"options":{"minimize":true,"typeKey":"type","strict":true,"id":true,"noVirtualId":false,"_id":true,"noId":false,"validateBeforeSave":true,"read":null,"shardKey":null,"autoIndex":null,"discriminatorKey":"__t","versionKey":"__v","capped":false,"bufferCommands":true},"$implicitlyCreated":true,"$globalPluginsApplied":true},"schemaOptions":{},"$isMongooseDocumentArray":true},"_id":{"path":"_id","instance":"ObjectID","validators":[],"setters":[null],"getters":[],"options":{"auto":true},"_index":null},"__v":{"path":"__v","instance":"Number","validators":[],"setters":[],"getters":[],"options":{},"_index":null}},"aliases":{},"subpaths":{},"virtuals":{"id":{"path":"id","getters":[null],"setters":[],"options":{}}},"singleNestedPaths":{},"nested":{"name":true,"parents":true},"inherits":{},"callQueue":[],"_indexes":[],"methods":{},"methodOptions":{},"statics":{},"tree":{"alive":{"required":true,"default":true},"name":{"first":{"required":[true,"Need first name"]},"middle":{},"maiden":{"required":[null,"Maiden name is required for non single female"]},"last":{"required":[true,"Need last name"]},"suffix":{}},"gender":{"enum":["male","female","m","f"],"required":[true,"Need to select gender"]},"birthdate":{},"nationality":{},"civilStatus":{"required":true,"default":"single","enum":["single","s","widowed","widow","w","married","m","annulled","a","divorced","d"]},"spouse":{"ref":"Profile"},"parents":{"mother":{"ref":"Profile"},"father":{"ref":"Profile"}},"contact":[{"main":{"default":false},"description":{},"countryCode":{"min":0,"max":999999},"areaCode":{"min":0,"max":999999},"number":{"min":0,"max":999999999999999}}],"email":[{"main":{"default":false},"address":{}}],"address":[{"main":{"default":false},"description":{},"street":{},"city":{},"province":{},"zipcode":{"min":1000,"max":9999}}],"government":[{"key":{},"number":{"max":100000000000000000000}}],"_id":{"auto":true},"id":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"virtuals\"][\"id\"]"}},"query":{},"childSchemas":[{"schema":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"contact\"][\"schema\"]"}},{"schema":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"email\"][\"schema\"]"}},{"schema":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"address\"][\"schema\"]"}},{"schema":{"$ref":"$[\"modelSchemas\"][\"Profile\"][\"paths\"][\"government\"][\"schema\"]"}}],"plugins":[{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][0][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][1][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][2][\"opts\"]"}},{"opts":{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][3][\"opts\"]"}},{"opts":{"deduplicate":true}}],"s":{"hooks":{"_pres":{"save":[{"isAsync":false},{"isAsync":false},{"isAsync":false}],"remove":[{"isAsync":false}]},"_posts":{"init":[null],"save":[null]}}},"_userProvidedOptions":{},"options":{"typeKey":"type","id":true,"noVirtualId":false,"_id":true,"noId":false,"validateBeforeSave":true,"read":null,"shardKey":null,"autoIndex":null,"minimize":true,"discriminatorKey":"__t","versionKey":"__v","capped":false,"bufferCommands":true,"strict":true,"pluralization":true},"$globalPluginsApplied":true}},"options":{"pluralization":true},"plugins":[[null,{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][0][\"opts\"]"}],[null,{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][1][\"opts\"]"}],[null,{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][2][\"opts\"]"}],[null,{"$ref":"$[\"modelSchemas\"][\"Users\"][\"plugins\"][3][\"opts\"]"}]],"level":"info","message":"","timestamp":"2018-06-19T15:57:19.303Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T15:59:26.798Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T15:59:26.798Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T15:59:26.798Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T15:59:27.816Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T16:00:23.156Z"}
+{"level":"info","message":"Connected to database dbname...","timestamp":"2018-06-19T16:02:53.037Z"}
+{"level":"info","message":"Connected to database dbname...","timestamp":"2018-06-19T16:06:26.941Z"}
+{"level":"info","message":"Connected to database dbname...","timestamp":"2018-06-19T16:07:26.145Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:04:01.124Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:04:01.124Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:04:01.125Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:04:02.141Z"}
+{"level":"info","message":"Database connection info: undefined","timestamp":"2018-06-19T17:04:02.141Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:04:27.667Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:04:27.667Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:04:27.668Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:04:28.701Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:08:03.752Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:10:36.021Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:12:33.864Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:31:13.542Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:33:28.392Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T17:33:28.399Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:36:33.965Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:36:33.966Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:36:33.966Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:36:34.996Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:37:07.861Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:37:07.861Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:37:07.862Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:37:08.895Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:40:37.757Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:40:37.758Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:40:37.758Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:40:38.794Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:41:00.394Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:41:00.394Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:41:00.394Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:41:01.446Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:48:03.841Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:52:02.693Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:52:35.701Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:53:27.123Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:53:36.444Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:53:36.444Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:53:36.445Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:53:37.478Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T17:53:39.576Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:54:17.960Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:54:17.961Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:54:17.961Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:54:18.979Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T17:55:43.473Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T17:55:43.474Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T17:55:43.474Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:55:44.506Z"}
+{"level":"info","message":"Server terminated: database GSM_TEST closed","timestamp":"2018-06-19T17:55:48.187Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:57:52.638Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T17:57:52.641Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T17:58:55.690Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T17:58:55.694Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:02:52.526Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:02:52.526Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:02:52.527Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:02:53.556Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:04:07.098Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:04:07.099Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:04:07.099Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:04:08.120Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:04:45.831Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:04:45.831Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:04:45.832Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:04:46.865Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:06:15.953Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:06:15.954Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:06:15.954Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:06:17.001Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:06:50.031Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:06:50.031Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:06:50.031Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:06:51.081Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:08:10.479Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:08:10.480Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:08:10.480Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:08:11.513Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:08:53.023Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:08:53.024Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:08:53.024Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:08:54.148Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:10:39.443Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:10:39.443Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:10:39.443Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:10:40.477Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:11:19.255Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:11:19.256Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:11:19.256Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:11:20.287Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T18:11:20.291Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:12:10.502Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:12:10.508Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:12:10.508Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:12:11.551Z"}
+{"level":"info","message":"Server terminated: database GSM_TEST closed","timestamp":"2018-06-19T18:12:22.705Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:17:51.174Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:17:51.175Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:17:51.175Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:17:52.220Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:19:29.967Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:19:29.967Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:19:29.967Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:19:30.987Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:20:31.785Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:20:31.785Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:20:31.785Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:20:32.806Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:21:50.625Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:21:50.625Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:21:50.625Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:21:51.661Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:22:31.258Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:22:31.258Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:22:31.259Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:22:32.319Z"}
+{"level":"info","message":"Server terminated: database GSM_TEST closed","timestamp":"2018-06-19T18:22:56.600Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:23:01.954Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:23:01.954Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:23:01.955Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:23:02.990Z"}
+{"message":"Converting circular structure to JSON","stack":"TypeError: Converting circular structure to JSON\n    at JSON.stringify (<anonymous>)\n    at stringify (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\response.js:1119:12)\n    at ServerResponse.json (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\response.js:260:14)\n    at ServerResponse.send (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\response.js:158:21)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\user.js:67:21\n    at newFn (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express-async-errors\\index.js:25:20)\n    at Layer.handle [as handle_request] (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\route.js:137:13)\n    at Route.dispatch (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\route.js:112:3)\n    at newFn (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express-async-errors\\index.js:25:20)\n    at Layer.handle [as handle_request] (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:281:22\n    at Function.process_params (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:335:12)\n    at next (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:275:10)\n    at Function.handle (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:174:3)\n    at router (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at newFn (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express-async-errors\\index.js:25:20)\n    at Layer.handle [as handle_request] (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:317:13)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:284:7\n    at Function.process_params (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:335:12)\n    at next (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\express\\lib\\router\\index.js:275:10)","level":"error","timestamp":"2018-06-19T18:23:05.289Z"}
+{"level":"info","message":"Server terminated: database GSM_TEST closed","timestamp":"2018-06-19T18:24:23.904Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:24:27.521Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:24:27.522Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:24:27.522Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:24:28.553Z"}
+{"level":"info","message":"Server terminated: database GSM_TEST closed","timestamp":"2018-06-19T18:24:36.507Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:25:01.384Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:25:01.384Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:25:01.384Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:25:02.433Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:25:20.573Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:25:20.574Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:25:20.574Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:25:21.599Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:25:56.079Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:25:56.079Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:25:56.079Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:25:57.104Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:35:54.607Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:35:54.607Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:35:54.607Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:35:55.626Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T18:35:55.666Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-06-19T18:36:31.028Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-06-19T18:36:31.029Z"}
+{"level":"info","message":"listening on port 3000...","timestamp":"2018-06-19T18:36:31.029Z"}
+{"level":"info","message":"Connected to database GSM_TEST...","timestamp":"2018-06-19T18:36:32.069Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-06-19T18:36:32.110Z"}
