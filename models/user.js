@@ -56,8 +56,8 @@ user.methods.hashPassword= async function(saltRounds = 10){
     this.password = await bcrypt.hash(this.password, salt);
 }
 
-user.methods.matchPassword = async function(passwordInput){
-    return await bcrypt.compare(passwordInput, this.password);
+user.methods.matchPassword = function(passwordInput){
+    return bcrypt.compare(passwordInput, this.password);
 }
 
 user.methods.genAuthToken = function(){
@@ -70,10 +70,15 @@ user.methods.genAuthToken = function(){
 }
 
 // const skipInit = process.env.NODE_ENV === 'test';
-module.exports = mongoose.model('Users', user);
+module.exports = mongoose.model('Users', user, 'users', true);
 
+//==========================================fnctions
 function validateUser(data){
-    return Joi.validate(data, Joi.string().alphanum().min(8).max(30).required());
+    const userSchema = Joi.object().keys({//to be tested
+        username:Joi.string().alphanum().min(8).max(30).required()
+    });
+    return userSchema.validate(data);
+    // return Joi.validate(data, Joi.string().alphanum().min(8).max(30).required());
 }
 
 function validatePassword(data){

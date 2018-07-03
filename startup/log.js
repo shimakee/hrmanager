@@ -3,7 +3,7 @@ const winston = require('winston'); //error handler
 // require('winston-mongodb');
 require('express-async-errors');//route try catch wrapper
 
-const URI_ERROR = config.get('db_log.uri');//database
+// const URI_ERROR = config.get('db_log.uri');//database
 
 module.exports = function(){
     winston.handleExceptions(//handling Errors outside express

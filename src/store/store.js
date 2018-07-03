@@ -6,41 +6,21 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state:{
-        sampleState: 0
+        page:'landingPage',
+        view:'login',
+        isLoggedIn: false
     },
-    getters:{
-        sampleState:(state)=>{
-            return state.sampleState;
+    mutations:{//mutate state
+        changeView:(state, payload)=>{
+            state.view = payload;
         },
-        doubleSampleState:(state)=>{
-            return state.sampleState * 2;
-        }
-    },
-    mutations:{
-        increase:(state)=>{
-            state.sampleState++;
-        },
-        increasesBy:(state, payload)=>{//adding payload
-            state.sampleState+=payload;
+        setLoginStatus(state, payload = false){
+            state.isLoggedIn = payload;
         }
     },
     actions:{ //can be used for async task like sending data to DB
-        increase:(context)=>{ //access to most
-            context.commit('increase');
-        },
-        incs:({commit})=>{ //access to only commit mutations
-            setTimeout(()=>{
-                commit('increasesBy');
-            },500);
-        },
-        withPayloadObj:({commit}, payload)=>{ //access to only commit mutations + PAYLOAD
-            setTimeout(()=>{
-                commit('increasesBy', payload.amount);
-            },payload.time);
-        }
-        
     },
-    modules:{
+    modules:{//attach imported modules
         signup: signup
     }
 }); 

@@ -1,12 +1,11 @@
 <template>
   <div>
-    <!-- <navbar></navbar> -->
+    <navbar></navbar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Login from './components/beforeAuth/login'
 import Navbar from './components/parts/navbar'
 import {mapGetters} from 'vuex'; //importing getters
 import {mapMutations} from 'vuex'; //importing mutations
@@ -18,11 +17,14 @@ export default {
       }
   },
   components:{
-    "login": Login,
     "navbar": Navbar
   }
 }
 </script>
 
 <style>
+body{
+  margin:0;
+  padding:0;
+}
 </style>

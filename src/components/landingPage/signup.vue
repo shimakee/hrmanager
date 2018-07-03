@@ -1,50 +1,52 @@
 <template>
     <div class="signup">
         <h1>Signup</h1>
+        
+            {{getData}}
         <form>
             <div class="form-group">
                 <label for="username">username</label>
-                <input type="text" v-model="identity.username" placeholder="Username">
+                <input type="text" v-model="identity.user.username" placeholder="Username">
             </div>
 
             <div class="form-group">
                 <div class="input-group">
                     <label for="password">password</label>
-                    <input type="password" v-model="identity.password" placeholder="Password">
+                    <input type="password" v-model="identity.user.password" placeholder="Password">
                 </div>
                 <div class="input-group">
                     <label for="passConfirm">password confrim</label>
-                    <input type="password" v-model="identity.passConfirm" placeholder="Confirm password">
+                    <input type="password" v-model="identity.user.passConfirm" placeholder="Confirm password">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email">email</label>
-                <input type="text" v-model="identity.email" placeholder="Email address">
+                <input type="text" v-model="identity.profile.email.address" placeholder="Email address">
             </div>
 
              <div class="form-group">
                 <label for="fullname">Full name</label>
-                <input type="text" v-model="identity.name.first" placeholder="First">
-                <input type="text" v-model="identity.name.middle" placeholder="Middle">
-                <input type="text" v-model="identity.name.last" placeholder="Last">
-                <input type="text" v-model="identity.name.suffix" placeholder="Suffix">
+                <input type="text" v-model="identity.profile.name.first" placeholder="First">
+                <input type="text" v-model="identity.profile.name.middle" placeholder="Middle">
+                <input type="text" v-model="identity.profile.name.last" placeholder="Last">
+                <input type="text" v-model="identity.profile.name.suffix" placeholder="Suffix">
             </div>
 
              <div class="form-group">
                  <div class="input-group">
                     <label for="male">Male</label>
-                    <input id="male" type="radio" value="male" v-model="identity.gender">
+                    <input id="male" type="radio" value="male" v-model="identity.profile.gender">
                  </div>
                  <div class="input-group">
                     <label for="female">Female</label>
-                    <input id="female" type="radio" value="female" v-model="identity.gender">
+                    <input id="female" type="radio" value="female" v-model="identity.profile.gender">
                  </div>
             </div>
 
              <div class="form-group">
                 <label for="gender">Civil status</label>
-                <select v-model="identity.civilStatus">
+                <select v-model="identity.profile.civilStatus">
                     <option value="single">Single</option>
                     <option value="married">Married</option>
                     <option value="annulled">Annulled</option>
@@ -65,18 +67,23 @@ export default {
     data(){
         return{
             identity:{
-                username: '',
-                password:'',
-                passConfirm:'',
-                email:'',
-                name:{
-                    first:'',
-                    middle:'',
-                    last:'',
-                    suffix:''
+                user:{
+                    username: '',
+                    password:'',
+                    passConfirm:''
                 },
-                gender:'male',
-                civilStatus:'single'
+                profile:{
+                    email:{main:true,
+                        address:''},
+                    name:{
+                        first:'',
+                        middle:'',
+                        last:'',
+                        suffix:''
+                    },
+                    gender:'male',
+                    civilStatus:'single'
+                }
             },
             submitted: false
         }
@@ -86,6 +93,11 @@ export default {
             event.preventDefault();
             this.$store.dispatch('signup', this.identity);
             this.submitted = true;
+        }
+    },
+    computed:{
+        getData(){
+            return this.$store.getters.getData;
         }
     }
 }

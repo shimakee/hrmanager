@@ -89,7 +89,7 @@ function validateProfile(data){
             suffix: Joi.string().max(50).regex(regex.common).allow('')
         },
         gender:Joi.string().valid(validDataLib.gender).insensitive().required(),
-        birthdate:Joi.date().min('1-1-1900').max('now').required(),
+        birthdate:Joi.date().min('1-1-1900').max('now').allow(''),
         nationality:Joi.string().max(30).regex(regex.common).allow(''),
         civilStatus:Joi.string().valid(validDataLib.civilStatus).insensitive().required(),
         spouse:Joi.objectId().allow(''),
@@ -103,7 +103,7 @@ function validateProfile(data){
         government:Joi.array().max(30).unique('number').items(governmentSchema).single()
     });
 
-    return profileSchema.validate(data);
+    return profileSchema.validate(data, {allowUnknown: true, presence:'optional'});
 }
 
 profile.statics.validate = function(data){
@@ -126,4 +126,4 @@ profile.methods.getFullName = function(){
 }
 
 // const skipInit = process.env.NODE_ENV === 'test';
-module.exports = mongoose.model('Profile', profile);
+module.exports = mongoose.model('Profile', profile, 'profiles', true);

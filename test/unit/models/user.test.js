@@ -70,7 +70,7 @@ describe('User model', ()=>{
                 expect(result.error).toBe(null);
             });
             it(`should validate user `, ()=>{
-                const result = User.validateUser(user.username);
+                const result = User.validateUser({username: user.username});
                 expect(result.error).toBe(null);
             });
         });

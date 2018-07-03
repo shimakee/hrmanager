@@ -4,7 +4,7 @@
         <form>
             <div class="input-group">
                 <label for="username">username</label>
-                <input type="text" v-model="user.name" placeholder="Username">
+                <input type="text" v-model="user.username" placeholder="Username">
             </div>
             <div class="input-group">
                 <label for="email">email</label>
@@ -19,7 +19,7 @@ export default {
     data(){
         return{
             user:{
-                name: '',
+                username: '',
                 email:''
             },
             submitted: false
