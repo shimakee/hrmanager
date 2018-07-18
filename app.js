@@ -15,6 +15,8 @@ app.use(express.static(__dirname));//using directory to serve static index file 
 require('./startup/routes')(app);//routes & middleware use
 require('./startup/utilities')();//tools & utilities like validation
 
+app.use('*', express.static(__dirname));//catchall
+
 const PORT = config.get('port') || 8080;
 
 // app.on('db ready', ()=>{

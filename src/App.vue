@@ -7,9 +7,9 @@
 
 <script>
 import Navbar from './components/parts/navbar'
-import {mapGetters} from 'vuex'; //importing getters
-import {mapMutations} from 'vuex'; //importing mutations
-import {mapActions} from 'vuex'; //importing mutations
+// import {mapGetters} from 'vuex'; //importing getters
+// import {mapMutations} from 'vuex'; //importing mutations
+// import {mapActions} from 'vuex'; //importing mutations
 
 export default {
   data(){
@@ -18,6 +18,11 @@ export default {
   },
   components:{
     "navbar": Navbar
+  },
+  mounted(){
+    this.$store.dispatch('autoLogin');
+    this.$store.dispatch('autoSetData');
+    this.$store.dispatch('autoLogout');
   }
 }
 </script>

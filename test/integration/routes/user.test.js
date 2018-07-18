@@ -184,7 +184,7 @@ describe('User route - /user', ()=>{
             res = await request(server)
                 .post('/user/login')
                 .send(data);
-            expect(res.status).toBe(400);
+            expect(res.status).toBe(404);
             expect(res.body).toMatchObject({message: 'Invalid username or password.'});
             expect(res.header).not.toHaveProperty(token_header);
         });
@@ -212,14 +212,13 @@ describe('User route - /user', ()=>{
             res = await sendSignup();
             expect(res.status).toBe(201);
 
-            let data = {username: '!',
-                password: body.user.password};
+            let data = {username: '!'};
 
             res = await request(server)
                 .post('/user/reset')
                 .send(data);
             expect(res.status).toBe(400);
-            expect(res.body).toHaveProperty('name', 'ValidationError');
+            expect(res.body).toHaveProperty("name", 'ValidationError');
         });
         it(`should return 400 username doesnt exist`, async ()=>{
             res = await sendSignup();
@@ -231,7 +230,7 @@ describe('User route - /user', ()=>{
                 .post('/user/reset')
                 .send(data);
             expect(res.status).toBe(400);
-            expect(res.body).toMatchObject({message: 'Bad request.'});
+            expect(res.body).toMatchObject({message: 'Bad request. Username doesnt exist'});
         });
     });
 
@@ -258,39 +257,56 @@ describe('User route - /user', ()=>{
         describe(`PUT`, ()=>{
             it(`should update user data`, async ()=>{
                 res = await sendSignup();
-                let data = {username: body.user.username,
-                    password: body.user.password};
+                let data = {old: body.user.password,
+                    new: body.user.password,
+                    newConfirm: body.user.password};
 
                 let token = res.header[token_header];
                     
                 res = await request(server)
-                    .put('/user/me')
+                    .put('/user/change_password')
                     .set(token_header, token)
                     .send(data);
                 expect(res.body).toMatchObject({message: 'Success'});
                 expect(res.status).toBe(200);
             });
-            it(`should return 400 invalid entry username`, async ()=>{
+            it(`should return 400 invalid entry old password`, async ()=>{
                 res = await sendSignup();
                 let token = res.header[token_header];
-                let data = {username: '!',
-                    password: body.user.password};
+                let data = {old: "!",
+                    new: body.user.password,
+                    newConfirm: body.user.password};
                     
                 res = await request(server)
-                    .put('/user/me')
+                    .put('/user/change_password')
                     .set(token_header, token)
                     .send(data);
                 expect(res.status).toBe(400);
                 expect(res.body).toMatchObject({name: 'ValidationError'});
             });
-            it(`should return 400 invalid entry password`, async ()=>{
+            it(`should return 400 invalid entry password does not match`, async ()=>{
                 res = await sendSignup();
                 let token = res.header[token_header];
-                let data = {username: body.user.username,
-                    password: '!'}
+                let data = {old: body.user.password,
+                    new: body.user.password,
+                    newConfirm: "!"};
                     
                 res = await request(server)
-                    .put('/user/me')
+                    .put('/user/change_password')
+                    .set(token_header, token)
+                    .send(data);
+                expect(res.status).toBe(400);
+                expect(res.body).toMatchObject({name: 'ValidationError'});
+            });
+            it(`should return 400 invalid entry invalid new password`, async ()=>{
+                res = await sendSignup();
+                let token = res.header[token_header];
+                let data = {old: body.user.password,
+                    new: "!",
+                    newConfirm: "!"};
+                    
+                res = await request(server)
+                    .put('/user/change_password')
                     .set(token_header, token)
                     .send(data);
                 expect(res.status).toBe(400);
@@ -298,13 +314,14 @@ describe('User route - /user', ()=>{
             });
             it(`should return 404 bad request`, async ()=>{
                 res = await sendSignup();
-                let data = {username: 'fakeuser',
-                password: body.user.password}
+                let data = {old: body.user.password,
+                    new: body.user.password,
+                    newConfirm: body.user.passConfirm};
                 let fakeUser = new User(data);
                 let fakeToken = fakeUser.genAuthToken();
 
                 res = await request(server)
-                    .put('/user/me')
+                    .put('/user/change_password')
                     .set(token_header, fakeToken)
                     .send(data);
                 expect(res.status).toBe(404);
@@ -312,22 +329,24 @@ describe('User route - /user', ()=>{
             });
             it(`should return forbidden`, async ()=>{
                 res = await sendSignup();
-                let data = {username: 'anotherUsername',
-                password: body.user.password}
+                let data = {old: body.user.password,
+                    new: body.user.password,
+                    newConfirm: body.user.passConfirm};
 
                 res = await request(server)
-                    .put('/user/me')
+                    .put('/user/change_password')
                     .send(data);
                 expect(res.status).toBe(401);
                 expect(res.body).toMatchObject({message: 'Access denied - no token provided'});
             });
             it(`should return invalid token`, async ()=>{
                 res = await sendSignup();
-                let data = {username: 'anotherUsername',
-                password: body.user.password}
+                let data = {old: body.user.password,
+                    new: body.user.password,
+                    newConfirm: body.user.passConfirm};
 
                 res = await request(server)
-                    .put('/user/me')
+                    .put('/user/change_password')
                     .set(token_header, 'a')
                     .send(data);
                 expect(res.status).toBe(400);

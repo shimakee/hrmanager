@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1>Home</h1>
-        <p>Hello world</p>
+        <router-view></router-view>
     </div>
 </template>
 <script>
 export default {
-    
+    //TODO on mount() or create()
 }
 </script>
 <style scoped>

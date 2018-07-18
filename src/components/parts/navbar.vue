@@ -1,14 +1,14 @@
 <template>
     <div class="nav">
         <div v-if="isLoggedIn === false">
-            <button @click="changeView('/', 'login')">Login</button>
-            <button @click="changeView('/', 'signup')">Signup</button>
-            <button @click="changeView('/', 'reset')">Reset</button>
+            <router-link to="/login">login</router-link>
+            <router-link to="/signup">signup</router-link>
+            <router-link to="/reset">reset</router-link>
         </div>
         <div v-if="isLoggedIn === true">
-            <button @click="changeView('/home', 'home')">Home</button>
-            <button @click="changeView('/settings', 'settings')">Settings</button>
-            <button @click="logout('/', 'login')">Logout</button>
+            <router-link to="/home">home</router-link>
+            <router-link to="/settings/">settings</router-link>
+            <button @click="logout()">Logout</button>
         </div>
     </div>
 </template>
@@ -22,18 +22,12 @@ export default {
     },
     computed:{
         isLoggedIn(){
-            return this.$store.state.isLoggedIn;
+            return this.$store.getters.hasToken;
         }
-    },methods:{
-        changeView(route, component){
-            this.$store.commit('changeView', component);//change page internal component
-            this.$router.push(route);//push to page
-        },
-        logout(route, component){
-            this.$store.commit('setLoginStatus', false);//set isLoggedIn to false
-            //clear $store data token
-            this.$store.commit('changeView', component);//change page internal component
-            this.$router.push(route);
+    },
+    methods:{
+        logout(){
+            this.$store.dispatch('logout');
         }
     }
 }

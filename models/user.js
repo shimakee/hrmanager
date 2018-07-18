@@ -25,6 +25,8 @@ const user = new Schema({
     password: {type: String,max:1024, required: [true, "Password required"]},
     profile: {type: ObjId, ref: 'Profile', required: [true, "Profile information required"]}
     // employment: [{type: ObjId, ref: 'Employment'}]
+    //role: [{type: ObjId, ref:'Role'}] //access control
+    //accountType: {type: String, enum: validDataLib.accountType, default:'client'} //client or staff
 });
 
 // user.plugin(passportLocalMongoose,{
@@ -48,6 +50,15 @@ user.statics.validatePassword = function(data){
 
 user.statics.validateSignup = function(data){
     return validateUserSignup(data);
+}
+
+user.statics.validateChangePassword = function(data){
+    return validateChangePassword(data);
+}
+
+user.statics.getTokenTime = function(token){
+    const decode = jwt.decode(token, config.get('token'));
+    return {iat:decode.iat, exp:decode.exp};
 }
 
 user.methods.hashPassword= async function(saltRounds = 10){
@@ -96,7 +107,7 @@ function validate(data){
     const {error} = validatePassword(data.password);
     if(error) return {error};
 
-    return userSchema.validate(data);
+    return userSchema.validate(data, {allowUnknown: true, presence:'optional'});
 }
 
 function validateUserSignup(data){
@@ -109,11 +120,26 @@ function validateUserSignup(data){
         profile:Joi.objectId()
     });
 
-    if(data.password !== data.passConfirm) return {error: 'Password confirmation does not match'};
+    if(data.password !== data.passConfirm){return {error: {message: 'Password confirmation does not match', name: "ValidationError"}}};
    
     const {error} = validatePassword(data.password);
     if(error) return {error};
     
     return userSchema.validate(data);
 
+}
+
+function validateChangePassword(data){
+    const userSchema = Joi.object().keys({//to be tested
+        old:Joi.string().min(10).max(72).required(),
+        new:Joi.string().min(10).max(72).required(),
+        newConfirm:Joi.string().min(10).max(72).required()
+    });
+
+    if(data.new !== data.newConfirm){return {error: {message: 'Password confirmation does not match', name: "ValidationError"}}};
+
+    const {error} = validatePassword(data.new);
+    if(error) return {error};
+
+    return userSchema.validate(data);
 }

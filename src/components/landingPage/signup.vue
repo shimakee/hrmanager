@@ -1,8 +1,6 @@
 <template>
     <div class="signup">
         <h1>Signup</h1>
-        
-            {{getData}}
         <form>
             <div class="form-group">
                 <label for="username">username</label>
@@ -96,9 +94,6 @@ export default {
         }
     },
     computed:{
-        getData(){
-            return this.$store.getters.getData;
-        }
     }
 }
 </script>

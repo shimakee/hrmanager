@@ -6,10 +6,10 @@
                 <label for="username">username</label>
                 <input type="text" v-model="user.username" placeholder="Username">
             </div>
-            <div class="input-group">
+            <!-- <div class="input-group">
                 <label for="email">email</label>
                 <input type="text" v-model="user.email" placeholder="Email address">
-            </div>
+            </div> -->
             <button @click="submit">Send</button>
         </form>
     </div>
@@ -19,8 +19,7 @@ export default {
     data(){
         return{
             user:{
-                username: '',
-                email:''
+                username: ''
             },
             submitted: false
         }
@@ -28,7 +27,6 @@ export default {
     methods:{
         submit(event){
             event.preventDefault();
-            
             this.$store.dispatch('resetPass', this.user);
             this.submitted = true;
         }

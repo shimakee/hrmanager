@@ -1,10 +1,8 @@
 <template>
     <div>
-        <h1>Settings</h1>
-
-        <h2>Change Password</h2>
+        <!-- <h2>Change Password</h2> -->
         <form>
-            <label for="password">password</label>
+            <label for="password">Password: </label>
             <input type="password" v-model="password.old" placeholder="Old password">
             <input type="password" v-model="password.new" placeholder="New password">
             <input type="password" v-model="password.newConfirm" placeholder="New password confirm">
@@ -27,12 +25,14 @@ export default {
     methods:{
         submit(event){
             event.preventDefault();
-
+            this.$store.dispatch('changePassword', this.password);
             this.submitted = true;
         }
     }
 }
 </script>
 <style scoped>
-
+    div{
+        margin: 1em;
+    }
 </style>

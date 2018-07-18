@@ -9,6 +9,7 @@ const auth = require('../middleware/auth');
 //utilities
 const Fawn = require('fawn');
 const   _ = require('lodash');
+const jwt = require('jsonwebtoken');
         //status 200 - ok
         //201 -resource created
         //status 400 - Bad request
@@ -22,27 +23,31 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
     
     result = User.validateSignup(req.body.user); //validate user
     if(result.error){ return res.status(400).send(result.error);}
-
+    
     const userExist = await User.findOne({username: req.body.user.username}).exec();//check that username is unique
     if(userExist) {return res.status(400).send({message: 'Username already exist'});}
-
+    
     const profileExist = await Profile.findOne({name: req.body.profile.name}).exec();//check that identity is unique
     if(profileExist) {return res.status(400).send({message:'Profile already exist'});}
     
-        const newProfile = new Profile(req.body.profile);
-        const newUser = new User(req.body.user);
-
-        newUser.profile = newProfile._id;
-        await newUser.hashPassword();
-        
-        const task = Fawn.Task();//save to database
-        await task.save('profiles', newProfile)
-        .save('users', newUser)
-        .run();
-
-        const token = newUser.genAuthToken();//generate token
-
-        return res.status(201).header(config.get('token_header'), token).send({message: 'Success'});//return sucess
+    const newProfile = new Profile(req.body.profile);
+    const newUser = new User(req.body.user);
+    
+    newUser.profile = newProfile._id;
+    await newUser.hashPassword();
+    
+    const task = Fawn.Task();//save to database
+    await task.save('profiles', newProfile)
+    .save('users', newUser)
+    .run();
+    
+    const token = newUser.genAuthToken();//generate token
+    const decode = User.getTokenTime(token);
+    
+        return res.status(201)
+                .header(config.get('token_header'), token)
+                .header('exp', decode.exp)
+                .send({message: 'Success'});//return sucess
 });
 
 router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
@@ -51,15 +56,17 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
     if(error) {return res.status(400).send(error);}
 
         const user = await User.findOne({username: userReq.username}).exec();//username exist
-        if(!user) {return res.status(400).send({message: 'Invalid username or password.'});}
+        if(!user) {return res.status(404).send({message: 'Invalid username or password.'});}
 
         const isValidPassword = await user.matchPassword(userReq.password);//match password
         if(!isValidPassword){return res.status(400).send({message: 'Invalid username or password.'});}
 
         const token = user.genAuthToken();//generate token
+        const decode = User.getTokenTime(token);
 
         return res.status(200)
             .header(config.get('token_header'), token)
+            .header('exp', decode.exp)
             .send(_.pick(user,['username']));   
 });
 
@@ -69,7 +76,7 @@ router.route('/reset').post(async (req,res,next)=>{
     if(error){ return res.status(400).send(error);}
         //check if user exist - exist
         const user = await User.findOne({username: req.body.username}).exec();
-        if(!user) {return res.status(400).send({message: 'Bad request.'});}
+        if(!user) {return res.status(400).send({message: 'Bad request. Username doesnt exist'});}
 
             //check if email is available
                 //check for main email && is valid
@@ -92,23 +99,14 @@ router.route('/me').get(auth.isAuth, (req,res,next)=>{
 }).put(auth.isAuth, async (req,res,next)=>{
     let data = req.body;
 
-    let {error} = User.validate(data);//validate
+    let {error}= User.validateUser(data);//validate TODO change validation
     if(error){return  res.status(400).send(error);}
 
-    // let user = await User.findOne({_id: req.user._id, username: req.user.username});
     let user = await User.findOne({_id: req.user._id}).exec();
     if(!user){return res.status(404).send({message: 'Bad request'});}//if doesnt exist - return 404 error
 
-    data = _.omit(data, ['_id']); //prevent id change
-    if(data.password){ 
-        let passError = User.validatePassword(data.password);
-        if(passError.error){return res.status(400).send(passError.error);}
-
-        user.password = data.password
-        data.password = await user.hashPassword();//hash password
-    }
-
-    await User.updateOne({_id: user._id}, data);//update
+        user.username = data.username;
+        await user.save();
 
     res.status(200).send({message: 'Success'});
 }).delete(auth.isAuth, async (req,res,next)=>{
@@ -127,5 +125,20 @@ router.route('/me').get(auth.isAuth, (req,res,next)=>{
 
         return res.status(200).send({message: 'Success'});
 });
+
+router.route('/change_password').put(auth.isAuth, async (req,res,next)=>{
+    let data = req.body;
+    let {error}= User.validateChangePassword(data);
+    if(error){return  res.status(400).send(error);}
+
+    let user = await User.findOne({_id: req.user._id}).exec();
+    if(!user){return res.status(404).send({message: 'Bad request'});}//if doesnt exist - return 404 error
+
+        user.password = data.new
+        await user.hashPassword();//hash password
+        await user.save();
+
+    res.status(200).send({message: 'Success'});
+})
 
 module.exports = router;

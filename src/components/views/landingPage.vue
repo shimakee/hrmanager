@@ -1,33 +1,16 @@
 <template>
     <div class="landing">
         <h1>Landing Page</h1> 
-        <component v-bind:is="view"></component>
+        <router-view></router-view>
     </div>
 </template>
 <script>
-import login from '../landingPage/login';
-import signup from '../landingPage/signup';
-import reset from '../landingPage/reset';
-
 export default {
     data(){
         return{
         }
     },
-    components:{
-        'login':login,
-        'signup':signup,
-        'reset':reset
-    },
-    computed:{
-        view(){
-            return this.$store.state.view;
-        }
-    },
     methods:{
-        changeView(component){
-            this.$store.commit('changeView', component);
-        }
     }
 }
 </script>

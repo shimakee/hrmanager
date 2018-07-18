@@ -2,10 +2,9 @@
     <div class="login">
         <form>
             <h1 class="title">Login</h1>
-            {{getData}}
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" v-model="user.username" placeholder="Username">
+                <input type="text" v-model="user.username" placeholder="Username" autofocus>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -29,20 +28,10 @@ export default {
     methods:{
         submit(event){
             event.preventDefault();
-            let vm=this;
-            let result = this.$store.dispatch('login', this.user);
-            result.then(res=>{
-                this.$router.push('/home');
-                // this.$store.commit('setLoginStatus', true);
-            }).catch(err=>{
-                //display custom error message
-            });
+            this.$store.dispatch('login', this.user);
         }
     },
     computed:{
-        getData(){
-            return this.$store.getters.getData;
-        }
     }
 }
 </script>
