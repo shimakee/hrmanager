@@ -7,7 +7,7 @@
         </div>
         <div v-if="isLoggedIn === true">
             <router-link to="/home">home</router-link>
-            <router-link to="/settings/">settings</router-link>
+            <router-link to="/settings">settings</router-link>
             <button @click="logout()">Logout</button>
         </div>
     </div>

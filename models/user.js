@@ -81,7 +81,7 @@ user.methods.genAuthToken = function(){
 }
 
 // const skipInit = process.env.NODE_ENV === 'test';
-module.exports = mongoose.model('Users', user, 'users', true);
+module.exports = mongoose.model('Users', user);
 
 //==========================================fnctions
 function validateUser(data){
@@ -89,7 +89,6 @@ function validateUser(data){
         username:Joi.string().alphanum().min(8).max(30).required()
     });
     return userSchema.validate(data);
-    // return Joi.validate(data, Joi.string().alphanum().min(8).max(30).required());
 }
 
 function validatePassword(data){

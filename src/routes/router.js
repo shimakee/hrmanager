@@ -7,13 +7,18 @@ import {store} from '../store/store';
 import Reset from '../components/landingPage/reset';
 
 import Home from '../components/views/home';
-import Settings from '../components/home/settings/settings';
 import Profile from '../components/home/profile/profile';
-import EditProfile from '../components/home/settings/editProfile';
-import Posts from '..//components/home/profile/post'
-import ChangePassword from '../components/home/settings/changePassword';
-import ChangeUsername from '../components/home/settings/changeUsername';
-import DeleteAccount from '../components/home/settings/deleteAccount';
+import Posts from '../components/home/profile/post';
+
+import Settings from '../components/settings/settings';
+import ChangePassword from '../components/settings/changePassword';
+import ChangeUsername from '../components/settings/changeUsername';
+import DeleteAccount from '../components/settings/deleteAccount';
+import EditProfile from '../components/settings/editProfile';
+import EditRelatives from '../components/settings/editRelatives';
+import EditAddress from '../components/settings/editAddress';
+import EditContacts from '../components/settings/editContacts';
+import EditGov from '../components/settings/editGov';
 
 export const routes = [
     {path:'/', component: LandingPage,
@@ -60,7 +65,12 @@ export const routes = [
             {path:'account', name:'account', components:{default: ChangeUsername, 
                                                         changePassword: ChangePassword,
                                                         deleteAccount: DeleteAccount,
-                                                        editProfile: EditProfile}},
+                                                        editProfile: EditProfile,
+                                                        editRelatives: EditRelatives,
+                                                        editAddress: EditAddress,
+                                                        editContacts: EditContacts,
+                                                        editGov: EditGov
+                                                        }},
         ]
     },
     {path:'*', redirect:'/home'}

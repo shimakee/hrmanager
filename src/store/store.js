@@ -6,7 +6,8 @@ import signup from './modules/beforeAuth/signup';//importing modules
 import reset from './modules/beforeAuth/reset';//importing modules
 import login from './modules/beforeAuth/login';//importing modules
 import logout from './modules/beforeAuth/logout';//importing modules
-import settings from './modules/user/settings';//importing modules
+import userSettings from './modules/settings/user';//importing modules
+import profileSettings from './modules/settings/profile';//importing modules
 import profile from './modules/profile/profile';//importing modules
 
 Vue.use(Vuex);
@@ -65,53 +66,54 @@ export const store = new Vuex.Store({
             return  new Promise((resolve, reject)=>{
                 
 
-                let response = {
-                    data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, "civilStatus": "married", "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ], "gender": "male", "contact": [], "address": [], "government": [] }
-                    ,headers:{
-                        auth:'asdasd'
-                    }   
-                }
-                response.headers['x-auth-sampletoken']='token';
-                response.headers['exp']=1530722965+76270878+76270878;
-                resolve(response);
+                // let response = {
+                //     // data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, "civilStatus": "married", "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ], "gender": "male", "contact": [], "address": [], "government": [] }
+                //     data:{"address":[{"main":false,"_id":"5b50b8f5ec4f044154e61112","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":4444},{"main":false,"_id":"5b50b8e8ec4f044154e61111","description":"home","street":"monnstone","city":"digos","province":"davao del sur","zipcode":8002},{"main":true,"_id":"5b50b8e0ec4f044154e61110","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":2222}]}
+                //     ,headers:{
+                //         auth:'asdasd'
+                //     }   
+                // }
+                // response.headers['x-auth-sampletoken']='token';
+                // response.headers['exp']=1530722965+76270878+76270878;
+                // resolve(response);
 
-                    // switch(true){
-                    //     case payload.method === 'get':
-                    //         axios.get(payload.url)
-                    //             .then(res=>{
-                    //                 resolve(res);
-                    //             }).catch(err=>{
-                    //                 reject(err);
-                    //             });
-                    //         break;
-                    //     case payload.method === 'post':
-                    //         axios.post(payload.url, payload.data)
-                    //             .then(res=>{
-                    //                 resolve(res);
-                    //             }).catch((err)=>{
-                    //                 reject(err);
-                    //             });
-                    //         break;
-                    //     case payload.method === 'put':
-                    //         axios.put(payload.url, payload.data)
-                    //             .then(res=>{
-                    //                 resolve(res);
-                    //             }).catch((err)=>{
-                    //                 reject(err);
-                    //             });
-                    //         break;
-                    //     case payload.method === 'delete':
-                    //         axios.delete(payload.url, payload.data)
-                    //             .then(res=>{
-                    //                 resolve(res);
-                    //             }).catch((err)=>{
-                    //                 reject(err);
-                    //             });
-                    //         break;
+                    switch(true){
+                        case payload.method === 'get':
+                            axios.get(payload.url)
+                                .then(res=>{
+                                    resolve(res);
+                                }).catch(err=>{
+                                    reject(err);
+                                });
+                            break;
+                        case payload.method === 'post':
+                            axios.post(payload.url, payload.data)
+                                .then(res=>{
+                                    resolve(res);
+                                }).catch((err)=>{
+                                    reject(err);
+                                });
+                            break;
+                        case payload.method === 'put':
+                            axios.put(payload.url, payload.data)
+                                .then(res=>{
+                                    resolve(res);
+                                }).catch((err)=>{
+                                    reject(err);
+                                });
+                            break;
+                        case payload.method === 'delete':
+                            axios.delete(payload.url, payload.data)
+                                .then(res=>{
+                                    resolve(res);
+                                }).catch((err)=>{
+                                    reject(err);
+                                });
+                            break;
     
-                    //     default:
-                    //         reject(new Error({messaage:'Error sending request to server'}));
-                    // }
+                        default:
+                            reject(new Error({messaage:'Error sending request to server'}));
+                    }
             });
         }
     },
@@ -120,7 +122,8 @@ export const store = new Vuex.Store({
         login,
         reset,
         logout,
-        settings,
+        userSettings,
+        profileSettings,
         profile
     }
 });

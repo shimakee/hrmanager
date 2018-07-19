@@ -53,8 +53,8 @@ export default {
         if(localProfile){
             this.$store.commit('setProfile', localProfile);
         }else{
-            this.$store.dispatch('getProfile').then(res=>{
-                localStorage.setItem('profile', JSON.stringify(res));
+            this.$store.dispatch('getProfile').then(res=>{//get new profile data
+                localStorage.setItem('profile', JSON.stringify(res)); //re-set and resave new data
                 this.$store.commit('setProfile', res);
             });
         }
