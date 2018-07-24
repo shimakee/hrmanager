@@ -12,7 +12,7 @@
             <button @click="submit">send</button>
         </form>
 
-        
+        <!-- TODO move this as a separate component card-->
         <ul>
             <li v-for="(item, key) in addresss" v-bind:key="key" class="card-address">
                 <div v-if="!edit[key]">
@@ -21,6 +21,7 @@
                     <p> {{item.street}} , {{item.city}} </p>
                     <p> {{item.zipcode}}, {{item.province}} </p>
                     <button @click="edit[key] = true">Edit</button>
+                    <button @click="deleteAddress(item._id)">Delete</button>
                 </div>
                 <div v-else>
                     <form>
@@ -35,13 +36,24 @@
                 </div>
             </li>
         </ul>
-        
+
+            <h2>Google Maps</h2>
+            <!-- <form>
+                <input type="number" v-model="location.lat">
+                {{location.lat}}
+                <input type="number" v-model="location.lng">
+                {{location.lng}}
+                
+                <button @click.prevent="getLocation">GO!</button>
+            </form> -->
+            <div id="map"></div>
     </div>
 </template>
 <script>
 export default {
     data(){
         return {
+            location: {lat: 0, lng: 0},
             edit: {},
             addressModel:{main: false,
                         description:"",
@@ -77,7 +89,7 @@ export default {
                     });
                 });
         },
-        updateAddress(data){
+        updateAddress(data){ //TODO move this in store dispatch action
 
             this.$store.dispatch('sendCommit', {url:`/profile/me/address?id=${data._id}`, method: 'put', data: data})//TODO move to store as dispatch action
                 .then(response=>{
@@ -88,6 +100,23 @@ export default {
                 }).catch(err=>{
                     console.log('err', err);
                 });
+        },
+        deleteAddress(data){//move this in store dispatch action
+            this.$store.dispatch('sendCommit', {url:`/profile/me/address?id=${data}`, method:'delete', data:null} )
+            .then(response=>{
+                this.$store.dispatch('getAddress').then(res=>{
+                        localStorage.setItem('address', JSON.stringify(res));
+                        this.$store.commit('setAddress', res);
+                    });
+            }).catch(err=>{
+                console.log('err', err);
+            });
+        },
+        getLocation(){
+            console.log('location', this.location);
+            this.$store.dispatch('getMap', {selector:'#map',
+                                        position:{ lat: parseFloat(this.location.lat), 
+                                                    lng: parseFloat(this.location.lng) }});
         }
     },
     beforeMount(){
@@ -101,8 +130,18 @@ export default {
                 this.$store.commit('setAddress', res);
             });
         }
+
+        
+    },
+    mounted(){
+            this.$store.dispatch('getMap', {selector:'#map',
+                                            position:{ lat: this.location.lat,
+                                                        lng: this.location.lng }});
     }
 }
 </script>
 <style scoped>
+#map, #map2, #map3{
+    height:500px;
+}
 </style>

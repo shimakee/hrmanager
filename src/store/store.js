@@ -10,6 +10,8 @@ import userSettings from './modules/settings/user';//importing modules
 import profileSettings from './modules/settings/profile';//importing modules
 import profile from './modules/profile/profile';//importing modules
 
+import googlemaps from './modules/googlemaps/googlemaps';//googlemaps module
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -17,7 +19,7 @@ export const store = new Vuex.Store({
         data:null, //data to be rendered
         token:null, //response token obtained
         timeout: null,
-        env:"tesst",
+        env:"tesst"
     },
     getters:{
         hasToken:(state)=>{
@@ -124,7 +126,8 @@ export const store = new Vuex.Store({
         logout,
         userSettings,
         profileSettings,
-        profile
+        profile,
+        googlemaps
     }
 });
 

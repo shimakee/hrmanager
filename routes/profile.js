@@ -113,6 +113,25 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
         res.status(200).send(result);
     }
 
+}).delete(auth.isAuth, async(req,res,next)=>{
+
+    if(!req.query.id){
+        res.status(400).send({message: "Bad request."});
+    }else{
+        let id = req.query.id;
+
+        let {error} = Profile.validateId({id: id});
+        if(error){return res.status(400).send(error);}
+        
+        let result = await Profile.updateOne({_id: req.user.profile, "address._id": id}, {$pull: {address: {_id: id}}}).exec();
+
+        if(result.nModified <= 0){
+            res.status(404).send({message: "Address not found."});
+        }else{
+            res.status(200).send(result);
+        }
+    }
+    
 });//todo delete all or one at a time
 
 router.route('/me/contacts').get((req,res,next)=>{
