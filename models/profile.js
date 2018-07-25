@@ -44,7 +44,11 @@ const profile  = new Schema({
                 street: {type: String},
                 city:{type:String},
                 province: {type:String},
-                zipcode: {type: Number, min: 1000, max: 9999}}],
+                zipcode: {type: Number, min: 1000, max: 9999},
+                position:{
+                    lat:{type: Number},
+                    lng: {type:Number}
+                }}],
     government: [{key: {type: String},  
                 number: {type: Number, max:99999999999999999999}}]
 });
@@ -105,7 +109,11 @@ function validateProfile(data){
         street:Joi.string().max(255).regex(regex.address).allow(''),
         city:Joi.string().max(50).regex(regex.common).allow(''),
         province: Joi.string().max(100).regex(regex.common).allow(''),
-        zipcode:Joi.number().positive().integer().min(1000).max(9999).allow('')
+        zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
+        position:{
+            lat: Joi.number().max(85).min(-85).allow(''),
+            lng: Joi.number().max(180).min(-180).allow('')
+        }
     });
 
     const governmentSchema = Joi.object().keys({//to be tested
@@ -178,7 +186,11 @@ function validateAddress(data){
         street:Joi.string().max(255).regex(regex.address).allow(''),
         city:Joi.string().max(50).regex(regex.common).allow(''),
         province: Joi.string().max(100).regex(regex.common).allow(''),
-        zipcode:Joi.number().positive().integer().min(1000).max(9999).allow('')
+        zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
+        position:{
+            lat: Joi.number().max(85).min(-85).allow(''),
+            lng: Joi.number().max(180).min(-180).allow('')
+        }
     });
 
     const profileSchema = Joi.object().keys({//to be tested

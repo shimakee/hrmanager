@@ -16,7 +16,7 @@ import ChangeUsername from '../components/settings/changeUsername';
 import DeleteAccount from '../components/settings/deleteAccount';
 import EditProfile from '../components/settings/editProfile';
 import EditRelatives from '../components/settings/editRelatives';
-import EditAddress from '../components/settings/editAddress';
+import Address from '../components/settings/address/address';
 import EditContacts from '../components/settings/editContacts';
 import EditGov from '../components/settings/editGov';
 
@@ -67,7 +67,7 @@ export const routes = [
                                                         deleteAccount: DeleteAccount,
                                                         editProfile: EditProfile,
                                                         editRelatives: EditRelatives,
-                                                        editAddress: EditAddress,
+                                                        editAddress: Address,
                                                         editContacts: EditContacts,
                                                         editGov: EditGov
                                                         }},

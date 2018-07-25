@@ -1,52 +1,78 @@
 const state = {
     googleMap:{
         map:null,
-        marker:null,
+        markers:[],
+        currentPosition:null,
         position:{
             lat: 0,
             lng:0
-        }
+        },
+        label:null
     }
 }
 const getters = {
-    //map getter
-    //marker getter
+    getMap:(state)=>{
+        return state.googleMap.map;
+    },
+    getMarkers:(state)=>{
+        return state.googleMap.markers;
+    },
+    getPosition:(state)=>{
+        return state.googleMap.position;
+    },
+    getLabel:(state)=>{
+        return state.googleMap.label;
+    }
 }
 const mutations = {
-    //create set marker
-    //creat set map
+    setMarker:(state, payload)=>{
+        let markers = state.googleMap.markers;
+        let label = payload.label || state.googleMap.label;
+        
+        let marker = new google.maps.Marker({position: payload.position, map: payload.map, label: label});
+        marker.addListener('click', function(){
+            this.setMap(null);
+            let index = markers.indexOf(this);
+            markers.splice(index, 1);
+        });
+
+        state.googleMap.markers.push(marker);
+    },
+    setMap:(state, payload)=>{
+        state.googleMap.map = new google.maps.Map(
+            document.querySelector(payload.selector), {
+                center: payload.position,
+                scrollwheel: true,
+                zoom: 4
+                // ,scaleControl: true
+                ,mapTypeControl: true,
+                mapTypeControlOptions:{
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                }
+            });
+    },
+    setPosition:(state, payload)=>{
+        state.googleMap.position = payload;
+    },
+    setLabel:(state, payload)=>{
+        state.googleMap.label = payload;
+    }
 }
 const actions = {
-    getMap:({state, dispatch}, payload)=>{
-        state.googleMap.map = new google.maps.Map(//push map with selector as key
-            document.querySelector(payload.selector), {
-            center: payload.position,
-            scrollwheel: true,
-            zoom: 4
-            // ,scaleControl: true
-            ,mapTypeControl: true,
-            mapTypeControlOptions:{
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-            }
-            });
-
-        state.googleMap.marker = new google.maps.Marker({position:state.googleMap.position, map: state.googleMap.map});
-        state.googleMap.marker.addListener('click', function(){
-            let position = state.googleMap.marker.getPosition();
-            console.log(position);
+    createMap:({commit, getters}, payload)=>{
+        commit('setMap', {
+            position: payload.position,
+            selector: payload.selector
         });
 
-        google.maps.event.addListener(state.googleMap.map, 'click', function(event){
-            dispatch('setMarker', event.latLng);
-        });
-    },
-    setMarker:({state}, payload)=>{
-        state.googleMap.marker = new google.maps.Marker({position: payload,
-                                                        map: state.googleMap.map,
-                                                        label: 'address'});
-        state.googleMap.marker.addListener('click', function(){
-            let position = state.googleMap.marker.getPosition();
-            console.log(position);
+        let map = getters.getMap;
+
+        // google.maps.event.addListener(map, 'click', function(event){
+        //     commit('setMarker', {position: event.latLng, map: map, label: null});
+        //     // state.googleMap.label = null;
+        // });
+        map.addListener('click', function(event){
+            commit('setMarker', {position: event.latLng, map: map, label: null});
         });
     }
 }
