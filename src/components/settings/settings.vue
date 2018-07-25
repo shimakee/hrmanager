@@ -14,6 +14,7 @@
 <script>
 export default {
     //TODO on mount() or create()
+    //TODO move to views
 }
 </script>
 <style scoped>

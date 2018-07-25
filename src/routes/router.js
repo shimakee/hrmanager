@@ -11,9 +11,9 @@ import Profile from '../components/home/profile/profile';
 import Posts from '../components/home/profile/post';
 
 import Settings from '../components/settings/settings';
-import ChangePassword from '../components/settings/changePassword';
-import ChangeUsername from '../components/settings/changeUsername';
-import DeleteAccount from '../components/settings/deleteAccount';
+import ChangePassword from '../components/settings/account/changePassword';
+import ChangeUsername from '../components/settings/account/changeUsername';
+import DeleteAccount from '../components/settings/account/deleteAccount';
 import EditProfile from '../components/settings/editProfile';
 import EditRelatives from '../components/settings/editRelatives';
 import Address from '../components/settings/address/address';

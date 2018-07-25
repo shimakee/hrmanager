@@ -2,10 +2,10 @@
     <div>
         <h2>Address</h2>
         <show-address   :editable="true"
-                        :showMap="false"
+                        :showMap="true"
                         :address="address" 
                         :editAddress="editAddress"/>
-        <add-address :showMap="false"/>
+        <add-address :showMap="true"/>
 
     </div>
 </template>

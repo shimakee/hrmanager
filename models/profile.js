@@ -43,6 +43,7 @@ const profile  = new Schema({
                 description: {type: String},
                 street: {type: String},
                 city:{type:String},
+                country:{type:String},
                 province: {type:String},
                 zipcode: {type: Number, min: 1000, max: 9999},
                 position:{
@@ -108,6 +109,7 @@ function validateProfile(data){
         description:Joi.string().max(50).regex(regex.common).allow(''),
         street:Joi.string().max(255).regex(regex.address).allow(''),
         city:Joi.string().max(50).regex(regex.common).allow(''),
+        country:Joi.string().max(50).regex(regex.common).allow(''),
         province: Joi.string().max(100).regex(regex.common).allow(''),
         zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
         position:{
@@ -185,6 +187,7 @@ function validateAddress(data){
         description:Joi.string().max(50).regex(regex.common).allow(''),
         street:Joi.string().max(255).regex(regex.address).allow(''),
         city:Joi.string().max(50).regex(regex.common).allow(''),
+        country:Joi.string().max(50).regex(regex.common).allow(''),
         province: Joi.string().max(100).regex(regex.common).allow(''),
         zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
         position:{

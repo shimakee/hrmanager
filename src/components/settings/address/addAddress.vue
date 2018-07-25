@@ -8,15 +8,15 @@
             <input type="text" v-model="addressModel.street" placeholder="street">
             <input type="text" v-model="addressModel.city" placeholder="city">
             <input type="text" v-model="addressModel.province" placeholder="province">
+            <input type="text" v-model="addressModel.country" placeholder="country">
             <input type="number" v-model="addressModel.zipcode" placeholder="zipcode">
-            <input type="number" v-model="addressModel.position.lat" placeholder="latitude">
-            <input type="number" v-model="addressModel.position.lng" placeholder="longditude">
 
             <google-maps    :showMap="showMap"
                             :selector="'mapForm'"
                             :label="addressModel.description" 
                             :editable="true" 
-                            @update:position="addressModel.position = $event.position"/>
+                            @update:position="addressModel.position = $event.position"
+                            @update:address="setAddressModel"/>
 
             <button @click="submit">send</button>
         </form>
@@ -39,7 +39,8 @@ export default {
                         street:"",
                         city:"",
                         province:"",
-                        zipcode:"",
+                        country:"",
+                        zipcode:"",//TODO add country
                         position:{
                             lat: null,
                             lng: null
@@ -57,14 +58,24 @@ export default {
                         localStorage.setItem('address', JSON.stringify(res));
                         this.$store.commit('setAddress', res);
                     });
-                });
 
-            this.addressModel.main = "";
-            this.addressModel.description = "";
-            this.addressModel.street = "";
-            this.addressModel.city = "";
-            this.addressModel.province = "";
-            this.addressModel.zipcode = "";
+                    this.addressModel.main = false;
+                    this.addressModel.description = "";
+                    this.addressModel.street = "";
+                    this.addressModel.city = "";
+                    this.addressModel.province = "";
+                    this.addressModel.country = "";
+                    this.addressModel.zipcode = "";
+                });
+        },
+        setAddressModel(event){
+                    this.addressModel.street = event.address.route.long_name;
+                    this.addressModel.city = event.address.city.long_name;
+                    this.addressModel.province = event.address.province.long_name;
+                    this.addressModel.country = event.address.country.long_name;
+                    if(event.address.zipcode){
+                        this.addressModel.zipcode = event.address.zipcode.long_name;
+                    }
         }
     }
 }

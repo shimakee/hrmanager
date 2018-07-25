@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Address edit</h2>
+        <h2>Address show</h2>
 
         <ul>
             <li v-for="(item, key) in address" v-bind:key="key" class="card-address">
@@ -14,6 +14,7 @@
                         <input type="text" v-model="item.street" placeholder="street">
                         <input type="text" v-model="item.city" placeholder="city">
                         <input type="text" v-model="item.province" placeholder="province">
+                        <input type="text" v-model="item.country" placeholder="country">
                         <input type="number" v-model="item.zipcode" placeholder="zipcode">
 
                         
@@ -22,7 +23,8 @@
                                         :label="item.description" 
                                         :editable="true" 
                                         :position="item.position" 
-                                        @update:position="item.position = $event.position"/>
+                                        @update:position="item.position = $event.position"
+                                        @update:address="setItem(item, $event)"/>
                         <button @click.prevent="updateAddress(item), editAddress[key] = false">send</button>
                     </form>
                 </div>
@@ -33,7 +35,8 @@
                     {{item.main}} {{key}}
                     <h3>{{item.description}}</h3>
                     <p> {{item.street}} , {{item.city}} </p>
-                    <p> {{item.zipcode}}, {{item.province}} </p>
+                    <p> {{item.zipcode}} {{item.province}} </p>
+                    <p> {{item.country}} </p>
 
                      <!--only show edit button if editable-->
                     <button v-if="editable"
@@ -72,6 +75,7 @@ export default {
                         description:"",
                         street:"",
                         city:"",
+                        country: "",
                         province:"",
                         zipcode:"",
                         position:{
@@ -102,6 +106,14 @@ export default {
             }).catch(err=>{
                 console.log('err', err);
             });
+        },
+        setItem(item, event){//set new values for auto address from googlemaps
+            if(event.address.route){item.street = event.address.route.long_name;}
+            if(event.address.city){item.city = event.address.city.long_name;}
+            if(event.address.province){item.province = event.address.province.long_name;}
+            if(event.address.country){item.country = event.address.country.long_name;}
+            if(event.address.zipcode){item.zipcode = event.address.zipcode.long_name;}
+            else{item.zipcode = "";}
         }
     }
 }
