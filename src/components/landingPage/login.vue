@@ -10,7 +10,8 @@
                 <label for="password">Password:</label>
                 <input type="password" v-model="user.password" placeholder="Password">
             </div>
-            <button @click="submit">Send</button>
+            <button @click.prevent="submitLogin">Send</button>
+            <button @click.prevent="submitReset">Forgot Password</button>
         </form>
     </div>
 </template>
@@ -22,16 +23,43 @@ export default {
                 username: '',
                 password:''
             },
-            submitted: false
+            loginSubmitted: false,
+            resetSUbmitted: false
         }
-    },
-    methods:{
-        submit(event){
-            event.preventDefault();
-            this.$store.dispatch('login', this.user);
+    }
+    ,methods:{
+        submitLogin(){
+            this.loginSubmitted=true;
+            this.$store.dispatch('login', this.user)
+                .then(res=>{
+
+                    this.$router.push('/home');
+                }).catch(err=>{
+                    this.loginSubmitted=true;
+
+                    //display error message
+                    console.log('login failed');
+                });
         }
-    },
-    computed:{
+        ,submitReset(){
+            this.resetSubmitted=true;
+
+            if(this.user.username){//check that it has value to be submitted
+                this.$store.dispatch('resetPass', {username: this.user.username})
+                    .then(res=>{
+                        //display success message
+                        console.log('reset success');
+                    }).catch(err=>{
+                        this.resetSubmitted=false;
+                        
+                        //display error message
+                        console.log('reset failed');
+                    });
+            }else{
+                //display prompt message to input username
+                console.log('Input in username required');
+            }
+        }
     }
 }
 </script>

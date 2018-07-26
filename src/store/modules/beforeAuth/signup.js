@@ -37,10 +37,9 @@ const actions = {
                     localStorage.setItem('exp', dateExpire);
 
                     dispatch('autoLogout');
-                    router.push('/home');
+                    resolve(res);
 
                 }).catch(err=>{
-                    console.log(err);
                     //return custom error message
                     reject(err);
                 });

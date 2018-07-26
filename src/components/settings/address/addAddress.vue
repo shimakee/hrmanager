@@ -69,13 +69,11 @@ export default {
                 });
         },
         setAddressModel(event){
-                    this.addressModel.street = event.address.route.long_name;
-                    this.addressModel.city = event.address.city.long_name;
-                    this.addressModel.province = event.address.province.long_name;
-                    this.addressModel.country = event.address.country.long_name;
-                    if(event.address.zipcode){
-                        this.addressModel.zipcode = event.address.zipcode.long_name;
-                    }
+            if(event.address.route.long_name){ this.addressModel.street = event.address.route.long_name;}
+            if(event.address.city.long_name){ this.addressModel.city = event.address.city.long_name;}
+            if(event.address.province.long_name){ this.addressModel.province = event.address.province.long_name;}
+            if(event.address.country.long_name){ this.addressModel.country = event.address.country.long_name;}
+            if(event.address.zipcode.long_name){ this.addressModel.zipcode = event.address.zipcode.long_name;}
         }
     }
 }

@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import axios from '../axios-auth';
 // import axios from '../axios';
 import signup from './modules/beforeAuth/signup';//importing modules
-import reset from './modules/beforeAuth/reset';//importing modules
 import login from './modules/beforeAuth/login';//importing modules
 import logout from './modules/beforeAuth/logout';//importing modules
 import userSettings from './modules/settings/user';//importing modules
@@ -122,7 +121,6 @@ export const store = new Vuex.Store({
     modules:{//attach imported modules
         signup,
         login,
-        reset,
         logout,
         userSettings,
         profileSettings,

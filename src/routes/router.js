@@ -1,12 +1,10 @@
-import LandingPage from '../components/views/landingPage';
+import LandingPage from '../components/landingPage/landingPage';
 import Login from '../components/landingPage/login';
 import Signup from '../components/landingPage/signup';
 import {store} from '../store/store';
 
 //lazy load
-import Reset from '../components/landingPage/reset';
-
-import Home from '../components/views/home';
+import Home from '../components/home/home';
 import Profile from '../components/home/profile/profile';
 import Posts from '../components/home/profile/post';
 
@@ -22,12 +20,12 @@ import EditGov from '../components/settings/editGov';
 
 export const routes = [
     {path:'/', component: LandingPage,
-        beforeEnter:(to, from, next)=>{
+        beforeEnter:(to, from, next)=>{//check authentication status
             const token = store.getters.hasToken;
             const localToken = localStorage.getItem('token');
 
             if(token || localToken){
-                next({name:'home'});
+                next({name:'home'});//if already logged in - redirect to home page
             }else{
                 next();
             }
@@ -35,8 +33,7 @@ export const routes = [
         children:[
             {path:'/', redirect:'/login'},
             {path:'/login', name:'login', component: Login},
-            {path:'/signup', name:'signup', component: Signup},
-            {path:'/reset', name:'reset', component: Reset},
+            {path:'/signup', name:'signup', component: Signup}
         ]
     },
     {path:'/home', component: Home,

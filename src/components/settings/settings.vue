@@ -15,6 +15,7 @@
 export default {
     //TODO on mount() or create()
     //TODO move to views
+    //TODO properly separate and categorize these components
 }
 </script>
 <style scoped>

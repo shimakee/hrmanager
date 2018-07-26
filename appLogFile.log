@@ -45,3 +45,18 @@
 {"level":"info","message":"listening on port 80...","timestamp":"2018-07-25T18:44:37.287Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-07-25T18:44:39.352Z"}
 {"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-07-25T18:54:22.108Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-07-26T07:40:18.355Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-07-26T07:40:18.359Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-07-26T07:40:18.360Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-07-26T07:40:20.634Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-07-26T07:48:00.222Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-07-26T07:49:46.332Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-07-26T07:49:46.333Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-07-26T07:49:46.334Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-07-26T07:49:48.477Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-07-26T07:52:08.147Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-07-26T13:33:45.003Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-07-26T13:33:45.004Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-07-26T13:33:45.004Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-07-26T13:33:47.119Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-07-26T13:51:50.015Z"}

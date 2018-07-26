@@ -53,7 +53,7 @@
                 </select>
             </div>
 
-            <button @click="submit">Send</button>
+            <button @click.prevent="submit">Send</button>
 
         </form>
     </div>
@@ -87,10 +87,21 @@ export default {
         }
     },
     methods:{
-        submit(event){
-            event.preventDefault();
-            this.$store.dispatch('signup', this.identity);
+        submit(){
             this.submitted = true;
+
+            this.$store.dispatch('signup', this.identity)
+                .then(res=>{
+                    console.log(res);
+
+                    this.$router.push('/home');
+                }).catch(err=>{
+                    this.submitted = false
+                    console.log(err);
+
+                    //display error message
+                    console.log('signup failed');
+                });
         }
     },
     computed:{

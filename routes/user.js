@@ -70,7 +70,7 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
             .send(_.pick(user,['username']));   
 });
 
-router.route('/reset').post(async (req,res,next)=>{
+router.route('/reset').post(async (req,res,next)=>{//TODO: send email
     //validate-valid 
     let {error} = User.validateUser(req.body);//validate username
     if(error){ return res.status(400).send(error);}
@@ -81,7 +81,7 @@ router.route('/reset').post(async (req,res,next)=>{
             //check if email is available
                 //check for main email && is valid
                     //create password hash with date/time validity
-                    user.password = 'aaAA11!!!!' //TODO: random generate word
+                    user.password = 'aaAA11!!!!';
                     await user.hashPassword();
                     //change password
                     const result = await User.updateOne({username: user.username}, {password: user.password}).exec();
@@ -99,7 +99,7 @@ router.route('/me').get(auth.isAuth, (req,res,next)=>{
 }).put(auth.isAuth, async (req,res,next)=>{
     let data = req.body;
 
-    let {error}= User.validateUser(data);//validate TODO change validation
+    let {error}= User.validateUser(data);//validate TODO change validation - doublecheck
     if(error){return  res.status(400).send(error);}
 
     let user = await User.findOne({_id: req.user._id}).exec();

@@ -8,12 +8,22 @@ const getters = {
 const mutations = {
 }
 const actions = {
+    resetPass:(context, payload)=>{
+        return new Promise((resolve, reject)=>{
+            context.dispatch('sendCommit', {url:'/user/reset', method: 'post', data: payload})
+                .then(res=>{
+                    resolve(res);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
     login:( {commit, dispatch}, payload)=>{
         return new Promise((resolve,reject)=>{
             dispatch('sendCommit', {url:'/user/login', method:'post', data: payload})
                 .then(res=>{
-                    let token_header = nameSpace.token_header
-                    let token_expire = nameSpace.token_expire
+                    let token_header = nameSpace.token_header//app token header name used
+                    let token_expire = nameSpace.token_expire//app token expiration name used
 
                     if(!res.headers[token_header]){//check token
                         throw Error('No Token passed');
@@ -22,6 +32,10 @@ const actions = {
                         throw Error('No token expiration date');
                     }
                     
+                    //probably uneccessary since axios intercepter does it every request/response
+                    //but still process it upon login just to be sure
+
+                    //remove upon production, have not found a use for it yet
                     //save response data to generic data state
                     commit('setData', res.data);
                     localStorage.setItem('data', JSON.stringify(res.data));
@@ -36,11 +50,16 @@ const actions = {
                     localStorage.setItem('exp', dateExpire);
 
                     dispatch('autoLogout');
-                    router.push('/home');
+                    
+                    // //auto reroute
+                    // router.push('/home');
+
+                    //pass back true and let the component handle next step in logic
+                    resolve(res);
 
                 }).catch(err=>{
-                    console.log(err);
-                    //return custom error message
+                    //TODO - interpret error first before returning reject 
+                    //return false with error message
                     reject(err);
                 });
         });
