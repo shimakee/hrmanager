@@ -8,7 +8,6 @@ const DB_NAME = config.get('db.name');
 
 module.exports = async function(app){
     // return new Promise(async (resolve, reject)=>{
-        // mongoose.Promise = require('bluebird');
         await mongoose.connect(URI);
         
         Fawn.init(mongoose); //enable transaction
@@ -27,7 +26,7 @@ module.exports = async function(app){
         });
         connection.on('open', (data)=>{
             winston.info(`Connected to database ${DB_NAME}...`);
-            app.emit('db ready');
+            // app.emit('db ready');
             // return connection;
             // resolve(connection);
         });

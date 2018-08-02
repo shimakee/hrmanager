@@ -8,17 +8,21 @@ const mutations = {
 }
 const actions = {
     logout:(context)=>{
-        //clear data
-        context.commit('clearAuthData');
-        //clear local storage
-        localStorage.clear();
+        context.commit('clearAuthData');//clear data
+        localStorage.clear();//clear local storage
 
-        router.replace({path: '/'});
+        router.replace({path: '/login'});
     },
     autoLogout:({state, commit, dispatch})=>{
+        let token = getters.hasToken;
+        let localStorageToken = localStorage.getItem('token');
         let now = new Date();
-        let expire = new Date(localStorage.getItem('exp'));
+        let exp = localStorage.getItem('exp');
+        let expire = new Date(exp);
         let timeLeft = expire - now;
+
+        if(!exp || timeLeft <= 0){dispatch('logout')}
+        if(!token && !localStorageToken){dispatch('logout')}
 
         const {timeout} = state;//get store timeout state
 

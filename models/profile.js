@@ -22,11 +22,7 @@ const profile  = new Schema({
     gender: {type: String, enum: validDataLib.gender, required: [true, 'Need to select gender']},
     birthdate: {type: Date},
     nationality: {type: String},
-    civilStatus: {type: String, required: true, default: 'single', enum: ['single', 's',
-                                                                        'widowed', 'widow', 'w',
-                                                                        'married', 'm',
-                                                                        'annulled', 'a',
-                                                                        'divorced', 'd']},
+    civilStatus: {type: String, required: true, default: 'single', enum: validDataLib.civilStatus},
 
     spouse: {type: ObjId, ref: 'Profile'},
     parents:     {mother: {type: ObjId, ref: 'Profile'},
@@ -149,7 +145,7 @@ function validateProfile(data){
         government:Joi.array().max(30).unique('number').items(governmentSchema).single()
     });
 
-    return profileSchema.validate(data, {allowUnknown: true, presence:'optional'});
+    return profileSchema.validate(data, {presence:'optional'});
 }
 
 function validateUpdate(data){
@@ -168,7 +164,7 @@ function validateUpdate(data){
         civilStatus:Joi.string().valid(validDataLib.civilStatus).insensitive().required()
     });
 
-    return profileSchema.validate(data, {allowUnknown: true, presence:'optional'});
+    return profileSchema.validate(data, {presence:'optional'});
 }
 
 function validateId(data){
@@ -177,12 +173,13 @@ function validateId(data){
         id:Joi.objectId().allow('')
     });
 
-    return profileSchema.validate(data, {allowUnknown: true, presence:'optional'});
+    return profileSchema.validate(data, {presence:'optional'});
 }
 
 function validateAddress(data){
 
     const addressSchema = Joi.object().keys({//to be tested
+        _id: Joi.objectId().allow(''),
         main:Joi.boolean().default(false),
         description:Joi.string().max(50).regex(regex.common).allow(''),
         street:Joi.string().max(255).regex(regex.address).allow(''),
@@ -200,5 +197,5 @@ function validateAddress(data){
         address:Joi.array().max(3).unique('street').items(addressSchema).single()
     });
 
-    return profileSchema.validate(data, {allowUnknown: true, presence:'optional'});
+    return addressSchema.validate(data, {presence:'optional'});
 }

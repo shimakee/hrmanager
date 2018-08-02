@@ -76,6 +76,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
 }).post(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Profile.validateAddress(req.body);
+    
     if(error){return res.status(400).send({message: 'Bad request.'});}
 
     // let task = Fawn.Task(); //DO not use Fawn task removes object id;
@@ -94,7 +95,9 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
 }).put(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Profile.validateAddress(req.body);
-    if(error){return res.status(400).send({message: 'Bad request.'});}
+    if(error){
+        console.log(error);
+        return res.status(400).send({message: 'Bad request.'});}
 
     if(!req.query.id){
         res.status(400).send({message: "Bad request."});

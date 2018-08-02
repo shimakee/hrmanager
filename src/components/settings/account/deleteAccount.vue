@@ -2,16 +2,14 @@
     <div>
         <form>
             <label for="password">Delete Account: </label>
-            <button @click="submit">Send</button>
+            <button @click.prevent="submit">Send</button>
         </form>
     </div>
 </template>
 <script>
 export default {
     methods:{
-        submit(event){
-            event.preventDefault();
-
+        submit(){
             let confirm = window.confirm('Delete account?');
             if(confirm){
                 this.$store.dispatch('deleteAccount')

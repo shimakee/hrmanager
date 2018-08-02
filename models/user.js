@@ -4,7 +4,9 @@ const   Joi = require('joi');//validator
 const PassComplexity = require('joi-password-complexity'); //password complexity joi object
 const bcrypt = require('bcrypt');//password hashing
 const jwt = require('jsonwebtoken');
-const   mongoose = require('mongoose'),
+const   mongoose = require('mongoose');
+
+// const _ = require('lodash');
 //         passportLocalMongoose = require('passport-local-mongoose'),
         Schema = mongoose.Schema,
         ObjId = mongoose.Schema.Types.ObjectId;
@@ -20,7 +22,7 @@ const passwordConfig = {//setting password complexity requirements
 }
 
 const user = new Schema({
-    activity: {type: Boolean, default: true},
+    activity: {type: Boolean, default: false},
     username: {type: String,min:8, max:30, required: [true, "Username required"], unique: true, dropDups: true},
     password: {type: String,max:1024, required: [true, "Password required"]},
     profile: {type: ObjId, ref: 'Profile', required: [true, "Profile information required"]}
@@ -56,9 +58,18 @@ user.statics.validateChangePassword = function(data){
     return validateChangePassword(data);
 }
 
+user.statics.validateResetPassword = function(data){
+    return validateResetPassword(data);
+}
+
 user.statics.getTokenTime = function(token){
     const decode = jwt.decode(token, config.get('token'));
     return {iat:decode.iat, exp:decode.exp};
+}
+
+user.statics.decode = function(token){
+    const decode = jwt.decode(token, config.get('token'));
+    return decode;
 }
 
 user.methods.hashPassword= async function(saltRounds = 10){
@@ -71,12 +82,12 @@ user.methods.matchPassword = function(passwordInput){
     return bcrypt.compare(passwordInput, this.password);
 }
 
-user.methods.genAuthToken = function(){
+user.methods.genAuthToken = function(time = '1h'){
     const token = jwt.sign({_id:this._id, 
                             username: this.username,
                             profile: this.profile}, 
     config.get('token'),
-    {expiresIn:'1h'});
+    {expiresIn:time});
     return token;
 }
 
@@ -106,7 +117,7 @@ function validate(data){
     const {error} = validatePassword(data.password);
     if(error) return {error};
 
-    return userSchema.validate(data, {allowUnknown: true, presence:'optional'});
+    return userSchema.validate(data, {presence:'optional'});
 }
 
 function validateUserSignup(data){
@@ -134,6 +145,27 @@ function validateChangePassword(data){
         new:Joi.string().min(10).max(72).required(),
         newConfirm:Joi.string().min(10).max(72).required()
     });
+
+    if(data.new !== data.newConfirm){return {error: {message: 'Password confirmation does not match', name: "ValidationError"}}};
+
+    const {error} = validatePassword(data.new);
+    if(error) return {error};
+
+    return userSchema.validate(data);
+}
+
+function validateResetPassword(data){
+    const userSchema = Joi.object().keys({//to be tested
+        new:Joi.string().min(10).max(72).required(),
+        newConfirm:Joi.string().min(10).max(72).required(),
+        token: Joi.string().required()
+    });
+
+    try{
+        const decoded = jwt.verify(data.token, config.get('token'));
+    }catch(ex){
+        return {error: {message: 'JWT invalid.'}};
+    }
 
     if(data.new !== data.newConfirm){return {error: {message: 'Password confirmation does not match', name: "ValidationError"}}};
 

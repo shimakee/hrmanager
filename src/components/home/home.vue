@@ -1,12 +1,19 @@
 <template>
     <div>
-        <h1>Home</h1>
+        <nav-bar />
         <router-view></router-view>
     </div>
 </template>
 <script>
+import Navbar from "../parts/navbar";
+
 export default {
-    //TODO on mount() or create()
+    components:{
+        "nav-bar": Navbar
+    }
+    ,created(){
+        this.$store.dispatch('autoLogout'); 
+    }
 }
 </script>
 <style scoped>

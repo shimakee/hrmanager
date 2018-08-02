@@ -2,6 +2,7 @@
     <div class="signup">
         <h1>Signup</h1>
         <form>
+            <!--TODO create component for input-->
             <div class="form-group">
                 <label for="username">username</label>
                 <input type="text" v-model="identity.user.username" placeholder="Username">

@@ -2,8 +2,6 @@
     <div class="card-post">
         <img class="img" src="https://picsum.photos/100/100/?random" alt="picture post">
         <div class="content">
-            <!-- <h3 class="title">Title</h3>
-            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quam qui consequuntur iusto dolorem voluptate. Consectetur omnis asperiores nesciunt reprehenderit commodi voluptates amet perspiciatis deleniti id cupiditate, laudantium dicta exercitationem!</p> -->
             <slot name="title" class="title"></slot>
             <slot class="description"></slot>
         </div>

@@ -1,9 +1,6 @@
 <template>
     <div>
-            <h2>Google Maps</h2>
-
             <div v-if="showMap" class="mapComponent" :id="selector"></div>
-
     </div>
 </template>
 <script>
@@ -13,10 +10,10 @@ import Axios from 'axios';
 export default {
     props:{
         showMap:{default: true, type: Boolean},
-        autoLocate:{default: true, type: Boolean},
-        autoAddress:{default: true, type: Boolean},
+        autoLocate:{default: true, type: Boolean},//perform location detection via geolocate
+        autoAddress:{default: true, type: Boolean},//emit to parent address object
         selector: String,
-        position: Object,
+        position: Object, //lat lng object to be used by default
         label:{default: 'Location', type: String}, //label on the marker
         editable: {default: false, type: Boolean}, //be able to add/remove markers
         markerLimit: {default: 1, type: Number}

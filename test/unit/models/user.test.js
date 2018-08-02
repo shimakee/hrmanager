@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const _ = require('lodash');
 
-const createTestObj = require('../../../util/helper');
+const createTestObj = require('../../../util/testHelper');
 
 
 describe('User model', ()=>{

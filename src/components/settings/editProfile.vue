@@ -37,7 +37,7 @@
                 <input type="text" v-model="formProfile.nationality" placeholder="nationality">
             </div>
 
-            <button @click="submit">Send</button>
+            <button @click.prevent="submit">Send</button>
         </form>
     </div>
 </template>
@@ -57,8 +57,7 @@ export default {
         }
     },
     methods:{
-        submit(event){
-            event.preventDefault();
+        submit(){
 
             this.$store.dispatch('updateProfile', this.formProfile)
                 .then(response=>{
@@ -68,8 +67,6 @@ export default {
                             this.$store.commit('setProfile', res);
                     });
                 });
-
-            //dispatch axios action here
         }
     },
     computed:{

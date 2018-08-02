@@ -9,8 +9,16 @@ import {routes} from './routes/router';
 Vue.use(VueRouter);
 export const router = new VueRouter({ //creating router instance
   routes: routes,
-  mode: 'history'
+  mode: 'history',
 });
+
+// router.beforeEach((to, from, next)=>{
+//   console.log('to', to);
+//   console.log('from', from);
+
+  
+//   next();
+// // });
 
 new Vue({
   el: '#app',

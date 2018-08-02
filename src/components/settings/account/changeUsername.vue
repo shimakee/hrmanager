@@ -4,7 +4,7 @@
         <form>
             <label for="password">Username: </label>
             <input type="text" v-model="user.username" placeholder="new username">
-            <button @click="submit">Send</button>
+            <button @click.prevent="submit">Send</button>
         </form>
     </div>
 </template>
@@ -19,8 +19,7 @@ export default {
         }
     },
     methods:{
-        submit(event){
-            event.preventDefault();
+        submit(){
             this.$store.dispatch('changeUsername', this.user);
             this.submitted = true;
         }

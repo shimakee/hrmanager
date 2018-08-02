@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar></navbar>
+    <!-- <navbar></navbar> -->
     <router-view></router-view>
   </div>
 </template>
@@ -19,10 +19,8 @@ export default {
   components:{
     "navbar": Navbar
   },
-  mounted(){
-    this.$store.dispatch('autoLogin');
-    this.$store.dispatch('autoSetData');
-    this.$store.dispatch('autoLogout');
+  created(){
+      this.$store.dispatch('autoLogin');
   }
 }
 </script>

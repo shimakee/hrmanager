@@ -20,7 +20,6 @@ export default {
     },
     data(){
         return {
-            // address:null,
             editAddress: {},
             addressModel:{main: false,
                         description:"",
@@ -37,26 +36,16 @@ export default {
     ,computed:{
         address(){
             let results = this.$store.getters.getAddress;
-            for (const key in results) {
+
+            for (const key in results) {//assing key value pairs for editable
                 if (results.hasOwnProperty(key)) {
                     const element = results[key];
                     this.$set(this.editAddress, key, false);//using this.$set so that it will be observable and component wil rerender
                 }
             }
 
-            return this.$store.getters.getAddress;
+            return results;
         }
-    }
-    ,mounted(){
-        // let results = this.$store.getters.getAddress;
-        //     for (const key in results) {
-        //         if (results.hasOwnProperty(key)) {
-        //             const element = results[key];
-        //             this.$set(this.editAddress, key, false);//using this.$set so that it will be observable and component wil rerender
-        //         }
-        //     }
-
-        // this.$set(this.$data, 'address', results);
     }
     ,beforeMount(){
         let localAddress = JSON.parse(localStorage.getItem('address'));

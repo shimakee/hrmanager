@@ -18,7 +18,9 @@ export const store = new Vuex.Store({
         data:null, //data to be rendered
         token:null, //response token obtained
         timeout: null,
-        env:"tesst"
+        resetToken: null,
+        env:"production"
+
     },
     getters:{
         hasToken:(state)=>{
@@ -29,6 +31,9 @@ export const store = new Vuex.Store({
         },
         getToken:(state)=>{//get token header on response
             return state.token;
+        },
+        getResetToken:(state)=>{
+            return state.resetToken;
         }
 
     },
@@ -48,6 +53,9 @@ export const store = new Vuex.Store({
         },
         setLogoutTime:(state, payload)=>{
             state.timeout = payload;
+        },
+        setResetToken:(state, payload)=>{
+            state.resetToken = payload;
         }
     },
     actions:{ //can be used for async task like sending data to DB
@@ -66,17 +74,23 @@ export const store = new Vuex.Store({
         sendCommit:({commit, state}, payload)=>{
             return  new Promise((resolve, reject)=>{
                 
+                if(state.env == "test"){
 
-                // let response = {
-                //     // data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, "civilStatus": "married", "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ], "gender": "male", "contact": [], "address": [], "government": [] }
-                //     data:{"address":[{"main":false,"_id":"5b50b8f5ec4f044154e61112","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":4444},{"main":false,"_id":"5b50b8e8ec4f044154e61111","description":"home","street":"monnstone","city":"digos","province":"davao del sur","zipcode":8002},{"main":true,"_id":"5b50b8e0ec4f044154e61110","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":2222}]}
-                //     ,headers:{
-                //         auth:'asdasd'
-                //     }   
-                // }
-                // response.headers['x-auth-sampletoken']='token';
-                // response.headers['exp']=1530722965+76270878+76270878;
-                // resolve(response);
+                    
+                    let response = {
+                        data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, 
+                        "civilStatus": "married", 
+                        "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ],
+                        "gender": "male", "contact": [], 
+                        "address": [{"main":false,"_id":"5b50b8f5ec4f044154e61112","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":4444},{"main":false,"_id":"5b50b8e8ec4f044154e61111","description":"home","street":"monnstone","city":"digos","province":"davao del sur","zipcode":8002},{"main":true,"_id":"5b50b8e0ec4f044154e61110","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":2222}], "government": [] }
+                        ,headers:{
+                            auth:'asdasd'
+                        }   
+                    }
+                    response.headers['x-auth-sampletoken']='token';
+                    response.headers['exp']=1933179424;
+                    resolve(response);
+                }else{
 
                     switch(true){
                         case payload.method === 'get':
@@ -115,6 +129,7 @@ export const store = new Vuex.Store({
                         default:
                             reject(new Error({messaage:'Error sending request to server'}));
                     }
+                }
             });
         }
     },

@@ -1,4 +1,4 @@
-import {router} from '../../../main';
+
 
 const state = {
     profile:null,
@@ -7,8 +7,8 @@ const state = {
 const getters = {
     getProfile:(state)=>{
         return state.profile;
-    },
-    getAddress:(state)=>{
+    }
+    ,getAddress:(state)=>{
         return state.address;
     }
 }

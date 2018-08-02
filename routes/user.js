@@ -9,7 +9,8 @@ const auth = require('../middleware/auth');
 //utilities
 const Fawn = require('fawn');
 const   _ = require('lodash');
-const jwt = require('jsonwebtoken');
+const tools = require('../util/tools');
+// const jwt = require('jsonwebtoken');
         //status 200 - ok
         //201 -resource created
         //status 400 - Bad request
@@ -74,24 +75,84 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
     //validate-valid 
     let {error} = User.validateUser(req.body);//validate username
     if(error){ return res.status(400).send(error);}
-        //check if user exist - exist
-        const user = await User.findOne({username: req.body.username}).exec();
-        if(!user) {return res.status(400).send({message: 'Bad request. Username doesnt exist'});}
 
-            //check if email is available
-                //check for main email && is valid
-                    //create password hash with date/time validity
-                    user.password = 'aaAA11!!!!';
-                    await user.hashPassword();
+    //check if user exist - exist
+    const user = await User.findOne({username: req.body.username}).exec();
+    if(!user) {return res.status(400).send({message: 'Bad request. Username doesnt exist'});}
+
+            //generate User jwt key to be used as reset link get request
+            const token = user.genAuthToken('30m');
+            let decode = User.getTokenTime(token);
+            
+            //get profile email
+            const profile = await Profile.findOne({_id: user.profile}).exec();
+            if(!profile) { return res.status(404).send({message: "Internal server error, could not match user with profile information."})}
+            //get main email
+            let email = profile.email.find(el=>{return el.main == true});
+            
+            //format email to be sent
+            mailOption = {
+                from: `"PC Master race 👻" <no-reply@what.com>`, // sender address
+                to: email.address, // list of receivers
+                subject: 'Password reset', // Subject line
+                // text: 'Hello world?', // plain text body
+                html: `<b>Hello world?</b><br>
+                <h1>url token for user ${user.username}</h1>
+                <a target="_blank" href="http://localhost/reset?token=${token}">Follow link</a>` // html body
+            };
+            
+            //send link via email - low time validity
+            let sendStatus = await tools.email.send(mailOption);
+            
+            console.log('sendstatus', sendStatus);
+            res.status(200).send({message: sendStatus});
+
+                    // user.password = 'aaAA11!!!!';
+                    // await user.hashPassword();
                     //change password
-                    const result = await User.updateOne({username: user.username}, {password: user.password}).exec();
-                    res.status(200).send({message: 'Success'});
+                    // const result = await User.updateOne({username: user.username}, {password: user.password}).exec();
+                    // res.status(200).send({message: 'Success'});
                     //send password as email to email account
                     //OR - send link with authtoken - time to live 30mins
         //does not exist - return message
     //invalid - return message
     next();
+}).put( async (req, res, next)=>{
+    //validate req.body
+    let {error} = User.validateResetPassword(req.body);
+    if(error){return res.status(400).send({message: 'Bad request. could not validate entry'})}
+
+    //decode token
+    let decode = User.decode(req.body.token);
+
+    //check if user exist - exist
+    const user = await User.findOne({username: decode.username}).exec();
+    if(!user) {return res.status(400).send({message: 'Bad request. Username doesnt exist'});}
+
+    //change password
+    user.password = req.body.new;
+    await user.hashPassword();
+    await user.save();
+    res.status(200).send({message:'success'});
+
+    next();
 });
+
+//TODO: create get link for forgot password
+    //check that req parameter/query exist
+    //validate key sent on req.query.kay
+    //create header - jwt token - temporary 1 hour
+    //redirect to change pssword
+
+//TODO: recive change password from forgot
+    //check req parameters/query exist - or hidden input token as part of post
+    //validate parameters is valid or token is valid
+    //check parameters/headers/token is authentic
+
+    //validate req.body
+    //change password
+    //hashpassword
+    //return success
 
 router.route('/me').get(auth.isAuth, (req,res,next)=>{
     return res.status(200).send({username: req.user.username});

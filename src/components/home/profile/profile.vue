@@ -2,11 +2,10 @@
     <div class="profile">
         <div class="avatar-container">
             <h2>Profile</h2>
-            <img class="avatar" src="https://picsum.photos/200/200/?random" :alt="profile.name.first">
-            <div>{{profile.name.first}} {{profile.name.middle}} {{profile.name.last}} {{profile.name.suffix}}</div>
-            <!-- <router-link :to="{name:'account'}">Edit</router-link> -->
-
-
+            <img class="avatar" src="https://picsum.photos/200/200/?random" :alt="fullName">
+            <div>{{fullName}}</div>
+            
+            <!-- TODO make into individual components -->
             <ul class="info">
                 <li v-for="(value, property) in profile" v-bind:key="property">
 
@@ -45,17 +44,32 @@ export default {
     computed:{
         profile(){
             return this.$store.getters.getProfile;
+        },
+        fullName(){
+            let name = "";
+            let profile = this.profile;
+            for (const key in profile.name) {//get name from profile
+                if (profile.name.hasOwnProperty(key)) { //get every element
+                    const element = profile.name[key];
+                    if(element){
+                        name +=  " " + element; //check that element has value and stack over name
+                    }
+                }
+            }
+            
+            return name.trim();
         }
     },
     beforeMount(){
-        let localProfile = JSON.parse(localStorage.getItem('profile'));
+        let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage
 
         if(localProfile){
-            this.$store.commit('setProfile', localProfile);
+            this.$store.commit('setProfile', localProfile);//save localstorage profile to state
+
         }else{
-            this.$store.dispatch('getProfile').then(res=>{//get new profile data
-                localStorage.setItem('profile', JSON.stringify(res)); //re-set and resave new data
-                this.$store.commit('setProfile', res);
+            this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
+                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+                this.$store.commit('setProfile', res);//save to state
             });
         }
     }

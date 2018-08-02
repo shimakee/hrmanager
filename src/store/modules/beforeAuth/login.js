@@ -67,20 +67,11 @@ const actions = {
     autoLogin:({commit, getters, dispatch})=>{//TODO change to autoLogin
         let token = getters.hasToken;
         let localStorageToken = localStorage.getItem('token');
-        let timeExpire = localStorage.getItem('exp');
         
-        if(!token){
-            if(!localStorageToken){
-                dispatch('logout');
-                return false;
-            }
+        if(!token && localStorageToken){
             commit('setToken', localStorageToken);
         }
-        if(!localStorageToken){
-            if(!token){
-                dispatch('logout');
-                return false;
-        }
+        if(!localStorageToken && token){
             localStorage.setItem('token', token);
         }
 

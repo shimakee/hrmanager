@@ -1,8 +1,7 @@
 <template>
     <div class="landing">
         <h1>Landing Page</h1> 
-        <button v-show="show"  to="/signup" @click="toSignup">Signup</button>
-        <button v-show="!show" to="/login" @click="toLogin">Login</button>
+        <button @click="changeTo">{{to}}</button>
         <router-view></router-view>
     </div>
 </template>
@@ -10,19 +9,29 @@
 export default {
     data(){
         return{
-            show:true
+            to:'login'
         }
     }
     ,methods:{
-        toLogin(){
-            this.show = !this.show;
-            // this.signup = !this.signup;
-            this.$router.push('/login');
-        },
-        toSignup(){
-            this.show = !this.show;
-            // this.signup = !this.signup;
-            this.$router.push('/signup');
+        changeTo(){
+            let vm = this;
+
+            if(this.to == 'login'){
+                this.$router.push('/login');
+                vm.to = 'signup';
+            }else{
+                this.$router.push('/signup');
+                vm.to = 'login';
+            }
+        }
+    }
+    ,beforeMount(){
+        let path = window.location.pathname; //get path
+        
+        if(path == '/login'){
+            this.to = 'signup';
+        }else if(path = '/signup'){
+            this.to = 'login';
         }
     }
 }

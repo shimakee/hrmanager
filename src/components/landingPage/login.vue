@@ -33,7 +33,9 @@ export default {
             this.$store.dispatch('login', this.user)
                 .then(res=>{
 
-                    this.$router.push('/home');
+                    this.$router.push({name:'home'});
+                    //display error message
+                    console.log('login sucess');
                 }).catch(err=>{
                     this.loginSubmitted=true;
 

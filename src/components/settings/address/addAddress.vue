@@ -18,7 +18,7 @@
                             @update:position="addressModel.position = $event.position"
                             @update:address="setAddressModel"/>
 
-            <button @click="submit">send</button>
+            <button @click.prevent="submit">send</button>
         </form>
     </div>
 </template>
@@ -40,7 +40,7 @@ export default {
                         city:"",
                         province:"",
                         country:"",
-                        zipcode:"",//TODO add country
+                        zipcode:"",
                         position:{
                             lat: null,
                             lng: null
@@ -49,26 +49,31 @@ export default {
         }
     },
     methods:{
-        submit(event){
-            event.preventDefault();
+        clearAddressModel(){
+            this.addressModel.main = false;
+            this.addressModel.description = "";
+            this.addressModel.street = "";
+            this.addressModel.city = "";
+            this.addressModel.province = "";
+            this.addressModel.country = "";
+            this.addressModel.zipcode = "";
+        }
+        ,submit(){
 
-            this.$store.dispatch('addAddress', this.addressModel)
+            this.$store.dispatch('addAddress', this.addressModel)//submit to backend
                 .then(response=>{
-                    this.$store.dispatch('getAddress').then(res=>{
-                        localStorage.setItem('address', JSON.stringify(res));
-                        this.$store.commit('setAddress', res);
+
+                    this.$store.dispatch('getAddress')//get new set of address
+                        .then(res=>{
+
+                            localStorage.setItem('address', JSON.stringify(res));
+                            this.$store.commit('setAddress', res);
                     });
 
-                    this.addressModel.main = false;
-                    this.addressModel.description = "";
-                    this.addressModel.street = "";
-                    this.addressModel.city = "";
-                    this.addressModel.province = "";
-                    this.addressModel.country = "";
-                    this.addressModel.zipcode = "";
+                    this.clearAddressModel();//empty form
                 });
         },
-        setAddressModel(event){
+        setAddressModel(event){//autofill form based on googlemap marker
             if(event.address.route.long_name){ this.addressModel.street = event.address.route.long_name;}
             if(event.address.city.long_name){ this.addressModel.city = event.address.city.long_name;}
             if(event.address.province.long_name){ this.addressModel.province = event.address.province.long_name;}

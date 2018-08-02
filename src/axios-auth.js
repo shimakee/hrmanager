@@ -31,7 +31,7 @@ instance.interceptors.response.use(response=>{
         localStorage.setItem('exp', expire);
 
         console.log('new expire', expire);//remove on production
-        store.dispatch('autoLogout');
+        store.dispatch('autoLogout');//re-initialize autologout every request
     }
 
     // //place data in local storage

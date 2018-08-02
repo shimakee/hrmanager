@@ -3,7 +3,7 @@ const Profile = require('../../../models/profile');
 const mongoose = require('mongoose');
 const moment = require('moment');
 const validDataLibrary = require('../../../util/validDataLibrary');
-const createTestObj = require('../../../util/helper');
+const createTestObj = require('../../../util/testHelper');
 const _ = require('lodash');
 
 describe('Profile model', ()=>{

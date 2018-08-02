@@ -1,4 +1,5 @@
 import LandingPage from '../components/landingPage/landingPage';
+import Reset from '../components/landingPage/reset';
 import Login from '../components/landingPage/login';
 import Signup from '../components/landingPage/signup';
 import {store} from '../store/store';
@@ -17,9 +18,10 @@ import EditRelatives from '../components/settings/editRelatives';
 import Address from '../components/settings/address/address';
 import EditContacts from '../components/settings/editContacts';
 import EditGov from '../components/settings/editGov';
+import googlemaps from '../store/modules/googlemaps/googlemaps';
 
 export const routes = [
-    {path:'/', component: LandingPage,
+    {path:'/login', component: LandingPage,
         beforeEnter:(to, from, next)=>{//check authentication status
             const token = store.getters.hasToken;
             const localToken = localStorage.getItem('token');
@@ -31,44 +33,67 @@ export const routes = [
             }
         },
         children:[
-            {path:'/', redirect:'/login'},
-            {path:'/login', name:'login', component: Login},
-            {path:'/signup', name:'signup', component: Signup}
+            {path:'/', name:'login', component: Login},
+            {path:'/signup', name:'signup', component: Signup},
+            {path:'/reset', component: Reset,
+                beforeEnter:(to, from, next)=>{
+                    const resetToken = to.query.token;//check that it has query token
+                    if(!resetToken){
+                            next(from.path);//return previous path
+                    }else{
+                        store.commit('setResetToken', resetToken); //commit reset token
+                        next();
+                    }
+                }
+            }
         ]
-    },
-    {path:'/home', component: Home,
+    }
+    ,{path:'/', component: Home,
         beforeEnter:(to, from, next)=>{
             const token = store.getters.hasToken;
             const localToken = localStorage.getItem('token');
 
-            if(token || localToken){
+            if(token || localToken){//check auth
                 next();
             }else{
-                next({name: 'login'});
+                next({name: 'login'});//no auth return to login
             }
         },
         children:[
-            {path:'/', name:'home', redirect:'profile'},
-            {path:'profile', component: Profile,
+            {path:'', name:'home', redirect:'profile'},
+            {path:'/profile', component: Profile,
                 children:[
                     {path:"/", name:"post", component: Posts}
+                ]
+            },
+            {path:'/settings', component: Settings, 
+                beforeEnter:(to, from, next)=>{
+                    const token = store.getters.hasToken;
+                    const localToken = localStorage.getItem('token');
+
+                    
+                    console.log('query', to.query);
+
+                    if(token || localToken){//check auth
+                        next();
+                    }else{
+                        next({name: 'login'});//no auth return to login
+                    }
+                },
+                children:[
+                    {path:'/', name:'settings', redirect:'account'},
+                    {path:'account', name:'account', components:{default: ChangeUsername, 
+                                                                changePassword: ChangePassword,
+                                                                deleteAccount: DeleteAccount,
+                                                                editProfile: EditProfile,
+                                                                editRelatives: EditRelatives,
+                                                                editAddress: Address,
+                                                                editContacts: EditContacts,
+                                                                editGov: EditGov
+                                                                }},
                 ]
             }
         ]
     },
-    {path:'/settings', component: Settings, 
-        children:[
-            {path:'/', name:'settings', redirect:'account'},
-            {path:'account', name:'account', components:{default: ChangeUsername, 
-                                                        changePassword: ChangePassword,
-                                                        deleteAccount: DeleteAccount,
-                                                        editProfile: EditProfile,
-                                                        editRelatives: EditRelatives,
-                                                        editAddress: Address,
-                                                        editContacts: EditContacts,
-                                                        editGov: EditGov
-                                                        }},
-        ]
-    },
-    {path:'*', redirect:'/home'}
+    ,{path:'*', redirect:'/'}
 ];

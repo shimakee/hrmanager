@@ -63,7 +63,7 @@ export default {
     props:{
         showMap:{default: true, type:Boolean},
         editable:{default: false, type: Boolean}, //determines if you are able to edit the address here
-        address:{type: Array}, //address to show
+        address:{type: Array}, //array of address to show
         editAddress:{type:Object} //on edit boolean pair for each address
     }
     ,components:{
