@@ -12,7 +12,7 @@ import profile from './modules/profile/profile';//importing modules
 import googlemaps from './modules/googlemaps/googlemaps';//googlemaps module
 
 Vue.use(Vuex);
-
+    
 export const store = new Vuex.Store({
     state:{
         data:null, //data to be rendered
@@ -89,7 +89,11 @@ export const store = new Vuex.Store({
                     }
                     response.headers['x-auth-sampletoken']='token';
                     response.headers['exp']=1933179424;
-                    resolve(response);
+
+                        setTimeout(function(){
+                            resolve(response)
+                        }
+                            , 2000);
                 }else{
 
                     switch(true){

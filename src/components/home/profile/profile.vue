@@ -41,26 +41,33 @@
 </template>
 <script>
 export default {
-    computed:{
+    data(){
+        return {
+            fullName: null
+        }
+    }
+    ,computed:{
         profile(){
             return this.$store.getters.getProfile;
-        },
-        fullName(){
-            let name = "";
-            let profile = this.profile;
-            for (const key in profile.name) {//get name from profile
-                if (profile.name.hasOwnProperty(key)) { //get every element
-                    const element = profile.name[key];
-                    if(element){
-                        name +=  " " + element; //check that element has value and stack over name
-                    }
-                }
-            }
-            
-            return name.trim();
         }
     },
     beforeMount(){
+        let name = "";
+            let profileName = this.$store.getters.getProfile;
+            // let profileName = this.profile.name;
+
+                for (const key in profileName.name) {//get name from profile
+                    if (profileName.name.hasOwnProperty(key)) { //get every element
+                        const element = profileName.name[key];
+                        if(element){
+                            name +=  " " + element; //check that element has value and stack over name
+                        }
+                    }
+                }
+            
+            this.fullName = name.trim();
+    }
+    ,created(){
         let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage
 
         if(localProfile){
@@ -68,8 +75,8 @@ export default {
 
         }else{
             this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
                 this.$store.commit('setProfile', res);//save to state
+                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
             });
         }
     }

@@ -44,11 +44,51 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
     
     const token = newUser.genAuthToken();//generate token
     const decode = User.getTokenTime(token);
+
+    // console.log('decode', decode);
+
+    //format email to be sent
+   let  mailOption = {
+        from: `"PC Master race 👻" <no-reply@what.com>`, // sender address
+        to: req.body.profile.email.address, // list of receivers
+        subject: 'Email confirmation and account activation', // Subject line
+        // text: 'Hello world?', // plain text body
+        html: `<b>Hello world?</b><br>
+        <h1>url token for user ${decode.username}</h1>
+        <a target="_blank" rel="noopener noreferrer" href="http://localhost/user/activate?token=${token}">Follow link</a>` // html body
+    };
+
+    //send link via email - low time validity
+    let sendStatus = await tools.email.send(mailOption);
+    console.log("sendStatus", sendStatus);
     
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
                 .send({message: 'Success'});//return sucess
+});
+
+router.route('/activate').get(async (req,res,next)=>{
+    let token = req.query.token;
+
+    if(!token){
+        res.status(400).send({message: 'Bad request. No token.'});
+    }else{
+        let decoded = User.verifyToken(token);
+        
+        if(!decoded.isValid){
+            res.status(400).send({message: 'Bad request. Invalid token.'});
+        }else{
+            
+            const user = await User.findOne({_id: decoded.info._id}).exec();//username exist
+            if(!user) {return res.status(404).send({message: 'Bad request. User does not exist'});}
+
+            user.activity = true;
+            await user.save();
+
+            res.status(200).redirect('/login');
+        }
+    }
 });
 
 router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
@@ -104,7 +144,7 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
             //send link via email - low time validity
             let sendStatus = await tools.email.send(mailOption);
             
-            console.log('sendstatus', sendStatus);
+            // console.log('sendstatus', sendStatus);
             res.status(200).send({message: sendStatus});
 
                     // user.password = 'aaAA11!!!!';

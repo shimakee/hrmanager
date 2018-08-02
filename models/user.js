@@ -72,6 +72,16 @@ user.statics.decode = function(token){
     return decode;
 }
 
+user.statics.verifyToken = function(token){
+    let decoded;
+    try{
+        decoded = jwt.verify(token, config.get('token'));
+    }catch(ex){
+        return {isValid: false, error: {message: 'JWT invalid.'}, info: null};
+    }
+    return {isValid:true, error: null, info: decoded}
+}
+
 user.methods.hashPassword= async function(saltRounds = 10){
 
     const salt = await bcrypt.genSalt(saltRounds);
