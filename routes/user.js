@@ -18,6 +18,9 @@ const tools = require('../util/tools');
         //403 forbidden
         //status 404 - object not found
 
+        
+    //TODO: create resend account activation link for user
+
 router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
     let result = Profile.validate(req.body.profile); //validate profile
     if(result.error){ return res.status(400).send(result.error);}
@@ -111,6 +114,7 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
             .send(_.pick(user,['username']));   
 });
 
+//send reset link for account reset, forgot password
 router.route('/reset').post(async (req,res,next)=>{//TODO: send email
     //validate-valid 
     let {error} = User.validateUser(req.body);//validate username
@@ -128,9 +132,9 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
             const profile = await Profile.findOne({_id: user.profile}).exec();
             if(!profile) { return res.status(404).send({message: "Internal server error, could not match user with profile information."})}
             //get main email
-            let email = profile.email.find(el=>{return el.main == true});
+            let email = profile.email.find(el=>{return el.main == true});//find main email and set as email
             
-            //format email to be sent
+            //format email to be sent as activation/confirmation
             mailOption = {
                 from: `"PC Master race 👻" <no-reply@what.com>`, // sender address
                 to: email.address, // list of receivers
@@ -144,19 +148,11 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
             //send link via email - low time validity
             let sendStatus = await tools.email.send(mailOption);
             
-            // console.log('sendstatus', sendStatus);
+            console.log('sendstatus', sendStatus);
             res.status(200).send({message: sendStatus});
-
-                    // user.password = 'aaAA11!!!!';
-                    // await user.hashPassword();
-                    //change password
-                    // const result = await User.updateOne({username: user.username}, {password: user.password}).exec();
-                    // res.status(200).send({message: 'Success'});
-                    //send password as email to email account
-                    //OR - send link with authtoken - time to live 30mins
-        //does not exist - return message
-    //invalid - return message
     next();
+
+//change account password through reset token
 }).put( async (req, res, next)=>{
     //validate req.body
     let {error} = User.validateResetPassword(req.body);
@@ -178,25 +174,13 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
     next();
 });
 
-//TODO: create get link for forgot password
-    //check that req parameter/query exist
-    //validate key sent on req.query.kay
-    //create header - jwt token - temporary 1 hour
-    //redirect to change pssword
 
-//TODO: recive change password from forgot
-    //check req parameters/query exist - or hidden input token as part of post
-    //validate parameters is valid or token is valid
-    //check parameters/headers/token is authentic
-
-    //validate req.body
-    //change password
-    //hashpassword
-    //return success
-
+//get username
 router.route('/me').get(auth.isAuth, (req,res,next)=>{
     return res.status(200).send({username: req.user.username});
 
+
+//edit username
 }).put(auth.isAuth, async (req,res,next)=>{
     let data = req.body;
 
@@ -210,6 +194,8 @@ router.route('/me').get(auth.isAuth, (req,res,next)=>{
         await user.save();
 
     res.status(200).send({message: 'Success'});
+
+//delete account
 }).delete(auth.isAuth, async (req,res,next)=>{
     let user = req.user;
 
@@ -227,6 +213,8 @@ router.route('/me').get(auth.isAuth, (req,res,next)=>{
         return res.status(200).send({message: 'Success'});
 });
 
+
+//chang password
 router.route('/change_password').put(auth.isAuth, async (req,res,next)=>{
     let data = req.body;
     let {error}= User.validateChangePassword(data);
@@ -242,4 +230,6 @@ router.route('/change_password').put(auth.isAuth, async (req,res,next)=>{
     res.status(200).send({message: 'Success'});
 })
 
+
+//TODO: user activation link
 module.exports = router;

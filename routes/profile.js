@@ -9,6 +9,7 @@ const auth = require('../middleware/auth');
 const Fawn = require('fawn');
 const   _ = require('lodash');
 
+//get user profile info
 router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     const user = req.user;
         let  profile = await Profile.findOne({_id: user.profile}).exec();
@@ -17,7 +18,8 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
         profile = _.omit(profile.toObject(), ['alive', '_id']);//remove important properties
         res.status(200).send(profile);
 
-}).put(auth.isAuth, async (req,res,next)=>{
+//edit user profile info
+}).put(auth.isAuth, async (req,res,next)=>{ 
     const user = req.user;
     let data = req.body;
 
@@ -32,6 +34,7 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     let result = await Profile.updateOne({_id: user.profile}, data).exec();
     res.status(200).send({message: 'Success', result: result});
 
+//delete user profile info
 }).delete(auth.isAuth, async (req,res,next)=>{
     let user = req.user;
 
@@ -48,6 +51,8 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     res.status(200).send({message: 'Success'});
 });
 
+
+//get profile address
 router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
 
     let profile = await Profile.findById(req.user.profile).exec();
@@ -73,13 +78,14 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
         res.status(200).send(result);
     }
 
+//add profile address
 }).post(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Profile.validateAddress(req.body);
     
     if(error){return res.status(400).send({message: 'Bad request.'});}
 
-    // let task = Fawn.Task(); //DO not use Fawn task removes object id;
+    // let task = Fawn.Task(); //DO not use Fawn task becasue it removes object id;
 
     if(req.body.main == true){//set everything else to false
         // task.update("profiles", {_id: req.user.profile}, {$set: {"address.$[].main": false}});
@@ -92,6 +98,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
 
     res.status(200).send(profile);
 
+//edit profile address
 }).put(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Profile.validateAddress(req.body);
@@ -116,6 +123,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
         res.status(200).send(result);
     }
 
+//delete profile address
 }).delete(auth.isAuth, async(req,res,next)=>{
 
     if(!req.query.id){

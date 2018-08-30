@@ -27,6 +27,7 @@ const user = new Schema({
     password: {type: String,max:1024, required: [true, "Password required"]},
     profile: {type: ObjId, ref: 'Profile', required: [true, "Profile information required"]}
     // employment: [{type: ObjId, ref: 'Employment'}]
+    // customer: [{type: ObjId, ref: 'Customer'}]
     //role: [{type: ObjId, ref:'Role'}] //access control
     //accountType: {type: String, enum: validDataLib.accountType, default:'client'} //client or staff
 });
