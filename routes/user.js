@@ -63,7 +63,7 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
 
     //send link via email - low time validity
     let sendStatus = await tools.email.send(mailOption);
-    console.log("sendStatus", sendStatus);
+    // console.log("sendStatus", sendStatus);
     
         return res.status(201)
                 .header(config.get('token_header'), token)
@@ -148,7 +148,7 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
             //send link via email - low time validity
             let sendStatus = await tools.email.send(mailOption);
             
-            console.log('sendstatus', sendStatus);
+            // console.log('sendstatus', sendStatus);
             res.status(200).send({message: sendStatus});
     next();
 

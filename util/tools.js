@@ -30,7 +30,7 @@ tools={
                 if(config.util.getEnv('NODE_ENV') === "production"){
                     mailConfig = {//real host
                         host: config.get('emailHost'),//set on node ENV variable
-                        port: 587,
+                        port: config.get('emailPort'),
                         secure: false,
                         auth: {
                             user: config.get('emailUser'), // set on node ENV variable

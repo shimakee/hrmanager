@@ -6,6 +6,8 @@ const   mongoose    = require ('mongoose')
 const   regex       = require('../util/regex'),
         validDataLib = require('../util/validDataLibrary');
 
+        //TODO: set limits here to relatives, contacts,  email, address, and government
+
 const profile  = new Schema({
     alive: {type: Boolean, required: true, default: true},
     name:   {
@@ -24,9 +26,11 @@ const profile  = new Schema({
     nationality: {type: String},
     civilStatus: {type: String, required: true, default: 'single', enum: validDataLib.civilStatus},
 
-    spouse: {type: ObjId, ref: 'Profile'},
-    parents:     {mother: {type: ObjId, ref: 'Profile'},
-                father: {type: ObjId, ref: 'Profile'}},
+    // spouse: {type: ObjId, ref: 'Profile'},
+    // parents:     {mother: {type: ObjId, ref: 'Profile'},
+    //             father: {type: ObjId, ref: 'Profile'}},
+    relatives:[{profile: {type:ObjId, ref: 'Profile'}, //use this instead
+             relationship: {type: String}}],
 
     contact:    [{main: {type: Boolean, default: false}, //TODO ObjId reference to new contact schema
                 description: {type: String}, 
@@ -47,7 +51,7 @@ const profile  = new Schema({
                     lng: {type:Number}
                 }}],
     government: [{key: {type: String},  
-                number: {type: Number, max:99999999999999999999}}]
+                info: {type: String}}]
 });
 
 profile.statics.validate = function(data){
@@ -64,6 +68,18 @@ profile.statics.validateId = function (data){
 
 profile.statics.validateAddress = function (data){
     return validateAddress(data);
+}
+
+profile.statics.validateContact = function (data){
+    return validateContact(data);
+}
+
+profile.statics.validateGov = function (data){
+    return validateGov(data);
+}
+
+profile.statics.validateRelative = function (data){
+    return validateRelative(data);
 }
 
 profile.methods.getFullName = function(){
@@ -115,8 +131,13 @@ function validateProfile(data){
     });
 
     const governmentSchema = Joi.object().keys({//to be tested
-        key:Joi.string().max(100).alphanum().allow(''),
-        number:Joi.number().positive().integer().max(99999999999999999999).allow('')
+        key:Joi.string().max(100).regex(regex.common).allow(''),
+        info:Joi.string().max(100).regex(regex.common).allow('')
+    });
+
+    const relativeSchema = Joi.object().keys({//to be tested
+        profile:Joi.objectId().allow(''),
+        relationship:Joi.string().max(100).regex(regex.common).allow('')
     });
 
     const profileSchema = Joi.object().keys({//to be tested
@@ -134,12 +155,13 @@ function validateProfile(data){
         birthdate:Joi.date().min('1-1-1900').max('now').allow(''),
         nationality:Joi.string().max(30).regex(regex.common).allow(''),
         civilStatus:Joi.string().valid(validDataLib.civilStatus).insensitive().required(),
-        spouse:Joi.objectId().allow(''),
-        parents:{
-            mother:Joi.objectId().allow(''),
-            father:Joi.objectId().allow(''),
-        },
-        contact:Joi.array().max(5).unique('number').items(contactSchema).single(),
+        // spouse:Joi.objectId().allow(''),
+        // parents:{
+        //     mother:Joi.objectId().allow(''),
+        //     father:Joi.objectId().allow(''),
+        // },
+        relatives:Joi.array().max(10).items(relativeSchema).single(),
+        contact:Joi.array().max(5).items(contactSchema).single(),
         email:Joi.array().max(5).unique('address').items(emailSchema).single(),
         address:Joi.array().max(3).unique('street').items(addressSchema).single(),
         government:Joi.array().max(30).unique('number').items(governmentSchema).single()
@@ -148,7 +170,7 @@ function validateProfile(data){
     return profileSchema.validate(data, {presence:'optional'});
 }
 
-function validateUpdate(data){
+function validateUpdate(data){ //TODO: rename to basicProfile
 
     const profileSchema = Joi.object().keys({//to be tested
         name:{
@@ -198,4 +220,48 @@ function validateAddress(data){
     });
 
     return addressSchema.validate(data, {presence:'optional'});
+}
+
+function validateContact(data){
+
+    const contactSchema = Joi.object().keys({ //to be tested
+        main: Joi.boolean().allow(''),
+        description:Joi.string().max(25).regex(regex.common),
+        countryCode:Joi.number().integer().positive().max(999999).allow(''),
+        areaCode:Joi.number().integer().positive().max(999999).allow(''),
+        number:Joi.number().integer().positive().max(999999999999999)
+    });
+
+    return contactSchema.validate(data, {presence:'optional'});
+}
+
+function validateGov(data){
+
+    const governmentSchema = Joi.object().keys({//to be tested
+        key:Joi.string().max(100).regex(regex.common),
+        info:Joi.string().max(100).regex(regex.commonAlphaNum)
+    });
+
+    return governmentSchema.validate(data, {presence:'optional'});
+}
+
+function validateRelative(data){
+    const relativeSchema = Joi.object().keys({//to be tested
+        profile:Joi.object().keys({
+            name:{
+                first:Joi.string().max(50).regex(regex.common).required(),
+                middle:Joi.string().max(50).regex(regex.common).allow(''),
+                maiden:Joi.string().max(50).regex(regex.common).allow(''),
+                last:Joi.string().max(50).regex(regex.common).required(),
+                suffix: Joi.string().max(50).regex(regex.common).allow('')
+            },
+            gender:Joi.string().valid(validDataLib.gender).insensitive().required(),
+            birthdate:Joi.date().min('1-1-1900').max('now').allow(''),
+            nationality:Joi.string().max(30).regex(regex.common).allow(''),
+            civilStatus:Joi.string().valid(validDataLib.civilStatus).insensitive().allow('')
+        }),
+        relationship:Joi.string().max(100).regex(regex.common)
+    });
+
+    return relativeSchema.validate(data, {presence:'optional'});
 }

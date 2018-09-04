@@ -24,7 +24,7 @@ module.exports = async function(app){
             winston.error(error);
             // reject(`Database ${DB_NAME} connection error: ${error}`);
         });
-        connection.on('open', (data)=>{
+        connection.on('connected', ()=>{
             winston.info(`Connected to database ${DB_NAME}...`);
             // app.emit('db ready');
             // return connection;
