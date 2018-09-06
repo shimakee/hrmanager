@@ -25,7 +25,13 @@ const profile  = new Schema({
     birthdate: {type: Date},
     nationality: {type: String},
     civilStatus: {type: String, required: true, default: 'single', enum: validDataLib.civilStatus},
-
+    picDir: {type: String}, //by default is already set at config - no need to save it yet
+    pics:[{filename: {type: String},
+        path: {type: String},
+        encoding: {type: String},
+        mimetype: {type: String},
+        size: {type: Number}}],
+    profilePicName: {type: String,}, //set which pic as profile
     // spouse: {type: ObjId, ref: 'Profile'},
     // parents:     {mother: {type: ObjId, ref: 'Profile'},
     //             father: {type: ObjId, ref: 'Profile'}},
