@@ -3,6 +3,7 @@ const express = require('express');
 const userRoutes = require('../routes/user');
 const profileRoutes = require('../routes/profile');
 const fileRoutes = require('../routes/file');
+const companyRoutes = require('../routes/company');
 //error hander
 const errorHandler = require('../middleware/err');
 
@@ -11,7 +12,8 @@ module.exports = function(app){
 
     app.use('/user', userRoutes);//using routes
     app.use('/profile', profileRoutes);//profile routes
-    app.use('/file', fileRoutes);
+    app.use('/file', fileRoutes); //file routes
+    app.use('/company', companyRoutes);//company routes
 
     app.use(errorHandler);//handling errors within express
 }

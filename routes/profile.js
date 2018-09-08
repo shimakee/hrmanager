@@ -9,13 +9,17 @@ const auth = require('../middleware/auth');
 const Fawn = require('fawn');
 const   _ = require('lodash');
 
+
+//find things necessary to be populated upon request
+//create middleware to check if profile id is present in req.user after authentication
 //get user profile info
 router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     const user = req.user;
-        let  profile = await Profile.findOne({_id: user.profile}).exec();
+        let  profile = await Profile.findById(user.profile).populate('relatives.profile').exec();
         if(!profile){return res.status(400).send({message: 'Bad request.'});}//remove error handling because of wrapper?
         
-        profile = _.omit(profile.toObject(), ['alive', '_id']);//remove important properties
+        //change _ method to pick instead of omit
+        profile = _.pick(profile.toObject(), ['name', 'gender', 'birthdate', 'nationality', 'civilStatus', 'pics', 'profilePicName', 'relatives', 'contact', 'email', 'address', 'government']);//remove important properties
         res.status(200).send(profile);
 
 //edit user profile info
@@ -128,6 +132,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
         }
     }
 
+//todo delete all or one at a time?
 //delete profile address
 }).delete(auth.isAuth, async(req,res,next)=>{
 
@@ -148,7 +153,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
         }
     }
     
-});//todo delete all or one at a time
+});
 
 //return all contacts or just 1 by query param id
 router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
@@ -338,14 +343,11 @@ router.route('/me/gov').get(auth.isAuth, async (req,res,next)=>{
     }
 });
 
-router.route('/me/relative').get(auth.isAuth, async(req,res,next)=>{
 
-});
-
-//TODO:add relatives
 //keep in mind
 //1 spouse, mother, father only
 //in-law, cousin, step-sibling, sibling, step-father, step-mother, child, grand-child, niece, nephew, 
+//get relatives - all or by query id
 router.route('/me/relatives').get(auth.isAuth, async (req,res,next)=>{
 
     let profile = await Profile.findById(req.user.profile).exec();
@@ -372,12 +374,13 @@ router.route('/me/relatives').get(auth.isAuth, async (req,res,next)=>{
         res.status(200).send(result);
     }
 
+    //add relatives 1 by 1
 }).post(auth.isAuth, async(req,res,next)=>{
 
     let {error} = Profile.validateRelative(req.body);
     if(error){return res.status(400).send({message: 'Bad request. Invalid information', error: error});}
     
-    let profile = await Profile.findById({_id: req.user.profile});
+    let profile = await Profile.findById(req.user.profile);
     if(!profile){return res.status(404).send({message: "could not locate profile information"});}
 
     //OPTIONAL: before adding check relatives length and deny add instead of slicing and auto deleting last entry
@@ -406,6 +409,8 @@ router.route('/me/relatives').get(auth.isAuth, async (req,res,next)=>{
             res.status(200).send(results);
         });
     }
+
+//edit relatives profile information
 }).put(auth.isAuth, async(req,res,next)=>{
     
     let {error} = Profile.validateRelative(req.body);
@@ -445,6 +450,8 @@ router.route('/me/relatives').get(auth.isAuth, async (req,res,next)=>{
             res.status(200).send(results);
         });
     }
+
+//delete relative via query id
 }).delete(auth.isAuth, async(req,res,next)=>{
 
     if(!req.query.id){

@@ -1,13 +1,14 @@
 const   Joi         = require('joi');
         Joi.objectId = require('joi-objectid')(Joi);
-const   mongoose    = require ('mongoose')
-,       Schema      = mongoose.Schema
-,       ObjId       = mongoose.Schema.Types.ObjectId
+const   mongoose    = require ('mongoose'),
+        Schema      = mongoose.Schema,
+        ObjId = mongoose.Schema.Types.ObjectId;
 const   regex       = require('../util/regex'),
         validDataLib = require('../util/validDataLibrary');
 
         //TODO: set limits here to relatives, contacts,  email, address, and government
 
+        //TODO: get profile method get main email
 const profile  = new Schema({
     alive: {type: Boolean, required: true, default: true},
     name:   {
@@ -35,7 +36,7 @@ const profile  = new Schema({
     // spouse: {type: ObjId, ref: 'Profile'},
     // parents:     {mother: {type: ObjId, ref: 'Profile'},
     //             father: {type: ObjId, ref: 'Profile'}},
-    relatives:[{profile: {type:ObjId, ref: 'Profile'}, //use this instead
+    relatives:[{profile: {type: ObjId, ref: 'Profile'}, //use this instead
              relationship: {type: String}}],
 
     contact:    [{main: {type: Boolean, default: false}, //TODO ObjId reference to new contact schema
@@ -119,7 +120,7 @@ function validateProfile(data){
 
     const emailSchema = Joi.object().keys({//to be tested
         main:Joi.boolean().allow(''),
-        address:Joi.string().email().allow('')
+        address:Joi.string().email().required()
     });
 
     const addressSchema = Joi.object().keys({//to be tested
@@ -168,7 +169,7 @@ function validateProfile(data){
         // },
         relatives:Joi.array().max(10).items(relativeSchema).single(),
         contact:Joi.array().max(5).items(contactSchema).single(),
-        email:Joi.array().max(5).unique('address').items(emailSchema).single(),
+        email:Joi.array().max(5).unique('address').items(emailSchema.required()).single().required(),
         address:Joi.array().max(3).unique('street').items(addressSchema).single(),
         government:Joi.array().max(30).unique('number').items(governmentSchema).single()
     });

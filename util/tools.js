@@ -44,8 +44,8 @@ tools={
                         port: 587,
                         secure: false, // true for 465, false for other ports //using ssl
                         auth: {
-                            user: 'gpdj2t24zfcmjw26@ethereal.email',
-                            pass: 'CJ89mqGy88Qh4mgrca'
+                            user: '	r5fbgj4ufub2adti@ethereal.email',
+                            pass: 'ndJ6DcwwHd1uvjUpGu'
                         },
                         tls:{
                             rejectUnauthorized: false

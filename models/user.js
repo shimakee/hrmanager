@@ -5,6 +5,7 @@ const PassComplexity = require('joi-password-complexity'); //password complexity
 const bcrypt = require('bcrypt');//password hashing
 const jwt = require('jsonwebtoken');
 const   mongoose = require('mongoose');
+const validDataLib = require('../util/validDataLibrary');
 
 // const _ = require('lodash');
 //         passportLocalMongoose = require('passport-local-mongoose'),
@@ -25,11 +26,12 @@ const user = new Schema({
     activity: {type: Boolean, default: false},
     username: {type: String,min:8, max:30, required: [true, "Username required"], unique: true, dropDups: true},
     password: {type: String,max:1024, required: [true, "Password required"]},
-    profile: {type: ObjId, ref: 'Profile', required: [true, "Profile information required"]}
+    profile: {type: ObjId, ref: 'Profile'},
     // employment: [{type: ObjId, ref: 'Employment'}]
-    // customer: [{type: ObjId, ref: 'Customer'}]
+    // customer: [{type: ObjId, ref: 'Customer'}] // this should be in company or business - better in business
+    company: {type: ObjId, ref: "Company"},
     //role: [{type: ObjId, ref:'Role'}] //access control
-    //accountType: {type: String, enum: validDataLib.accountType, default:'client'} //client or staff
+    accountType: {type: String, enum: validDataLib.accountType, required: [true, "Account type required"]} //client user, client company, or staff
 });
 
 // user.plugin(passportLocalMongoose,{
@@ -96,14 +98,16 @@ user.methods.matchPassword = function(passwordInput){
 user.methods.genAuthToken = function(time = '1h'){
     const token = jwt.sign({_id:this._id, 
                             username: this.username,
-                            profile: this.profile}, 
+                            profile: this.profile, // check accoutn type first
+                            company: this.company, //check accoutn type first
+                            accountType: this.accountType}, 
     config.get('token'),
     {expiresIn:time});
     return token;
 }
 
 // const skipInit = process.env.NODE_ENV === 'test';
-module.exports = mongoose.model('Users', user);
+module.exports = mongoose.model('User', user);
 
 //==========================================fnctions
 function validateUser(data){
@@ -122,7 +126,9 @@ function validate(data){
         _id:Joi.objectId().allow(''),
         username:Joi.string().alphanum().min(8).max(30).required(),
         password:Joi.string().min(10).max(72).required(),
-        profile:Joi.objectId().allow('')
+        accountType: Joi.string().valid(validDataLib.accountType).required(),
+        profile:Joi.objectId().allow(''),
+        company: Joi.objectId().allow('')
     });
 
     const {error} = validatePassword(data.password);
