@@ -275,6 +275,8 @@ router.route('/change_password').put(auth.isAuth, async (req,res,next)=>{
 
 router.route('/register').post(async (req,res,next)=>{
 
+    //TODO: profile information save perhaps?... or tie in/link it
+
     let result = Company.validateRegistration(req.body.company); //validate company
     if(result.error){ return res.status(400).send(result.error);}
     

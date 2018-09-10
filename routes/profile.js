@@ -89,13 +89,17 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
     let {error} = Profile.validateAddress(req.body);
     if(error){return res.status(400).send({message: 'Bad request.'});}
 
+    //check profile exist
+    let profile = await Profile.findById(req.user.profile).exec();
+    if(!profile){return releaseEvents.status(404).send({message:"Could not locate profile"})}
+
     if(req.body.main == true){//set everything else to false
         // task.update("profiles", {_id: req.user.profile}, {$set: {"address.$[].main": false}});
         await Profile.updateOne({_id: req.user.profile}, {$set: {"address.$[].main": false}}).exec();
     }
 
     //OPTIONAL: before adding check address length and deny add instead of slicing and auto deleting last entry
-    let profile = await Profile.updateOne({_id: req.user.profile}, {$push:{ address: {$each:[req.body], $position: 0, $slice: 3}}}).exec();
+    profile = await Profile.updateOne({_id: req.user.profile}, {$push:{ address: {$each:[req.body], $position: 0, $slice: 3}}}).exec();
     // let profile = await task.run({useMongoose: true});
 
     if(profile.nModified <= 0){
