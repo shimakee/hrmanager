@@ -41,7 +41,7 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
         let result = await Company.findByIdAndUpdate(company._id, data).exec();
         res.status(200).send({message: 'Success', result: result});
 
-//delete user profile info
+//delete company info
 }).delete(auth.isAuth, async (req,res,next)=>{
         let user = req.user;
 
@@ -158,9 +158,16 @@ router.route('/me/owner').get(auth.isAuth, async (req,res,next)=>{
 
 
 //TODO: add businesses 
-//TODO: crud applicants - on the general side - do not use authentication
-//TODO: scout company
-//TODO: scout applicants
 //TODO: crud employees
+//TODO: rud applicants - read, update - remarks & hire, delete, move to pool - reject (or keep for hiring pool),
+
+//on the general side - do not use authentication 
+//TODO: c applicants - profiles applying to company
+//TODO: scout company  -get request for all companies to be view by profile
+//TODO: scout applicants - get request on profiles to be viewed by companies
+
+//employment - last feature 
+//work started - work -ended - w/ reason and other employment details
+//future features - like salary - location assignment - promotion - memos
 
 module.exports = router;
