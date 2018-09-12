@@ -51,7 +51,7 @@ var company = new Schema({
                 }}],
         government: [{key: {type: String},  
                 info: {type: String}}],
-    appicants: [{profile: {type: ObjId, ref: 'Profile'}}]
+    employees: [{employee: {type: ObjId, ref: 'Employee'}}]
 //     ,
 //     employees: [{profile: {type: ObjId, ref: 'Profile'}}]
 });

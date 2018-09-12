@@ -1,34 +1,33 @@
 const   mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        ObjId = mongoose.Schema.Types.ObjectId;
+        ObjId = mongoose.Schema.Types.ObjectId,
+        regex       = require('../util/regex'),
+        validDataLib = require('../util/validDataLibrary');
 
-const employment = new Schema({
+const   Joi = require('joi');//validator
+        Joi.objectId = require('joi-objectid')(Joi);
+
+const employee = new Schema({
     active: {type: Boolean, default: false},
-    employee: {type: ObjId, ref: 'Identity'},
+    profile: {type: ObjId, ref: 'Profile'},
     employer: {type: ObjId, ref: 'Company'},
     status: {type: String, enum:['applied','rejected', 'wait-listed','hired', 'resigned', 'dismissed']}, //TODO change to enum hired/resigned/dismissed/applied
-    application:[{
+    infoDate:[{
+        class: {type:String, enum:['applied', 'rejected', 'hired']},
         date: {type: Date},
-        evaluation: {type: String}
-    }],
-    interview:[{
-        date: {type: Date},
-        evaluation: {type: String}
-    }],
-    hire:[{
-        date: {type: Date},
-        evaluation: {type: String}
+        remarks: {type: String}
     }],
     separation:[{
         dateSubmitted: {type: Date},
         dateRecieved: {type: Date},
         dateEffective: {type: Date},
         class:{type:String, enum:['dismiss', 'resign']},
-        reason: {type: String}
+        reason: {type: String},
+        remarks:{type: String}
     }],
-    payroll:[{type: ObjId, ref: 'Payroll'}],
-    attendance: [{type: ObjId, ref: 'Attendance'}],
-    memo:[{type: ObjId, ref: 'Memo'}],
+    // payroll:[{payroll: {type: ObjId, ref: 'Payroll'}}], //future feature
+    // attendance: [{attedance: {type: ObjId, ref: 'Attendance'}}], //future feature
+    // memo:[{info:{type: ObjId, ref: 'Memo'}}], //future feature
     assingment:[{
         position: {type: String},
         location: {type: ObjId, ref: 'Business'},
@@ -45,4 +44,4 @@ const employment = new Schema({
     }]
 });
 
-module.exports = mongoose.model('Employment', employment);
+module.exports = mongoose.model('Employee', employee);
