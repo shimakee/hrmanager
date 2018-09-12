@@ -23,7 +23,7 @@ var company = new Schema({
     ownershipType: {type: String, enum: ['sole proprietor', 'partnership', 'corporation']},
     owner: [{profile: {type: ObjId, ref: 'Profile'},
         position: {type: String}}],
-//     business: [{type: ObjId, ref: 'Business'}],
+    businesses: [{business: {type: ObjId, ref: 'Business'}}],
     picDir: {type: String}, //by default is already set at config - no need to save it yet
     pics:[{filename: {type: String},
         path: {type: String},
@@ -32,28 +32,28 @@ var company = new Schema({
         size: {type: Number}}],
     companyPicName: {type: String,}, //set which pic as profile
     contact:    [{main: {type: Boolean, default: false}, //TODO ObjId reference to new contact schema
-        description: {type: String}, 
-        countryCode: {type: Number,min:0, max:999999}, 
-        areaCode: {type: Number, min:0, max:999999}, 
-        number: {type: Number, min:0, max:999999999999999}}],
-    email:      [{main: {type: Boolean, default: false},
-            address: {type: String}}],
-    address:    [{main: {type: Boolean, default: false},
-            description: {type: String},
-            street: {type: String},
-            city:{type:String},
-            country:{type:String},
-            province: {type:String},
-            zipcode: {type: Number, min: 1000, max: 9999},
-            position:{
+                description: {type: String}, 
+                countryCode: {type: Number,min:0, max:999999}, 
+                areaCode: {type: Number, min:0, max:999999}, 
+                number: {type: Number, min:0, max:999999999999999}}],
+        email:      [{main: {type: Boolean, default: false},
+                address: {type: String}}],
+        address:    [{main: {type: Boolean, default: false},
+                description: {type: String},
+                street: {type: String},
+                city:{type:String},
+                country:{type:String},
+                province: {type:String},
+                zipcode: {type: Number, min: 1000, max: 9999},
+                position:{
                 lat:{type: Number},
                 lng: {type:Number}
-            }}],
-    government: [{key: {type: String},  
-            info: {type: String}}],
+                }}],
+        government: [{key: {type: String},  
+                info: {type: String}}],
     appicants: [{profile: {type: ObjId, ref: 'Profile'}}]
 //     ,
-//     employees: [{profile: {type: ObjId, ref: 'Employment'}}]
+//     employees: [{profile: {type: ObjId, ref: 'Profile'}}]
 });
 
 // company.plugin(passportLocalMongoose,{
@@ -77,6 +77,18 @@ company.statics.validateOwner = function(data){
 }
 company.statics.validateOwnerUpdate = function(data){
         return validateOwnerUpdate(data);
+}
+company.statics.validateAddress = function(data){
+        return validateAddress(data);
+}
+company.statics.validateContact = function(data){
+        return validateContact(data);
+}
+company.statics.validateGov = function(data){
+        return validateGov(data);
+}
+company.statics.validateEmail = function(data){
+        return validateEmail(data);
 }
 
 module.exports = mongoose.model('Company', company);
@@ -193,3 +205,63 @@ function validateOwnerUpdate(data){
 
         return ownerSchema.validate(data);
 }
+
+function validateAddress(data){
+
+        const addressSchema = Joi.object().keys({//to be tested
+            _id: Joi.objectId().allow(''),
+            main:Joi.boolean().default(false),
+            description:Joi.string().max(50).regex(regex.common).allow(''),
+            street:Joi.string().max(255).regex(regex.address).allow(''),
+            city:Joi.string().max(50).regex(regex.common).allow(''),
+            country:Joi.string().max(50).regex(regex.common).allow(''),
+            province: Joi.string().max(100).regex(regex.common).allow(''),
+            zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
+            position:{
+                lat: Joi.number().max(85).min(-85).allow(''),
+                lng: Joi.number().max(180).min(-180).allow('')
+            }
+        });
+    
+        const profileSchema = Joi.object().keys({//to be tested
+            address: Joi.array().max(3).unique('street').items(addressSchema.required()).single().required()
+        });
+    
+        return profileSchema.validate(data);
+    }
+
+    function validateContact(data){
+
+        const contactSchema = Joi.object().keys({ //to be tested
+            main: Joi.boolean().allow(''),
+            description:Joi.string().max(25).regex(regex.common),
+            countryCode:Joi.number().integer().positive().max(999999).allow(''),
+            areaCode:Joi.number().integer().positive().max(999999).allow(''),
+            number:Joi.number().integer().positive().max(999999999999999)
+        });
+    
+        return contactSchema.validate(data, {presence:'optional'});
+    }
+
+    function validateGov(data){
+
+        const governmentSchema = Joi.object().keys({//to be tested
+            key:Joi.string().max(100).regex(regex.common),
+            info:Joi.string().max(100).regex(regex.commonAlphaNum)
+        });
+    
+        return governmentSchema.validate(data, {presence:'optional'});
+    }
+
+    function validateEmail(data){
+        const emailSchema = Joi.object().keys({//to be tested
+            main:Joi.boolean().allow('').default(false),
+            address:Joi.string().email().required()
+        });
+    
+        // const emailArraySchema = Joi.object().keys({//to be tested
+        //     email:Joi.array().max(5).unique('address').items(emailSchema.required()).single().required()
+        // });
+    
+        return emailSchema.validate(data);
+    }

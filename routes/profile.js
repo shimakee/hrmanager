@@ -9,6 +9,9 @@ const auth = require('../middleware/auth');
 const Fawn = require('fawn');
 const   _ = require('lodash');
 
+//TODO: turn this into a method
+//TODO: COMPANY, Business,, PROFILE - email, address, contact, government - delete - post if length == 1 make main into true - as it is the only one remaining
+//TODO: on put request make position zero true - if true is converted to false upon edit - atleast 1 email must be true
 
 //find things necessary to be populated upon request
 //create middleware to check if profile id is present in req.user after authentication
@@ -55,6 +58,114 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     res.status(200).send({message: 'Success'});
 });
 
+//get profile email
+router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
+
+    let profile = await Profile.findById(req.user.profile).exec();
+    if(!profile){return res.status(404).send({message: "could not locate profile information"});}
+
+    if(!req.query.id){
+        res.status(200).send(profile.email);
+    }else{
+        let id = req.query.id;
+
+        let {error} = Profile.validateId({id: id});
+        if(error){return res.status(400).send(error);}
+
+        let result = profile.email.find(element=>{
+            if(element._id == id){
+                return element;
+            }
+        });
+
+        if(!result){
+            return res.status(404).send({message: 'Invalid ID, or email no longer exist'});
+        }
+
+        res.status(200).send(result);
+    }
+
+//add profile email 1 by 1
+}).post(auth.isAuth, async (req,res,next)=>{
+    
+    let {error} = Profile.validateEmail(req.body);
+    if(error){return res.status(400).send({message: 'Bad request.'});}
+    
+    //check profile exist
+    let profile = await Profile.findById(req.user.profile).exec();
+    if(!profile){return res.status(404).send({message:"Could not locate profile"})}
+    
+    if(req.body.main == true || req.body.main == "true"){//set everything else to false
+        // task.update("profiles", {_id: req.user.profile}, {$set: {"address.$[].main": false}});
+        await Profile.updateOne({_id: req.user.profile}, {$set: {"email.$[].main": false}}).exec();
+    }
+
+
+    //OPTIONAL: before adding check address length and deny add instead of slicing and auto deleting last entry
+    profile = await Profile.updateOne({_id: req.user.profile}, {$push:{ email: {$each: [req.body], $position: 0, $slice: 3}}}).exec();
+    // let profile = await task.run({useMongoose: true});
+
+    if(profile.nModified <= 0){
+        res.status(404).send({message: "Could not add email"});
+    }else{
+        res.status(200).send(profile);
+    }
+
+//edit profile email
+}).put(auth.isAuth, async (req,res,next)=>{
+
+    let {error} = Profile.validateEmail(req.body);
+    if(error){
+        return res.status(400).send({message: 'Bad request.'});}
+
+    if(!req.query.id){
+        res.status(400).send({message: "Bad request."});
+    }else{
+        let id = req.query.id;
+
+        let {error} = Profile.validateId({id: id});
+        if(error){return res.status(400).send(error);}
+
+        //check that profile exist
+
+        if(req.body.main == true || req.body.main == "true"){//set everything else to false
+            await Profile.updateOne({_id: req.user.profile}, {$set: {"email.$[].main": false}}).exec();
+        }
+        
+        let result = await Profile.updateOne({_id: req.user.profile, "email._id": id}, {$set: {"email.$": req.body}}).exec();
+
+        if(result.nModified <= 0){
+            res.status(404).send({message: "email not found."});
+        }else{
+            res.status(200).send(result);
+        }
+    }
+
+//todo delete all or one at a time?
+//delete profile email
+}).delete(auth.isAuth, async(req,res,next)=>{
+
+    if(!req.query.id){
+        res.status(400).send({message: "Bad request."});
+    }else{
+        let id = req.query.id;
+
+        let {error} = Profile.validateId({id: id});
+        if(error){return res.status(400).send(error);}
+
+        //check that profile exist
+        
+        let result = await Profile.updateOne({_id: req.user.profile, "email._id": id}, {$pull: {email: {_id: id}}}).exec();
+
+        if(result.nModified <= 0){
+            res.status(404).send({message: "email not found."});
+        }else{
+            res.status(200).send(result);
+        }
+    }
+    
+});
+
 
 //get profile address
 router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
@@ -91,9 +202,9 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
 
     //check profile exist
     let profile = await Profile.findById(req.user.profile).exec();
-    if(!profile){return releaseEvents.status(404).send({message:"Could not locate profile"})}
+    if(!profile){return res.status(404).send({message:"Could not locate profile"})}
 
-    if(req.body.main == true){//set everything else to false
+    if(req.body.main == true || req.body.main == "true"){//set everything else to false
         // task.update("profiles", {_id: req.user.profile}, {$set: {"address.$[].main": false}});
         await Profile.updateOne({_id: req.user.profile}, {$set: {"address.$[].main": false}}).exec();
     }
@@ -123,7 +234,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
         let {error} = Profile.validateId({id: id});
         if(error){return res.status(400).send(error);}
 
-        if(req.body.main == true){//set everything else to false
+        if(req.body.main == true || req.body.main == "true"){//set everything else to false
             await Profile.updateOne({_id: req.user.profile}, {$set: {"address.$[].main": false}}).exec();
         }
         
@@ -290,6 +401,8 @@ router.route('/me/gov').get(auth.isAuth, async (req,res,next)=>{
     //validate
     let {error} = Profile.validateGov(req.body);
     if(error){return res.status(400).send({message: 'Bad request. Invalid information'});}
+    
+    //check that profile exist
 
     //OPTIONAL: before adding check contact length and deny add instead of slicing and auto deleting last entry
     //add information
@@ -316,6 +429,8 @@ router.route('/me/gov').get(auth.isAuth, async (req,res,next)=>{
 
         let {error} = Profile.validateId({id: id});
         if(error){return res.status(400).send(error);}
+
+        //check that profile exist
 
         let result = await Profile.updateOne({_id: req.user.profile, "government._id": id}, {$set: {"government.$": req.body}}).exec();
 

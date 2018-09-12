@@ -89,6 +89,10 @@ profile.statics.validateRelative = function (data){
     return validateRelative(data);
 }
 
+profile.statics.validateEmail = function (data){
+    return validateEmail(data);
+}
+
 profile.methods.getFullName = function(){
     let name = this.name;
     let fullName = [];
@@ -271,4 +275,17 @@ function validateRelative(data){
     });
 
     return relativeSchema.validate(data, {presence:'optional'});
+}
+
+function validateEmail(data){
+    const emailSchema = Joi.object().keys({//to be tested
+        main:Joi.boolean().allow('').default(false),
+        address:Joi.string().email().required()
+    });
+
+    // const emailArraySchema = Joi.object().keys({//to be tested
+    //     email:Joi.array().max(5).unique('address').items(emailSchema.required()).single().required()
+    // });
+
+    return emailSchema.validate(data);
 }

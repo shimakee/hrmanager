@@ -60,6 +60,8 @@ const upload = multer({storage: storage,
                 },
                 fileFilter: fileFilter});
 
+
+                //TODO: delete pictures on company, profile, and user routes when deleting accounts
 //todo: save to profile the file directory
 //todo - learn multiple upload
 //TODO: setting of profile pic
