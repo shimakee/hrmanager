@@ -27,7 +27,7 @@ const user = new Schema({
     username: {type: String,min:8, max:30, required: [true, "Username required"], unique: true, dropDups: true},
     password: {type: String,max:1024, required: [true, "Password required"]},
     profile: {type: ObjId, ref: 'Profile'},
-    // employment: [{type: ObjId, ref: 'Employment'}]
+    employment: [{_id:{type: ObjId, ref: 'Employee'}}],
     // customer: [{type: ObjId, ref: 'Customer'}] // this should be in company or business - better in business
     company: {type: ObjId, ref: "Company"},
     //role: [{type: ObjId, ref:'Role'}] //access control
@@ -100,6 +100,7 @@ user.methods.genAuthToken = function(time = '1h'){
                             username: this.username,
                             profile: this.profile, // check accoutn type first
                             company: this.company, //check accoutn type first
+                            employment: this.employment,
                             accountType: this.accountType}, 
     config.get('token'),
     {expiresIn:time});

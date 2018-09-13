@@ -1,4 +1,5 @@
 const Joi = require('joi');
+        Joi.objectId = require('joi-objectid')(Joi);
 const config = require('config');
 
 tools={
@@ -14,6 +15,13 @@ tools={
 
         
             return mailOptionSchema.validate(data, {presence:'optional', stripUnknown: true});
+        },
+        isObjectId(data){
+            
+            let {error} =  Joi.validate(String(data), Joi.objectId().required());
+
+            if(!error){return true}
+            return false
         }
 
 
@@ -44,8 +52,8 @@ tools={
                         port: 587,
                         secure: false, // true for 465, false for other ports //using ssl
                         auth: {
-                            user: '	r5fbgj4ufub2adti@ethereal.email',
-                            pass: 'ndJ6DcwwHd1uvjUpGu'
+                            user: 'rgfx3mif3woansd3@ethereal.email',
+                            pass: 'gRTuAJu25fqEUGYRgv'
                         },
                         tls:{
                             rejectUnauthorized: false

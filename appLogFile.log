@@ -2334,3 +2334,314 @@
 {"level":"info","message":"App: My web App","timestamp":"2018-09-12T15:32:24.383Z"}
 {"level":"info","message":"listening on port 80...","timestamp":"2018-09-12T15:32:24.383Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-12T15:32:26.507Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-12T15:37:37.624Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:05:08.049Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:05:08.051Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:05:08.051Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:05:10.253Z"}
+{"message":"Invalid login: 535 Authentication failed","stack":"Error: Invalid login: 535 Authentication failed\n    at SMTPConnection._formatError (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:606:19)\n    at SMTPConnection._actionAUTHComplete (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:1335:34)\n    at SMTPConnection._responseActions.push.str (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:366:26)\n    at SMTPConnection._processResponse (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:762:20)\n    at SMTPConnection._onData (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:558:14)\n    at TLSSocket._socket.on.chunk (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:709:51)\n    at emitOne (events.js:116:13)\n    at TLSSocket.emit (events.js:211:7)\n    at addChunk (_stream_readable.js:263:12)\n    at readableAddChunk (_stream_readable.js:250:11)\n    at TLSSocket.Readable.push (_stream_readable.js:208:10)\n    at TLSWrap.onread (net.js:597:20)","code":"EAUTH","response":"535 Authentication failed","responseCode":535,"command":"AUTH PLAIN","level":"error","timestamp":"2018-09-13T03:08:27.294Z"}
+{"message":"Invalid login: 535 Authentication failed","stack":"Error: Invalid login: 535 Authentication failed\n    at SMTPConnection._formatError (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:606:19)\n    at SMTPConnection._actionAUTHComplete (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:1335:34)\n    at SMTPConnection._responseActions.push.str (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:366:26)\n    at SMTPConnection._processResponse (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:762:20)\n    at SMTPConnection._onData (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:558:14)\n    at TLSSocket._socket.on.chunk (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:709:51)\n    at emitOne (events.js:116:13)\n    at TLSSocket.emit (events.js:211:7)\n    at addChunk (_stream_readable.js:263:12)\n    at readableAddChunk (_stream_readable.js:250:11)\n    at TLSSocket.Readable.push (_stream_readable.js:208:10)\n    at TLSWrap.onread (net.js:597:20)","code":"EAUTH","response":"535 Authentication failed","responseCode":535,"command":"AUTH PLAIN","level":"error","timestamp":"2018-09-13T03:09:25.942Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:10:32.109Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:10:35.098Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:10:35.100Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:10:35.100Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:10:37.218Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:12:45.996Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:12:48.562Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:12:48.563Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:12:48.564Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:12:50.655Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:46:58.124Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:47:00.816Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:47:00.817Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:47:00.817Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:47:02.905Z"}
+{"message":"Cannot read property '1' of null","stack":"TypeError: Cannot read property '1' of null\n    at firstchar (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:175:37)\n    at parse (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:79:19)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\read.js:121:18\n    at invokeCallback (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:224:16)\n    at done (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:213:7)\n    at IncomingMessage.onEnd (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:273:7)\n    at emitNone (events.js:106:13)\n    at IncomingMessage.emit (events.js:208:7)\n    at endReadableNT (_stream_readable.js:1064:12)\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\n    at process._tickCallback (internal/process/next_tick.js:180:9)","expose":true,"statusCode":400,"status":400,"body":"\r\n","type":"entity.parse.failed","level":"error","timestamp":"2018-09-13T03:48:32.420Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:49:02.216Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:49:05.431Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:49:05.432Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:49:05.433Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:49:07.559Z"}
+{"message":"Cannot read property '1' of null","stack":"TypeError: Cannot read property '1' of null\n    at firstchar (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:175:37)\n    at parse (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:79:19)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\read.js:121:18\n    at invokeCallback (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:224:16)\n    at done (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:213:7)\n    at IncomingMessage.onEnd (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:273:7)\n    at emitNone (events.js:106:13)\n    at IncomingMessage.emit (events.js:208:7)\n    at endReadableNT (_stream_readable.js:1064:12)\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\n    at process._tickCallback (internal/process/next_tick.js:180:9)","expose":true,"statusCode":400,"status":400,"body":"\r\n","type":"entity.parse.failed","level":"error","timestamp":"2018-09-13T03:49:08.881Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:49:22.115Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:49:42.574Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:49:42.577Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:49:42.577Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:49:44.741Z"}
+{"message":"Cannot read property '1' of null","stack":"TypeError: Cannot read property '1' of null\n    at firstchar (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:175:37)\n    at parse (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:79:19)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\read.js:121:18\n    at invokeCallback (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:224:16)\n    at done (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:213:7)\n    at IncomingMessage.onEnd (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:273:7)\n    at emitNone (events.js:106:13)\n    at IncomingMessage.emit (events.js:208:7)\n    at endReadableNT (_stream_readable.js:1064:12)\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\n    at process._tickCallback (internal/process/next_tick.js:180:9)","expose":true,"statusCode":400,"status":400,"body":"\r\n","type":"entity.parse.failed","level":"error","timestamp":"2018-09-13T03:49:45.727Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:50:31.276Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:50:34.633Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:50:34.635Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:50:34.636Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:50:36.768Z"}
+{"message":"Cannot read property '1' of null","stack":"TypeError: Cannot read property '1' of null\n    at firstchar (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:175:37)\n    at parse (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\types\\json.js:79:19)\n    at C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\body-parser\\lib\\read.js:121:18\n    at invokeCallback (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:224:16)\n    at done (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:213:7)\n    at IncomingMessage.onEnd (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\raw-body\\index.js:273:7)\n    at emitNone (events.js:106:13)\n    at IncomingMessage.emit (events.js:208:7)\n    at endReadableNT (_stream_readable.js:1064:12)\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\n    at process._tickCallback (internal/process/next_tick.js:180:9)","expose":true,"statusCode":400,"status":400,"body":"\r\n","type":"entity.parse.failed","level":"error","timestamp":"2018-09-13T03:50:40.172Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:52:17.496Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:52:20.368Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:52:20.370Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:52:20.370Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:52:22.487Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:53:12.699Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:53:15.698Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:53:15.699Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:53:15.700Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:53:17.821Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:53:26.486Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:53:29.619Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:53:29.621Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:53:29.621Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:53:31.744Z"}
+{"message":"Profile is not defined","stack":"ReferenceError: Profile is not defined\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:53:19)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T03:54:11.575Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:54:41.736Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:54:44.609Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:54:44.610Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:54:44.610Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:54:46.684Z"}
+{"message":"Cannot destructure property `error` of 'undefined' or 'null'.","stack":"TypeError: Cannot destructure property `error` of 'undefined' or 'null'.\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:70:28)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T03:54:47.709Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T03:55:08.805Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T03:55:11.447Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T03:55:11.448Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T03:55:11.449Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T03:55:13.556Z"}
+{"message":"Cannot destructure property `error` of 'undefined' or 'null'.","stack":"TypeError: Cannot destructure property `error` of 'undefined' or 'null'.\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:70:28)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T03:55:14.589Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:00:21.452Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:00:23.679Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:00:23.680Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:00:23.680Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:00:25.773Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:02:30.048Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:02:32.554Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:02:32.555Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:02:32.555Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:02:34.642Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:04:24.104Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:04:26.697Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:04:26.697Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:04:26.698Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:04:28.797Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:05:26.111Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:05:28.699Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:05:28.700Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:05:28.700Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:05:30.818Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:06:04.734Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:06:06.935Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:06:06.937Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:06:06.937Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:06:09.027Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:06:12.042Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:06:14.339Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:06:14.340Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:06:14.340Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:06:16.403Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:08:09.190Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:08:11.603Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:08:11.605Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:08:11.606Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:08:13.724Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:08:32.188Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:08:34.315Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:08:34.316Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:08:34.316Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:08:36.430Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:10:27.200Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:10:27.202Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:10:27.202Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:10:29.311Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:18:51.071Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:18:53.221Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:18:53.222Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:18:53.223Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:18:55.327Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:31:08.576Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:31:10.642Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:31:10.643Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:31:10.643Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:31:12.733Z"}
+{"message":"newEmployee is not defined","stack":"ReferenceError: newEmployee is not defined\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:100:27)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T04:31:14.805Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:32:26.295Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:32:28.614Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:32:28.616Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:32:28.616Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:32:30.720Z"}
+{"message":"newEmployee is not defined","stack":"ReferenceError: newEmployee is not defined\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:104:86)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T04:32:31.738Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:33:04.292Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:33:06.391Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:33:06.391Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:33:06.392Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:33:08.502Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:40:19.900Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:40:22.054Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:40:22.055Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:40:22.055Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:40:24.146Z"}
+{"message":"Cannot read property 'find' of undefined","stack":"TypeError: Cannot read property 'find' of undefined\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:106:46)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T04:40:25.173Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:40:43.988Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:40:46.213Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:40:46.215Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:40:46.215Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:40:48.315Z"}
+{"message":"Cannot read property 'find' of undefined","stack":"TypeError: Cannot read property 'find' of undefined\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:106:46)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T04:40:51.734Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:41:14.090Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:41:16.182Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:41:16.183Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:41:16.184Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:41:18.279Z"}
+{"message":"Cannot read property 'find' of undefined","stack":"TypeError: Cannot read property 'find' of undefined\n    at router.route.get.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:107:46)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T04:41:19.315Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:44:58.475Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:45:00.593Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:45:00.594Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:45:00.594Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:45:02.667Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:47:55.973Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:47:58.049Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:47:58.050Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:47:58.050Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:48:00.152Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:48:27.932Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:48:30.668Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:48:30.669Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:48:30.669Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:48:32.763Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:49:22.915Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:49:25.216Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:49:25.217Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:49:25.217Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:49:27.308Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:50:48.827Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:50:50.812Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:50:50.813Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:50:50.813Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:50:52.903Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:51:37.358Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:51:39.396Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:51:39.397Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:51:39.397Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:51:41.495Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:52:25.893Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:52:27.922Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:52:27.923Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:52:27.923Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:52:30.019Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:53:00.584Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:53:03.517Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:53:03.518Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:53:03.518Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:53:05.591Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:54:26.164Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:54:28.170Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:54:28.171Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:54:28.171Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:54:30.277Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:56:09.714Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:56:11.821Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:56:11.822Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:56:11.822Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:56:13.917Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:58:50.145Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:58:52.869Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:58:52.871Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:58:52.871Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:58:54.977Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:59:33.289Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:59:36.240Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:59:36.241Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:59:36.242Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:59:38.361Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T04:59:49.089Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T04:59:51.822Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T04:59:51.823Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T04:59:51.823Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T04:59:53.898Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T05:00:37.634Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:21:11.479Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:21:11.480Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:21:11.481Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:21:13.587Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:23:48.327Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:35:18.225Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:35:18.226Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:35:18.226Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:35:20.306Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:36:25.275Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:36:39.780Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:36:39.781Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:36:39.782Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:36:41.876Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:37:09.199Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:37:11.339Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:37:11.340Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:37:11.340Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:37:13.435Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:37:33.529Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:37:35.519Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:37:35.519Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:37:35.520Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:37:37.637Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:37:58.930Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:38:00.980Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:38:00.981Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:38:00.982Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:38:03.063Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:38:11.021Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:38:13.066Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:38:13.067Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:38:13.068Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:38:15.160Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:39:05.693Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:39:08.162Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:39:08.164Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:39:08.164Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:39:10.254Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:40:37.932Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:40:40.757Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:40:40.759Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:40:40.759Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:40:42.852Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:41:06.959Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:41:09.426Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:41:09.427Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:41:09.428Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:41:11.531Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:41:59.991Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:42:02.570Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:42:02.571Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:42:02.572Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:42:04.694Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:42:46.675Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:42:49.935Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:42:49.936Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:42:49.936Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:42:52.071Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:43:16.142Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:43:18.737Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:43:18.738Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:43:18.739Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:43:20.884Z"}
+{"message":"Joi.object(...).objectId is not a function","stack":"TypeError: Joi.object(...).objectId is not a function\n    at Object.isObjectId (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\util\\tools.js:22:34)\n    at router.route.get (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:25:40)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T08:43:21.911Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:44:35.540Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:44:38.560Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:44:38.561Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:44:38.561Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:44:40.685Z"}
+{"message":"Joi.object(...).objectId is not a function","stack":"TypeError: Joi.object(...).objectId is not a function\n    at Object.isObjectId (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\util\\tools.js:22:34)\n    at router.route.get (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:25:40)\n    at <anonymous>","level":"error","timestamp":"2018-09-13T08:44:41.715Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:44:54.059Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:44:57.281Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:44:57.282Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:44:57.283Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:44:59.402Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:45:30.764Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:45:33.657Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:45:33.658Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:45:33.658Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:45:35.791Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:45:57.308Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:46:00.292Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:46:00.293Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:46:00.293Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:46:02.413Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:47:25.398Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-13T08:47:28.511Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-13T08:47:28.513Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-13T08:47:28.513Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-13T08:47:30.616Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-13T08:48:28.201Z"}
