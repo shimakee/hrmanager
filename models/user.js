@@ -22,6 +22,8 @@ const passwordConfig = {//setting password complexity requirements
     requirementCount: 2,
 }
 
+const employmentLimit = 5000;
+
 const user = new Schema({
     activity: {type: Boolean, default: false},
     username: {type: String,min:8, max:30, required: [true, "Username required"], unique: true, dropDups: true},

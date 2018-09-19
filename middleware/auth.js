@@ -15,6 +15,16 @@ const auth = {
         }catch(ex){
             res.status(400).send({message: 'Invalid token'});
         }
+    },
+    isAccountType: function(accountType){
+        return function(req, res, next){
+
+            if(req.user.accountType == accountType){
+                next();
+            }else{
+                res.status(401).send({message: `Unauthorized access. only ${accountType} accounts are allowed. `});
+            }
+        }
     }
     //role.isAllowed
 }

@@ -11,6 +11,15 @@ const   Joi = require('joi');//validator
         //TODO: create methods to call for updates and deletes to use througout the routes -same for other models
         //TODO: create class for multiple used schemas - like owner
 
+        const ownerLimit = 50;
+        const businessLimit = 1000;
+        const picsLimit = 50;
+        const employeesLimit = 5000;
+        const addressLimit = 3;
+        const contactLimit = 5;
+        const emailLimit = 5;
+        const governmentLimit = 50;
+
 var company = new Schema({
     // username: {type: String, required: [true, "Username required"], unique: true, dropDups: true
     //         , match: [regex.username, 'Invalid input on username']},
@@ -240,7 +249,7 @@ function validateAddress(data){
             number:Joi.number().integer().positive().max(999999999999999)
         });
     
-        return contactSchema.validate(data, {presence:'optional'});
+        return contactSchema.validate(data);
     }
 
     function validateGov(data){
@@ -250,7 +259,7 @@ function validateAddress(data){
             info:Joi.string().max(100).regex(regex.commonAlphaNum)
         });
     
-        return governmentSchema.validate(data, {presence:'optional'});
+        return governmentSchema.validate(data);
     }
 
     function validateEmail(data){

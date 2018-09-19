@@ -17,9 +17,9 @@ const employee = new Schema({
     active: {type: Boolean, default: false},
     profile: {type: ObjId, ref: 'Profile'},
     company: {type: ObjId, ref: 'Company'},
-    status: {type: String, enum:['applied','rejected', 'wait-listed','hired', 'resigned', 'dismissed']}, //TODO change to enum hired/resigned/dismissed/applied
+    status: {type: String, enum:validDataLib.employeeStatus}, //TODO change to enum hired/resigned/dismissed/applied
     infoDate:[{
-        class: {type:String, enum:['applied', 'rejected', 'hired']},
+        class: {type:String, enum:validDataLib.employeeStatus},
         date: {type: Date},
         remarks: {type: String}
     }],
@@ -27,7 +27,7 @@ const employee = new Schema({
         dateSubmitted: {type: Date},
         dateRecieved: {type: Date},
         dateEffective: {type: Date},
-        class:{type:String, enum:['dismiss', 'resign']},
+        class:{type:String, enum:validDataLib.employeeSeparationClass},
         reason: {type: String},
         remarks:{type: String}
     }],
@@ -43,7 +43,7 @@ const employee = new Schema({
     }],
     salary:[{
         amount: {type:Number},
-        rate:{type: String, enum:['hour', 'day', 'week', 'month', 'quarter', 'semi-annual', 'year']}, //TODO enum (hourly/daily/weekly/monthly/yearly)
+        rate:{type: String, enum:validDataLib.salaryRate}, //TODO enum (hourly/daily/weekly/monthly/yearly)
         dateAnnounced: {type: Date},
         dateEffective: {type: Date},
         remark: {type: String}

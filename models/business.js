@@ -7,6 +7,14 @@ const   mongoose    = require ('mongoose'),
 const   Joi = require('joi');
         Joi.objectId = require('joi-objectid')(Joi);
 
+    const employeesLimit = 5000;
+    const picsLimit = 50;
+    const addressLimit = 3;
+    const contactLimit = 5;
+    const emailLimit = 5;
+    const governmentLimit = 50;
+
+
 var business    = new Schema ({
     company: {type: ObjId, ref: 'Company', required: [true, 'Owner required']},
     tradename: {type: String, required: [true, 'Tradename required']

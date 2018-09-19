@@ -9,6 +9,8 @@ const auth = require('../middleware/auth');
 const Fawn = require('fawn');
 const   _ = require('lodash');
 
+
+//TODO:cascade delete of account into Employment
 //TODO: turn this into a method
 //TODO: COMPANY, Business,, PROFILE - email, address, contact, government - delete - post if length == 1 make main into true - as it is the only one remaining
 //TODO: on put request make position zero true - if true is converted to false upon edit - atleast 1 email must be true

@@ -9,7 +9,9 @@ const data = {
     falsy:[0,'0','f','false','n','no'],
     accountType: ['profile', 'company', 'staff'],
     ownershipType: ['sole', 'partnership', 'corporation'],
-    employeeStatus: ['applied', 'hired', 'rejected', 'resigned', 'dismissed', 'wait-listed']
+    employeeStatus: ['applied', 'recruited', 'cancelled', 'wait-listed', 'hired', 'rejected', 'resigned', 'dismissed'],
+    employeeSeparationClass : ['resigned', 'dismissed'],
+    salaryRate: ['hour', 'day', 'week', 'month', 'quarter', 'semi-annual', 'annual']
 }
 //TODO: move to config
 

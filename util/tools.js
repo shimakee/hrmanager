@@ -20,8 +20,80 @@ tools={
             
             let {error} =  Joi.validate(String(data), Joi.objectId().required());
 
-            if(!error){return true}
-            return false
+            if(!error){
+                return true
+            }else{
+                
+                return false
+            }
+        },
+        address(data){
+
+            const addressSchema = Joi.object().keys({
+                _id: Joi.objectId().allow(''),
+                main:Joi.boolean().default(false),
+                description:Joi.string().max(50).regex(regex.common).allow(''),
+                street:Joi.string().max(255).regex(regex.address).allow(''),
+                city:Joi.string().max(50).regex(regex.common).allow(''),
+                country:Joi.string().max(50).regex(regex.common).allow(''),
+                province: Joi.string().max(100).regex(regex.common).allow(''),
+                zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
+                position:{
+                    lat: Joi.number().max(85).min(-85).allow(''),
+                    lng: Joi.number().max(180).min(-180).allow('')
+                }
+            });
+            
+            //TODO: set max limit as variable somewhere in config, or model
+            const arraySchema = Joi.object().keys({
+                address: Joi.array().max(3).unique('street').items(addressSchema.required()).single().required()
+            });
+        
+            return arraySchema.validate(data);
+        },
+        contact(data){
+    
+            const contactSchema = Joi.object().keys({ //to be tested
+                main: Joi.boolean().allow(''),
+                description:Joi.string().max(25).regex(regex.common),
+                countryCode:Joi.number().integer().positive().max(999999).allow(''),
+                areaCode:Joi.number().integer().positive().max(999999).allow(''),
+                number:Joi.number().integer().positive().max(999999999999999)
+            });
+
+            //TODO: set max limit as variable somewhere in config, or model
+            const arraySchema = Joi.object().keys({
+                contact: Joi.array().max(3).unique('number').items(contactSchema.required()).single().required()
+            });
+        
+            return arraySchema.validate(data);
+        },
+        government(data){
+    
+            const governmentSchema = Joi.object().keys({//to be tested
+                key:Joi.string().max(100).regex(regex.common),
+                info:Joi.string().max(100).regex(regex.commonAlphaNum)
+            });
+
+            //TODO: set max limit as variable somewhere in config, or model
+            const arraySchema = Joi.object().keys({
+                government: Joi.array().max(3).unique('key').items(governmentSchema.required()).single().required()
+            });
+        
+            return arraySchema.validate(data);
+        },
+        email(data){
+            const emailSchema = Joi.object().keys({//to be tested
+                main:Joi.boolean().allow('').default(false),
+                address:Joi.string().email().required()
+            });
+        
+            //TODO: set max limit as variable somewhere in config, or model
+            const arraySchema = Joi.object().keys({
+                address: Joi.array().max(3).unique('address').items(emailSchema.required()).single().required()
+            });
+        
+            return arraySchema.validate(data);
         }
 
 

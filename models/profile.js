@@ -8,7 +8,14 @@ const   regex       = require('../util/regex'),
 
         //TODO: set limits here to relatives, contacts,  email, address, and government
 
-        //TODO: get profile method get main email
+        const relativesLimit = 50;
+        const picsLimit = 50;
+        const addressLimit = 3;
+        const contactLimit = 5;
+        const emailLimit = 5;
+        const governmentLimit = 50;
+
+        //TODO: get profile method get main email - put into tools to be used by other models
 const profile  = new Schema({
     alive: {type: Boolean, required: true, default: true},
     name:   {

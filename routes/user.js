@@ -19,6 +19,7 @@ const tools = require('../util/tools');
         //403 forbidden
         //status 404 - object not found
 
+//TODO:cascade delete of account into Employment
 //TODO: must have email        
 //TODO: create RESEND account activation link for user - if no activation link was emailed
 router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
@@ -205,9 +206,10 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
 
 //get username
 router.route('/me').get(auth.isAuth, async (req,res,next)=>{
-    let user = await User.findById(req.user._id).populate('profile').populate('company').exec();
+    let user = await User.findById(req.user._id).populate('profile').populate('company').populate('employment._id').exec();
 
-    return res.status(200).send(_.omit(user.toObject(), ['_id', 'profile._id']));
+    //change to pick instead of omit - err in the side of safety
+    return res.status(200).send(_.omit(user.toObject(), ['_id', 'profile._id', 'password' ]));
 
 
 //edit username
