@@ -58,10 +58,17 @@ employee.statics.lengthLimit = {
     salary: salaryLengthLimit
 }
 
-//methods
+//statics
 employee.statics.validate = function(data){
     return validate(data);
 }
+
+employee.statics.isValidStatus = function(data){
+
+    return Joi.validate(data, Joi.string().valid(validDataLib.employeeStatus).required());
+}
+
+//methods
 //find assignment
 employee.methods.findAssignment = function (key, value){
     let result = this.assignment.find(el=>{
