@@ -299,6 +299,54 @@ router.route('/me/recruit/:status').post(auth.isAuth, auth.isAccountType('profil
 //profile - resign company TODO
 router.route('/me/resign').post(auth.isAuth, auth.isAccountType('profile'), async (req,res,next)=>{
 
+        const profileId = req.user.profile;
+        const companyId = req.query.companyId;
+
+        //check that company id is passed
+        if(!companyId){return res.status(400).send({message:'Bad request.'});}
+        //check that profile exist
+        const company = await Company.findById(companyId).exec();
+        if(!company){return res.status(404).send({message:'Could not locate company to hire.'})}
+
+        //check if employment is already available
+        let employment = await Employee.findOne({profile: profileId, company: companyId}).exec();
+        if(!employment){return res.status(404).send({message:'Could not locate employee'});}
+
+        
+        //check status
+        if(employment.status == 'hired'){
+
+                //run task
+                let task = Fawn.Task();
+
+                //change status to resigned
+                task.update('employees', {_id: employment._id}, {$set: {status: 'resigned'}});
+
+                //insert into infodate the resigned info
+                const now = new Date(Date.now());
+                const info = {class: "resigned", date: now}
+                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
+                
+                //check that company exist & remove employee from company
+                const company = await Company.findById(companyId).exec();
+                if(!company){return res.status(404).send({message: ' could not locate company'});}
+                task.update('companies', {_id: company._id}, {$pull: {employees: {employee: employment._id}}});
+                
+                //check user exist & remove employment from user
+                const user = await User.findById(req.user._id).exec();
+                if(!user){return res.status(404).send({message: ' could not locate user'});}
+                task.update('users', {_id: user._id}, {$pull: {employment: {_id: employment._id}}});
+
+                task.run()
+                .then((result)=>{
+                        return res.status(200).send({message:result});
+                }, (error)=>{
+                        return res.status(200).send({message: 'Error.', error: error});
+                });
+
+        }else{
+                return res.status(400).send({message: 'Profile no longer within company.'});
+        }
 });
 
 //profile - get all companies that you are under or have been under in employment? TODO
@@ -481,6 +529,7 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
     });
     //check that id does not exist already in profile
     let user = await User.findOne({profile: profile._id}).exec();
+    if(!user){return res.status(404).send({message: ' could not locate user'});}
         let resultUser = user.employment.find(el=>{
                 if(String(el._id) == String(employee.employee)){
                         return el;
@@ -568,15 +617,133 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
 
 //company - hire TODO
 router.route('/me/hire').post(auth.isAuth, auth.isAccountType('company'), async (req,res,next)=>{
+
+        const profileId = req.query.profileId;
+        const companyId = req.user.company;
+
+        //check that profile id is passed
+        if(!profileId){return res.status(400).send({message:'Bad request.'});}
+
+        //check that profile exist
+        const profile = await Profile.findById(profileId).exec();
+        if(!profile){return res.status(404).send({message:'Could not locate profile to hire.'})}
+
+        //check if employment is already available
+        let employment = await Employee.findOne({profile: profileId, company: companyId}).exec();
+        if(!employment){return res.status(404).send({message:'Could not locate employee'});}
+
         
+        //check status
+        if(employment.status == 'applied' || employment.status == 'accepted'){
 
-//company cancel recruitment
-}).delete(auth.isAuth, auth.isAccountType('company'), async (req,res,next)=>{
+                //run task
+                let task = Fawn.Task();
 
+                //change status to hired
+                task.update('employees', {_id: employment._id}, {$set: {status: 'hired'}});
+
+                //insert into infodate the hired info
+                const now = new Date(Date.now());
+                const info = {class: "hired", date: now}
+
+                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
+                
+                //check that company exist
+                const company = await Company.findById(companyId).exec();
+                if(!company){return res.status(404).send({message: ' could not locate company'});}
+                //check that id does not exist already in company
+                let resultCompany = company.employees.find(el=>{
+                        if(String(el.employee) == String(employment._id)){
+                                return el;
+                        }
+                });
+                //insert profile into company employees
+                if(!resultCompany){
+                        task.update('companies', {_id: company._id}, {$push: {employees: {employee: employment._id}}});
+                }
+                
+                //check user exist
+                const user = await User.findById(req.user._id).exec();
+                if(!user){return res.status(404).send({message: ' could not locate user'});}
+                //check that id does not exist already in user
+                let resultUser = user.employment.find(el=>{
+                        if(String(el._id) == String(employment._id)){
+                                return el;
+                        }
+                });
+                //insert employment into user employment
+                if(!resultUser){
+                        task.update('users', {_id: user._id}, {$push: {employment: {_id: employment._id}}});
+                }
+
+                task.run()
+                .then((result)=>{
+                        return res.status(200).send({message:result});
+                }, (error)=>{
+                        return res.status(200).send({message: 'Error.', error: error});
+                });
+
+        }else if(employment.status == 'recruited'){
+                return res.status(400).send({message: 'Profile must accept your invitation first.'});
+        }else if(employment.status == 'hired'){
+                return res.status(400).send({message:'Status already hired'})
+        }else{
+                return res.status(400).send({message: 'Profile must have a status of applied or accepted before hiring.'});
+        }
+        
 });
 
 //company - dismiss TODO
 router.route('/me/dismiss').post(auth.isAuth, auth.isAccountType('company'), async (req,res,next)=>{
+
+        const profileId = req.query.profileId;
+        const companyId = req.user.company;
+
+        //check that profile id is passed
+        if(!profileId){return res.status(400).send({message:'Bad request.'});}
+        //check that profile exist
+        const profile = await Profile.findById(profileId).exec();
+        if(!profile){return res.status(404).send({message:'Could not locate profile to hire.'})}
+
+        //check if employment is already available
+        let employment = await Employee.findOne({profile: profileId, company: companyId}).exec();
+        if(!employment){return res.status(404).send({message:'Could not locate employee'});}
+
+        
+        //check status
+        if(employment.status == 'hired'){
+
+                //run task
+                let task = Fawn.Task();
+
+                //change status to dimissed
+                task.update('employees', {_id: employment._id}, {$set: {status: 'dimissed'}});
+
+                //insert into infodate the dimissed info
+                const now = new Date(Date.now());
+                const info = {class: "dimissed", date: now}
+                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
+                
+                //check that company exist & remove employee from company
+                const company = await Company.findById(companyId).exec();
+                if(!company){return res.status(404).send({message: ' could not locate company'});}
+                task.update('companies', {_id: company._id}, {$pull: {employees: {employee: employment._id}}});
+                
+                //check user exist & remove employment from user
+                const user = await User.findById(req.user._id).exec();
+                if(!user){return res.status(404).send({message: ' could not locate user'});}
+                task.update('users', {_id: user._id}, {$pull: {employment: {_id: employment._id}}});
+
+                task.run()
+                .then((result)=>{
+                        return res.status(200).send({message:result});
+                }, (error)=>{
+                        return res.status(200).send({message: 'Error.', error: error});
+                });
+
+        }else{
+                return res.status(400).send({message: 'Profile no longer within company.'});
+        }
 
 });
 

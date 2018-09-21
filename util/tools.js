@@ -2,6 +2,7 @@ const Joi = require('joi');
         Joi.objectId = require('joi-objectid')(Joi);
 const config = require('config');
 
+//TODO: date tool using npm to generate clients local date or servers date - use moment npm package
 tools={
     validate:{
         mailOption(data){
