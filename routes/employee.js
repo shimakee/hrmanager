@@ -317,16 +317,64 @@ router.route('/me/resign').post(auth.isAuth, auth.isAccountType('profile'), asyn
         //check status
         if(employment.status == 'hired'){
 
+                const now = moment().toDate();
+                const reqBody = req.body;
+                
+                //validate data
+                let {error} = Employee.validateDismiss(reqBody);
+                if(error){return res.status(400).send({message: 'Bad request'})}
+
+                const dateEffect = moment(new Date(reqBody.dateEffective)).toDate();
+                
+                let data = {
+                        assignment:{
+                                _id: tools.get.objectId(),
+                                position: "resigned",
+                                dateAnnounced: now,
+                                dateEffective: dateEffect,
+                                remarks: reqBody.remarks,
+                                location: ""
+                        },
+                        salary:{
+                                _id: tools.get.objectId(),
+                                amount: 0,
+                                rate: 'day',
+                                dateAnnounced: now,
+                                dateEffective: dateEffect,
+                                remarks: reqBody.remarks
+                        },
+                        separation:{
+                                _id: tools.get.objectId(),
+                                dateSubmitted: now,
+                                dateEffective: dateEffect,
+                                class: 'resigned',
+                                reason: reqBody.reason,
+                                remarks: reqBody.remarks
+                        },
+                        info: {
+                                _id: tools.get.objectId(), 
+                                class: "resigned", 
+                                date: now
+                        }
+                };
+
                 //run task
                 let task = Fawn.Task();
+
+                //insert Separation
+                task.update('employees', {_id: employment._id}, {$push: {separation: {$each: [data.separation], $position: 0}}});
+                
+                // insert assignment
+                task.update('employees', {_id: employment._id}, {$push: {assignment: {$each: [data.assignment], $position: 0}}});
+                
+                //insert salary
+                task.update('employees', {_id: employment._id}, {$push: {salary: {$each: [data.salary], $position: 0}}});
 
                 //change status to resigned
                 task.update('employees', {_id: employment._id}, {$set: {status: 'resigned'}});
 
                 //insert into infodate the resigned info
-                const now = new Date(Date.now());
-                const info = {_id: tools.get.objectId(), class: "resigned", date: now}
-                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
+                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [data.info], $position: 0}}});
                 
                 //check that company exist & remove employee from company
                 const company = await Company.findById(companyId).exec();
@@ -640,7 +688,7 @@ router.route('/me/hire').post(auth.isAuth, auth.isAccountType('company'), async 
                 let data = req.body;
                 data.salary.dateAnnounced = now;
                 data.assignment.dateAnnounced = now;
-                //insert into infodate the hired info
+                //create the infodate the hired info
                 const info = {_id: tools.get.objectId(), class: "hired", date: now}
                 
                 //validate req.body
@@ -732,14 +780,58 @@ router.route('/me/dismiss').post(auth.isAuth, auth.isAccountType('company'), asy
         //check status
         if(employment.status == 'hired'){
 
+                const now = moment().toDate();
+                const reqBody = req.body;
+                
+                //validate data
+                let {error} = Employee.validateDismiss(reqBody);
+                if(error){return res.status(400).send({message: 'Bad request'})}
+
+                const dateEffect = moment(new Date(reqBody.dateEffective)).toDate();
+                
+                let data = {
+                        assignment:{
+                                _id: tools.get.objectId(),
+                                position: "dismissed",
+                                dateAnnounced: now,
+                                dateEffective: dateEffect,
+                                remarks: reqBody.remarks,
+                                location: ""
+                        },
+                        salary:{
+                                _id: tools.get.objectId(),
+                                amount: 0,
+                                rate: 'day',
+                                dateAnnounced: now,
+                                dateEffective: dateEffect,
+                                remarks: reqBody.remarks
+                        },
+                        separation:{
+                                _id: tools.get.objectId(),
+                                dateSubmitted: now,
+                                dateEffective: dateEffect,
+                                class: 'dismissed',
+                                reason: reqBody.reason,
+                                remarks: reqBody.remarks
+                        }
+                };
+
                 //run task
                 let task = Fawn.Task();
+
+                //insert Separation
+                task.update('employees', {_id: employment._id}, {$push: {separation: {$each: [data.separation], $position: 0}}});
+                
+                // insert assignment
+                task.update('employees', {_id: employment._id}, {$push: {assignment: {$each: [data.assignment], $position: 0}}});
+                
+                //insert salary
+                task.update('employees', {_id: employment._id}, {$push: {salary: {$each: [data.salary], $position: 0}}});
 
                 //change status to dimissed
                 task.update('employees', {_id: employment._id}, {$set: {status: 'dimissed'}});
 
                 //insert into infodate the dimissed info
-                const now = new Date(Date.now());
                 const info = {_id: tools.get.objectId(), class: "dimissed", date: now}
                 task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
                 

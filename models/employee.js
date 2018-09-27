@@ -40,14 +40,14 @@ const employee = new Schema({
         location: {type: ObjId, ref: 'Business'},
         dateAnnounced: {type: Date},
         dateEffective: {type: Date},
-        remark: {type: String}
+        remarks: {type: String}
     }],
     salary:[{
         amount: {type:Number}, //amount should be in cents must always be an integer not a floating point
         rate:{type: String, enum:validDataLib.salaryRate}, //TODO enum (hourly/daily/weekly/monthly/yearly)
         dateAnnounced: {type: Date},
         dateEffective: {type: Date},
-        remark: {type: String}
+        remarks: {type: String}
     }]
 });
 
@@ -71,6 +71,10 @@ employee.statics.isValidStatus = function(data){
 
 employee.statics.validateHire = function(data){
     return validateHire(data);
+}
+
+employee.statics.validateDismiss = function (data){
+    return validateDismiss(data);
 }
 
 //methods
@@ -119,16 +123,16 @@ module.exports = mongoose.model('Employee', employee);
 
 function validate(data){
     const infoSchema = Joi.object().keys({
-        class: Joi.string().regex(regex.address).required(),
+        class: Joi.string().max(1020).regex(regex.address).required(),
         date: Joi.date().min('1-1-1900').max('now').required(),
-        remarks: Joi.string().regex(regex.address).allow('')
+        remarks: Joi.string().max(510).regex(regex.address).allow('')
     });
 
     const employeeSchema = Joi.object().keys({
         active: Joi.boolean().allow(''),
         profile: Joi.objectId().required(),
         company: Joi.objectId().required(),
-        status: Joi.string().valid(validDataLib.employeeStatus).required(),
+        status: Joi.string().max(510).valid(validDataLib.employeeStatus).required(),
         infoDate: Joi.array().max(5).items(infoSchema.required()).single().required()
 
     });
@@ -146,7 +150,7 @@ function validateHire(data){
         location: Joi.objectId().allow(""),
         dateAnnounced: Joi.date().min(now).max(nYearsFromNow).required(),
         dateEffective: Joi.date().min(now).max(nYearsFromNow).required(),
-        remark: Joi.string().regex(regex.commonAlphaNum).allow("")
+        remark: Joi.string().max(510).regex(regex.commonAlphaNum).allow("")
     });
     const salarySchema = Joi.object().keys({
         // _id: Joi.objectId().required(),
@@ -154,7 +158,7 @@ function validateHire(data){
         rate:Joi.string().valid(validDataLib.salaryRate).required(),
         dateAnnounced: Joi.date().min(now).max(nYearsFromNow).required(),
         dateEffective: Joi.date().min(now).max(nYearsFromNow).required(),
-        remark: Joi.string().regex(regex.commonAlphaNum).allow("")
+        remarks: Joi.string().max(510).regex(regex.commonAlphaNum).allow("")
     });
 
     const hireSchema = Joi.object().keys({
@@ -163,6 +167,20 @@ function validateHire(data){
     });
 
     return hireSchema.validate(data);
+}
+
+function validateDismiss(data){
+    
+    const now = moment().subtract(1, 'h').toDate();
+    const nYearsFromNow = moment().add(100, 'y').toDate();
+
+    const dismissSchema = Joi.object().keys({
+        dateEffective: Joi.date().min(now).max(nYearsFromNow).required(),
+        reason: Joi.string().max(510).regex(regex.commonAlphaNum).required(),
+        remarks: Joi.string().max(510).regex(regex.commonAlphaNum).allow("")
+    });
+
+    return dismissSchema.validate(data);
 }
 
 function findElement(array, key, value){ //move to tools

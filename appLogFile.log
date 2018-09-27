@@ -3158,3 +3158,39 @@
 {"level":"info","message":"listening on port 80...","timestamp":"2018-09-25T07:07:22.660Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-25T07:07:24.753Z"}
 {"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-25T07:14:58.423Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T03:48:13.354Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T03:48:13.389Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T03:48:13.393Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T03:48:16.092Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T03:52:42.240Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T03:52:52.891Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T03:52:52.898Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T03:52:52.899Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T03:52:55.337Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T03:55:09.114Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T03:55:22.618Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T03:55:22.625Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T03:55:22.629Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T03:55:25.709Z"}
+{"message":"console is not a function","stack":"TypeError: console is not a function\n    at router.route.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:743:17)\n    at <anonymous>","level":"error","timestamp":"2018-09-27T03:55:36.785Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T03:57:34.214Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T03:57:45.873Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T03:57:45.888Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T03:57:45.890Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T03:57:48.357Z"}
+{"message":"console is not a function","stack":"TypeError: console is not a function\n    at router.route.post (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\routes\\employee.js:743:17)\n    at <anonymous>","level":"error","timestamp":"2018-09-27T03:57:53.622Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T03:58:06.798Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T03:58:19.987Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T03:58:19.998Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T03:58:20.000Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T03:58:22.436Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T04:02:07.915Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T04:02:07.919Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T04:02:07.920Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T04:02:10.290Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T04:06:12.239Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-09-27T04:07:18.911Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-09-27T04:07:18.917Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T04:07:18.919Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T04:07:21.439Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T04:20:11.104Z"}
