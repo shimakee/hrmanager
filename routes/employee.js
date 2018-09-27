@@ -858,11 +858,6 @@ router.route('/me/dismiss').post(auth.isAuth, auth.isAccountType('company'), asy
 
 });
 
-//TODO: dissmiss - on separation insert
-//TODO: resign - on separation insert
-//TODO: company remarks on resign
-//TODO: profile remarks on dismiss
-
 //TODO: on date effective - change status to dismiss or hire - how would i handle this?
 
 //TODO: infoDate - new
