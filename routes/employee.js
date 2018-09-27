@@ -13,6 +13,7 @@ const _ = require('lodash');
 const Fawn = require('fawn');
 const tools = require('../util/tools');
 const validate = tools.validate;
+const moment = require('moment');
 
 
 
@@ -69,7 +70,7 @@ router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async
 
                 //create applied date now
                 let now = new Date(Date.now());
-                let appliedInfo = {class: "applied", date: now}
+                let appliedInfo = {_id: tools.get.objectId(), class: "applied", date: now}
 
                 //start a task
                 let task = Fawn.Task();
@@ -173,7 +174,7 @@ router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async
 
                 //create applied date now
                 let now = new Date(Date.now());
-                let info = {class: "cancelled", date: now}
+                let info = {_id: tools.get.objectId(), class: "cancelled", date: now}
 
                 //push infoDate status - cancelled
                 task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each:[info], $position:0}}});
@@ -235,7 +236,7 @@ router.route('/me/recruit/:status').post(auth.isAuth, auth.isAccountType('profil
                         
                         //create applied date now
                         let now = new Date(Date.now());
-                        let info = {class: status, date: now}
+                        let info = {_id: tools.get.objectId(), class: status, date: now}
                         
                         //push infoDate status - cancelled
                         task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each:[info], $position:0}}});
@@ -324,7 +325,7 @@ router.route('/me/resign').post(auth.isAuth, auth.isAccountType('profile'), asyn
 
                 //insert into infodate the resigned info
                 const now = new Date(Date.now());
-                const info = {class: "resigned", date: now}
+                const info = {_id: tools.get.objectId(), class: "resigned", date: now}
                 task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
                 
                 //check that company exist & remove employee from company
@@ -484,7 +485,7 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
     const task = Fawn.Task();
     //create applied date now
     let now = new Date(Date.now());
-    let appliedInfo = {class: "recruited", date: now}
+    let appliedInfo = {_id: tools.get.objectId(), class: "recruited", date: now}
 
     //use current instead
     if(employeeExist){
@@ -579,7 +580,7 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
 
                 //create applied date now
                 let now = new Date(Date.now());
-                let info = {class: "cancelled", date: now}
+                let info = {_id: tools.get.objectId(), class: "cancelled", date: now}
 
                 //push infoDate status - cancelled
                 task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each:[info], $position:0}}});
@@ -615,7 +616,7 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
 
 
 
-//company - hire TODO
+//company - hire TODO - salary upon hiring and location assigned
 router.route('/me/hire').post(auth.isAuth, auth.isAccountType('company'), async (req,res,next)=>{
 
         const profileId = req.query.profileId;
@@ -635,18 +636,36 @@ router.route('/me/hire').post(auth.isAuth, auth.isAccountType('company'), async 
         
         //check status
         if(employment.status == 'applied' || employment.status == 'accepted'){
+                const now = moment().toDate();
+                let data = req.body;
+                data.salary.dateAnnounced = now;
+                data.assignment.dateAnnounced = now;
+                //insert into infodate the hired info
+                const info = {_id: tools.get.objectId(), class: "hired", date: now}
+                
+                //validate req.body
+                let {error} = Employee.validateHire(data);
+
+                //add Id for beter search and retrieve later
+                data.salary._id = tools.get.objectId();
+                data.assignment._id = tools.get.objectId();
+                //turn string into object id
+                data.assignment.location = tools.get.objectId(data.assignment.location);
 
                 //run task
                 let task = Fawn.Task();
 
+                // //insert assignment
+                task.update('employees', {_id: employment._id}, {$push: {assignment: {$each: [data.assignment], $position: 0}}});
+                
+                //insert salary
+                task.update('employees', {_id: employment._id}, {$push: {salary: {$each: [data.salary], $position: 0}}});
+
+                //insert infoDate
+                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
+                
                 //change status to hired
                 task.update('employees', {_id: employment._id}, {$set: {status: 'hired'}});
-
-                //insert into infodate the hired info
-                const now = new Date(Date.now());
-                const info = {class: "hired", date: now}
-
-                task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
                 
                 //check that company exist
                 const company = await Company.findById(companyId).exec();
@@ -721,7 +740,7 @@ router.route('/me/dismiss').post(auth.isAuth, auth.isAccountType('company'), asy
 
                 //insert into infodate the dimissed info
                 const now = new Date(Date.now());
-                const info = {class: "dimissed", date: now}
+                const info = {_id: tools.get.objectId(), class: "dimissed", date: now}
                 task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each: [info], $position: 0}}});
                 
                 //check that company exist & remove employee from company
@@ -746,6 +765,25 @@ router.route('/me/dismiss').post(auth.isAuth, auth.isAccountType('company'), asy
         }
 
 });
+
+//TODO: dissmiss - on separation insert
+//TODO: resign - on separation insert
+//TODO: company remarks on resign
+//TODO: profile remarks on dismiss
+
+//TODO: on date effective - change status to dismiss or hire - how would i handle this?
+
+//TODO: infoDate - new
+//TODO: info date - edit
+//TODO: info date - delete
+
+//TODO: insert new assignment
+//TODO: update - assignment
+//TODO: delete assignment
+
+//TODO: insert new salary
+//TODO: update - salary
+//TODO: delete salary
 
 
 //TODO: crud employees - when already employed - this is when role based authentication comes in to play

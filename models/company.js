@@ -13,12 +13,14 @@ const   Joi = require('joi');//validator
 
         const ownerLimit = 50;
         const businessLimit = 1000;
-        const picsLimit = 50;
         const employeesLimit = 5000;
+        const picsLimit = 50;
         const addressLimit = 3;
         const contactLimit = 5;
         const emailLimit = 5;
         const governmentLimit = 50;
+
+//TODO: add positions - for positions of the employees - specific to the company
 
 var company = new Schema({
     // username: {type: String, required: [true, "Username required"], unique: true, dropDups: true

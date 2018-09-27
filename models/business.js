@@ -14,6 +14,7 @@ const   Joi = require('joi');
     const emailLimit = 5;
     const governmentLimit = 50;
 
+//TODO: add positions - for the positions of the employees
 
 var business    = new Schema ({
     company: {type: ObjId, ref: 'Company', required: [true, 'Owner required']},

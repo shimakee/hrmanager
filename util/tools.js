@@ -1,9 +1,19 @@
 const Joi = require('joi');
         Joi.objectId = require('joi-objectid')(Joi);
 const config = require('config');
+const mongoose = require('mongoose');
 
 //TODO: date tool using npm to generate clients local date or servers date - use moment npm package
 tools={
+    get:{
+        objectId(data = null){
+            if(data){
+                return new mongoose.mongo.ObjectId(data);
+            }else{
+                return new mongoose.mongo.ObjectId();
+            }
+        }
+    },
     validate:{
         mailOption(data){
             let mailOptionSchema = Joi.object().keys({
