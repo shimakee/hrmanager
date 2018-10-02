@@ -1,0 +1,9 @@
+{
+    "token": "TOKEN",
+    "port": "PORT",
+    "emailHost": "EMAILHOST",
+    "emailUser": "EMAILUSER",
+    "emailPass": "EMAILPASS",
+    "uri":"URI"
+
+}

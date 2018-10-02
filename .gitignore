@@ -1,6 +1,6 @@
 .DS_Store
 node_modules/
-dist/
+#dist/
 npm-debug.log
 yarn-error.log
 
@@ -19,7 +19,7 @@ yarn-error.log
 .svg
 
 #environment
-config/
-config.js
+#config/
+#config.js
 .env
 .log

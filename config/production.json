@@ -1,0 +1,6 @@
+{
+    "name": "My web App produced",
+    "token_header": "x-auth-sampletoken",
+    "db": {"name": "GSM",
+        "uri":"mongodb://localhost/GSM"}
+}
