@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //utilities
 const winston = require('winston');
 const Fawn = require('fawn');
-const URI = config.get('db.uri');
+const URI = config.get('uri') || config.get('db.uri');
 const DB_NAME = config.get('db.name');
 
 module.exports = async function(app){
