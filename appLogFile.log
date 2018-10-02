@@ -3194,3 +3194,8 @@
 {"level":"info","message":"listening on port 80...","timestamp":"2018-09-27T04:07:18.919Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-09-27T04:07:21.439Z"}
 {"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-09-27T04:20:11.104Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-10-02T03:55:33.433Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-10-02T03:55:33.437Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-10-02T03:55:33.439Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-10-02T03:55:35.791Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-10-02T03:55:38.881Z"}
