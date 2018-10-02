@@ -1,4 +1,6 @@
 {
     "db": {"name": "GSM_TEST",
-        "uri":"mongodb://localhost/GSM_test"}
+        "uri":"mongodb://localhost/GSM_test"},
+    "hostName":"localhost",
+    "protocolEmail":"http"
 }

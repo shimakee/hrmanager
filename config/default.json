@@ -6,5 +6,7 @@
     "db_log": {"name":"GSM_LOG",
         "uri":"mongodb://localhost/GSM_log"},
     "emailPort": 587,
-    "imgDestination":"assets/uploads/"
+    "imgDestination":"assets/uploads/",
+    "hostName":"deleonhr.herokuapp.com",
+    "protocolEmail":"https"
 }
