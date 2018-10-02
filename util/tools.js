@@ -122,7 +122,7 @@ tools={
                     mailConfig = {//real host
                         host: config.get('emailHost'),//set on node ENV variable
                         port: config.get('emailPort'),
-                        secure: false,
+                        secure: true,
                         auth: {
                             user: config.get('emailUser'), // set on node ENV variable
                             pass: config.get('emailPass') // set on node ENV variable
