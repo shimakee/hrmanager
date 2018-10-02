@@ -120,20 +120,25 @@ tools={
 
                 if(config.util.getEnv('NODE_ENV') === "production"){
                     mailConfig = {//real host
-                        host: config.get('emailHost'),//set on node ENV variable
-                        port: config.get('emailPort'),
+                        host: 'smtp.gmail.com',//set on node ENV variable
+                        port: 465,
                         secure: true,
                         auth: {
                             user: config.get('emailUser'), // set on node ENV variable
                             pass: config.get('emailPass') // set on node ENV variable
+                        },
+                        tls:{
+                            rejectUnauthorized: false
                         }
                     }
                     
                 }else{
                     mailConfig = {//test host
                         host: 'smtp.ethereal.email',
+                        // host: 'smtp.gmail.com',
                         port: 587,
-                        secure: false, // true for 465, false for other ports //using ssl
+                        // port: 465,
+                        secure: true, // true for 465, false for other ports //using ssl
                         auth: {
                             user: 'rgfx3mif3woansd3@ethereal.email',
                             pass: 'gRTuAJu25fqEUGYRgv'

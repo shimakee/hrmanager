@@ -1,0 +1,21 @@
+{"level":"info","message":"NODE_ENV: development","timestamp":"2018-10-02T08:20:28.425Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-10-02T08:20:28.426Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-10-02T08:20:28.427Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-10-02T08:20:30.553Z"}
+{"level":"info","message":"Database GSM closed.","timestamp":"2018-10-02T08:20:53.795Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-10-02T08:21:07.834Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-10-02T08:21:07.835Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-10-02T08:21:07.835Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-10-02T08:21:09.920Z"}
+{"message":"Greeting never received","stack":"Error: Greeting never received\n    at SMTPConnection._formatError (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:606:19)\n    at SMTPConnection._onError (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:579:20)\n    at Timeout._greetingTimeout.setTimeout (C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\node_modules\\nodemailer\\lib\\smtp-connection\\index.js:520:22)\n    at ontimeout (timers.js:498:11)\n    at tryOnTimeout (timers.js:323:5)\n    at Timer.listOnTimeout (timers.js:290:5)","code":"ETIMEDOUT","command":"CONN","level":"error","timestamp":"2018-10-02T08:21:58.358Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-10-02T08:23:21.896Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-10-02T08:23:24.768Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-10-02T08:23:24.769Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-10-02T08:23:24.769Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-10-02T08:23:26.850Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-10-02T08:25:19.445Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-10-02T08:25:21.676Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-10-02T08:25:21.677Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-10-02T08:25:21.677Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-10-02T08:25:23.764Z"}
+{"level":"info","message":"Database GSM_TEST closed.","timestamp":"2018-10-02T08:25:26.410Z"}
