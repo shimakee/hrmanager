@@ -13,8 +13,7 @@ const   Joi = require('joi');
     const contactLimit = 5;
     const emailLimit = 5;
     const governmentLimit = 50;
-
-//TODO: add positions - for the positions of the employees
+    const businessNumberLimit = 5000
 
 var business    = new Schema ({
     company: {type: ObjId, ref: 'Company', required: [true, 'Owner required']},
@@ -24,7 +23,7 @@ var business    = new Schema ({
     employees: [{
             // employment: {type: ObjId, ref: 'Employment'},
                 profile: {type: ObjId, ref: 'Profile'}}],
-    contact:    [{main: {type: Boolean, default: false}, //TODO ObjId reference to new contact schema
+    contact:    [{main: {type: Boolean, default: false},
         description: {type: String}, 
         countryCode: {type: Number,min:0, max:999999}, 
         areaCode: {type: Number, min:0, max:999999}, 

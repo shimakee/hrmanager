@@ -9,14 +9,6 @@ const auth = require('../middleware/auth');
 const Fawn = require('fawn');
 const   _ = require('lodash');
 
-
-//TODO:cascade delete of account into Employment
-//TODO: turn this into a method
-//TODO: COMPANY, Business,, PROFILE - email, address, contact, government - delete - post if length == 1 make main into true - as it is the only one remaining
-//TODO: on put request make position zero true - if true is converted to false upon edit - atleast 1 email must be true
-
-//find things necessary to be populated upon request
-//create middleware to check if profile id is present in req.user after authentication
 //get user profile info
 router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     const user = req.user;
@@ -33,7 +25,7 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     let data = req.body;
 
     let {error} = Profile.validateUpdate(data);
-    if(error){return  res.status(400).send(error);} //TODO remove because of wrapper
+    if(error){return  res.status(400).send(error);}
 
     
     const profile = await Profile.findOne({_id: user.profile}).exec();//find profile if existing

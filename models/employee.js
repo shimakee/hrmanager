@@ -18,7 +18,7 @@ const employee = new Schema({
     active: {type: Boolean, default: false},
     profile: {type: ObjId, ref: 'Profile'},
     company: {type: ObjId, ref: 'Company'},
-    status: {type: String, enum:validDataLib.employeeStatus}, //TODO change to enum hired/resigned/dismissed/applied
+    status: {type: String, enum:validDataLib.employeeStatus},
     infoDate:[{
         class: {type:String, enum:validDataLib.employeeStatus},
         date: {type: Date},
@@ -44,7 +44,7 @@ const employee = new Schema({
     }],
     salary:[{
         amount: {type:Number}, //amount should be in cents must always be an integer not a floating point
-        rate:{type: String, enum:validDataLib.salaryRate}, //TODO enum (hourly/daily/weekly/monthly/yearly)
+        rate:{type: String, enum:validDataLib.salaryRate},
         dateAnnounced: {type: Date},
         dateEffective: {type: Date},
         remarks: {type: String}

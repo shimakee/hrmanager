@@ -6,8 +6,6 @@ const   mongoose    = require ('mongoose'),
 const   regex       = require('../util/regex'),
         validDataLib = require('../util/validDataLibrary');
 
-        //TODO: set limits here to relatives, contacts,  email, address, and government
-
         const relativesLimit = 50;
         const picsLimit = 50;
         const addressLimit = 3;
@@ -15,7 +13,6 @@ const   regex       = require('../util/regex'),
         const emailLimit = 5;
         const governmentLimit = 50;
 
-        //TODO: get profile method get main email - put into tools to be used by other models
 const profile  = new Schema({
     alive: {type: Boolean, required: true, default: true},
     name:   {
@@ -46,7 +43,7 @@ const profile  = new Schema({
     relatives:[{profile: {type: ObjId, ref: 'Profile'}, //use this instead
              relationship: {type: String}}],
 
-    contact:    [{main: {type: Boolean, default: false}, //TODO ObjId reference to new contact schema
+    contact:    [{main: {type: Boolean, default: false},
                 description: {type: String}, 
                 countryCode: {type: Number,min:0, max:999999}, 
                 areaCode: {type: Number, min:0, max:999999}, 
@@ -188,7 +185,7 @@ function validateProfile(data){
     return profileSchema.validate(data, {presence:'optional'});
 }
 
-function validateUpdate(data){ //TODO: rename to basicProfile
+function validateUpdate(data){
 
     const profileSchema = Joi.object().keys({//to be tested
         name:{

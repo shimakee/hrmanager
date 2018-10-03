@@ -3,7 +3,6 @@ const Joi = require('joi');
 const config = require('config');
 const mongoose = require('mongoose');
 
-//TODO: date tool using npm to generate clients local date or servers date - use moment npm package
 tools={
     get:{
         objectId(data = null){
@@ -116,6 +115,7 @@ tools={
                 'use strict';
                 const nodemailer = require('nodemailer');
 
+                //TODO: let mailconfig be passed as an arguement as well
                 let mailConfig;
 
                 if(config.util.getEnv('NODE_ENV') === "production"){

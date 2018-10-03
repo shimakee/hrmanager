@@ -32,3 +32,5 @@ const PORT = config.get('port') || 8080;
 // exports.db = db;
 // exports.db = connection;
 // exports.server = server;
+
+//TODO: add routes for staff

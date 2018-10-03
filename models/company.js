@@ -7,10 +7,6 @@ const   mongoose    = require('mongoose'),
 const   Joi = require('joi');//validator
         Joi.objectId = require('joi-objectid')(Joi);
 
-        //TODO: create method to get main email
-        //TODO: create methods to call for updates and deletes to use througout the routes -same for other models
-        //TODO: create class for multiple used schemas - like owner
-
         const ownerLimit = 50;
         const businessLimit = 1000;
         const employeesLimit = 5000;
@@ -19,8 +15,6 @@ const   Joi = require('joi');//validator
         const contactLimit = 5;
         const emailLimit = 5;
         const governmentLimit = 50;
-
-//TODO: add positions - for positions of the employees - specific to the company
 
 var company = new Schema({
     // username: {type: String, required: [true, "Username required"], unique: true, dropDups: true
@@ -42,7 +36,7 @@ var company = new Schema({
         mimetype: {type: String},
         size: {type: Number}}],
     companyPicName: {type: String,}, //set which pic as profile
-    contact:    [{main: {type: Boolean, default: false}, //TODO ObjId reference to new contact schema
+    contact:    [{main: {type: Boolean, default: false},
                 description: {type: String}, 
                 countryCode: {type: Number,min:0, max:999999}, 
                 areaCode: {type: Number, min:0, max:999999}, 
@@ -104,7 +98,6 @@ company.statics.validateEmail = function(data){
 
 module.exports = mongoose.model('Company', company);
 
-//TODO: general validation of company
 function validate(data){
         const ownerSchema = Joi.object().keys({
                 profile: Joi.objectId().required(),

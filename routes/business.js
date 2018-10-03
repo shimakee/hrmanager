@@ -56,7 +56,6 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     const task = Fawn.Task();
 
     task.save('businesses', newBusiness);
-    //TODO: set business number limit in model
     business = {business: newBusiness._id}
     task.update('companies', {_id: company._id}, {$push:{ businesses: {$each: [business], $position: 0, $slice: 50}}});
     await task.run();
@@ -648,6 +647,5 @@ router.route('/me/government').get(auth.isAuth, async (req,res,next)=>{
 
 });
 
-//TODO: crud employees
 
 module.exports = router;

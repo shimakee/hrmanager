@@ -61,10 +61,6 @@ const upload = multer({storage: storage,
                 fileFilter: fileFilter});
 
 
-                //TODO: delete pictures on company, profile, and user routes when deleting accounts
-//todo: save to profile the file directory
-//todo - learn multiple upload
-//TODO: setting of profile pic
 //upload picture 1 by 1
 router.route('/photo').post(auth.isAuth, upload.single('imgField'), (req,res,next)=>{
     
@@ -114,7 +110,6 @@ router.route('/photo').post(auth.isAuth, upload.single('imgField'), (req,res,nex
     //open image destination directory
     fs.readdir(pathToFile, (err, files)=>{
 
-        //TODO: remove extention to make it more flexible  and case insensitive (.jpg .JPG)
         //find the file within the directory
         let file = files.find(el=>{
             return path.parse(el).name == path.parse(fileToDelete).name;
