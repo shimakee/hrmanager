@@ -37,7 +37,7 @@ tools={
                 return false
             }
         },
-        address(data){
+        address(data, limit = 3){
 
             const addressSchema = Joi.object().keys({
                 _id: Joi.objectId().allow(''),
@@ -56,12 +56,12 @@ tools={
             
             //TODO: set max limit as variable somewhere in config, or model
             const arraySchema = Joi.object().keys({
-                address: Joi.array().max(3).unique('street').items(addressSchema.required()).single().required()
+                address: Joi.array().max(limit).unique('street').items(addressSchema.required()).single().required()
             });
         
             return arraySchema.validate(data);
         },
-        contact(data){
+        contact(data, limit = 3){
     
             const contactSchema = Joi.object().keys({ //to be tested
                 main: Joi.boolean().allow(''),
@@ -73,12 +73,12 @@ tools={
 
             //TODO: set max limit as variable somewhere in config, or model
             const arraySchema = Joi.object().keys({
-                contact: Joi.array().max(3).unique('number').items(contactSchema.required()).single().required()
+                contact: Joi.array().max(limit).unique('number').items(contactSchema.required()).single().required()
             });
         
             return arraySchema.validate(data);
         },
-        government(data){
+        government(data, limit = 50){
     
             const governmentSchema = Joi.object().keys({//to be tested
                 key:Joi.string().max(100).regex(regex.common),
@@ -87,12 +87,12 @@ tools={
 
             //TODO: set max limit as variable somewhere in config, or model
             const arraySchema = Joi.object().keys({
-                government: Joi.array().max(3).unique('key').items(governmentSchema.required()).single().required()
+                government: Joi.array().max(limit).unique('key').items(governmentSchema.required()).single().required()
             });
         
             return arraySchema.validate(data);
         },
-        email(data){
+        email(data, limit = 3){
             const emailSchema = Joi.object().keys({//to be tested
                 main:Joi.boolean().allow('').default(false),
                 address:Joi.string().email().required()
@@ -100,13 +100,11 @@ tools={
         
             //TODO: set max limit as variable somewhere in config, or model
             const arraySchema = Joi.object().keys({
-                address: Joi.array().max(3).unique('address').items(emailSchema.required()).single().required()
+                address: Joi.array().max(limit).unique('address').items(emailSchema.required()).single().required()
             });
         
             return arraySchema.validate(data);
         }
-
-
 
     },
     email:{

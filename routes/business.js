@@ -9,6 +9,8 @@ const Employee = require('../models/employee');
 //tools
 const _ = require('lodash');
 const Fawn = require('fawn');
+const tools = require('../util/tools');
+const validate = tools.validate;
 
 
 //Business==================================BUSINESS
@@ -40,7 +42,7 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
 //add business 1 by 1 or multiple
 }).post(auth.isAuth, async (req,res,next)=>{
 
-    let {error} = Business.validate(req.body);
+    let {error} = validate.isObjectId(req.body);
     if(error){return res.status(400).send({message: 'Bad request.', error: error});}
 
     //OPTIONAL: before adding check address length and deny add instead of slicing and auto deleting last entry
@@ -74,7 +76,7 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
             let id = req.query.id;
 
             //should be a general tool for validation
-            let {error} = Business.validateId({id: id});
+            let {error} = validate.isObjectId({id: id});
             if(error){return res.status(400).send(error);}
 
             //check that the business is there
@@ -93,7 +95,7 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     }else{
             let id = req.query.id;
 
-            let {error} = Business.validateId({id: id});
+            let {error} = validate.isObjectId({id: id});
             if(error){return res.status(400).send(error);}
 
             let business = await Business.findById(id).exec();
@@ -125,7 +127,7 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
     if(!req.query.businessId){return res.status(400).send({message:"bad request"});}
     const businessId = req.query.businessId;
     //check taht object id is valid
-    let {error} = Business.validateId({id: businessId});
+    let {error} = validate.isObjectId({id: businessId});
     if(error){return res.status(400).send(error);}
     
     //check that company exist & that business id is inside company
@@ -144,7 +146,7 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
     }else{
             const emailId = req.query.emailId;
             
-            let isId = Business.validateId({id: emailId});
+            let isId = validate.isObjectId({id: emailId});
             if(isId.error){return res.status(400).send(error);}
             
 
@@ -170,10 +172,10 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
     if(!businessId){return res.status(400).send({message:"bad request"})}
 
     //validate input
-    let {error} = Business.validateEmail(email);
+    let {error} = validate.email(email, Business.emailLimit);
             if(error){return res.status(400).send({message: 'Bad request..', error: error});}
     //validate object id
-    let result = Business.validateId({id: businessId});
+    let result = validate.isObjectId({id: businessId});
             if(result.error){return res.status(400).send({message: 'Bad request.', error: result.error});}
 
     //check company exist
@@ -214,16 +216,16 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
     const emailId= req.query.emailId;
 
     //validate input
-    let {error} = Business.validateEmail(email);
+    let {error} = validate.email(email, Business.emailLimit);
     if(error){return res.status(400).send({message: 'Bad request.'});}
     //check required ids exist
     if(!emailId || !businessId){
             res.status(400).send({message: "Bad request."});
     }else{
             //validate id is an object id
-            let isBusinessId = Business.validateId({id: businessId});
+            let isBusinessId = validate.isObjectId({id: businessId});
                     if(isBusinessId.error){return res.status(400).send({message:"bad request"});}
-            let isEmailId = Business.validateId({id: emailId});
+            let isEmailId = validate.isObjectId({id: emailId});
                     if(isEmailId.error){return res.status(400).send({message:"bad request"});}
 
             //check company exist
@@ -263,9 +265,9 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
             res.status(400).send({message: "Bad request."});
     }else{
 
-            let isEmailId = Business.validateId({id: emailId});
+            let isEmailId = validate.isObjectId({id: emailId});
             if(isEmailId.error){return res.status(400).send({message:"Bad request"});}
-            let isBusinessId = Business.validateId({id: businessId});
+            let isBusinessId = validate.isObjectId({id: businessId});
             if(isBusinessId.error){return res.status(400).send({message:"bad request"});}
 
             //check company exist
@@ -302,7 +304,7 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
     if(!req.query.businessId){return res.status(400).send({message:"bad request"});}
     const businessId = req.query.businessId;
     //check taht object id is valid
-    let {error} = Business.validateId({id: businessId});
+    let {error} = validate.isObjectId({id: businessId});
     if(error){return res.status(400).send(error);}
     
     //check that company exist & that business id is inside company
@@ -321,7 +323,7 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
     }else{
             const contactId = req.query.contactId;
             
-            let isId = Business.validateId({id: contactId});
+            let isId = validate.isObjectId({id: contactId});
             if(isId.error){return res.status(400).send(error);}
             
 
@@ -347,10 +349,10 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
     if(!businessId){return res.status(400).send({message:"bad request"})}
 
     //validate input
-    let {error} = Business.validateContact(contact);
+    let {error} = validate.contact(contact, Business.contactLimit);
             if(error){return res.status(400).send({message: 'Bad request..', error: error});}
     //validate object id
-    let result = Business.validateId({id: businessId});
+    let result = validate.isObjectId({id: businessId});
             if(result.error){return res.status(400).send({message: 'Bad request.', error: result.error});}
 
     //check company exist
@@ -391,16 +393,16 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
     const contactId= req.query.contactId;
 
     //validate input
-    let {error} = Business.validateContact(contact);
+    let {error} = validate.contact(contact, Business.contactLimit);
     if(error){return res.status(400).send({message: 'Bad request.'});}
     //check required ids exist
     if(!contactId || !businessId){
             res.status(400).send({message: "Bad request."});
     }else{
             //validate id is an object id
-            let isBusinessId = Business.validateId({id: businessId});
+            let isBusinessId = validate.isObjectId({id: businessId});
                     if(isBusinessId.error){return res.status(400).send({message:"bad request"});}
-            let isContactId = Business.validateId({id: contactId});
+            let isContactId = validate.isObjectId({id: contactId});
                     if(isContactId.error){return res.status(400).send({message:"bad request"});}
 
             //check company exist
@@ -440,9 +442,9 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
             res.status(400).send({message: "Bad request."});
     }else{
 
-            let isContactId = Business.validateId({id: contactId});
+            let isContactId = validate.isObjectId({id: contactId});
             if(isContactId.error){return res.status(400).send({message:"Bad request"});}
-            let isBusinessId = Business.validateId({id: businessId});
+            let isBusinessId = validate.isObjectId({id: businessId});
             if(isBusinessId.error){return res.status(400).send({message:"bad request"});}
 
             //check company exist
@@ -480,7 +482,7 @@ router.route('/me/government').get(auth.isAuth, async (req,res,next)=>{
     if(!req.query.businessId){return res.status(400).send({message:"bad request"});}
     const businessId = req.query.businessId;
     //check taht object id is valid
-    let {error} = Business.validateId({id: businessId});
+    let {error} = validate.isObjectId({id: businessId});
     if(error){return res.status(400).send(error);}
     
     //check that company exist & that business id is inside company
@@ -499,7 +501,7 @@ router.route('/me/government').get(auth.isAuth, async (req,res,next)=>{
     }else{
             const governmentId = req.query.governmentId;
             
-            let isId = Business.validateId({id: governmentId});
+            let isId = validate.isObjectId({id: governmentId});
             if(isId.error){return res.status(400).send(error);}
             
 
@@ -525,10 +527,10 @@ router.route('/me/government').get(auth.isAuth, async (req,res,next)=>{
     if(!businessId){return res.status(400).send({message:"bad request"})}
 
     //validate input
-    let {error} = Business.validateGov(government);
+    let {error} = validate.government(government, Business.governmentLimit);
             if(error){return res.status(400).send({message: 'Bad request..', error: error});}
     //validate object id
-    let result = Business.validateId({id: businessId});
+    let result = validate.isObjectId({id: businessId});
             if(result.error){return res.status(400).send({message: 'Bad request.', error: result.error});}
 
     //check company exist
@@ -569,16 +571,16 @@ router.route('/me/government').get(auth.isAuth, async (req,res,next)=>{
     const governmentId= req.query.governmentId;
 
     //validate input
-    let {error} = Business.validateGov(government);
+    let {error} = validate.government(government, Business.governmentLimit);
     if(error){return res.status(400).send({message: 'Bad request.'});}
     //check required ids exist
     if(!governmentId || !businessId){
             res.status(400).send({message: "Bad request."});
     }else{
             //validate id is an object id
-            let isBusinessId = Business.validateId({id: businessId});
+            let isBusinessId = validate.isObjectId({id: businessId});
                     if(isBusinessId.error){return res.status(400).send({message:"bad request"});}
-            let isGovernment = Business.validateId({id: governmentId});
+            let isGovernment = validate.isObjectId({id: governmentId});
                     if(isGovernment.error){return res.status(400).send({message:"bad request"});}
 
             //check company exist
@@ -618,9 +620,9 @@ router.route('/me/government').get(auth.isAuth, async (req,res,next)=>{
             res.status(400).send({message: "Bad request."});
     }else{
 
-            let isGovernmentId = Business.validateId({id: governmentId});
+            let isGovernmentId = validate.isObjectId({id: governmentId});
             if(isGovernmentId.error){return res.status(400).send({message:"Bad request"});}
-            let isBusinessId = Business.validateId({id: businessId});
+            let isBusinessId = validate.isObjectId({id: businessId});
             if(isBusinessId.error){return res.status(400).send({message:"bad request"});}
 
             //check company exist
