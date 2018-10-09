@@ -1,4 +1,0 @@
-{
-    "db": {"name": "GSM",
-        "uri":"mongodb://localhost/GSM"}
-}

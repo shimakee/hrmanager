@@ -8,7 +8,7 @@ const DB_NAME = config.get('db.name');
 
 module.exports = async function(app){
     // return new Promise(async (resolve, reject)=>{
-        await mongoose.connect(URI);
+        await mongoose.connect(URI, {useNewUrlParser: true});
         
         Fawn.init(mongoose); //enable transaction
         

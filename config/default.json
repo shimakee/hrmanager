@@ -1,12 +1,12 @@
 {
     "name": "My web App",
-    "token_header": "x-auth-sampletoken",
-    "db": {"name": "GSM",
-        "uri":"mongodb://localhost/GSM"},
-    "db_log": {"name":"GSM_LOG",
-        "uri":"mongodb://localhost/GSM_log"},
-    "emailPort": 587,
-    "imgDestination":"assets/uploads/",
     "hostName":"deleonhr.herokuapp.com",
+    "token_header": "x-auth-sampletoken",
+    "db": {"name": "deleon_hrmanager",
+        "uri":"mongodb://localhost/deleon_hrmanager"},
+    "db_log": {"name":"deleon_hrmanager_log",
+        "uri":"mongodb://localhost/deleon_hrmanager_log"},
+    "imgDestination":"assets/uploads/",
+    "emailPort": 587,
     "protocolEmail":"https"
 }

@@ -10,12 +10,12 @@ const winston = require('winston');
 require('./startup/log')();//logging
 require('./startup/config')();//config
 require('./startup/db')(app);//database
-// app.use(express.static(__dirname));//using directory to serve static index file for vue
+app.use(express.static(__dirname));//using directory to serve static index file for vue
 
 require('./startup/routes')(app);//routes & middleware use
 require('./startup/utilities')();//tools & utilities like validation
 
-// app.use('*', express.static(__dirname));//catchall
+app.use('*', express.static(__dirname));//catchall
 
 const PORT = config.get('port') || 8080;
 
@@ -32,5 +32,3 @@ const PORT = config.get('port') || 8080;
 // exports.db = db;
 // exports.db = connection;
 // exports.server = server;
-
-//TODO: add routes for staff
