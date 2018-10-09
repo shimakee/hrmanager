@@ -19,7 +19,7 @@ yarn-error.log
 .svg
 
 #environment
-#config/
-#config.js
+config/
+config.js
 .env
 .log

@@ -3,11 +3,20 @@ const mongoose = require('mongoose');
 //utilities
 const winston = require('winston');
 const Fawn = require('fawn');
-const URI = config.get('uri') || config.get('db.uri');
+// let URI = config.get('uri') || config.get('db.uri');
+let URI;
 const DB_NAME = config.get('db.name');
 
 module.exports = async function(app){
     // return new Promise(async (resolve, reject)=>{
+        if (config.util.getEnv('NODE_ENV') === "production"){
+            //get production uri from env variables
+            URI = config.get('uri');
+        }else{
+            //get test uri from config
+            URI = config.get('db.uri');
+        }
+        
         await mongoose.connect(URI, {useNewUrlParser: true});
         
         Fawn.init(mongoose); //enable transaction
