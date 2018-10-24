@@ -88,7 +88,7 @@ export const store = new Vuex.Store({
                         }   
                     }
                     response.headers['x-auth-sampletoken']='token';
-                    response.headers['exp']=1933179424;
+                    response.headers['exp']=19331794214;
 
                         setTimeout(function(){
                             resolve(response)

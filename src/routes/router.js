@@ -2,6 +2,7 @@ import LandingPage from '../components/landingPage/landingPage';
 import Reset from '../components/landingPage/reset';
 import Login from '../components/landingPage/login';
 import Signup from '../components/landingPage/signup';
+import Register from '../components/landingPage/register';
 import {store} from '../store/store';
 
 //lazy load
@@ -35,6 +36,7 @@ export const routes = [
         children:[
             {path:'/', name:'login', component: Login},
             {path:'/signup', name:'signup', component: Signup},
+            {path:'/register', name:'register', component: Register},
             {path:'/reset', component: Reset,
                 beforeEnter:(to, from, next)=>{
                     const resetToken = to.query.token;//check that it has query token

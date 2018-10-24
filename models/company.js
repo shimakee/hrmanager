@@ -25,6 +25,7 @@ var company = new Schema({
     tradename: {type: String, required: [true, 'Tradename required'], 
     // unique: true, dropDups: true,
             },
+            //description: {type:String}
     ownershipType: {type: String, enum: ['sole proprietor', 'partnership', 'corporation']},
     owner: [{profile: {type: ObjId, ref: 'Profile'},
         position: {type: String}}],

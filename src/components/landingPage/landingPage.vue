@@ -1,7 +1,16 @@
 <template>
     <div class="landing">
-        <h1>Landing Page</h1> 
-        <button @click="changeTo">{{to}}</button>
+        <h1>Landing Page</h1>
+            <a v-if="to != 'signup'"  
+                @click.prevent="changeTo('signup')" 
+                href="/signup">signup</a>
+            <a v-if="to != 'register'"  
+                @click.prevent="changeTo('register')" 
+                href="/register">register</a>
+            <a  v-if="to != 'login'" 
+                @click.prevent="changeTo('login')" 
+                href="/login">login</a>
+
         <router-view></router-view>
     </div>
 </template>
@@ -13,16 +22,10 @@ export default {
         }
     }
     ,methods:{
-        changeTo(){
+        changeTo(url){
             let vm = this;
-
-            if(this.to == 'login'){
-                this.$router.push('/login');
-                vm.to = 'signup';
-            }else{
-                this.$router.push('/signup');
-                vm.to = 'login';
-            }
+                this.$router.push('/'+url);
+                vm.to = url;
         }
     }
     ,beforeMount(){

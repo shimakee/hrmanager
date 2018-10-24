@@ -1,7 +1,7 @@
 <template>
     <div class="signup">
         <form class="form-group">
-        <h1>Signup</h1>
+        <h1>Register</h1>
             <!--TODO create component for input-->
             <div class="form-group">
                 <label for="username">username</label>
