@@ -20,37 +20,21 @@
             </div>
 
             <div class="form-group">
-                <label for="email">email</label>
-                <input type="text" v-model="identity.profile.email.address" placeholder="Email address">
+                <label for="email">Email</label>
+                <input type="text" v-model="identity.company.email.address" placeholder="Email address">
             </div>
 
              <div class="form-group">
-                <label for="fullname">Full name</label>
-                <input type="text" v-model="identity.profile.name.first" placeholder="First">
-                <input type="text" v-model="identity.profile.name.middle" placeholder="Middle">
-                <input type="text" v-model="identity.profile.name.last" placeholder="Last">
-                <input type="text" v-model="identity.profile.name.suffix" placeholder="Suffix">
+                <label for="fullname">Tradename</label>
+                <input type="text" v-model="identity.company.tradename">
             </div>
 
              <div class="form-group">
-                 <div class="input-group">
-                    <label for="male">Male</label>
-                    <input id="male" type="radio" value="male" v-model="identity.profile.gender">
-                 </div>
-                 <div class="input-group">
-                    <label for="female">Female</label>
-                    <input id="female" type="radio" value="female" v-model="identity.profile.gender">
-                 </div>
-            </div>
-
-             <div class="form-group">
-                <label for="gender">Civil status</label>
-                <select v-model="identity.profile.civilStatus">
-                    <option value="single">Single</option>
-                    <option value="married">Married</option>
-                    <option value="annulled">Annulled</option>
-                    <option value="divorced">Divorced</option>
-                    <option value="widowed">Widowed</option>
+                <label for="ownership">Ownership type</label>
+                <select v-model="identity.company.ownershipType">
+                    <option value="sole">Sole proprietor</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="corporation">Corporation</option>
                 </select>
             </div>
 
@@ -67,31 +51,31 @@ export default {
         return{
             identity:{
                 user:{
-                    username: '',
-                    password:'',
-                    passConfirm:''
+                username:'',
+                password:'',
+                passConfirm:''
                 },
-                profile:{
-                    email:{main:true,
-                        address:''},
-                    name:{
-                        first:'',
-                        middle:'',
-                        last:'',
-                        suffix:''
-                    },
-                    gender:'male',
-                    civilStatus:'single'
+                company:{
+                    tradename:'',
+                    ownershipType: 'sole',
+                    owner: [{ //do i need this? or just add owner when updating instead of here in registration
+                        profile:'', //get profile ID from store
+                        position:'' //default position is proprietor for sole, and CEO for corp
+                    }],
+                    email:{
+                        main:true,
+                        address:''
+                    }
                 }
             },
-            submitted: false
+            submitted:false
         }
     },
     methods:{
         submit(){
             this.submitted = true;
 
-            this.$store.dispatch('signup', this.identity)
+            this.$store.dispatch('register', this.identity)
                 .then(res=>{
                     console.log(res);
 
