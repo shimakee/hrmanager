@@ -82,7 +82,7 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
-                .send({message: 'Success', sendStatus: sendStatus});//return sucess
+                .send(newUser.response());//return sucess
 });
 
 router.route('/activate').get(async (req,res,next)=>{
@@ -126,7 +126,7 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
         return res.status(200)
             .header(config.get('token_header'), token)
             .header('exp', decode.exp)
-            .send(_.pick(user,['username', 'accountType']));   
+            .send(user.response());   
 });
 
 //TODO: check account type first before sending email to get email details
@@ -339,7 +339,7 @@ router.route('/register').post(async (req,res,next)=>{
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
-                .send({message: 'Success', sendStatus: sendStatus});//return sucess
+                .send(newUser.response());//return sucess
 
 });
 module.exports = router;

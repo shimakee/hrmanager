@@ -58,10 +58,11 @@ export default {
                 company:{
                     tradename:'',
                     ownershipType: 'sole',
-                    owner: [{ //do i need this? or just add owner when updating instead of here in registration
-                        profile:'', //get profile ID from store
-                        position:'' //default position is proprietor for sole, and CEO for corp
-                    }],
+                    // owner: [{ //do i need this? or just add owner when updating instead of here in registration
+                    //     profile:'', //get profile ID from store
+                    //     position:'' //default position is proprietor for sole, and CEO for corp
+                    // }],
+                    owner:[],
                     email:{
                         main:true,
                         address:''

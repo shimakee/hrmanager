@@ -8,6 +8,8 @@ import {store} from '../store/store';
 //lazy load
 import Home from '../components/home/home';
 import Profile from '../components/home/profile/profile';
+import Company from '../components/home/profile/company';
+import Staff from '../components/home/profile/staff';
 import Posts from '../components/home/profile/post';
 
 import Settings from '../components/settings/settings';
@@ -62,19 +64,50 @@ export const routes = [
             }
         },
         children:[
-            {path:'', name:'home', redirect:'profile'},
-            {path:'/profile', component: Profile,
-                children:[
-                    {path:"/", name:"post", component: Posts}
-                ]
+            {path:'', name:'home', //login landing page - sort by account type
+                beforeEnter:(to,from,next)=>{
+                    let accountType = store.getters.accountType;
+                    // console.trace('account', accountType);
+                    if(!accountType){ 
+                        // console.trace('local', localStorage.getItem('accountType'));
+                        accountType = localStorage.getItem('accountType');
+                    }
+            
+                    if(!accountType){
+                        next({name:'login'});//no account type invalid login redirect to login
+                    }else{
+
+                        switch (accountType) { //push based on account type
+                            case "profile":
+                                next({name:'profile'});
+                                break;
+
+                            case "company":
+                                next({name:'company'});
+                                break;
+                                
+                            case "staff":
+                                next({name:'staff'});
+                                break;
+                        
+                            default:
+                                next({name:'login'});
+                                break;
+                        }
+                    }
+                }
             },
-            {path:'/settings', component: Settings, 
+            
+            {path:'/profile', name:'profile', component: Profile //TODO: only proceed if account type is profile
+            },
+            {path:'/company', name:'company', component: Company //TODO: only proceed if account type is company
+            },
+            {path:'/staff', name:'staff', component: Staff //TODO: only proceed if account type is staff
+            },
+            {path:'/settings', component: Settings, //TODO: settings show based on account type
                 beforeEnter:(to, from, next)=>{
                     const token = store.getters.hasToken;
                     const localToken = localStorage.getItem('token');
-
-                    
-                    console.log('query', to.query);
 
                     if(token || localToken){//check auth
                         next();

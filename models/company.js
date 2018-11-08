@@ -72,6 +72,9 @@ var company = new Schema({
 company.statics.validateRegistration = function(data){
         return validateRegistration(data);
 }
+company.statics.validateUserSignup = function(data){
+        return validateUserSignup(data);
+}
 company.statics.validateUpdate = function(data){
         return validateUpdate(data);
 }
@@ -173,7 +176,7 @@ function validateRegistration(data){
         const companySchema = Joi.object().keys({
                 tradename: Joi.string().regex(regex.commonAlphaNum).min(1).max(255).required(),
                 ownershipType: Joi.string().valid(validDataLib.ownershipType).required(),
-                owner: Joi.array().max(30).unique('profile').items(ownerSchema).single(),
+                owner: Joi.array().max(30).unique('profile').items(ownerSchema).single().allow(''),
                 email:Joi.array().max(5).unique('address').items(emailSchema.required()).single().required(),     
         });
 
@@ -269,4 +272,22 @@ function validateAddress(data){
         // });
     
         return emailSchema.validate(data);
+    }
+
+    function validateUserSignup(data){
+        const userSchema = Joi.object().keys({//to be tested
+            _id: Joi.objectId().allow(''),
+            activity:Joi.boolean().allow(''),
+            username:Joi.string().alphanum().min(8).max(30).required(),
+            password:Joi.string().min(10).max(72).required(),
+            passConfirm:Joi.string().min(10).max(72).required()
+        });
+    
+        if(data.password !== data.passConfirm){return {error: {message: 'Password confirmation does not match', name: "ValidationError"}}};
+       
+        const {error} = validatePassword(data.password);
+        if(error) return {error};
+        
+        return userSchema.validate(data);
+    
     }

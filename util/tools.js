@@ -136,10 +136,10 @@ tools={
                         // host: 'smtp.gmail.com',
                         port: 587,
                         // port: 465,
-                        secure: true, // true for 465, false for other ports //using ssl
+                        secure: false, // true for 465, false for other ports //using ssl
                         auth: {
-                            user: 'rgfx3mif3woansd3@ethereal.email',
-                            pass: 'gRTuAJu25fqEUGYRgv'
+                            user: 'kacnpio7pk5azltq@ethereal.email',
+                            pass: 'HcqcSEvpD32gyghjHc'
                         },
                         tls:{
                             rejectUnauthorized: false

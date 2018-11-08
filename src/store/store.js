@@ -17,9 +17,10 @@ export const store = new Vuex.Store({
     state:{
         data:null, //data to be rendered
         token:null, //response token obtained
+        accountType:null,
         timeout: null,
         resetToken: null,
-        env:"test"
+        env:"production"
 
     },
     getters:{
@@ -28,6 +29,9 @@ export const store = new Vuex.Store({
         },
         getData:(state)=>{//get data on state
             return state.data;
+        },
+        getAccountType:(state)=>{
+            return state.accountType;
         },
         getToken:(state)=>{//get token header on response
             return state.token;
@@ -46,6 +50,9 @@ export const store = new Vuex.Store({
         },
         setToken:(state, payload)=>{//set token on state
             state.token = payload;
+        },
+        setAccountType:(state, payload)=>{//set token on state
+            state.accountType = payload;
         },
         clearAuthData:(state)=>{
             state.data = null;
@@ -79,13 +86,14 @@ export const store = new Vuex.Store({
                     
                     let response = {
                         data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, 
+                        "accountType":"profile",
                         "civilStatus": "married", 
                         "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ],
                         "gender": "male", "contact": [], 
                         "address": [{"main":false,"_id":"5b50b8f5ec4f044154e61112","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":4444},{"main":false,"_id":"5b50b8e8ec4f044154e61111","description":"home","street":"monnstone","city":"digos","province":"davao del sur","zipcode":8002},{"main":true,"_id":"5b50b8e0ec4f044154e61110","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":2222}], "government": [] }
                         ,headers:{
                             auth:'asdasd'
-                        }   
+                        }
                     }
                     response.headers['x-auth-sampletoken']='token';
                     response.headers['exp']=19331794214;

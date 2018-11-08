@@ -5,9 +5,9 @@ const PassComplexity = require('joi-password-complexity'); //password complexity
 const bcrypt = require('bcrypt');//password hashing
 const jwt = require('jsonwebtoken');
 const   mongoose = require('mongoose');
-const validDataLib = require('../util/validDataLibrary');
+const validDataLib = require('../util/validDataLibrary'); //predefined terms library
+const _ = require('lodash'); //tools
 
-// const _ = require('lodash');
 //         passportLocalMongoose = require('passport-local-mongoose'),
         Schema = mongoose.Schema,
         ObjId = mongoose.Schema.Types.ObjectId;
@@ -97,7 +97,7 @@ user.methods.matchPassword = function(passwordInput){
     return bcrypt.compare(passwordInput, this.password);
 }
 
-user.methods.genAuthToken = function(time = '1h'){
+user.methods.genAuthToken = function(time = '1h'){//object to insert inside token
     const token = jwt.sign({_id:this._id, 
                             username: this.username,
                             profile: this.profile, // check accoutn type first
@@ -109,10 +109,16 @@ user.methods.genAuthToken = function(time = '1h'){
     return token;
 }
 
+user.methods.response = function(){//uniformed user info response to return to client
+    return _.pick(this,['username', 'accountType']);
+}
+
 // const skipInit = process.env.NODE_ENV === 'test';
 module.exports = mongoose.model('User', user);
 
 //==========================================fnctions
+
+//TODO: create one class for this validations
 function validateUser(data){
     const userSchema = Joi.object().keys({//to be tested
         username:Joi.string().alphanum().min(8).max(30).required()
@@ -129,7 +135,7 @@ function validate(data){
         _id:Joi.objectId().allow(''),
         username:Joi.string().alphanum().min(8).max(30).required(),
         password:Joi.string().min(10).max(72).required(),
-        accountType: Joi.string().valid(validDataLib.accountType).required(),
+        // accountType: Joi.string().valid(validDataLib.accountType).required(),
         profile:Joi.objectId().allow(''),
         company: Joi.objectId().allow('')
     });

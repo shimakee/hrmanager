@@ -37,8 +37,14 @@ const actions = {
 
                     //remove upon production, have not found a use for it yet
                     //save response data to generic data state
+                    console.trace('login', res.data);
                     commit('setData', res.data);
                     localStorage.setItem('data', JSON.stringify(res.data));
+
+                    //save account type information
+                    console.trace(res.data.accountType);
+                    commit('setAccountType', res.data.accountType);
+                    localStorage.setItem('accountType', res.data.accountType);//no need to stringify since saving only a string and not an object
                     
                     //save token to state and localstorage
                     const token = res.headers[token_header];

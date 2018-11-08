@@ -10,6 +10,14 @@
                 <label for="password">Password:</label>
                 <input type="password" v-model="user.password" placeholder="Password">
             </div>
+            <!-- <div class="form-group">
+                <label for="password">Account type</label>
+                <select v-model="user.accountType">
+                    <option value="profile">Profile</option>
+                    <option value="company">Company</option>
+                    <option value="staff">Staff</option>
+                </select>
+            </div> -->
             <button @click.prevent="submitLogin">Send</button>
             <button @click.prevent="submitReset">Forgot Password</button>
         </form>
@@ -73,8 +81,8 @@ export default {
 }
 
 .login .form-group{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+    /* display:grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(100px, auto)); */
 }
 .login button{
     margin: 1rem;

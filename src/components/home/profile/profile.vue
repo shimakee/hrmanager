@@ -7,28 +7,28 @@
             
             <!-- TODO make into individual components -->
             <ul class="info">
-                <li v-for="(value, property) in profile" v-bind:key="property">
+                <li v-for="(value, property) in profile" v-bind:key="property"> <!--loop through profile properties-->
 
-                    <span v-if="typeof value === 'object'">
-
-                        <span v-if="property === 'email'">
-                            {{property}} : 
-                                        <span v-for="(object, prop) in value" v-bind:key="prop">
-                                            <span v-if="object.main === true">
-                                                {{object.address}}
+                    <span v-if="typeof value === 'object'"><!--loop property if property is another object-->
+                        <span v-if="value && property === 'email'"><!--only show if it has value && special case for email-->
+                            {{property}}:   <span v-for="(object, prop) in value" v-bind:key="prop">
+                                                <span v-if="object.main === true"> <!--only show main email-->
+                                                    {{object.address}}
+                                                </span>
                                             </span>
-                                        </span>
                         </span>
                         <span v-else>
-                            {{property}} : 
-
-                            <span v-for="(item, k) in value" v-bind:key="k">
-                                    {{item}}
+                            <span v-if="value && typeof value === 'string'"><!--only show if it has value-->
+                                {{property}}:   <span v-for="(item, k) in value" v-bind:key="k">
+                                                    {{item}}
+                                                </span>
                             </span>
                         </span>
                     </span>
                     <span v-else>
-                        {{property}} : {{value}}
+                        <span v-if="value && typeof value === 'string'"><!--only show if it has value-->
+                            {{property}} : {{value}}
+                        </span>
                     </span>
                 </li>     
             </ul>
@@ -41,6 +41,9 @@
 </template>
 <script>
 export default {
+    components:{
+
+    },
     data(){
         return {
             fullName: null
@@ -52,10 +55,12 @@ export default {
         }
     },
     beforeMount(){
+        //get full name===================================================
         let name = "";
             let profileName = this.$store.getters.getProfile;
             // let profileName = this.profile.name;
 
+            if(profileName.name){
                 for (const key in profileName.name) {//get name from profile
                     if (profileName.name.hasOwnProperty(key)) { //get every element
                         const element = profileName.name[key];
@@ -65,7 +70,8 @@ export default {
                     }
                 }
             
-            this.fullName = name.trim();
+                this.fullName = name.trim();
+            }
     }
     ,created(){
         let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage
