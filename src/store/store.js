@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
         accountType:null,
         timeout: null,
         resetToken: null,
-        env:"production"
+        env:"test"
 
     },
     getters:{
@@ -96,7 +96,7 @@ export const store = new Vuex.Store({
                         }
                     }
                     response.headers['x-auth-sampletoken']='token';
-                    response.headers['exp']=19331794214;
+                    response.headers['exp']=19331994214;
 
                         setTimeout(function(){
                             resolve(response)

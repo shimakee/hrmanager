@@ -317,3 +317,4 @@
 {"level":"info","message":"App: My web App","timestamp":"2018-11-08T07:01:01.174Z"}
 {"level":"info","message":"listening on port 80...","timestamp":"2018-11-08T07:01:01.175Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-11-08T07:01:03.252Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-11-08T07:03:15.102Z"}

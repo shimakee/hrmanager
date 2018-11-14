@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <nav-bar />
-        <router-view></router-view>
+    <div class="home">
+        <!-- <nav-bar /> -->
+        <router-view class="content"></router-view>
+        <router-view name="info" class="info"></router-view>
+        <router-view name="actions" class="actions"></router-view>
     </div>
 </template>
 <script>
@@ -17,5 +19,22 @@ export default {
 }
 </script>
 <style scoped>
-
+.home{
+    display: grid; 
+    grid-template-columns: 1fr 3fr;
+    text-align: center;
+}
+.info{
+    text-align: center;
+    background-color: green;
+}
+.actions{
+    text-align: center;
+    background-color: blue;
+}
+.content{
+    grid-row: 1/span 2;
+    grid-column: 2/span 2;
+    background-color: aqua;
+}
 </style>

@@ -5,12 +5,17 @@ import Signup from '../components/landingPage/signup';
 import Register from '../components/landingPage/register';
 import {store} from '../store/store';
 
+import Error from '../components/views/errorPage'
+
 //lazy load
 import Home from '../components/home/home';
-import Profile from '../components/home/profile/profile';
-import Company from '../components/home/profile/company';
-import Staff from '../components/home/profile/staff';
-import Posts from '../components/home/profile/post';
+import Profile from '../components/home/accountType/profile';
+import ProfileInfo from '../components/home/accountType/profile/profileInfo';
+import ProfileActions from '../components/home/accountType/profile/profileActions';
+
+import Company from '../components/home/accountType/company';
+import Staff from '../components/home/accountType/staff';
+import Posts from '../components/home/accountType/post';
 
 import Settings from '../components/settings/settings';
 import ChangePassword from '../components/settings/account/changePassword';
@@ -28,22 +33,24 @@ export const routes = [
         beforeEnter:(to, from, next)=>{//check authentication status
             const token = store.getters.hasToken;
             const localToken = localStorage.getItem('token');
+            let accountType = store.getters.accountType; //check javascript for account type
+            if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
 
-            if(token || localToken){
+            if(token || localToken && accountType){
                 next({name:'home'});//if already logged in - redirect to home page
             }else{
                 next();
             }
         },
         children:[
-            {path:'/', name:'login', component: Login},
+            {path:'', name:'login', component: Login},
             {path:'/signup', name:'signup', component: Signup},
             {path:'/register', name:'register', component: Register},
             {path:'/reset', component: Reset,
                 beforeEnter:(to, from, next)=>{
                     const resetToken = to.query.token;//check that it has query token
                     if(!resetToken){
-                            next(from.path);//return previous path
+                            next(from.path);//return previous path if no token
                     }else{
                         store.commit('setResetToken', resetToken); //commit reset token
                         next();
@@ -52,10 +59,12 @@ export const routes = [
             }
         ]
     }
-    ,{path:'/', component: Home,
+    ,{path:'/',
         beforeEnter:(to, from, next)=>{
             const token = store.getters.hasToken;
             const localToken = localStorage.getItem('token');
+            let accountType = store.getters.accountType; //check javascript for account type
+            if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
 
             if(token || localToken){//check auth
                 next();
@@ -63,18 +72,15 @@ export const routes = [
                 next({name: 'login'});//no auth return to login
             }
         },
+        component: Home,
         children:[
-            {path:'', name:'home', //login landing page - sort by account type
+            {path:'', name:'home', //index page - sort by account type - redirect
                 beforeEnter:(to,from,next)=>{
-                    let accountType = store.getters.accountType;
-                    // console.trace('account', accountType);
-                    if(!accountType){ 
-                        // console.trace('local', localStorage.getItem('accountType'));
-                        accountType = localStorage.getItem('accountType');
-                    }
+                    let accountType = store.getters.accountType; //check javascript for account type
+                    if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
                     if(!accountType){
-                        next({name:'login'});//no account type invalid login redirect to login
+                        next({name:'error'});//no account type invalid login redirect to login
                     }else{
 
                         switch (accountType) { //push based on account type
@@ -91,19 +97,65 @@ export const routes = [
                                 break;
                         
                             default:
-                                next({name:'login'});
+                                next({name:'login'}); // no valid account type return to login
                                 break;
                         }
                     }
                 }
             },
+            //==================================================PROFILE
+            {path:'/profile', 
+                beforeEnter:(to,from,next)=>{//TODO: only proceed if account type is profile
+                    let accountType = store.getters.accountType; //check javascript for account type
+                    if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
-            {path:'/profile', name:'profile', component: Profile //TODO: only proceed if account type is profile
+                    if(!accountType || accountType !== 'profile'){
+                        console.trace('account', accountType);
+                        next({name:'login'});//no account type invalid login redirect to login
+                    }else{
+                        next();
+                    }
+                }, 
+                components: {
+                    default: Profile,
+                    info: ProfileInfo,
+                    actions: ProfileActions
+                },
+                children:[ //this is where the content goes - its children will be the content details
+                    {path:"", name: "profile", //landing page for profile
+                        components:{
+                            default: ChangeUsername
+                        }
+                    },
+                    {path:"settings", ///profile/settings - CONTENT
+                        components:{
+                            default: Settings,
+                        },
+                        children:[//TODO: to determine layout - this is where the content goes
+                            {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
+                                components:{
+                                    default: DeleteAccount, 
+                                    changePassword: ChangePassword,
+                                    deleteAccount: DeleteAccount,
+                                    editProfile: EditProfile,
+                                    editRelatives: EditRelatives,
+                                    editAddress: Address,
+                                    editContacts: EditContacts,
+                                    editGov: EditGov
+                                }
+                            }
+                        ]
+                    }
+                ]
             },
+            //==================================================COMPANY
             {path:'/company', name:'company', component: Company //TODO: only proceed if account type is company
             },
+            //==================================================STAFF
             {path:'/staff', name:'staff', component: Staff //TODO: only proceed if account type is staff
             },
+
+            //these will be put to children
             {path:'/settings', component: Settings, //TODO: settings show based on account type
                 beforeEnter:(to, from, next)=>{
                     const token = store.getters.hasToken;
@@ -117,18 +169,13 @@ export const routes = [
                 },
                 children:[
                     {path:'/', name:'settings', redirect:'account'},
-                    {path:'account', name:'account', components:{default: ChangeUsername, 
-                                                                changePassword: ChangePassword,
-                                                                deleteAccount: DeleteAccount,
-                                                                editProfile: EditProfile,
-                                                                editRelatives: EditRelatives,
-                                                                editAddress: Address,
-                                                                editContacts: EditContacts,
-                                                                editGov: EditGov
+                    {path:'account', name:'account', components:{default: ChangeUsername
                                                                 }},
                 ]
             }
         ]
     },
+    ,{path:'/error', name: 'error', component: Error}
     ,{path:'*', redirect:'/'}
+
 ];

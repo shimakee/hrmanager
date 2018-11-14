@@ -1,8 +1,8 @@
 <template>
     <div>
         <form>
-            <label for="password">Delete Account: </label>
-            <button @click.prevent="submit">Send</button>
+            <!-- <label for="password">Delete Account: </label> -->
+            <button @click.prevent="submit">Delete Account</button>
         </form>
     </div>
 </template>
