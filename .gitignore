@@ -12,6 +12,8 @@ yarn-error.log
 *.sln
 
 #pictures and images
+assets/*
+assets/uploads/*
 .png
 .jpg
 .gif

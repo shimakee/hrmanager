@@ -26,6 +26,7 @@ const actions = {
             dispatch('sendCommit', {url:'/profile/me', method:'get', data:null})
             .then(res=>{
                 resolve(res.data);
+                console.trace('response data', res.data);
             }).catch(err=>{
                 reject(err);
             });

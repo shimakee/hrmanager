@@ -42,11 +42,12 @@ const storage = multer.diskStorage({
         let extention = path.parse(file.originalname).ext;
         let name = file.fieldname + extention;
 
-        //save filename as profile id
+        //save profile id as filename
         cb(null, name);
     }
 });
 const fileFilter = (req, file, cb)=>{
+    console.trace('filter', file);
     if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' ){
         cb(null, true);
     }else{
@@ -62,22 +63,25 @@ const upload = multer({storage: storage,
 
 
 //upload picture 1 by 1
-router.route('/photo').post(auth.isAuth, upload.single('imgField'), (req,res,next)=>{
+router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,next)=>{
     
     //validate
-    let {error} = Joi.validate(req.body.imageName, Joi.string().regex(regex.commonAlphaNum).required());
-    if(error){return res.status(400).send({message: "Bad request."})}
+    if(!req.body.imgName){return res.status(400).send({message: "Bad request. imgName required"});}
+    let {error} = Joi.validate(req.body.imgName, Joi.string().regex(regex.commonAlphaNum).required());
+    if(error){return res.status(400).send({message: "Bad request. Invalid characters"})}
+
+
 
     //get file extention
     let extention = path.parse(req.file.originalname).ext;
-    let newPath =  req.file.destination + "/" + req.body.imageName + extention;
+    let newPath =  req.file.destination + "/" + req.body.imgName + extention;
 
     //rename file
     fs.rename(req.file.path, newPath, async (err)=>{
         if(!err){
             
             //establish details
-            let pic = {filename: req.body.imageName + extention,
+            let pic = {filename: req.body.imgName + extention,
                 path: newPath,
                 encoding: req.file.encoding,
                 mimetype: req.file.mimetype,

@@ -21,6 +21,8 @@ import Settings from '../components/settings/settings';
 import ChangePassword from '../components/settings/account/changePassword';
 import ChangeUsername from '../components/settings/account/changeUsername';
 import DeleteAccount from '../components/settings/account/deleteAccount';
+import EditPic from '../components/settings/account/editPic';
+
 import EditProfile from '../components/settings/editProfile';
 import EditRelatives from '../components/settings/editRelatives';
 import Address from '../components/settings/address/address';
@@ -134,7 +136,8 @@ export const routes = [
                         children:[//TODO: to determine layout - this is where the content goes
                             {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
                                 components:{
-                                    default: DeleteAccount, 
+                                    default: DeleteAccount,
+                                    editPic: EditPic,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,
                                     editProfile: EditProfile,

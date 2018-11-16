@@ -2,7 +2,7 @@
     <div class="profile">
         <div class="avatar-container">
             <slot></slot>
-            <img class="avatar" src="https://picsum.photos/200/200/?random" :alt="fullName">
+            <img class="avatar" src="/file/photo/me?name=imagename.JPG" :alt="fullName">
             <div>{{fullName}}</div>
         </div>
 
@@ -49,21 +49,47 @@ export default {
     },
     beforeMount(){
         //get full name===================================================
-        let name = "";
-            let profileName = this.$store.getters.getProfile;
-            // let profileName = this.profile.name;
-                if(profileName.name){
-                    for (const key in profileName.name) {//get name from profile
-                        if (profileName.name.hasOwnProperty(key)) { //get every element
-                            const element = profileName.name[key];
+        const vm = this;
+        const cachedName = JSON.parse(localStorage.getItem('profile'));
+        let profileName = this.$store.getters.getProfile;
+
+        if(!cachedName && !profileName){
+            vm.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
+                vm.$store.commit('setProfile', res);//save to state
+
+                if(res.name){
+                    vm.fullName = SetName(res.name);
+                }else{
+                    console.trace('error, no name');
+                }
+
+                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+            });
+        }else{
+            if(!cachedName){
+                vm.fullName = SetName(profileName.name);
+            }else{
+                vm.fullName = SetName(cachedName.name);
+            }
+        }
+
+        function SetName(dataName){//set local component data fullname
+            let name = "";
+                if(dataName){
+                    for (const key in dataName) {//get name from profile
+                        if (dataName.hasOwnProperty(key)) { //get every element
+                            const element = dataName[key];
                             if(element){
                                 name +=  " " + element; //check that element has value and stack over name
                             }
                         }
                     }
                 
-                    this.fullName = name.trim();
+                    return name.trim();
+                }else{
+                    console.trace('error invalid value for name');
                 }
+        }
     }
     ,created(){
         let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage

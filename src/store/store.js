@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
         accountType:null,
         timeout: null,
         resetToken: null,
-        env:"test"
+        env:"production"
 
     },
     getters:{
@@ -78,7 +78,7 @@ export const store = new Vuex.Store({
                 localStorage.setItem('data', JSON.stringify(data)); //TODO refactor to use vuex actions
             }
         },
-        sendCommit:({commit, state}, payload)=>{
+        sendCommit:(state, payload)=>{
             return  new Promise((resolve, reject)=>{
                 
                 if(state.env == "test"){
@@ -96,7 +96,7 @@ export const store = new Vuex.Store({
                         }
                     }
                     response.headers['x-auth-sampletoken']='token';
-                    response.headers['exp']=19331994214;
+                    response.headers['exp']=19431994214;
 
                         setTimeout(function(){
                             resolve(response)
@@ -143,7 +143,26 @@ export const store = new Vuex.Store({
                     }
                 }
             });
+        },
+        uploadPic:(state, payload)=>{
+            console.trace('payload', payload);
+            return new Promise((resolve, reject)=>{
+                const formData = new FormData();
+                formData.append('imgField', payload.file.imgField, payload.file.imgField.name);
+                formData.append('imgName', payload.file.imgName);
+                console.trace('formData', formData);
+
+                axios.post(payload.url, formData)
+                    .then(res=>{
+                        console.log('res', res);
+                        resolve(res);
+                    }).catch((err)=>{
+                        reject(err);
+                    });
+
+            });
         }
+        
     },
     modules:{//attach imported modules
         signup,

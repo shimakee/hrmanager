@@ -7,15 +7,17 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config=>{
-    console.log('config', config); //emove upon production
+    console.trace('config', config); //emove upon production
 
     if(store.getters.hasToken){//adding token as header for all request when token is available
         config.headers.common[nameSpace.token_header] = store.getters.getToken;
+    }else{
+
     }
     return config;
 });
 instance.interceptors.response.use(response=>{
-    console.log('response', response);//Remove upond production
+    console.trace('response', response);//Remove upond production
 
     if(response.headers[nameSpace.token_header]){//save token header
         //place token in store && local storage
@@ -41,6 +43,8 @@ instance.interceptors.response.use(response=>{
     //     localStorage.setItem('data', JSON.stringify(response.data));
     // }
     return response;
+},reject=>{
+    console.trace('reject', reject);
 });
 
 export default instance;
