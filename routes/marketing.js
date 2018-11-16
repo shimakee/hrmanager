@@ -7,7 +7,7 @@ const path = require('path');
 const winston = require('winston');
 const regex = require("../util/regex");
 //request to another server - cors
-const cors = require('cors');
+// const cors = require('cors');
 const http = require('http');
 //model
 const Profile = require("../models/profile");
