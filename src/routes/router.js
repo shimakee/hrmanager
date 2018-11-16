@@ -23,6 +23,8 @@ import ChangeUsername from '../components/settings/account/changeUsername';
 import DeleteAccount from '../components/settings/account/deleteAccount';
 import EditPic from '../components/settings/account/editPic';
 
+import Marketing from '../components/marketing/textblast';
+
 import EditProfile from '../components/settings/editProfile';
 import EditRelatives from '../components/settings/editRelatives';
 import Address from '../components/settings/address/address';
@@ -131,7 +133,7 @@ export const routes = [
                     },
                     {path:"settings", ///profile/settings - CONTENT
                         components:{
-                            default: Settings,
+                            default: Settings
                         },
                         children:[//TODO: to determine layout - this is where the content goes
                             {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
@@ -148,6 +150,11 @@ export const routes = [
                                 }
                             }
                         ]
+                    },
+                    {path:"marketing",
+                        components:{
+                            default: Marketing
+                        }
                     }
                 ]
             },

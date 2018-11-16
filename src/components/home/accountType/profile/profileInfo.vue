@@ -2,7 +2,8 @@
     <div class="profile">
         <div class="avatar-container">
             <slot></slot>
-            <img class="avatar" src="/file/photo/me?name=imagename.JPG" :alt="fullName">
+            <!-- <img class="avatar" src="/file/photo/me?name=imagename.JPG" :alt="fullName"> -->
+            <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName">
             <div>{{fullName}}</div>
         </div>
 

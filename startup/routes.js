@@ -6,6 +6,7 @@ const fileRoutes = require('../routes/file');
 const companyRoutes = require('../routes/company');
 const businessRoutes = require('../routes/business');
 const employmentRoutes = require('../routes/employee');
+const marketingRoutes = require('../routes/marketing');
 //error hander
 const errorHandler = require('../middleware/err');
 
@@ -18,6 +19,7 @@ module.exports = function(app){
     app.use('/company', companyRoutes);//company routes
     app.use('/business', businessRoutes);//business routes
     app.use('/employment', employmentRoutes);//employee routes
+    app.use('/marketing', marketingRoutes);//employee routes
 
     app.use(errorHandler);//handling errors within express
 }

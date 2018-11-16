@@ -45,6 +45,7 @@ instance.interceptors.response.use(response=>{
     return response;
 },reject=>{
     console.trace('reject', reject);
+    return reject;
 });
 
 export default instance;

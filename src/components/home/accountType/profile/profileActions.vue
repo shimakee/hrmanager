@@ -1,8 +1,11 @@
 <template>
     <div>
         <p>Profile - Actions</p>
+        <span class="links">
         <router-link to="profile">Profile</router-link>
         <router-link to="settings">Settings</router-link>
+        <router-link to="marketing">Marketing</router-link>
+        </span>
         <button @click="logout()">logout</button>
     </div>
 </template>
@@ -21,4 +24,8 @@ export default {
 }
 </script>
 <style scoped>
+.links a, a:active, a:hover, a:visited{
+    /* color: black; */
+    font-size: 1.5em;
+}
 </style>

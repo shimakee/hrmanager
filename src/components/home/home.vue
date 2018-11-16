@@ -26,15 +26,15 @@ export default {
 }
 .info{
     text-align: center;
-    background-color: green;
+    /* background-color: green; */
 }
 .actions{
     text-align: center;
-    background-color: blue;
+    /* background-color: blue; */
 }
 .content{
     grid-row: 1/span 2;
     grid-column: 2/span 2;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 </style>
