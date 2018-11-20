@@ -74,7 +74,7 @@ router.route('/textblast').post(auth.isAuth, (req,res,next)=>{
         // host: '192.168.254.123', //for own server gsm model attached locally
         host: '120.28.193.241', //for cload server
         path:'/goip_post_sms.html?username=shimakee&password=riffraff',
-        port: '80',
+        port: '8080',
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
