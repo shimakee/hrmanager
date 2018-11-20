@@ -71,7 +71,8 @@ router.route('/textblast').post(auth.isAuth, (req,res,next)=>{
     const data = JSON.stringify(req.body); //stringify the data
 
     const options = { //create options
-        host: '192.168.254.123',
+        // host: '192.168.254.123', //for own server gsm model attached locally
+        host: '120.28.193.241', //for cload server
         path:'/goip_post_sms.html?username=shimakee&password=riffraff',
         port: '80',
         method: 'POST',
