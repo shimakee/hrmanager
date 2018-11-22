@@ -3,7 +3,7 @@ const config = require('config');
 // require('dotenv').config();//required to run .env variables
 //server
 const express = require('express');
-// const cors = require('cors');
+const cors = require('cors');
 const app = express();
 //error handling package
 const winston = require('winston');
@@ -13,10 +13,11 @@ require('./startup/config')();//config
 require('./startup/db')(app);//database
 app.use(express.static(__dirname));//using directory to serve static index file for vue
 
+app.use(cors());
 require('./startup/routes')(app);//routes & middleware use
 require('./startup/utilities')();//tools & utilities like validation
 
-// app.use(cors());
+
 app.use('*', express.static(__dirname));//catchall
 
 const PORT = config.get('port') || 8080;
