@@ -13,7 +13,20 @@ require('./startup/config')();//config
 require('./startup/db')(app);//database
 app.use(express.static(__dirname));//using directory to serve static index file for vue
 
-app.use(cors());
+const corsWhitelist = ['http://120.28.193.241', 'https://deleonhr.herokuapp.com'];
+const corsOption = {
+        origin: function(origin, callback){
+                if(corsWhitelist.indexOf(origin) !== -1){
+                        callback(null, true);
+                }else{
+                        callback(new Error('Source not allowed by cors.'));
+                }
+        },
+        methods: ['GET','POST','PUT','DELETE'],
+        exposeHeaders:[config.get('token_header')]
+}
+
+app.use(cors(corsOption));
 require('./startup/routes')(app);//routes & middleware use
 require('./startup/utilities')();//tools & utilities like validation
 

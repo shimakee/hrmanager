@@ -123,7 +123,7 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
     const token = user.genAuthToken();//generate token
     const decode = User.getTokenTime(token);
 
-    console.log('response token', token);
+    // console.log('response token', token);
 
         return res.status(200)
             .header(config.get('token_header'), token)
