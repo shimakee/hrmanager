@@ -48,7 +48,7 @@ export default {
                     this.loginSubmitted=true;
 
                     //display error message
-                    console.log('login failed');
+                    console.log('login failed', err);
                 });
         }
         ,submitReset(){
@@ -63,7 +63,7 @@ export default {
                         this.resetSubmitted=false;
                         
                         //display error message
-                        console.log('reset failed');
+                        console.log('reset failed', err);
                     });
             }else{
                 //display prompt message to input username
