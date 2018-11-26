@@ -19,7 +19,7 @@ const tools = require('../util/tools');
         //403 forbidden
         //status 404 - object not found
 //constant variables set
-const hostName = config.get('hostName');
+const domainName = config.get('domainName');
 const protocol = config.get('protocolEmail');
 
 //TODO:cascade delete of account into Employment
@@ -71,7 +71,7 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
         // text: 'Hello world?', // plain text body
         html: `<b>Hello world?</b><br>
         <h1>url token for user ${newUser.username}</h1>
-        <a target="_blank" rel="noopener noreferrer" href="${protocol}://${hostName}/user/activate?token=${token}">Follow link</a>` // html body
+        <a target="_blank" rel="noopener noreferrer" href="${protocol}://${domainName}/user/activate?token=${token}">Follow link</a>` // html body
     };
 
     //might not AWAIT for email
@@ -176,7 +176,7 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
                 // text: 'Hello world?', // plain text body
                 html: `<b>Hello world?</b><br>
                 <h1>url token for user ${user.username}</h1>
-                <a target="_blank" href="${protocol}://${hostName}/reset?token=${token}">Follow link</a>` // html body
+                <a target="_blank" href="${protocol}://${domainName}/reset?token=${token}">Follow link</a>` // html body
             };
             
             //send link via email - low time validity
@@ -330,7 +330,7 @@ router.route('/register').post(async (req,res,next)=>{
         // text: 'Hello world?', // plain text body
         html: `<b>Hello world?</b><br>
         <h1>url token for user ${newUser.username}</h1>
-        <a target="_blank" rel="noopener noreferrer" href="${protocol}://${hostName}/user/activate?token=${token}">Follow link</a>` // html body
+        <a target="_blank" rel="noopener noreferrer" href="${protocol}://${domainName}/user/activate?token=${token}">Follow link</a>` // html body
     };
 
     //might not AWAIT for email

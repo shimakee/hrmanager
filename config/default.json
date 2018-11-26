@@ -1,6 +1,8 @@
 {
     "name": "My web App",
-    "hostName":"deleonhr.herokuapp.com",
+    "port": 80,
+    "protocol":"http",
+    "domainName":"deleonhr.herokuapp.com",
     "token_header": "x-auth-sampletoken",
     "db": {"name": "deleon_hrmanager",
         "uri":"mongodb://localhost/deleon_hrmanager"},

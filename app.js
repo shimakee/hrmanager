@@ -13,10 +13,12 @@ require('./startup/config')();//config
 require('./startup/db')(app);//database
 app.use(express.static(__dirname));//using directory to serve static index file for vue
 
-const corsWhitelist = ['http://120.28.193.241', 'https://deleonhr.herokuapp.com'];
+app.options('*', cors()); //enable pre-flight
+
+const corsWhitelist = ['http://120.28.193.241', 'https://deleonhr.herokuapp.com'];/ / whitelist sources
 const corsOption = {
         origin: function(origin, callback){
-                if(corsWhitelist.indexOf(origin) !== -1){
+                if(corsWhitelist.indexOf(origin) !== -1 || !origin){
                         callback(null, true);
                 }else{
                         callback(new Error('Source not allowed by cors.'));
