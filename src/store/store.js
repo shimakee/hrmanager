@@ -24,6 +24,9 @@ export const store = new Vuex.Store({
 
     },
     getters:{
+        getEnv:(state)=>{
+            return state.env;
+        },
         hasToken:(state)=>{
             return state.token !== null;
         },

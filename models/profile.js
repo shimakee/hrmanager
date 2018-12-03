@@ -33,6 +33,7 @@ const profile  = new Schema({
     picDir: {type: String}, //by default is already set at config - no need to save it yet
     pics:[{filename: {type: String},
         path: {type: String},
+        destination: String,
         encoding: {type: String},
         mimetype: {type: String},
         size: {type: Number}}],

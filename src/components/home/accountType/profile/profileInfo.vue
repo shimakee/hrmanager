@@ -1,9 +1,8 @@
 <template>
     <div class="profile">
         <div class="avatar-container">
-            <slot></slot>
-            <!-- <img class="avatar" src="/file/photo/me?name=imagename.JPG" :alt="fullName"> -->
-            <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName">
+            <img class="avatar" :src='url' :alt="fullName">
+            <!-- <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName"> -->
             <div>{{fullName}}</div>
         </div>
 
@@ -40,7 +39,9 @@
 export default {
     data(){
         return {
-            fullName: null
+            fullName: null,
+            token: null,
+            url: '/file/photo/me?name=imagename.JPG'
         }
     }
     ,computed:{
@@ -49,8 +50,33 @@ export default {
         }
     },
     beforeMount(){
-        //get full name===================================================
         const vm = this;
+
+        // const cachedToken = localStorage.getItem('token');
+        // let token = this.$store.getters.getToken;
+
+        // if(!token && !cachedToken){
+        //     console.log('walay token');
+        // }else{
+        //     this.token = token || cachedToken;
+        // }
+
+        //get picture - url //TODO
+
+        // this.$store.dispatch('sendCommit', {url:'http://localhost/file/photo/me?name=imagename.JPG', method: 'get'})
+        //     .then(res=>{
+        //         let pic = window.btoa(res.data);
+        //         // let src = window.atob(res.data);
+        //         vm.pic = 'data:image/jpg;base64,'+pic;
+        //         // vm.src = 'data:image/jpg;base64,'+src;
+
+        //         console.trace('getpic', vm.pic);
+        //         // console.trace('getpic', vm.src);
+        //     }).catch(err=>{
+        //         console.trace('getpic', err);
+        //     });
+        //get full name===================================================
+        // const vm = this;
         const cachedName = JSON.parse(localStorage.getItem('profile'));
         let profileName = this.$store.getters.getProfile;
 

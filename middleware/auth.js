@@ -3,10 +3,17 @@ const jwt = require('jsonwebtoken');
 
 const auth = {
     isAuth: function(req,res,next){
-        const token = req.header(config.get('token_header'));
-        if(!token){return res.status(401).send({message: 'Access denied - no token provided'})}
+        
+        const tokenHeader = req.header(config.get('token_header'));
+        const tokenCookie = req.cookies.token;
+        
+        if(!tokenHeader && !tokenCookie){return res.status(401).send({message: 'Access denied - no token provided'})}
 
         try{
+            let token;
+            if(!tokenHeader && tokenCookie){ token = tokenCookie}
+            if(!tokenCookie && tokenHeader){ token = tokenHeader}
+        
             const decoded = jwt.verify(token, config.get('token'));
 
             req.user = decoded;

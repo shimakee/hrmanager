@@ -1,0 +1,4 @@
+{
+    "db": {"name": "deleon_hrmanager",
+    "uri":"mongodb://localhost/deleon_hrmanager"}
+}

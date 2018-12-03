@@ -8,6 +8,7 @@ const winston = require('winston');
 const regex = require("../util/regex");
 //model
 const Profile = require("../models/profile");
+const User = require("../models/user");
 //validator
 const   Joi         = require('joi');
         Joi.objectId = require('joi-objectid')(Joi);
@@ -83,6 +84,7 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
             //establish details
             let pic = {filename: req.body.imgName + extention,
                 path: newPath,
+                destination: req.file.destination,
                 encoding: req.file.encoding,
                 mimetype: req.file.mimetype,
                 size: req.file.size}
@@ -136,10 +138,10 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     });
 
 }).get(auth.isAuth, (req,res,next)=>{
-    //establish file path
-    let pathToFile = config.get('imgDestination') + req.user.profile;
     //check that there is a req.query
     if(req.query.name){
+        //establish file path
+        let pathToFile = config.get('imgDestination') + req.user.profile;
         
         //validate format of query
         let {error} = Joi.validate(req.query.name, Joi.string().regex(regex.imgName).required());

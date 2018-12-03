@@ -78,10 +78,12 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
     //send link via email - low time validity
     let sendStatus = await tools.email.send(mailOption);
     // console.log("sendStatus", sendStatus);
+    const expireDate = new Date(decode.exp * 1000); //set expiration
     
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
+                .cookie('token', token, {expires: expireDate })
                 .send(newUser.response());//return sucess
 });
 
@@ -121,13 +123,13 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
     if(!isValidPassword){return res.status(400).send({message: 'Invalid username or password.'});}
 
     const token = user.genAuthToken();//generate token
-    const decode = User.getTokenTime(token);
-
-    // console.log('response token', token);
+    const decode = User.getTokenTime(token); //decode token info
+    const expireDate = new Date(decode.exp * 1000); //set expiration
 
         return res.status(200)
             .header(config.get('token_header'), token)
             .header('exp', decode.exp)
+            .cookie('token', token, {expires: expireDate })
             .send(user.response());   
 });
 
@@ -337,10 +339,13 @@ router.route('/register').post(async (req,res,next)=>{
     //send link via email - low time validity
     let sendStatus = await tools.email.send(mailOption);
     // console.log("sendStatus", sendStatus);
+    const expireDate = new Date(decode.exp * 1000); //set expiration
+    
 
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
+                .cookie('token', token, {expires: expireDate })
                 .send(newUser.response());//return sucess
 
 });

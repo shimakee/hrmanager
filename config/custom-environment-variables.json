@@ -1,6 +1,6 @@
 {
     "token": "TOKEN",
-    "port": "PORT",
+    "cookieSecret": "COOKIESECRET",
     "emailHost": "EMAILHOST",
     "emailUser": "EMAILUSER",
     "emailPass": "EMAILPASS",

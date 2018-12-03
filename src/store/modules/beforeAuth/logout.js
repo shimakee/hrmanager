@@ -10,6 +10,7 @@ const actions = {
     logout:(context)=>{
         context.commit('clearAuthData');//clear data
         localStorage.clear();//clear local storage
+        document.cookie = "token=;expires=1900-01-01T00:00:00.0Z;path=/"; // clear cookies
 
         router.replace({path: '/login'});
     },
