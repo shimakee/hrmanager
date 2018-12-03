@@ -16,25 +16,37 @@ const   Joi         = require('joi');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        //create picture path using profile id
-        let path = config.get('imgDestination') + req.user.profile;
+        //create picture path using account type and profile id
+        let destination = config.get('imgDestination') + `/${req.user.accountType}/${req.user.profile}`;
+        let destinationArray = destination.split(/[\\\/]{1,2}/);
+        let pathConcat = '';
 
-        //check if directory already exist
-        fs.access(path, (err)=>{
-            if(!err){
-                //set dir
-                cb(null, path)
+        //check if file and full directory already exist
+        fs.access(destination, (err)=>{
+            if(!err){//already exist - set dir
+                cb(null, destination)
             }else{
 
-                //create the directory
-                fs.mkdir(path, (err)=>{
-                    if(!err){
-                        //set dir
-                        cb(null, path);
-                    }else{
-                        winston.info({message: "Could not create directory", error: err});
+                //recursively create directory
+                for (let i = 0; i < destinationArray.length; i++) {
+                    let element = destinationArray[i];
+                    
+                    if(i != 0){//only add slash if its not the first directory
+                        element = `/${element}`;
                     }
-                });
+
+                    pathConcat += `${element}`;//concatinate every pass on path
+
+                    fs.mkdir(pathConcat, (err)=>{//create directory
+                        if(err){
+                            winston.info({message: `Could not create directory:${pathConcat}`, error: err});
+                        }else{
+                            if(pathConcat == destination){//check that created directory matches full directory
+                                cb(null, pathConcat); //pass match as destination
+                            }
+                        }
+                    });
+                }
             }
         });
     },

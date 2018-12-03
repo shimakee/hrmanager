@@ -6,7 +6,7 @@
     "token_header": "x-auth-hureon",
     "db_log": {"name":"deleon_hrmanager_log",
         "uri":"mongodb://localhost/deleon_hrmanager_log"},
-    "imgDestination":"assets/uploads/",
+    "imgDestination":"assets/uploads",
     "emailPort": 587,
     "protocolEmail":"https"
 }

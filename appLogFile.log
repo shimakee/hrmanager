@@ -809,3 +809,202 @@
 {"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T04:46:10.300Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T04:46:12.428Z"}
 {"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T04:47:53.445Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T06:53:21.347Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T06:53:21.349Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T06:53:21.349Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T06:53:21.349Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T06:53:23.441Z"}
+{"message":"Could not create directory","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c;"},"level":"info","timestamp":"2018-12-03T06:54:01.205Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T06:54:50.145Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T06:54:52.278Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T06:54:52.279Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T06:54:52.279Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T06:54:52.279Z"}
+{"message":"Could not create directory","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T06:54:54.067Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T06:54:54.371Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T06:57:43.630Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T06:57:45.862Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T06:57:45.863Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T06:57:45.863Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T06:57:45.864Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T06:57:47.968Z"}
+{"message":"Could not create directory","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T06:58:00.926Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:03:50.000Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:03:52.090Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:03:52.091Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:03:52.091Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:03:52.092Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:03:54.161Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:04:05.926Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:04:17.678Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:04:19.794Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:04:19.795Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:04:19.796Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:04:19.796Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:04:21.887Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:04:22.347Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:04:58.640Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:11:28.512Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:11:28.514Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:11:28.514Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:11:28.515Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:11:30.598Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:11:35.707Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:11:50.635Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:11:52.882Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:11:52.883Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:11:52.883Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:11:52.883Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:11:54.975Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:11:55.532Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:22:06.601Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:22:08.772Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:22:08.773Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:22:08.773Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:22:08.774Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:22:10.859Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:24:07.702Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:24:07.703Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:24:07.703Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:24:07.703Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:24:09.781Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:28:13.478Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:28:13.479Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:28:13.479Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:28:13.479Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:30:17.176Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:30:17.177Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:30:17.177Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:30:17.177Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:30:19.246Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:30:20.257Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:31:44.411Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:31:46.419Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:31:46.420Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:31:46.420Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:31:46.421Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:31:48.492Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:32:06.282Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:35:34.768Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:35:37.087Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:35:37.088Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:35:37.089Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:35:37.089Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:35:39.167Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T07:35:41.976Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T07:48:00.120Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:48:02.442Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:48:02.443Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:48:02.443Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:48:02.443Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:48:04.510Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:54:57.188Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:54:57.189Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:54:57.190Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:54:57.190Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:54:59.286Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T07:55:46.267Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T07:55:46.268Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T07:55:46.269Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T07:55:46.269Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T07:55:48.348Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:03:24.086Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:03:26.511Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:03:26.513Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:03:26.513Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:03:26.514Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:03:28.585Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:11:44.557Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:11:46.694Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:11:46.702Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:11:46.703Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:11:46.703Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:11:48.784Z"}
+{"message":"could not create directory recursively.","error":{"errno":-4058,"code":"ENOENT","syscall":"access","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"error","timestamp":"2018-12-03T08:11:48.825Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:11:48.826Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:11:48.827Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:11:48.828Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:14:07.956Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:14:09.976Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:14:09.977Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:14:09.977Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:14:09.977Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:14:12.052Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:14:12.380Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:14:12.381Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:14:12.382Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:16:43.217Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:16:45.227Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:16:45.228Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:16:45.228Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:16:45.229Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:47.025Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:47.026Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:47.027Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:47.028Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:16:47.305Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:54.368Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:54.370Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:54.371Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:16:54.372Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:18:34.090Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:18:36.530Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:18:36.531Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:18:36.531Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:18:36.531Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:18:38.407Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:18:38.408Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:18:38.409Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:18:38.410Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:18:38.606Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:19:09.192Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:19:11.316Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:19:11.317Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:19:11.318Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:19:11.318Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:19:13.390Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:19:13.706Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:19:13.709Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:19:13.710Z"}
+{"message":"Could not create directory.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:19:13.712Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:21:28.028Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:21:30.540Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:21:30.541Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:21:30.541Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:21:30.542Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:21:32.613Z"}
+{"message":"Could not create directory.","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets"},"level":"info","timestamp":"2018-12-03T08:21:34.876Z"}
+{"message":"Could not create directory.","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:21:34.885Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:24:36.232Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:24:38.342Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:24:38.344Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:24:38.355Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:24:38.355Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:24:40.442Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c.","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets"},"level":"info","timestamp":"2018-12-03T08:24:52.432Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c.","error":{"errno":-4058,"code":"ENOENT","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:24:52.433Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:26:56.523Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:26:58.583Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:26:58.584Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:26:58.584Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:26:58.585Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:27:00.659Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets"},"level":"info","timestamp":"2018-12-03T08:27:00.950Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads"},"level":"info","timestamp":"2018-12-03T08:27:00.951Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile"},"level":"info","timestamp":"2018-12-03T08:27:00.952Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets"},"level":"info","timestamp":"2018-12-03T08:27:17.360Z"}
+{"message":"Could not create directory.","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile\\5c04a4a1a304873c98ef589c"},"level":"info","timestamp":"2018-12-03T08:27:17.365Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:29:09.606Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:29:11.662Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:29:11.663Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:29:11.664Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:29:11.664Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:29:13.740Z"}
+{"message":"Could not create directory:assets/uploads/profile/5c04a4a1a304873c98ef589c","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets"},"level":"info","timestamp":"2018-12-03T08:29:27.314Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:30:16.142Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2018-12-03T08:34:21.977Z"}
+{"level":"info","message":"App: My web App","timestamp":"2018-12-03T08:34:21.978Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2018-12-03T08:34:21.979Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2018-12-03T08:34:21.979Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2018-12-03T08:34:24.056Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2018-12-03T08:35:11.980Z"}
