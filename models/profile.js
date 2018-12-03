@@ -31,7 +31,8 @@ const profile  = new Schema({
     nationality: {type: String},
     civilStatus: {type: String, required: true, default: 'single', enum: validDataLib.civilStatus},
     picDir: {type: String}, //by default is already set at config - no need to save it yet
-    pics:[{filename: {type: String},
+    pics:[{main: {type: Boolean, default: false},
+        filename: {type: String},
         path: {type: String},
         destination: String,
         encoding: {type: String},

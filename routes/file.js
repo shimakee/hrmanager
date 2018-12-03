@@ -48,7 +48,6 @@ const storage = multer.diskStorage({
     }
 });
 const fileFilter = (req, file, cb)=>{
-    console.trace('filter', file);
     if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' ){
         cb(null, true);
     }else{
@@ -82,14 +81,33 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
         if(!err){
             
             //establish details
-            let pic = {filename: req.body.imgName + extention,
+            let pic = {main: true,
+                filename: req.body.imgName + extention,
                 path: newPath,
                 destination: req.file.destination,
                 encoding: req.file.encoding,
                 mimetype: req.file.mimetype,
                 size: req.file.size}
-            //save to database profile pics array
-            let profile = await Profile.updateOne({_id: req.user.profile}, {$push: {pics: pic}}).exec();
+
+            const oldProfile = await Profile.findById(req.user.profile).exec();
+            if(!oldProfile){return res.status(404).send({message:'could not locate profile to upload.'});}
+
+            let result = oldProfile.pics.find(element=>{
+                if(element.path == pic.path){
+                    return element;
+                }
+            });
+
+            if(!result){//if it doesnt exist
+                //set everything else to false
+                if(pic.main == true || pic.main == "true"){
+                    await Profile.updateOne({_id: req.user.profile}, {$set: {"pics.$[].main": false}}).exec();
+                }
+    
+                //save to database profile pics array
+                await Profile.updateOne({_id: req.user.profile}, {$push: {pics: pic}}).exec();
+            }
+
                 
             res.status(200).send({message:"success"});
         }else{
@@ -171,6 +189,10 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
         res.status(400).send({message: "Bad request."});
     }
 });
+
+//TODO - get url path of all pic in pics
+//TODO: choose and set profile pic
+//TODO: auto crop and check size when uploading pic
 
 
 

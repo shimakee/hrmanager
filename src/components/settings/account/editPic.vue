@@ -2,7 +2,7 @@
     <div>
         <!-- <form> -->
             <input type="file" @change="fileSelected">
-            <input type="text" v-model="this.form.imgName">
+            <input type="text" v-model="form.imgName">
             <button @click.prevent="submit()">Upload</button>
         <!-- </form> -->
     </div>

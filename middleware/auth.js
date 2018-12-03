@@ -10,9 +10,7 @@ const auth = {
         if(!tokenHeader && !tokenCookie){return res.status(401).send({message: 'Access denied - no token provided'})}
 
         try{
-            let token;
-            if(!tokenHeader && tokenCookie){ token = tokenCookie}
-            if(!tokenCookie && tokenHeader){ token = tokenHeader}
+            let token = tokenHeader || tokenCookie;
         
             const decoded = jwt.verify(token, config.get('token'));
 

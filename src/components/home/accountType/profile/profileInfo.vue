@@ -1,7 +1,8 @@
 <template>
+import profileVue from '../profile.vue';
     <div class="profile">
         <div class="avatar-container">
-            <img class="avatar" :src='url' :alt="fullName">
+            <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()">
             <!-- <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName"> -->
             <div>{{fullName}}</div>
         </div>
@@ -40,43 +41,49 @@ export default {
     data(){
         return {
             fullName: null,
-            token: null,
-            url: '/file/photo/me?name=imagename.JPG'
+            token: null
         }
     }
     ,computed:{
         profile(){
             return this.$store.getters.getProfile;
+        },
+        url(){
+            let cachedProfile = JSON.parse(localStorage.getItem('profile'));
+            let stateProfile = this.$store.getters.getProfile
+            let profile = stateProfile || cachedProfile;
+
+            if(!profile){
+                profile = this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
+                    return res;
+                });
+            }
+
+            let url = '/file/photo/me?name=default.JPG'; // perhaps public/assets - for default avatar image //TODO
+
+            if(profile.pics){
+                const pic = profile.pics.find(element=>{
+                    if(element.main == true || element.main == 'true'){
+                        return element;
+                    }
+                })
+
+                url = `/file/photo/me?name=${pic.filename}`;
+
+            }
+
+            return url;
+        }
+    },
+    methods:{
+        displayUrl(){
+            console.log('image url', this.url);
         }
     },
     beforeMount(){
         const vm = this;
-
-        // const cachedToken = localStorage.getItem('token');
-        // let token = this.$store.getters.getToken;
-
-        // if(!token && !cachedToken){
-        //     console.log('walay token');
-        // }else{
-        //     this.token = token || cachedToken;
-        // }
-
-        //get picture - url //TODO
-
-        // this.$store.dispatch('sendCommit', {url:'http://localhost/file/photo/me?name=imagename.JPG', method: 'get'})
-        //     .then(res=>{
-        //         let pic = window.btoa(res.data);
-        //         // let src = window.atob(res.data);
-        //         vm.pic = 'data:image/jpg;base64,'+pic;
-        //         // vm.src = 'data:image/jpg;base64,'+src;
-
-        //         console.trace('getpic', vm.pic);
-        //         // console.trace('getpic', vm.src);
-        //     }).catch(err=>{
-        //         console.trace('getpic', err);
-        //     });
         //get full name===================================================
-        // const vm = this;
+
         const cachedName = JSON.parse(localStorage.getItem('profile'));
         let profileName = this.$store.getters.getProfile;
 

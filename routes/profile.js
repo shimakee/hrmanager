@@ -120,7 +120,7 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
         let {error} = Profile.validateId({id: id});
         if(error){return res.status(400).send(error);}
 
-        //check that profile exist
+        //check that profile exist //TODO
 
         if(req.body.main == true || req.body.main == "true"){//set everything else to false
             await Profile.updateOne({_id: req.user.profile}, {$set: {"email.$[].main": false}}).exec();
@@ -147,7 +147,7 @@ router.route('/me/email').get(auth.isAuth, async (req,res,next)=>{
         let {error} = Profile.validateId({id: id});
         if(error){return res.status(400).send(error);}
 
-        //check that profile exist
+        //check that profile exist //TODO
         
         let result = await Profile.updateOne({_id: req.user.profile, "email._id": id}, {$pull: {email: {_id: id}}}).exec();
 
