@@ -5,7 +5,7 @@ const auth = {
     isAuth: function(req,res,next){
         
         const tokenHeader = req.header(config.get('token_header'));
-        const tokenCookie = req.cookies.token;
+        const tokenCookie = req.signedCookies.token;
         
         if(!tokenHeader && !tokenCookie){return res.status(401).send({message: 'Access denied - no token provided'})}
 

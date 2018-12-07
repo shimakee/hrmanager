@@ -25,7 +25,7 @@ const actions = {
                     let token_header = nameSpace.token_header//app token header name used
                     let token_expire = nameSpace.token_expire//app token expiration name used
 
-                    if(!res.headers[token_header]){//check token
+                    if(!res.headers[token_header]){//check token //TODO: check cookie as well
                         throw Error('No Token passed');
                     }
                     if(!res.headers[token_expire]){
@@ -37,12 +37,11 @@ const actions = {
 
                     //remove upon production, have not found a use for it yet
                     //save response data to generic data state
-                    console.trace('login', res.data);
                     commit('setData', res.data);
                     localStorage.setItem('data', JSON.stringify(res.data));
 
                     //save account type information
-                    console.trace(res.data.accountType);
+                    // console.trace(res.data.accountType);
                     commit('setAccountType', res.data.accountType);
                     localStorage.setItem('accountType', res.data.accountType);//no need to stringify since saving only a string and not an object
                     

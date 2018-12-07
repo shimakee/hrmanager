@@ -1,5 +1,4 @@
 <template>
-import profileVue from '../profile.vue';
     <div class="profile">
         <div class="avatar-container">
             <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()">

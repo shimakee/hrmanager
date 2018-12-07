@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
         accountType:null,
         timeout: null,
         resetToken: null,
-        env:"production"
+        env:"test"
 
     },
     getters:{
@@ -89,6 +89,7 @@ export const store = new Vuex.Store({
                     
                     let response = {
                         data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, 
+                        "token":"asdas",
                         "accountType":"profile",
                         "civilStatus": "married", 
                         "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ],
@@ -98,8 +99,8 @@ export const store = new Vuex.Store({
                             auth:'asdasd'
                         }
                     }
-                    response.headers['x-auth-sampletoken']='token';
-                    response.headers['exp']=229531994214;
+                    response.headers['x-auth-hureon']='token';
+                    response.headers['exp']=1329531994214;
 
                         setTimeout(function(){
                             resolve(response)

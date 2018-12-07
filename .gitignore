@@ -14,6 +14,11 @@ yarn-error.log
 #pictures and images
 assets/*
 assets/uploads/*
+assets/uploads/profile/*
+assets/uploads/company/*
+assets/uploads/staff/*
+assets/public/*
+src/assets/*
 .png
 .jpg
 .gif

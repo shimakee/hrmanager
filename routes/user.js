@@ -83,7 +83,7 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
-                .cookie('token', token, {expires: expireDate })
+                .cookie('token', token, {expires: expireDate, signed: true})
                 .send(newUser.response());//return sucess
 });
 
@@ -129,7 +129,7 @@ router.route('/login').post(async (req,res,next)=>{//need further testing :TODO
         return res.status(200)
             .header(config.get('token_header'), token)
             .header('exp', decode.exp)
-            .cookie('token', token, {expires: expireDate })
+            .cookie('token', token, {expires: expireDate, signed: true})
             .send(user.response());   
 });
 
@@ -345,7 +345,7 @@ router.route('/register').post(async (req,res,next)=>{
         return res.status(201)
                 .header(config.get('token_header'), token)
                 .header('exp', decode.exp)
-                .cookie('token', token, {expires: expireDate })
+                .cookie('token', token, {expires: expireDate, signed: true})
                 .send(newUser.response());//return sucess
 
 });
