@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
         accountType:null,
         timeout: null,
         resetToken: null,
-        env:"test"
+        env:"production"
 
     },
     getters:{

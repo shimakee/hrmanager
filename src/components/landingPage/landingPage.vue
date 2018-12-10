@@ -107,7 +107,7 @@ body, html{
         border-right: black 1px solid; 
     }
     .form-container{
-        margin: 1em 2em;
+        margin: 1em 5px;
         /* padding: 0em 1em 1em 1em; */
         background-color: rgba(149, 198, 221, 0.5);
         border-radius: 5px;
