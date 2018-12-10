@@ -19,6 +19,15 @@ assets/uploads/company/*
 assets/uploads/staff/*
 assets/public/*
 src/assets/*
+dist/*.jpg
+dist/*.png
+dist/*.svg
+dist/*.svg
+*.png
+*.jpg
+*.gif
+*.bmp
+*.svg
 .png
 .jpg
 .gif
