@@ -3,8 +3,8 @@ import {store} from './store/store';
 import nameSpace from './util/nameSpace';
 
 const instance = axios.create({
-    // baseURL:'http://120.28.193.241' //for own server
-    baseURL:'http://localhost' //for local deployment
+    baseURL:'http://120.28.193.241' //for own server
+    // baseURL:'http://localhost' //for local deployment
     // baseURL:'https://deleonhr.herokuapp.com' //for herokuapp
 });
 

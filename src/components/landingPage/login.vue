@@ -143,9 +143,4 @@ export default {
         grid-template-columns: 1fr 2fr;
     } */
  }
-
-
-    
-
-
 </style>

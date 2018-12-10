@@ -100,7 +100,7 @@ router.route('/textblast').post(auth.isAuth, (req,res,next)=>{
     });
     
     reqSend.on('error', (err)=>{
-        console.log('something went wrong');
+        console.log('something went wrong', err);
     });
 
     reqSend.write(data);

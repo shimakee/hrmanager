@@ -1,15 +1,53 @@
 <template>
     <div class="home">
-        <!-- <nav-bar /> -->
-        <router-view class="content"></router-view>
-        <router-view name="info" class="info"></router-view>
-        <router-view name="actions" class="actions"></router-view>
+        <!-- <nav-bar /> --> 
+        <!-- <div class="mobile"> -->
+            <div class="menu">
+                <span @click="infoShow">Info</span>
+                <span @click="showContent">Content</span>
+                <span @click="actionShow">Action</span>
+            </div>
+            <div class="view-container">
+                <router-view class="content"></router-view>
+                <transition name="slideLeft">
+                    <!-- <router-view v-show="info"  name="info" class="tab info"></router-view> -->
+                    <router-view v-bind:class="{slideLeft: info, return: !info}" name="info" class="tab info"></router-view>
+                </transition>
+                <transition name="slideRight">
+                    <!-- <router-view v-show="action" name="actions" class="tab actions"></router-view> -->
+                    <router-view v-bind:class="{slideRight: action, return: !action}" name="actions" class="tab actions"></router-view>
+                </transition>
+            </div>
+        <!-- </div> -->
     </div>
 </template>
 <script>
 import Navbar from "../parts/navbar";
 
 export default {
+    data(){
+        return{
+            info: true,
+            action: true
+
+        }
+    },
+    methods:{
+        showContent(){
+            this.info = true;
+            this.action = true;
+
+            console.log('show content');
+        },
+        infoShow(){
+            this.info = !this.info;
+            this.action = true;
+        },
+        actionShow(){
+            this.info = true;
+            this.action = !this.action;
+        }
+    },
     components:{
         "nav-bar": Navbar
     }
@@ -18,23 +56,173 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
 .home{
-    display: grid; 
-    grid-template-columns: 1fr 3fr;
+    display: grid;
+    overflow: hidden;
+}
+.menu{ /*to be removed*/
+    display: none;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+.menu span{
+    transition: display 1s 2s;
+    transition: transform 1s  ease-in-out;
     text-align: center;
 }
-.info{
-    text-align: center;
-    /* background-color: green; */
+.noShow{
+    display:none;
 }
-.actions{
-    text-align: center;
-    /* background-color: blue; */
+.slideLeft{
+    transition: transform 1s  ease-in-out;
+    transform:translateX(-100%);
 }
-.content{
-    grid-row: 1/span 2;
-    grid-column: 2/span 2;
-    /* background-color: aqua; */
+.slideRight{
+    transition: transform 1s ease-in-out;
+    transform:translateX(100%);
 }
+.return{
+    transition: 1s ease-in-out;
+    transform: translateX(0%);
+}
+.view-container{
+        position:relative;
+        display: grid;
+}
+
+ /*mobile*/
+@media (max-width: 480px) {
+    .menu{
+        display: grid;
+    }
+    .menu span{
+        padding: 10px 1em;
+    }
+    .home{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .view-container{
+        grid-template-columns: 1fr;
+    }
+    .tab{
+        position:absolute;
+        top:0;
+        width: 100%;
+    }
+}
+@media (max-width: 1024px) and (orientation: portrait){
+    
+    .menu{
+        display: grid;
+    }
+    .menu span{
+        padding: 15px 1em;
+    }
+    .home{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .view-container{
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 1024px) and (orientation: landscape){
+    .menu{
+        display: none;
+    }
+    .view-container{
+        grid-template-columns: 1fr 3fr;
+    }
+    
+    .slideRight,
+    .slideLeft{
+        transform: translateX(0%);
+    }
+    .content{
+        grid-row: 1/span 2;
+        grid-column: 2;
+    }
+}
+
+/*tablet*/
+/* @media (min-width:480px) and (max-width: 1024px){ 
+    
+    .view-container{
+        display:grid;
+        grid-template-columns: 1fr 3fr;
+    }
+    .view-container .dashboard.info,
+    .view-container .dashboard.actions{
+        display: grid;
+    }
+    .content{
+        grid-row: 1/span 2;
+        grid-column: 2;
+    }
+} */
+@media (min-width: 1024px) { /*Laptop & tvs*/
+    .view-container{
+        display:grid;
+        grid-template-columns: 1fr 3fr;
+    }
+    .content{
+        grid-row: 1/span 2;
+        grid-column: 2;
+    }
+    .slideRight,
+    .slideLeft{
+        transform: translateX(0%);
+    }
+ }
+
+ /*===========================transitions===========================*/
+ .info{
+     background-color: blue;
+ }
+ .actions{
+     background-color: brown;
+ }
+ .content{
+     background-color: palevioletred;
+ }
+
+
+ /*slide-right*/
+ .slideRight-enter{
+     transform: translateX(100%);
+ }
+ .slideRight-enter-active,
+ .slideRight-leave-active{
+     transition: .5s ease-in-out;
+ }
+ .slideRight-enter-to{  
+     transform: translateX(0%);
+ }
+ .slideRight-leave{
+     transform: translateX(0%);
+ }
+ .slideRight-leave-to{
+     transform: translateX(100%);
+ }
+
+ /*slide-left*/
+ .slideLeft-enter{
+     /* transition: .5s ease-in-out; */
+     transform: translateX(-100%);
+ }
+ .slideLeft-enter-active,
+ .slideLeft-leave-active{
+     transition: .5s ease-in-out;
+     /* transform: translateX(-50%); */
+ }
+ .slideLeft-enter-to{  
+     transform: translateX(0%);
+ }
+ .slideLeft-leave{
+     transform: translateX(0%);
+ }
+ .slideLeft-leave-to{
+     transform: translateX(-100%);
+ }
 </style>
