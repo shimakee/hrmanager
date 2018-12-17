@@ -9,13 +9,13 @@
             </div>
             <div class="view-container">
                 <router-view class="content"></router-view>
-                <transition name="slideLeft">
-                    <!-- <router-view v-show="info"  name="info" class="tab info"></router-view> -->
-                    <router-view v-bind:class="{slideLeft: info, return: !info}" name="info" class="tab info"></router-view>
-                </transition>
                 <transition name="slideRight">
                     <!-- <router-view v-show="action" name="actions" class="tab actions"></router-view> -->
                     <router-view v-bind:class="{slideRight: action, return: !action}" name="actions" class="tab actions"></router-view>
+                </transition>
+                <transition name="slideLeft">
+                    <!-- <router-view v-show="info"  name="info" class="tab info"></router-view> -->
+                    <router-view v-bind:class="{slideLeft: info, return: !info}" name="info" class="tab info"></router-view>
                 </transition>
             </div>
         <!-- </div> -->
@@ -59,11 +59,16 @@ export default {
 <style>
 .home{
     display: grid;
-    overflow: hidden;
+    grid-template-rows: max-content;
+    height: 100vh;
 }
-.menu{ /*to be removed*/
+.menu{
     display: none;
     grid-template-columns: 1fr 2fr 1fr;
+    position: sticky;
+    top:0px;
+    background-color: rgb(6, 11, 80);
+    color: white;
 }
 .menu span{
     transition: display 1s 2s;
@@ -88,10 +93,11 @@ export default {
 .view-container{
         position:relative;
         display: grid;
+        grid-template-rows: max-content;
 }
 
  /*mobile*/
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* mobiles */
     .menu{
         display: grid;
     }
@@ -108,26 +114,38 @@ export default {
     .tab{
         position:absolute;
         top:0;
-        width: 100%;
+        /* width: 100%; */
     }
 }
-@media (max-width: 1024px) and (orientation: portrait){
+@media (max-width: 1024px) and (orientation: portrait){/*tablets - portrait mode*/
     
+    .home{
+        grid-template-columns: 1fr;
+        text-align: center;
+        /* overflow-x: hidden; */
+    }
     .menu{
         display: grid;
     }
     .menu span{
         padding: 15px 1em;
     }
-    .home{
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
     .view-container{
         grid-template-columns: 1fr;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .tab{
+        position:absolute;
     }
 }
-@media (max-width: 1024px) and (orientation: landscape){
+@media (min-width: 480px) and (max-width: 1024px) and (orientation: portrait){ /*tablets*/
+    .tab{
+        position:absolute;
+        width: 100%;
+    }
+}
+@media (max-width: 1024px) and (orientation: landscape){/*tablets - landscape mode*/
     .menu{
         display: none;
     }
@@ -165,6 +183,7 @@ export default {
     .view-container{
         display:grid;
         grid-template-columns: 1fr 3fr;
+        font-size: 20px;
     }
     .content{
         grid-row: 1/span 2;
@@ -177,14 +196,19 @@ export default {
  }
 
  /*===========================transitions===========================*/
- .info{
-     background-color: blue;
- }
+ .info,
+ .content,
  .actions{
-     background-color: brown;
+     padding: 10px 15px;
+ }
+ .info{ /*must have backgrounds*/
+     background-color: white;
+ }
+ .actions{/*must have backgrounds*/
+     background-color: white;
  }
  .content{
-     background-color: palevioletred;
+     /* background-color: palevioletred; */
  }
 
 

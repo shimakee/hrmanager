@@ -6,6 +6,36 @@
             <input type="text" v-model="user.username" placeholder="new username">
             <button @click.prevent="submit">Send</button>
         </form>
+
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
+        <h1>Something</h1>  
     </div>
 </template>
 <script>
