@@ -3,7 +3,7 @@
         <div class="profile">
             <div class="avatar-container">
                 <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()">
-                <div>{{fullName}}</div>
+                <p class="description">{{fullName}}</p>
             </div>
 
                 <!-- TODO make into individual components -->
@@ -165,12 +165,39 @@ export default {
     padding:.5em;
     margin:1.5em;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
 }
-.avatar{
+.avatar-container img{
+    width: 100%;
     border-radius: 20em;
 }
+.avatar-container p{
+    font-size: 1em;
+    padding: 0;
+    margin: 12px 0;
+}
+/* .avatar{
+} */
 .info{
     list-style: none;
     text-align: center;
 }
+ul{
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+    grid-gap: 10px;
+    padding: 0;
+}
+ /* ul li.card-pic{
+     background-color: cornsilk;
+     display: grid;
+     grid-template-columns: 1fr;
+     justify-items: center;
+     align-items: center;
+ } */
+
 </style>
