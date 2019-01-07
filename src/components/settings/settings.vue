@@ -3,6 +3,7 @@
         <h1>Settings</h1>
         <router-view></router-view>
         <router-view name="editPic"></router-view>
+        <router-view name="changeUsername"></router-view>
         <router-view name="changePassword"></router-view>
         <router-view name="editProfile"></router-view>
         <router-view name="editRelatives"></router-view>

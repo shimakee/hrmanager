@@ -199,13 +199,15 @@ export default {
  .info,
  .content,
  .actions{
-     padding: 10px 15px;
+     padding: 10px 20px;
  }
  .info{ /*must have backgrounds*/
-     background-color: white;
+    background-color: rgb(6, 11, 80);
+    color: white;
  }
  .actions{/*must have backgrounds*/
-     background-color: white;
+    background-color: rgb(6, 11, 80);
+    color: white;
  }
  .content{
      /* background-color: palevioletred; */

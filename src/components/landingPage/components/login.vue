@@ -41,6 +41,7 @@ export default {
 
                     //display error message
                     console.log('login failed', err);
+                    console.log('body', res);
                 });
         }
         ,submitReset(){

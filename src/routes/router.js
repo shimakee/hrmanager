@@ -1,35 +1,48 @@
-import LandingPage from '../components/landingPage/landingPage';
-import Reset from '../components/landingPage/reset';
-import Login from '../components/landingPage/login';
-import Signup from '../components/landingPage/signup';
-import Register from '../components/landingPage/register';
 import {store} from '../store/store';
 
 import Error from '../components/views/errorPage'
 
-//lazy load
-import Home from '../components/home/home';
-import Profile from '../components/home/accountType/profile';
-import ProfileInfo from '../components/home/accountType/profile/profileInfo';
-import ProfileActions from '../components/home/accountType/profile/profileActions';
+//lazy load - TODO choose which one to lazy load
 
+//Mother pages
+import LandingPage from '../components/landingPage/landingPage';
+import Home from '../components/home/home';
+import Settings from '../components/settings/settings';
+
+//Landingpage
+import Reset from '../components/landingPage/components/reset';
+import Login from '../components/landingPage/components/login';
+import Signup from '../components/landingPage/components/signup';
+import Register from '../components/landingPage/components/register';
+
+//Home - others to do after profile
 import Company from '../components/home/accountType/company';
 import Staff from '../components/home/accountType/staff';
 import Posts from '../components/home/accountType/post';
 
-import Settings from '../components/settings/settings';
+//Home - profile
+import Profile from '../components/home/accountType/profile';
+import ProfileInfo from '../components/home/accountType/profile/profileInfo';
+import ProfileActions from '../components/home/accountType/profile/profileActions';
+import ProfileDefault from '../components/home/accountType/profile/profileDefault';
+    //Home - profile - settings
+    import EditProfile from '../components/settings/editProfile';
+    import EditRelatives from '../components/settings/editRelatives';
+    import Address from '../components/settings/address/address';
+    import EditContacts from '../components/settings/editContacts';
+    import EditGov from '../components/settings/editGov';
+
+
+//Settings -todo sort out
 import ChangePassword from '../components/settings/account/changePassword';
 import ChangeUsername from '../components/settings/account/changeUsername';
 import DeleteAccount from '../components/settings/account/deleteAccount';
 import EditPic from '../components/settings/account/editPic';
 
+//add - on temporary
 import Marketing from '../components/marketing/textblast';
 
-import EditProfile from '../components/settings/editProfile';
-import EditRelatives from '../components/settings/editRelatives';
-import Address from '../components/settings/address/address';
-import EditContacts from '../components/settings/editContacts';
-import EditGov from '../components/settings/editGov';
+//additional features
 import googlemaps from '../store/modules/googlemaps/googlemaps';
 
 export const routes = [
@@ -128,7 +141,7 @@ export const routes = [
                 children:[ //this is where the content goes - its children will be the content details
                     {path:"", name: "profile", //landing page for profile
                         components:{
-                            default: ChangeUsername
+                            default: ProfileDefault
                         }
                     },
                     {path:"settings", ///profile/settings - CONTENT
@@ -140,6 +153,7 @@ export const routes = [
                                 components:{
                                     default: DeleteAccount,
                                     editPic: EditPic,
+                                    changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,
                                     editProfile: EditProfile,

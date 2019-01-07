@@ -2,8 +2,8 @@
     <div>
         <div class="profile">
             <div class="avatar-container">
-                <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()">
-                <!-- <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName"> -->
+                <!-- <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()"> -->
+                <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName">
                 <div>{{fullName}}</div>
             </div>
 
@@ -60,7 +60,8 @@ export default {
                 });
             }
 
-            let url = '/file/photo/me?name=default.JPG'; // perhaps public/assets - for default avatar image //TODO
+            // let url = '/file/photo/me?name=default.JPG'; // perhaps public/assets - for default avatar image //TODO
+            let url = 'https://picsum.photos/100/100/?random';
 
             if(profile.pics){
                 const pic = profile.pics.find(element=>{
