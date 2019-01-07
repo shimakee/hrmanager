@@ -141,7 +141,8 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     //set file to delete
     let fileToDelete = req.query.name;
     //establish path destination
-    let pathToFile = config.get('imgDestination') + req.user.profile;
+    // let pathToFile = config.get('imgDestination') + req.user.profile;
+    let pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
 
     //open image destination directory
     fs.readdir(pathToFile, (err, files)=>{
@@ -171,7 +172,7 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     //check that there is a req.query
     if(req.query.name){
         //establish file path
-        let pathToFile = config.get('imgDestination') + req.user.profile;
+        let pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
         
         //validate format of query
         let {error} = Joi.validate(req.query.name, Joi.string().regex(regex.imgName).required());

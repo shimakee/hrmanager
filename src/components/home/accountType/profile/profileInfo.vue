@@ -2,8 +2,7 @@
     <div>
         <div class="profile">
             <div class="avatar-container">
-                <!-- <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()"> -->
-                <img class="avatar" src="https://picsum.photos/100/100/?random" :alt="fullName">
+                <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()">
                 <div>{{fullName}}</div>
             </div>
 
@@ -50,20 +49,14 @@ export default {
             return this.$store.getters.getProfile;
         },
         url(){
-            let cachedProfile = JSON.parse(localStorage.getItem('profile'));
-            let stateProfile = this.$store.getters.getProfile
+            const cachedProfile = JSON.parse(localStorage.getItem('profile'));
+            const stateProfile = this.$store.getters.getProfile
             let profile = stateProfile || cachedProfile;
+            let url;
 
-            if(!profile){
-                profile = this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-                    return res;
-                });
-            }
-
-            // let url = '/file/photo/me?name=default.JPG'; // perhaps public/assets - for default avatar image //TODO
-            let url = 'https://picsum.photos/100/100/?random';
-
-            if(profile.pics){
+            if(!profile || !profile.pics){
+                url = 'https://picsum.photos/100/100/?random';
+            }else{
                 const pic = profile.pics.find(element=>{
                     if(element.main == true || element.main == 'true'){
                         return element;
@@ -71,8 +64,29 @@ export default {
                 })
 
                 url = `/file/photo/me?name=${pic.filename}`;
-
             }
+
+            // console.trace('profileINfo', profile);
+
+            // if(!profile){
+            //     profile = this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
+            //         return res;
+            //     });
+            // }
+
+            // // let url = '/file/photo/me?name=default.JPG'; // perhaps public/assets - for default avatar image //TODO
+            // let url = 'https://picsum.photos/100/100/?random';
+
+            // if(profile.pics){
+            //     const pic = profile.pics.find(element=>{
+            //         if(element.main == true || element.main == 'true'){
+            //             return element;
+            //         }
+            //     })
+
+            //     url = `/file/photo/me?name=${pic.filename}`;
+
+            // }
 
             return url;
         }
