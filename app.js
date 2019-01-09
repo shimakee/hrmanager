@@ -11,7 +11,7 @@ require('./startup/log')();//logging
 require('./startup/config')();//config
 require('./startup/db')(app);//database
 require('./startup/util')(app);//routes & middleware use
-// app.use(express.static(__dirname));//using directory to serve static index file for vue
+app.use(express.static(__dirname));//using directory to serve static index file for vue
 app.use('/public', express.static(__dirname+'/assets/public'));//give static files in public assets folder
 
 require('./startup/routes')(app);//routes & middleware use

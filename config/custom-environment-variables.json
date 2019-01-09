@@ -4,6 +4,6 @@
     "emailHost": "EMAILHOST",
     "emailUser": "EMAILUSER",
     "emailPass": "EMAILPASS",
-    "uri":"URI"
-
+    "uri":"URI",
+    "port":"PORT"
 }

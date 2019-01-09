@@ -1,6 +1,5 @@
 {
     "name": "My web App",
-    "port": 1025,
     "protocol":"http",
     "domainName":"deleonhr.herokuapp.com",
     "token_header": "x-auth-hureon",
