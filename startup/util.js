@@ -9,7 +9,7 @@ module.exports = function(app){
     //CORS
     app.options('*', cors()); //enable pre-flight
     //cors options
-    const corsWhitelist = ['http://120.28.193.241', 'https://deleonhr.herokuapp.com', 'http://localhost', 'https://localhost'];// whitelist sources
+    const corsWhitelist = ['http://120.28.193.241', 'http://49.148.197.201', 'https://deleonhr.herokuapp.com', 'http://localhost', 'https://localhost'];// whitelist sources
     const corsOption = {
             origin: function(origin, callback){
                 //     console.log('origin', origin);
@@ -24,6 +24,6 @@ module.exports = function(app){
             preflightContinue: true
     }
     //implement cors
-//     app.use(cors(corsOption)); //allow cors
-    app.use(cors()); //allow all cors
+    app.use(cors(corsOption)); //allow cors
+//     app.use(cors()); //allow all cors
 }
