@@ -24,5 +24,6 @@ module.exports = function(app){
             preflightContinue: true
     }
     //implement cors
-    app.use(cors(corsOption)); //allow cors
+//     app.use(cors(corsOption)); //allow cors
+    app.use(cors()); //allow all cors
 }
