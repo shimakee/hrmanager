@@ -25,7 +25,11 @@ const actions = {
                     let token_header = nameSpace.token_header//app token header name used
                     let token_expire = nameSpace.token_expire//app token expiration name used
 
-                    if(!res.headers[token_header]){//check token //TODO: check cookie as well
+                    console.log('res', res);
+                    console.log('resheader', res.headers);
+                    console.log('resheaderget', res.headers.get([token_header]));
+
+                    if(!res.headers.get([token_header])){//check token //TODO: check cookie as well
                         throw Error('No Token passed');
                     }
                     if(!res.headers[token_expire]){

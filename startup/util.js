@@ -20,7 +20,8 @@ module.exports = function(app){
                     }
             },
             methods: ['GET','POST','PUT','DELETE'],
-            exposeHeaders:[config.get('token_header')],
+            exposeHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie'],
+            allowHeader:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie'],
             preflightContinue: true
     }
     //implement cors
