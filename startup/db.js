@@ -12,9 +12,11 @@ module.exports = async function(app){
         if (config.util.getEnv('NODE_ENV') === "production"){
             //get production uri from env variables
             URI = config.get('uri');
+            winston.info(`Using uri:${URI}`);
         }else{
             //get test uri from config
             URI = config.get('db.uri');
+            winston.info(`Using uri:${URI}`);
         }
         
         await mongoose.connect(URI, {useNewUrlParser: true});
