@@ -1,19 +1,21 @@
 <template>
     <div class="profile">
-        <div class="avatar-container">
-            <h2>Company</h2>
-            <img class="avatar" src="https://picsum.photos/200/200/?random">
-            
-        </div>
-        <div class="posts">
-            <router-view></router-view> 
-        </div>
+            <h2>{{accountType}}</h2>
+            <router-view />
     </div>
 </template>
 <script>
 export default {
-   
+    computed:{
+        accountType(){
+            return this.$store.getters.getAccountType
+        }
+    }
 }
 </script>
 <style scoped>
+    h2{
+        margin: 0;
+        padding: 10px;
+    }
 </style>

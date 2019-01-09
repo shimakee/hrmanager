@@ -16,9 +16,8 @@ import Signup from '../components/landingPage/components/signup';
 import Register from '../components/landingPage/components/register';
 
 //Home - others to do after profile
-import Company from '../components/home/accountType/company';
 import Staff from '../components/home/accountType/staff';
-import Posts from '../components/home/accountType/post';
+import Default from '../components/home/accountType/default';
 
 //Home - profile
 import Profile from '../components/home/accountType/profile';
@@ -31,6 +30,12 @@ import ProfileDefault from '../components/home/accountType/profile/profileDefaul
     import Address from '../components/settings/address/address';
     import EditContacts from '../components/settings/editContacts';
     import EditGov from '../components/settings/editGov';
+
+//home - company
+import Company from '../components/home/accountType/company';
+import CompanyInfo from '../components/home/accountType/company/companyInfo';
+import CompanyActions from '../components/home/accountType/company/companyActions';
+import CompanyDefault from '../components/home/accountType/company/companyDefault';
 
 
 //Settings -todo sort out
@@ -122,7 +127,7 @@ export const routes = [
             },
             //==================================================PROFILE
             {path:'/profile', 
-                beforeEnter:(to,from,next)=>{//TODO: only proceed if account type is profile
+                beforeEnter:(to,from,next)=>{//only proceed if account type is profile
                     let accountType = store.getters.accountType; //check javascript for account type
                     if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
@@ -148,7 +153,7 @@ export const routes = [
                         components:{
                             default: Settings
                         },
-                        children:[//TODO: to determine layout - this is where the content goes
+                        children:[
                             {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
                                 components:{
                                     default: DeleteAccount,
@@ -173,7 +178,56 @@ export const routes = [
                 ]
             },
             //==================================================COMPANY
-            {path:'/company', name:'company', component: Company //TODO: only proceed if account type is company
+            {path:'/company',  
+                beforeEnter:(to,from,next)=>{//only proceed if account type is company
+                    let accountType = store.getters.accountType; //check javascript for account type
+                    if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+            
+                    if(!accountType || accountType !== 'company'){
+                        console.trace('account', accountType);
+                        next({name:'login'});//no account type invalid login redirect to login
+                    }else{
+                        next();
+                    }
+                }, 
+                components: {
+                    default: Company,
+                    info: CompanyInfo,
+                    actions: CompanyActions
+                },
+                children:[ //this is where the content goes - its children will be the content details
+                    {path:"", name: "company", //landing page for profile
+                        components:{
+                            default: CompanyDefault
+                        }
+                    },
+                    {path:"settings", ///profile/settings - CONTENT
+                        components:{
+                            default: Settings
+                        },
+                        children:[
+                            {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
+                                components:{
+                                    default: DeleteAccount,
+                                    editPic: EditPic,
+                                    changeUsername: ChangeUsername,
+                                    changePassword: ChangePassword,
+                                    deleteAccount: DeleteAccount,
+                                    editProfile: EditProfile,
+                                    editRelatives: EditRelatives,
+                                    editAddress: Address,
+                                    editContacts: EditContacts,
+                                    editGov: EditGov
+                                }
+                            }
+                        ]
+                    },
+                    {path:"marketing",
+                        components:{
+                            default: Marketing
+                        }
+                    }
+                ]
             },
             //==================================================STAFF
             {path:'/staff', name:'staff', component: Staff //TODO: only proceed if account type is staff

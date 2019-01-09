@@ -2,7 +2,7 @@
     <div>
         <div class="profile">
             <div class="avatar-container">
-                <img class="avatar" :src='url' :alt="fullName" @click="displayUrl()">
+                <img class="avatar" :src='url' :alt="fullName">
                 <p class="description">{{fullName}}</p>
             </div>
 
@@ -40,8 +40,7 @@
 export default {
     data(){
         return {
-            fullName: null,
-            token: null
+            fullName: null
         }
     }
     ,computed:{
@@ -54,16 +53,21 @@ export default {
             let profile = stateProfile || cachedProfile;
             let url;
 
-            if(!profile || !profile.pics){
-                url = 'https://picsum.photos/100/100/?random';
-            }else{
+            if(profile && profile.pics){
                 const pic = profile.pics.find(element=>{
                     if(element.main == true || element.main == 'true'){
                         return element;
                     }
                 })
 
-                url = `/file/photo/me?name=${pic.filename}`;
+                if(pic){
+                    url = `/file/photo/me?name=${pic.filename}`;
+                }else{
+                    url = 'https://picsum.photos/100/100/?random';
+                }
+
+            }else{
+                url = 'https://picsum.photos/100/100/?random';
             }
 
             // console.trace('profileINfo', profile);
@@ -89,11 +93,6 @@ export default {
             // }
 
             return url;
-        }
-    },
-    methods:{
-        displayUrl(){
-            console.log('image url', this.url);
         }
     },
     beforeMount(){
@@ -185,13 +184,13 @@ export default {
     list-style: none;
     text-align: center;
 }
-ul{
+/* ul{
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, auto));
     grid-gap: 10px;
     padding: 0;
-}
+} */
  /* ul li.card-pic{
      background-color: cornsilk;
      display: grid;

@@ -8,6 +8,7 @@ const winston = require('winston');
 const regex = require("../util/regex");
 //model
 const Profile = require("../models/profile");
+const Company = require("../models/company");
 const User = require("../models/user");
 //validator
 const   Joi         = require('joi');
@@ -91,6 +92,7 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     //rename file
     fs.rename(req.file.path, newPath, async (err)=>{
         if(!err){
+            const accountType = req.user.accountType;
             
             //establish details
             let pic = {main: true,
@@ -101,27 +103,56 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
                 mimetype: req.file.mimetype,
                 size: req.file.size}
 
-            const oldProfile = await Profile.findById(req.user.profile).exec();
-            if(!oldProfile){return res.status(404).send({message:'could not locate profile to upload.'});}
+            //TODO: depending on account type
+            if(accountType == "profile"){
+                const oldProfile = await Profile.findById(req.user.profile).exec();
+                if(!oldProfile){return res.status(404).send({message:'could not locate profile to upload.'});}
 
-            let result = oldProfile.pics.find(element=>{
-                if(element.path == pic.path){
-                    return element;
-                }
-            });
+                let result = oldProfile.pics.find(element=>{
+                    if(element.path == pic.path){
+                        return element;
+                    }
+                });
 
-            if(!result){//if it doesnt exist
-                //set everything else to false
-                if(pic.main == true || pic.main == "true"){
-                    await Profile.updateOne({_id: req.user.profile}, {$set: {"pics.$[].main": false}}).exec();
+                if(!result){//if it doesnt exist
+                    //set everything else to false
+                    if(pic.main == true || pic.main == "true"){
+                        await Profile.updateOne({_id: req.user.profile}, {$set: {"pics.$[].main": false}}).exec();
+                    }
+        
+                    //save to database profile pics array
+                    await Profile.updateOne({_id: req.user.profile}, {$push: {pics: pic}}).exec();
                 }
-    
-                //save to database profile pics array
-                await Profile.updateOne({_id: req.user.profile}, {$push: {pics: pic}}).exec();
+
+                    
+                res.status(200).send({message:"success"});
             }
 
-                
-            res.status(200).send({message:"success"});
+            if(accountType == "company"){
+                const oldCompany = await Company.findById(req.user.company).exec();
+                if(!oldCompany){return res.status(404).send({message:'could not locate profile to upload.'});}
+
+                let result = oldCompany.pics.find(element=>{
+                    if(element.path == pic.path){
+                        return element;
+                    }
+                });
+
+                if(!result){//if it doesnt exist
+                    //set everything else to false
+                    if(pic.main == true || pic.main == "true"){
+                        await Company.updateOne({_id: req.user.company}, {$set: {"pics.$[].main": false}}).exec();
+                    }
+        
+                    //save to database company pics array
+                    await Company.updateOne({_id: req.user.company}, {$push: {pics: pic}}).exec();
+                }
+
+                    
+                res.status(200).send({message:"success"});
+            }
+
+            
         }else{
             //try again or delete?
             console.log(err);

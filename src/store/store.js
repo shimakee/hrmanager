@@ -6,8 +6,8 @@ import signup from './modules/beforeAuth/signup';//importing modules
 import login from './modules/beforeAuth/login';//importing modules
 import logout from './modules/beforeAuth/logout';//importing modules
 import userSettings from './modules/settings/user';//importing modules
-import profileSettings from './modules/settings/profile';//importing modules
 import profile from './modules/profile/profile';//importing modules
+import company from './modules/profile/company';//importing modules
 
 import googlemaps from './modules/googlemaps/googlemaps';//googlemaps module
 
@@ -20,6 +20,7 @@ export const store = new Vuex.Store({
         accountType:null,
         timeout: null,
         resetToken: null,
+        pics:null,
         env:"production"
 
     },
@@ -67,6 +68,7 @@ export const store = new Vuex.Store({
         setResetToken:(state, payload)=>{
             state.resetToken = payload;
         }
+        
     },
     actions:{ //can be used for async task like sending data to DB
         autoSetData:({commit, getters})=>{//TODO change to autoLogin
@@ -189,8 +191,8 @@ export const store = new Vuex.Store({
         login,
         logout,
         userSettings,
-        profileSettings,
         profile,
+        company,
         googlemaps
     }
 });
