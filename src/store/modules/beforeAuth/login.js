@@ -27,9 +27,9 @@ const actions = {
 
                     console.log('res', res);
                     console.log('resheader', res.headers);
-                    console.log('resheaderget', res.headers.get([token_header]));
+                    console.log('resheaderget', res.headers[token_header]);
 
-                    if(!res.headers.get([token_header])){//check token //TODO: check cookie as well
+                    if(!res.headers[token_header]){//check token //TODO: check cookie as well
                         throw Error('No Token passed');
                     }
                     if(!res.headers[token_expire]){

@@ -13,8 +13,6 @@ instance.interceptors.request.use(config=>{
 
     if(store.getters.hasToken){//adding token as header for all request when token is available
         config.headers.common[nameSpace.token_header] = store.getters.getToken;
-    }else{
-
     }
     return config;
 });

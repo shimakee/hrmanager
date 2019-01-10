@@ -19,19 +19,22 @@ module.exports = function(app){
                         callback(new Error('Source not allowed by cors.'));
                 }
         },
-        // origin: '*',
+        // origin: 'http://localhost:8080',
         methods: ['GET','POST','PUT','DELETE'],
-        exposeHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
         allowedHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
+        exposeHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization', 'x-auth-hureon'],
         preflightContinue: true
     }
     //implement cors
-    app.use(cors(corsOption)); //allow cors
+//     app.use(cors(corsOption)); //allow cors
 //     app.use(cors()); //allow all cors
 
-//     app.use(function(req, res, next) {
-//         res.header("Access-Control-Allow-Origin", "*");
-//         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-auth-hureon, X-Auth-Hureon, Set-Cookie, Authorization");
-//         next();
-//       });
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", '*');
+        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELTE, OPTIONS");
+        res.header("Access-Control-Allow-Credentials", 'true');
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-hureon, exp");
+        res.header("access-control-expose-headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-hureon, exp");
+        next();
+      });
 }
