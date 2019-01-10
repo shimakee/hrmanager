@@ -22,7 +22,7 @@ module.exports = function(app){
         // origin: '*',
         methods: ['GET','POST','PUT','DELETE'],
         exposeHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
-        allowHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
+        allowedHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
         preflightContinue: true
     }
     //implement cors
