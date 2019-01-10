@@ -20,11 +20,17 @@ module.exports = function(app){
                     }
             },
             methods: ['GET','POST','PUT','DELETE'],
-            exposeHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie'],
-            allowHeader:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie'],
+            exposeHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
+            allowHeaders:[config.get('token_header'), 'Content-Type', 'X-Auth-Hureon', 'Set-Cookie', 'Authorization'],
             preflightContinue: true
     }
     //implement cors
-//     app.use(cors(corsOption)); //allow cors
-    app.use(cors()); //allow all cors
+    app.use(cors(corsOption)); //allow cors
+//     app.use(cors()); //allow all cors
+
+//     app.use(function(req, res, next) {
+//         res.header("Access-Control-Allow-Origin", "*");
+//         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-auth-hureon, X-Auth-Hureon, Set-Cookie, Authorization");
+//         next();
+//       });
 }
