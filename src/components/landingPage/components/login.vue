@@ -58,7 +58,7 @@ export default {
                         //clear messages
                         this.$store.commit('setInfoMessage', null);
                         this.$store.commit('setErrorMessage', null);
-    
+                        //reroute to home page
                         this.$router.push({name:'home'});
                         console.log('login vue sucess');
                     }).catch(err=>{
@@ -69,14 +69,15 @@ export default {
                         this.$store.commit('setErrorMessage', err.response.statusText);
                     });
             }else{
+                //TODO: change to switch statement
                 //clientside validation
-                if(!username && !password){//TODO: change to switch statement
+                if(!username && !password){//error no input
                     this.$store.commit('setErrorMessage', 'Username & password input required.');
                 }else{
-                    if(username == null || username == ''){
+                    if(username == null || username == ''){//error no username
                         this.$store.commit('setErrorMessage', 'Username input required.');
                     }
-                    if(password == null || password == ''){
+                    if(password == null || password == ''){//error no password
                         this.$store.commit('setErrorMessage', 'Password input required.');
                     }
                 }
@@ -86,7 +87,7 @@ export default {
         ,submitReset(){
             this.resetSubmitted=true;
 
-            if(this.user.username){//check that it has value to be submitted
+            if(this.user.username){//validation - username input
 
                 //send commit
                 this.$store.dispatch('resetPass', {username: this.user.username})

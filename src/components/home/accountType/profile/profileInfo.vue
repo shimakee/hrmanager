@@ -140,19 +140,19 @@ export default {
                 }
         }
     }
-    ,created(){
-        let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage
+    // ,created(){
+    //     let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage
 
-        if(localProfile){
-            this.$store.commit('setProfile', localProfile);//save localstorage profile to state
+    //     if(localProfile){
+    //         this.$store.commit('setProfile', localProfile);//save localstorage profile to state
 
-        }else{
-            this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-                this.$store.commit('setProfile', res);//save to state
-                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
-            });
-        }
-    }
+    //     }else{
+    //         this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
+    //             this.$store.commit('setProfile', res);//save to state
+    //             localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+    //         });
+    //     }
+    // }
 }
 </script>
 <style scoped>

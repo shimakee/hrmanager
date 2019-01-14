@@ -22,50 +22,86 @@ const actions = {
         return new Promise((resolve,reject)=>{
             dispatch('sendCommit', {url:'/user/login', method:'post', data: payload})
                 .then(res=>{
+                    //headers
                     let token_header = nameSpace.token_header//app token header name used
                     let token_expire = nameSpace.token_expire//app token expiration name used
-
-                    console.log('res', res);
-                    console.log('resheader', res.headers);
-                    console.log('resheaderget', res.headers[token_header]);
-
-                    if(!res.headers[token_header]){//check token //TODO: check cookie as well
+                    //account tpye
+                    const accountType = res.data.accountType;
+                    let pics;
+                    
+                    //TODO: check cookie as well
+                    //validation
+                    if(!res.headers[token_header]){//check token
                         throw Error('No Token passed');
                     }
-                    if(!res.headers[token_expire]){
+                    if(!res.headers[token_expire]){//check expiration time
                         throw Error('No token expiration date');
                     }
-                    
-                    //save pics if any
-                    if(res.data.pics){
-                        commit('setPics', res.data.pics);
-                        localStorage.setItem('pics', JSON.stringify(res.data.pics));
-                    }
-
-                    //save account type information
-                    // console.trace(res.data.accountType);
+                
+                    //save - general info accross on account
+                    //account type
                     commit('setAccountType', res.data.accountType);
-                    localStorage.setItem('accountType', res.data.accountType);//no need to stringify since saving only a string and not an object
+                    localStorage.setItem('accountType', res.data.accountType);
+                    commit('setUsername', res.data.username);
+                    localStorage.setItem('username', res.data.username);
+
+                    //get - necessary info - based on account type
+                    switch (accountType) {
+                        case 'profile':
+                            //get profile info
+                            dispatch('getProfile').then(res=>{//get new profile data from backend
+                                commit('setProfile', res);//save to state
+                                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+
+                                pics = res.pics;//save pics
+                            });
+
+                            break;
+
+                        case 'company':
+                            //get company info
+                            dispatch('getCompany').then(res=>{//get new profile data from backend
+                                commit('setCompany', res);//save to state
+                                localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
+
+                                pics = res.pics//save pics
+                            });
+                            
+                            break;
+                            
+                        case 'staff': //not implemented yet
+
+                            
+                            break;
                     
-                    //save token to state and localstorage
-                    const token = res.headers[token_header];
-                    commit('setToken', token);
-                    localStorage.setItem('token', token);
-
-                    //save token expiration date to localstorage
-                    const dateExpire = new Date(res.headers[token_expire]* 1000);
-                    localStorage.setItem('exp', dateExpire);
-
-                    dispatch('autoLogout');
+                        default: // if none of the above  clear local storage - return to login
+                            dispatch('logout');
+                            break;
+                    }
                     
-                    // //auto reroute
-                    // router.push('/home');
+                //save - necessary info - based on account type
+                //save pics
+                commit('setPics', pics);
+                localStorage.setItem('pics', JSON.stringify(pics));
+                    
+                //TODO: find better solution than local storage - use cookies perhaps?
+                //save token to state and localstorage
+                const token = res.headers[token_header];
+                commit('setToken', token);
+                localStorage.setItem('token', token);
 
-                    //pass back true and let the component handle next step in logic
-                    resolve(res);
+                //save token expiration date to localstorage
+                const dateExpire = new Date(res.headers[token_expire]* 1000); // multiplies seconds by miliseconds
+                localStorage.setItem('exp', dateExpire);
+
+                dispatch('autoLogout');
+
+                //return promise - let component handle routing and other steps
+                resolve(res);
 
                 }).catch(err=>{
                     //TODO - interpret error first before returning reject 
+                    console.log('Store login failed', err);
                     //return false with error message
                     reject(err);
                 });

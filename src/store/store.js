@@ -15,6 +15,7 @@ Vue.use(Vuex);
     
 export const store = new Vuex.Store({
     state:{
+        username:null,
         data:null, //data to be rendered
         token:null, //response token obtained
         accountType:null,
@@ -26,6 +27,9 @@ export const store = new Vuex.Store({
 
     },
     getters:{
+        getUsername:(state)=>{//get data on state
+            return state.username;
+        },
         getData:(state)=>{//get data on state
             return state.data;
         },
@@ -57,6 +61,9 @@ export const store = new Vuex.Store({
         // setLoginStatus(state, payload = false){
         //     state.loginStatus = payload;
         // },
+        setUsername:(state, payload)=>{//set data on state
+            state.username = payload;
+        },
         setData:(state, payload)=>{//set data on state
             state.data = payload;
         },
