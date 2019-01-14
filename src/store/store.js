@@ -18,39 +18,51 @@ export const store = new Vuex.Store({
         data:null, //data to be rendered
         token:null, //response token obtained
         accountType:null,
-        timeout: null,
-        resetToken: null,
+        timeout: null, //autologout feature countdown
+        resetToken: null, //token data for reseting account
         pics:null,
-        env:"production"
+        errorMessage: null,
+        infoMessage: null
 
     },
     getters:{
-        getEnv:(state)=>{
-            return state.env;
-        },
-        hasToken:(state)=>{
-            return state.token !== null;
-        },
         getData:(state)=>{//get data on state
             return state.data;
-        },
-        getAccountType:(state)=>{
-            return state.accountType;
         },
         getToken:(state)=>{//get token header on response
             return state.token;
         },
+        hasToken:(state)=>{ //return boolean without exposing token
+            return state.token !== null;
+        },
+        getAccountType:(state)=>{
+            return state.accountType;
+        },
         getResetToken:(state)=>{
             return state.resetToken;
+        },
+        getPics:(state)=>{
+            return state.pics;
+        },
+        getErrorMessage:(state)=>{
+            return state.errorMessage;
+        },
+        getInfoMessage:(state)=>{
+            return state.infoMessage;
         }
+
 
     },
     mutations:{//mutate state
-        setLoginStatus(state, payload = false){
-            state.loginStatus = payload;
-        },
+        // setLoginStatus(state, payload = false){
+        //     state.loginStatus = payload;
+        // },
         setData:(state, payload)=>{//set data on state
             state.data = payload;
+        },
+        clearAuthData:(state)=>{
+            state.data = null;
+            state.token = null;
         },
         setToken:(state, payload)=>{//set token on state
             state.token = payload;
@@ -58,15 +70,20 @@ export const store = new Vuex.Store({
         setAccountType:(state, payload)=>{//set token on state
             state.accountType = payload;
         },
-        clearAuthData:(state)=>{
-            state.data = null;
-            state.token = null;
-        },
         setLogoutTime:(state, payload)=>{
             state.timeout = payload;
         },
         setResetToken:(state, payload)=>{
             state.resetToken = payload;
+        },
+        setPics:(state, payload)=>{
+            state.pics = payload;
+        },
+        setErrorMessage:(state, payload)=>{
+            state.errorMessage = payload;
+        },
+        setInfoMessage:(state, payload)=>{
+            state.infoMessage = payload;
         }
         
     },
@@ -85,30 +102,6 @@ export const store = new Vuex.Store({
         },
         sendCommit:({state}, payload)=>{
             return  new Promise((resolve, reject)=>{
-                
-                if(state.env == "test"){
-
-                    
-                    let response = {
-                        data:{ "name": { "first": "Kenneth", "middle": "Mitchell", "last": "De Leon", "suffix": "Master" }, 
-                        "token":"asdas",
-                        "accountType":"profile",
-                        "civilStatus": "married", 
-                        "email": [ { "main": true, "_id": "5b46c448c9979007acde2cab", "address": "sample@mkas.com" } ],
-                        "gender": "male", "contact": [], 
-                        "address": [{"main":false,"_id":"5b50b8f5ec4f044154e61112","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":4444},{"main":false,"_id":"5b50b8e8ec4f044154e61111","description":"home","street":"monnstone","city":"digos","province":"davao del sur","zipcode":8002},{"main":true,"_id":"5b50b8e0ec4f044154e61110","description":"asdasd","street":"asdasd","city":"asdasd","province":"asdasd","zipcode":2222}], "government": [] }
-                        ,headers:{
-                            auth:'asdasd'
-                        }
-                    }
-                    response.headers['x-auth-hureon']='token';
-                    response.headers['exp']=1329531994214;
-
-                        setTimeout(function(){
-                            resolve(response)
-                        }
-                            , 2000);
-                }else{
 
                     switch(true){
                         case payload.method === 'get':
@@ -147,7 +140,6 @@ export const store = new Vuex.Store({
                         default:
                             reject(new Error({messaage:'Error sending request to server'}));
                     }
-                }
             });
         },
         uploadPic:(state, payload)=>{

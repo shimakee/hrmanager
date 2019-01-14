@@ -5,5 +5,6 @@
     "emailUser": "EMAILUSER",
     "emailPass": "EMAILPASS",
     "uri":"URI",
-    "port":"PORT"
+    "port":"PORT",
+    "corsUrl":"CORSURL"
 }

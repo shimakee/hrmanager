@@ -36,16 +36,6 @@ const actions = {
                         throw Error('No token expiration date');
                     }
                     
-                    //probably uneccessary since axios intercepter does it every request/response
-                    //but still process it upon login just to be sure
-
-                    //TODO:get profile or company data depending on account type instead of randomly saving data
-
-                    //remove upon production, have not found a use for it yet
-                    //save response data to generic data state
-                    commit('setData', res.data);
-                    localStorage.setItem('data', JSON.stringify(res.data));
-
                     //save pics if any
                     if(res.data.pics){
                         commit('setPics', res.data.pics);

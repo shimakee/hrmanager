@@ -29,8 +29,9 @@ module.exports = function(app){
 //     app.use(cors(corsOption)); //allow cors
 //     app.use(cors()); //allow all cors
 
-    app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", '*');
+    app.use(function(req, res, next) { //TODO create middle ware
+        res.header("Access-Control-Allow-Origin", config.get('corsUrl')); // to control cors vie env variables
+        // res.header("Access-Control-Allow-Origin", '*');
         res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELTE, OPTIONS");
         res.header("Access-Control-Allow-Credentials", 'true');
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-hureon, exp");

@@ -12,6 +12,14 @@
             </div>
             <a @click.prevent="submitReset">Forgot Password?</a>
             <button class="btn primary" @click.prevent="submitLogin">Send</button>
+
+            <br>
+            <span class="error" v-if="errorMessage">
+                {{errorMessage}}
+            </span>
+            <span class="info" v-if="infoMessage">
+                {{infoMessage}}
+            </span>
         </form>
     </div>
 </template>
@@ -21,46 +29,85 @@ export default {
         return{
             user:{
                 username: '',
-                password:''
+                password: ''
             },
             loginSubmitted: false,
             resetSUbmitted: false
+            // errorMessage: null
+        }
+    },
+    computed:{
+        errorMessage(){
+            return this.$store.getters.getErrorMessage;
+        },
+        infoMessage(){
+            return this.$store.getters.getInfoMessage;
         }
     }
     ,methods:{
         submitLogin(){
             this.loginSubmitted=true;
-            this.$store.dispatch('login', this.user)
-                .then(res=>{
+            
+            const username = this.user.username;
+            const password = this.user.password;
 
-                    this.$router.push({name:'home'});
-                    //display error message
-                    console.log('login sucess');
-                }).catch(err=>{
-                    this.loginSubmitted=true;
+            
+            if(username && password){
+                this.$store.dispatch('login', this.user)
+                    .then(res=>{
+                        //clear messages
+                        this.$store.commit('setInfoMessage', null);
+                        this.$store.commit('setErrorMessage', null);
+    
+                        this.$router.push({name:'home'});
+                        console.log('login vue sucess');
+                    }).catch(err=>{
+                        this.loginSubmitted=false;
+    
+                        //display error message
+                        console.log('login vue failed', err.response);
+                        this.$store.commit('setErrorMessage', err.response.statusText);
+                    });
+            }else{
+                //clientside validation
+                if(!username && !password){//TODO: change to switch statement
+                    this.$store.commit('setErrorMessage', 'Username & password input required.');
+                }else{
+                    if(username == null || username == ''){
+                        this.$store.commit('setErrorMessage', 'Username input required.');
+                    }
+                    if(password == null || password == ''){
+                        this.$store.commit('setErrorMessage', 'Password input required.');
+                    }
+                }
+            }
 
-                    //display error message
-                    console.log('login failed', err);
-                    console.log('body', res);
-                });
         }
         ,submitReset(){
             this.resetSubmitted=true;
 
             if(this.user.username){//check that it has value to be submitted
+
+                //send commit
                 this.$store.dispatch('resetPass', {username: this.user.username})
                     .then(res=>{
+                        //clear error message
+                        this.$store.commit('setErrorMessage', null);
+
                         //display success message
-                        console.log('reset success');
+                        console.log('Reset Vue success');
+                        this.$store.commit('setInfoMessage', 'Account reset success.');
                     }).catch(err=>{
                         this.resetSubmitted=false;
                         
                         //display error message
-                        console.log('reset failed', err);
+                        console.log('Reset Vue submit failed', err);
+                        this.$store.commit('setErrorMessage', 'Account reset Failed.');
                     });
             }else{
                 //display prompt message to input username
-                console.log('Input in username required');
+                console.log('Reset vue failed, required input on username');
+                this.$store.commit('setErrorMessage', 'Input required on username.');
             }
         }
     }
@@ -69,6 +116,18 @@ export default {
 <style scoped>
 .landing{
     position:absolute;
+}
+.error{
+    color: rgb(250, 17, 64);
+    font-family: sans-serif;
+    text-shadow: 0px 0px 1px rgb(6, 11, 80);
+    font-weight: bolder;
+}
+.info{
+    color: rgb(45, 236, 19);
+    font-family: sans-serif;
+    text-shadow: 0px 0px 1px rgb(6, 11, 80);
+    font-weight: bolder;
 }
 .login-form{
     /* margin: 20px 0; */
