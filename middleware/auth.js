@@ -1,6 +1,8 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+//TODO: //role.isAllowed
+
 const auth = {
     isAuth: function(req,res,next){
         
@@ -30,8 +32,15 @@ const auth = {
                 res.status(401).send({message: `Unauthorized access. only ${accountType} accounts are allowed. `});
             }
         }
+    },
+    cors:function(req, res, next){
+        res.header("Access-Control-Allow-Origin", config.get('corsUrl')); // to control cors vie env variables
+        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELTE, OPTIONS");
+        res.header("Access-Control-Allow-Credentials", 'true');
+        res.header("Access-Control-Allow-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp`);
+        res.header("Access-Control-Expose-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp`);
+        next();
     }
-    //role.isAllowed
 }
 
 module.exports = auth;
