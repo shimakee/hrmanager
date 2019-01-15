@@ -7,6 +7,16 @@ const getters = {
 const mutations = {
 }
 const actions = {
+    getUser:({commit, dispatch})=>{
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:'/user/me', method: 'get', data: null})
+                .then(res=>{
+                    resolve(res);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
     changePassword:({dispatch}, payload)=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/user/change_password', method: 'put', data: payload})

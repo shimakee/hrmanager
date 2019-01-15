@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <!-- <div> -->
         <div class="profile">
-            <div class="avatar-container">
-                <img class="avatar" :src='url' :alt="fullName">
+            <div class="container">
+                <div class="avatar-container">
+                    <img class="avatar" :src='url' :alt="fullName">
+                </div>
                 <p class="description">{{fullName}}</p>
             </div>
 
@@ -34,133 +36,86 @@
                 </li>     
             </ul>
         </div>
-    </div>
+    <!-- </div> -->
 </template>
 <script>
 export default {
-    data(){
-        return {
-            fullName: null
-        }
-    }
-    ,computed:{
+    computed:{
         profile(){
-            return this.$store.getters.getProfile;
+            const stateProfile = this.$store.getters.getProfile;
+            const localProfile = JSON.parse(localStorage.getItem('profile'));
+            let profile = stateProfile || localProfile;
+
+            if(!profile){
+                this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
+                    this.$store.commit('setProfile', res);//save to state
+                    localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+
+                    profile = res;
+                });
+            }
+
+            return profile;
+        },
+        fullName(){
+            let profile = this.profile
+            const name = profile.name;
+            
+            let fullName = "";
+            if(name){
+                for (const key in name) {//get name from profile
+                    if (name.hasOwnProperty(key)) { //get every element
+                        const element = name[key];
+                        if(element){
+                            fullName +=  " " + element; //check that element has value and stack over name
+                        }
+                    }
+                }
+            
+                return fullName.trim();
+            }else{
+                return "Unknown Profile"
+            }
         },
         url(){
-            const cachedProfile = JSON.parse(localStorage.getItem('profile'));
-            const stateProfile = this.$store.getters.getProfile
-            let profile = stateProfile || cachedProfile;
+            const localPic = JSON.parse(localStorage.getItem('pics'));
+            const statePic = this.$store.getters.getPic;
+            let pics = statePic || localPic;
             let url;
+            const defaultUrl = 'https://picsum.photos/100/100/?random';
 
-            if(profile && profile.pics){
-                const pic = profile.pics.find(element=>{
+            if(pics){
+                //find main picture
+                const pic = pics.find(element=>{
                     if(element.main == true || element.main == 'true'){
                         return element;
                     }
-                })
+                });
+
+                const baseUrl = 'http://localhost'//TODO:to be removed on production
 
                 if(pic){
-                    url = `/file/photo/me?name=${pic.filename}`;
+                    url = `${baseUrl}/file/photo/me?name=${pic.filename}`;
                 }else{
-                    url = 'https://picsum.photos/100/100/?random';
+                    url = defaultUrl;
                 }
 
             }else{
-                url = 'https://picsum.photos/100/100/?random';
+                url =  defaultUrl;
             }
-
-            // console.trace('profileINfo', profile);
-
-            // if(!profile){
-            //     profile = this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-            //         return res;
-            //     });
-            // }
-
-            // // let url = '/file/photo/me?name=default.JPG'; // perhaps public/assets - for default avatar image //TODO
-            // let url = 'https://picsum.photos/100/100/?random';
-
-            // if(profile.pics){
-            //     const pic = profile.pics.find(element=>{
-            //         if(element.main == true || element.main == 'true'){
-            //             return element;
-            //         }
-            //     })
-
-            //     url = `/file/photo/me?name=${pic.filename}`;
-
-            // }
 
             return url;
         }
-    },
-    beforeMount(){
-        const vm = this;
-        //get full name===================================================
-
-        const cachedName = JSON.parse(localStorage.getItem('profile'));
-        let profileName = this.$store.getters.getProfile;
-
-        if(!cachedName && !profileName){
-            vm.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-                vm.$store.commit('setProfile', res);//save to state
-
-                if(res.name){
-                    vm.fullName = SetName(res.name);
-                }else{
-                    console.trace('error, no name');
-                }
-
-                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
-            });
-        }else{
-            if(!cachedName){
-                vm.fullName = SetName(profileName.name);
-            }else{
-                vm.fullName = SetName(cachedName.name);
-            }
-        }
-
-        function SetName(dataName){//set local component data fullname
-            let name = "";
-                if(dataName){
-                    for (const key in dataName) {//get name from profile
-                        if (dataName.hasOwnProperty(key)) { //get every element
-                            const element = dataName[key];
-                            if(element){
-                                name +=  " " + element; //check that element has value and stack over name
-                            }
-                        }
-                    }
-                
-                    return name.trim();
-                }else{
-                    console.trace('error invalid value for name');
-                }
-        }
     }
-    // ,created(){
-    //     let localProfile = JSON.parse(localStorage.getItem('profile'));//get profile data saved on local storage
-
-    //     if(localProfile){
-    //         this.$store.commit('setProfile', localProfile);//save localstorage profile to state
-
-    //     }else{
-    //         this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-    //             this.$store.commit('setProfile', res);//save to state
-    //             localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
-    //         });
-    //     }
-    // }
 }
 </script>
 <style scoped>
 .profile{
     display: grid; 
     grid-template-columns: 1fr;
+    /* margin: 0px 15px; */
 }
-.avatar-container{
+.container{
     padding:.5em;
     margin:1.5em;
     text-align: center;
@@ -169,34 +124,27 @@ export default {
     justify-items: center;
     align-items: center;
 }
-.avatar-container img{
-    width: 100%;
-    border-radius: 20em;
+.avatar-container{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    display: grid;
+    border-radius: 50px;
+    justify-content: center;
+    align-content: center;
 }
-.avatar-container p{
+.container img{
+    max-width: 150px;
+    max-height: 150px;
+}
+.container p{
     font-size: 1em;
     padding: 0;
     margin: 12px 0;
 }
-/* .avatar{
-} */
 .info{
     list-style: none;
     text-align: center;
 }
-/* ul{
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-    grid-gap: 10px;
-    padding: 0;
-} */
- /* ul li.card-pic{
-     background-color: cornsilk;
-     display: grid;
-     grid-template-columns: 1fr;
-     justify-items: center;
-     align-items: center;
- } */
 
 </style>

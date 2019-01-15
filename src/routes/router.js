@@ -18,6 +18,7 @@ import Register from '../components/landingPage/components/register';
 //Home - others to do after profile
 import Staff from '../components/home/accountType/staff';
 import Default from '../components/home/accountType/default';
+import Actions from '../components/home/accountType/actions';
 
 //Home - profile
 import Profile from '../components/home/accountType/profile';
@@ -141,12 +142,12 @@ export const routes = [
                 components: {
                     default: Profile,
                     info: ProfileInfo,
-                    actions: ProfileActions
+                    actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
                     {path:"", name: "profile", //landing page for profile
                         components:{
-                            default: ProfileDefault
+                            default: Default
                         }
                     },
                     {path:"settings", ///profile/settings - CONTENT
@@ -193,12 +194,12 @@ export const routes = [
                 components: {
                     default: Company,
                     info: CompanyInfo,
-                    actions: CompanyActions
+                    actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
                     {path:"", name: "company", //landing page for profile
                         components:{
-                            default: CompanyDefault
+                            default: Default
                         }
                     },
                     {path:"settings", ///profile/settings - CONTENT
@@ -206,7 +207,7 @@ export const routes = [
                             default: Settings
                         },
                         children:[
-                            {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
+                            {path:"", name:"companySettings",///profile/settings - main page - CONTENT - details
                                 components:{
                                     default: DeleteAccount,
                                     editPic: EditPic,

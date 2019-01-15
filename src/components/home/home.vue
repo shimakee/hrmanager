@@ -102,7 +102,7 @@ export default {
         display: grid;
     }
     .menu span{
-        padding: 10px 1em;
+        /* padding: 10px 1em; */
     }
     .home{
         grid-template-columns: 1fr;
@@ -114,7 +114,11 @@ export default {
     .tab{
         position:absolute;
         top:0;
-        /* width: 100%; */
+        width: 100%;
+    }
+    
+    .view-container .tab.actions,.view-container .tab.info {
+        padding: 10px 0px;
     }
 }
 @media (max-width: 1024px) and (orientation: portrait){/*tablets - portrait mode*/
@@ -199,7 +203,7 @@ export default {
  .info,
  .content,
  .actions{
-     padding: 10px 20px;
+     padding: 10px 15px;
  }
  .info{ /*must have backgrounds*/
     background-color: rgb(6, 11, 80);

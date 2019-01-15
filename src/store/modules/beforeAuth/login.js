@@ -53,7 +53,10 @@ const actions = {
                                 commit('setProfile', res);//save to state
                                 localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
 
-                                pics = res.pics;//save pics
+                                pics = res.pics;
+                                //save pics
+                                commit('setPics', pics);
+                                localStorage.setItem('pics', JSON.stringify(pics));
                             });
 
                             break;
@@ -64,7 +67,10 @@ const actions = {
                                 commit('setCompany', res);//save to state
                                 localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
 
-                                pics = res.pics//save pics
+                                pics = res.pics
+                                //save pics
+                                commit('setPics', pics);
+                                localStorage.setItem('pics', JSON.stringify(pics));
                             });
                             
                             break;
@@ -80,9 +86,7 @@ const actions = {
                     }
                     
                 //save - necessary info - based on account type
-                //save pics
-                commit('setPics', pics);
-                localStorage.setItem('pics', JSON.stringify(pics));
+                
                     
                 //TODO: find better solution than local storage - use cookies perhaps?
                 //save token to state and localstorage

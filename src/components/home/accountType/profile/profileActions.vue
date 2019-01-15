@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="profile-actions">
         <p>Profile - Actions</p>
         <span class="links">
         <router-link to="profile">Profile</router-link>
