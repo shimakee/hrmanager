@@ -44,23 +44,34 @@ export default {
             const stateCompany = this.$store.getters.getCompany;
             let company = stateCompany || cachedCompany;
 
+            if(!company){
+                this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
+                    this.$store.commit('setCompany', res);//save to state
+                    localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
+
+                    company = res;
+                });
+            }
+
             return company;
         },
         tradename(){
             let company = this.company;
 
-            if(!company){
-                const cachedCompany = JSON.parse(localStorage.getItem('company'));
-                const stateCompany = this.$store.getters.getCompany;
-                company = stateCompany || cachedCompany;
+            // if(!company){
+            //     const cachedCompany = JSON.parse(localStorage.getItem('company'));
+            //     const stateCompany = this.$store.getters.getCompany;
+            //     company = stateCompany || cachedCompany;
 
-            }
+            // }
 
-            if(company){
-                return this.company.tradename;
-            }else{
-                return "Tradename";
-            }
+            // if(company){
+            //     return this.company.tradename;
+            // }else{
+            //     return "Tradename";
+            // }
+
+            return company.tradename;
         },
         url(){
             const cachedCompany = JSON.parse(localStorage.getItem('company'));
@@ -68,10 +79,8 @@ export default {
             let company = stateCompany || cachedCompany;
             let url;
 
-            console.log('company', company)
-
             if(company && company.pics){
-                const pic = company.pics.find(element=>{
+                const pic = company.pics.find(element=>{//find main picture
                     if(element.main == true || element.main == 'true'){
                         return element;
                     }
@@ -79,30 +88,32 @@ export default {
 
                 if(pic){
                     url = `/file/photo/me?name=${pic.filename}`;
-                }else{
-                    url = 'https://picsum.photos/100/100/?random';
                 }
+                // else{
+                //     url = 'https://picsum.photos/100/100/?random';
+                // }
 
-            }else{
+            }
+            if(!url){
                 url = 'https://picsum.photos/100/100/?random';
             }
 
             return url;
         }
     }
-    ,created(){
-        let localCompany = JSON.parse(localStorage.getItem('company'));//get profile data saved on local storage
+    // ,created(){
+    //     let localCompany = JSON.parse(localStorage.getItem('company'));//get profile data saved on local storage
 
-        if(localCompany){
-            this.$store.commit('setCompany', localCompany);//save localstorage profile to state
+    //     if(localCompany){
+    //         this.$store.commit('setCompany', localCompany);//save localstorage profile to state
 
-        }else{
-            this.$store.dispatch('getCompany').then(res=>{//get new profile data from backend
-                this.$store.commit('setCompany', res);//save to state
-                localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
-            });
-        }
-    }
+    //     }else{
+    //         this.$store.dispatch('getCompany').then(res=>{//get new profile data from backend
+    //             this.$store.commit('setCompany', res);//save to state
+    //             localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
+    //         });
+    //     }
+    // }
 }
 </script>
 <style scoped>

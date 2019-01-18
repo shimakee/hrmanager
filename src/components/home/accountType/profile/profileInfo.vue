@@ -59,10 +59,11 @@ export default {
         },
         fullName(){
             let profile = this.profile
-            const name = profile.name;
             
             let fullName = "";
-            if(name){
+            if(profile){
+                const name = profile.name;
+
                 for (const key in name) {//get name from profile
                     if (name.hasOwnProperty(key)) { //get every element
                         const element = name[key];
