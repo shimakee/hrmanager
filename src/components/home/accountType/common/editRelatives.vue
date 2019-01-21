@@ -1,10 +1,17 @@
 <template>
     <div>
-        <h2>Profile</h2>
         <form>
+            
             <div class="formGroup">
-                <select v-model="formProfile.civilStatus" id="">
-                    <option value="single">Single</option>
+                <select v-model="formProfile.relationship">
+                    <option value="spouse">Spouse</option>
+                    <option value="mother">Mother</option>
+                    <option value="father">Father</option>
+                </select>
+            </div>
+
+            <div class="formGroup">
+                <select v-model="formProfile.civilStatus">
                     <option value="married">Married</option>
                     <option value="divorced">Divorced</option>
                     <option value="annulled">Annuled</option>
@@ -32,15 +39,13 @@
             <div class="formGroup">
                 <input type="date" v-model="formProfile.birthdate">
             </div>
+            
 
-            <div class="formGroup">
-                <input type="text" v-model="formProfile.nationality" placeholder="nationality">
-            </div>
-
-            <button @click.prevent="submit">Send</button>
+            <button @click="submit">Add relative</button>
         </form>
     </div>
 </template>
+
 <script>
 export default {
     data(){
@@ -50,54 +55,21 @@ export default {
                                 maiden:"",
                                 last: "",
                                 suffix: "" },
-                        civilStatus: "single",
-                        nationality:"",
+                        civilStatus: "married",
                         gender: "male",
-                        birthdate:"",}
+                        birthdate:"",
+                        relationship:'spouse'
+            }
         }
     },
     methods:{
-        submit(){
+        submit(event){
+            event.preventDefault();
 
-            this.$store.dispatch('updateProfile', this.formProfile)
-                .then(response=>{
-                    this.$store.dispatch('getProfile')
-                        .then(res=>{
-                            localStorage.setItem('profile', JSON.stringify(res));
-                            this.$store.commit('setProfile', res);
-                    });
-                });
+            //dispatch axios action here
         }
-    },
-    computed:{
-        profile(){
-            return this.$store.getters.getProfile;
-        }
-    },
+    }
 }
 </script>
 <style scoped>
-.profile{
-    display: grid; 
-    grid-template-columns: 1fr 4fr;
-}
-.avatar-container{
-    /* position:relative; */
-    padding:.5em;
-    margin:1.5em;
-    text-align: center;
-    float: left;
-    /* width:20vw; */
-}
-.avatar{
-    border-radius: 20em;
-}
-.info{
-    list-style: none;
-    text-align: center;
-}
-.posts{
-    position:relative;
-    display:block;
-}
 </style>

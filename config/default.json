@@ -1,6 +1,6 @@
 {
     "name": "My web App",
-    "protocol":"http",
+    "protocol":"https",
     "domainName":"deleonhr.herokuapp.com",
     "token_header": "x-auth-hureon",
     "db_log": {"name":"deleon_hrmanager_log",

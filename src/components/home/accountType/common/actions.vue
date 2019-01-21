@@ -1,31 +1,43 @@
 <template>
     <div class="profile-actions">
-        <p>{{accountType}} - Actions</p>
+        <!-- <p>{{accountType}} - Actions</p> -->
 
         <!-- accordion using css -->
         <ul class="accordion-container">
             <accordion>
-                <h3 slot="title">Profile</h3>
-                <router-link slot="content" to="/">To {{accountType}}</router-link>
-            </accordion>
-            <accordion>
-                <h3 slot="title">Settings</h3>
+                <h3 slot="title">{{accountType}}</h3>
                 <ul slot="content">
-                    <li><router-link to="/">{{accountType}}</router-link></li>
-                    <li><router-link to="settings">Settings</router-link></li>
-                    <li><router-link to="marketing">Marketing</router-link></li>
+                    <li><router-link to="account">information</router-link></li>
+                    <li><router-link to="gallery">Photos</router-link></li> <!--this is currently used as the default content-->
+                    <li><router-link to="address">Address</router-link></li>
+                    <li><router-link to="contact">Contact</router-link></li>
                 </ul>
             </accordion>
+            <!-- <accordion>
+                <h3 slot="title">Settings</h3>
+                <ul slot="content">
+                    <li><router-link to="account">{{accountType}} account</router-link></li>
+                    <li><router-link to="settings">General</router-link></li>
+                    <li><router-link to="privacy">Privacy</router-link></li>
+                    <li><router-link to="marketing">Marketing</router-link></li>
+                </ul>
+            </accordion> -->
             <accordion>
                 <h3 slot="title">Account</h3>
-                <button @click="logout()" slot="content">logout</button>
+                <ul slot="content">
+                    <li><router-link to="account">General</router-link></li>
+                    <li><router-link to="settings">Settings</router-link></li>
+                    <li><a href="#" @click.prevent="logout()">Logout</a></li>
+                </ul>
+                
+                <!-- <button @click="logout()" slot="content">logout</button> -->
             </accordion>
         </ul>
 
     </div>
 </template>
 <script>
-import Accordion from "../../parts/accordion";
+import Accordion from "../../../parts/accordion";
 
 export default {
 

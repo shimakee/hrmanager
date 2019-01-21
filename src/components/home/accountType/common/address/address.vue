@@ -5,7 +5,7 @@
                         :showMap="true"
                         :address="address" 
                         :editAddress="editAddress"/>
-        <add-address :showMap="true"/>
+        <add-address :showMap="false"/>
 
     </div>
 </template>

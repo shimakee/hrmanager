@@ -16,27 +16,22 @@ import Signup from '../components/landingPage/components/signup';
 import Register from '../components/landingPage/components/register';
 
 //Home - others to do after profile
-import Staff from '../components/home/accountType/staff';
-import Default from '../components/home/accountType/default';
-import Actions from '../components/home/accountType/actions';
+import HomeContentContainer from '../components/home/accountType/homeContentContainer';
+import HomeDefaulContent from '../components/home/accountType/common/homeDefaultContent';
+import Actions from '../components/home/accountType/common/actions';
 
 //Home - profile
-import Profile from '../components/home/accountType/profile';
 import ProfileInfo from '../components/home/accountType/profile/profileInfo';
-import ProfileActions from '../components/home/accountType/profile/profileActions';
-import ProfileDefault from '../components/home/accountType/profile/profileDefault';
+import ProfileAccount from '../components/home/accountType/profile/profileAccount';
     //Home - profile - settings
-    import EditProfile from '../components/settings/editProfile';
-    import EditRelatives from '../components/settings/editRelatives';
-    import Address from '../components/settings/address/address';
-    import EditContacts from '../components/settings/editContacts';
-    import EditGov from '../components/settings/editGov';
+    import EditProfile from '../components/home/accountType/profile/editProfile';
+    import EditRelatives from '../components/home/accountType/common/editRelatives';
+    import Address from '../components/home/accountType/common/address/address';
+    import Contact from '../components/home/accountType/common/contact/contact';
+    import EditGov from '../components/home/accountType/common/editGov';
 
 //home - company
-import Company from '../components/home/accountType/company';
 import CompanyInfo from '../components/home/accountType/company/companyInfo';
-import CompanyActions from '../components/home/accountType/company/companyActions';
-import CompanyDefault from '../components/home/accountType/company/companyDefault';
 
 
 //Settings -todo sort out
@@ -140,22 +135,23 @@ export const routes = [
                     }
                 }, 
                 components: {
-                    default: Profile,
+                    default: HomeContentContainer,
                     info: ProfileInfo,
                     actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
                     {path:"", name: "profile", //landing page for profile
                         components:{
-                            default: Default
+                            default: HomeDefaulContent
                         }
                     },
-                    {path:"settings", ///profile/settings - CONTENT
+                    {path:"account",
                         components:{
-                            default: Settings
-                        },
+                            default: ProfileAccount
+                        }
+                        ,
                         children:[
-                            {path:"", name:"profileSettings",///profile/settings - main page - CONTENT - details
+                            {path: "", 
                                 components:{
                                     default: DeleteAccount,
                                     editPic: EditPic,
@@ -165,7 +161,71 @@ export const routes = [
                                     editProfile: EditProfile,
                                     editRelatives: EditRelatives,
                                     editAddress: Address,
-                                    editContacts: EditContacts,
+                                    contact: Contact,
+                                    editGov: EditGov
+                                }
+                            }
+                        ]
+
+                    },
+                    {path:"gallery", name:"gallery",
+                        components:{
+                            default: HomeDefaulContent
+                        }
+                        // ,
+                        // children:[
+                        //     {path: "", name:"gallery",
+                        //         components:{
+                        //             default: HomeDefaulContent
+                        //         }
+                        //     }
+                        // ]
+
+                    },
+                    {path:"address", name:"address",
+                        components:{
+                            default: Address
+                        }
+                        // ,
+                        // children:[
+                        //     {path: "", name:"address",
+                        //         components:{
+                        //             default: HomeDefaulContent
+                        //         }
+                        //     }
+                        // ]
+
+                    },
+                    {path:"contact", name:"contact",
+                        components:{
+                            default: HomeDefaulContent
+                        }
+                        // ,
+                        // children:[
+                        //     {path: "", name:"address",
+                        //         components:{
+                        //             default: HomeDefaulContent
+                        //         }
+                        //     }
+                        // ]
+
+                    },
+                    {path:"settings", ///profile/settings - CONTENT
+                        components:{
+                            default: Settings
+                        },
+                        children:[
+                            {path:"",///profile/settings - main page - CONTENT - details
+                                components:{
+                                    default: DeleteAccount,
+                                    editPic: EditPic,
+                                    changeUsername: ChangeUsername,
+                                    changePassword: ChangePassword,
+                                    deleteAccount: DeleteAccount,
+                                    editProfile: EditProfile,
+                                    editRelatives: EditRelatives,
+                                    editAddress: Address,
+                                    contact: Contact,
                                     editGov: EditGov
                                 }
                             }
@@ -192,14 +252,14 @@ export const routes = [
                     }
                 }, 
                 components: {
-                    default: Company,
+                    default: HomeContentContainer,
                     info: CompanyInfo,
                     actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
                     {path:"", name: "company", //landing page for profile
                         components:{
-                            default: Default
+                            default: HomeDefaulContent
                         }
                     },
                     {path:"settings", ///profile/settings - CONTENT
@@ -217,7 +277,7 @@ export const routes = [
                                     editProfile: EditProfile,
                                     editRelatives: EditRelatives,
                                     editAddress: Address,
-                                    editContacts: EditContacts,
+                                    contact: Contact,
                                     editGov: EditGov
                                 }
                             }
@@ -231,7 +291,7 @@ export const routes = [
                 ]
             },
             //==================================================STAFF
-            {path:'/staff', name:'staff', component: Staff //TODO: only proceed if account type is staff
+            {path:'/staff', name:'staff', component: HomeContentContainer //TODO: only proceed if account type is staff
             },
 
             //these will be put to children

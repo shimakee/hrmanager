@@ -1,7 +1,7 @@
 <template>
     <div class="profile">
             <h2>{{accountType}}</h2>
-            <router-view />
+            <router-view /> 
     </div>
 </template>
 <script>

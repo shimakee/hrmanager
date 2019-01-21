@@ -1,18 +1,9 @@
 <template>
     <div>
-        <h2>Relatives</h2>
         <form>
-            
             <div class="formGroup">
-                <select v-model="formProfile.relationship">
-                    <option value="spouse">Spouse</option>
-                    <option value="mother">Mother</option>
-                    <option value="father">Father</option>
-                </select>
-            </div>
-
-            <div class="formGroup">
-                <select v-model="formProfile.civilStatus">
+                <select v-model="formProfile.civilStatus" id="">
+                    <option value="single">Single</option>
                     <option value="married">Married</option>
                     <option value="divorced">Divorced</option>
                     <option value="annulled">Annuled</option>
@@ -40,13 +31,15 @@
             <div class="formGroup">
                 <input type="date" v-model="formProfile.birthdate">
             </div>
-            
 
-            <button @click="submit">Add relative</button>
+            <div class="formGroup">
+                <input type="text" v-model="formProfile.nationality" placeholder="nationality">
+            </div>
+
+            <button @click.prevent="submit">Send</button>
         </form>
     </div>
 </template>
-
 <script>
 export default {
     data(){
@@ -56,21 +49,54 @@ export default {
                                 maiden:"",
                                 last: "",
                                 suffix: "" },
-                        civilStatus: "married",
+                        civilStatus: "single",
+                        nationality:"",
                         gender: "male",
-                        birthdate:"",
-                        relationship:'spouse'
-            }
+                        birthdate:"",}
         }
     },
     methods:{
-        submit(event){
-            event.preventDefault();
+        submit(){
 
-            //dispatch axios action here
+            this.$store.dispatch('updateProfile', this.formProfile)
+                .then(response=>{
+                    this.$store.dispatch('getProfile')
+                        .then(res=>{
+                            localStorage.setItem('profile', JSON.stringify(res));
+                            this.$store.commit('setProfile', res);
+                    });
+                });
         }
-    }
+    },
+    computed:{
+        profile(){
+            return this.$store.getters.getProfile;
+        }
+    },
 }
 </script>
 <style scoped>
+.profile{
+    display: grid; 
+    grid-template-columns: 1fr 4fr;
+}
+.avatar-container{
+    /* position:relative; */
+    padding:.5em;
+    margin:1.5em;
+    text-align: center;
+    float: left;
+    /* width:20vw; */
+}
+.avatar{
+    border-radius: 20em;
+}
+.info{
+    list-style: none;
+    text-align: center;
+}
+.posts{
+    position:relative;
+    display:block;
+}
 </style>

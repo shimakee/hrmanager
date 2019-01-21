@@ -1,6 +1,5 @@
 <template>
     <div class="home">
-        <!-- <nav-bar /> --> 
         <!-- <div class="mobile"> -->
             <div class="menu">
                 <span @click="infoShow">Info</span>
@@ -9,20 +8,19 @@
             </div>
             <div class="view-container">
                 <router-view class="content"></router-view>
-                <transition name="slideRight">
-                    <!-- <router-view v-show="action" name="actions" class="tab actions"></router-view> -->
-                    <router-view v-bind:class="{slideRight: action, return: !action}" name="actions" class="tab actions"></router-view>
-                </transition>
                 <transition name="slideLeft">
                     <!-- <router-view v-show="info"  name="info" class="tab info"></router-view> -->
                     <router-view v-bind:class="{slideLeft: info, return: !info}" name="info" class="tab info"></router-view>
+                </transition>
+                <transition name="slideRight">
+                    <!-- <router-view v-show="action" name="actions" class="tab actions"></router-view> -->
+                    <router-view v-bind:class="{slideRight: action, return: !action}" name="actions" class="tab actions"></router-view>
                 </transition>
             </div>
         <!-- </div> -->
     </div>
 </template>
 <script>
-import Navbar from "../parts/navbar";
 
 export default {
     data(){
@@ -47,9 +45,6 @@ export default {
             this.info = true;
             this.action = !this.action;
         }
-    },
-    components:{
-        "nav-bar": Navbar
     }
     ,created(){
         this.$store.dispatch('autoLogout'); 

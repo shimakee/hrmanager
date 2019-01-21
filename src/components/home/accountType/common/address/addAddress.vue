@@ -23,7 +23,7 @@
     </div>
 </template>
 <script>
-import Maps from "../googleMap";
+import Maps from "../../../../parts/googleMap";
 
 export default {
     props:{

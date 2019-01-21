@@ -46,7 +46,7 @@ export default {
 .tab-content{
     max-height: 0;
     overflow: hidden;
-    /* margin: 5px 10px; */
+    margin: 5px 10px;
 }
 .tab-content a,
 .tab-content a:visited,
@@ -63,7 +63,7 @@ export default {
     margin: 0;
 }
 .accordion-tab input:checked~ .tab-content{
-    max-height: 300px;
+    max-height:fit-content;
     /* overflow-y: scroll; */
 }
 </style>

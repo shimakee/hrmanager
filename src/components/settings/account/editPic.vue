@@ -47,5 +47,7 @@ export default {
 }
 </script>
 <style scoped>
-
+    div{
+        margin: 1em;
+    }
 </style>
