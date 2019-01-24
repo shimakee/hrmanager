@@ -18,111 +18,114 @@ const actions = {
                 });
         });
     },
-    login:( {commit, dispatch}, payload)=>{
+    sendLogin:({commit, dispatch}, payload)=>{
         return new Promise((resolve,reject)=>{
             dispatch('sendCommit', {url:'/user/login', method:'post', data: payload})
                 .then(res=>{
-                    //headers
-                    let token_header = nameSpace.token_header//app token header name used
-                    let token_expire = nameSpace.token_expire//app token expiration name used
-                    //account tpye
-                    const accountType = res.data.accountType;
-                    let pics;
-                    
-                    //TODO: check cookie as well
-                    //validation
-                    if(!res.headers[token_header]){//check token
-                        throw Error('No Token passed');
-                    }
-                    if(!res.headers[token_expire]){//check expiration time
-                        throw Error('No token expiration date');
-                    }
-                
-                    //save - general info accross on account
-                    //account type
-                    commit('setAccountType', res.data.accountType);
-                    localStorage.setItem('accountType', res.data.accountType);
-                    commit('setUsername', res.data.username);
-                    localStorage.setItem('username', res.data.username);
+                    dispatch('login', res);
 
-                    //get - necessary info - based on account type
-                    switch (accountType) {
-                        case 'profile':
-                            //get profile info
-                            dispatch('getProfile').then(res=>{//get new profile data from backend
-                                commit('setProfile', res);//save to state
-                                localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+                    resolve(res);
 
-                                pics = res.pics;
-                                //save pics
-                                commit('setPics', pics);
-                                localStorage.setItem('pics', JSON.stringify(pics));
-                            });
+            }).catch(err=>{
+                //TODO - interpret error first before returning reject 
+                console.log('Store login failed', err);
 
-                            break;
-
-                        case 'company':
-                            //get company info
-                            dispatch('getCompany').then(res=>{//get new profile data from backend
-                                commit('setCompany', res);//save to state
-                                localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
-
-                                pics = res.pics
-                                //save pics
-                                commit('setPics', pics);
-                                localStorage.setItem('pics', JSON.stringify(pics));
-                            });
-                            
-                            break;
-                            
-                        case 'staff': //not implemented yet
-
-                            
-                            break;
-                    
-                        default: // if none of the above  clear local storage - return to login
-                            dispatch('logout');
-                            break;
-                    }
-                    
-                //save - necessary info - based on account type
-                
-                    
-                //TODO: find better solution than local storage - use cookies perhaps?
-                //save token to state and localstorage
-                const token = res.headers[token_header];
-                commit('setToken', token);
-                localStorage.setItem('token', token);
-
-                //save token expiration date to localstorage
-                const dateExpire = new Date(res.headers[token_expire]* 1000); // multiplies seconds by miliseconds
-                localStorage.setItem('exp', dateExpire);
-
-                dispatch('autoLogout');
-
-                //return promise - let component handle routing and other steps
-                resolve(res);
-
-                }).catch(err=>{
-                    //TODO - interpret error first before returning reject 
-                    console.log('Store login failed', err);
-                    //return false with error message
-                    reject(err);
-                });
+                commit('setErrorMessage', "Connection error, problem sending request.");
+                //return false with error message
+                reject(err);
+            });
         });
     },
-    autoLogin:({commit, getters, dispatch})=>{//TODO change to autoLogin
+    login:( {state, getters, commit, dispatch}, payload)=>{
+        //headers
+        let token_header = nameSpace.token_header//app token header name used
+        let token_expire = nameSpace.token_expire//app token expiration name used
+        //account tpye
+        const accountType = payload.data.accountType;
+        let pics;
+        
+        //TODO: check cookie as well
+        //validation
+        if(!payload.headers[token_header]){//check token
+            throw Error('No Token passed');
+        }
+        if(!payload.headers[token_expire]){//check expiration time
+            throw Error('No token expiration date');
+        }
+
+        //TODO: find better solution than local storage - use cookies perhaps?
+        const token = payload.headers[token_header];
+        const dateExpire = new Date(payload.headers[token_expire]* 1000); // multiplies seconds by miliseconds
+
+        //save to state
+        commit('setAccountType', payload.data.accountType);
+        commit('setUsername', payload.data.username);
+        commit('setToken', token);
+        
+        //save to storage
+        if(getters.getAllowStorage){
+            //response header
+            localStorage.setItem('token', token);
+            localStorage.setItem('exp', dateExpire);
+            //response body
+            localStorage.setItem('username', payload.data.username);
+            localStorage.setItem('accountType', payload.data.accountType);
+        }
+
+        //get - necessary info - based on account type
+        switch (accountType) {
+            case 'profile':
+                //get profile info
+                dispatch('getProfile').then(res=>{//get new profile data from backend
+                    //REMOVED: already done in getProfile action
+                    // commit('setProfile', res);//save to state
+                    // localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
+                });
+
+                break;
+
+            case 'company':
+                //get company info
+                dispatch('getCompany').then(res=>{//get new profile data from backend
+                    //REMOVED: already in getCompany actions
+                    // commit('setCompany', res);//save to state
+                    // localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
+
+                    // pics = res.pics
+                    // //save pics
+                    // commit('setPics', pics);
+                    // localStorage.setItem('pics', JSON.stringify(pics));
+                });
+                
+                break;
+                
+            case 'staff': //not implemented yet
+
+                
+                break;
+        
+            default: // if none of the above  clear local storage - return to login
+                dispatch('logout');
+                break;
+        }
+
+        dispatch('autoLogout');
+    },
+    autoLogin:({commit, getters, dispatch})=>{//TODO: check that token is authentic - or change to cookie
         let token = getters.hasToken;
         let localStorageToken = localStorage.getItem('token');
-        
+
+
+        //router handles the login - it checks the state and localStorage
         if(!token && localStorageToken){
             commit('setToken', localStorageToken);
         }
         if(!localStorageToken && token){
-            localStorage.setItem('token', token);
-        }
 
-        return true;
+            if(getters.getAllowStorage){//TODO:change to cookie
+                localStorage.setItem('token', token);
+            }
+        }
     }
 }
 

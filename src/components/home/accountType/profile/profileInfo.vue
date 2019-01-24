@@ -28,6 +28,9 @@
                             </span>
                         </span>
                     </span>
+                    <span v-else-if="value && property == 'birthdate'"> <!--handling date string-->
+                        {{property}}: {{parseBirthdate(value)}}
+                    </span>
                     <span v-else>
                         <span v-if="value && typeof value === 'string'"><!--only show if it has value-->
                             {{property}} : {{value}}
@@ -40,6 +43,17 @@
 </template>
 <script>
 export default {
+    methods:{
+        parseBirthdate(birthdate){
+            let date = new Date(birthdate);
+
+            const month = date.getUTCMonth()+1; //zero based
+            const day = date.getUTCDate();
+            const year = date.getUTCFullYear();
+
+            return `${month}/${day}/${year}`;
+        }
+    },
     computed:{
         profile(){
             const stateProfile = this.$store.getters.getProfile;
@@ -75,7 +89,7 @@ export default {
             
                 return fullName.trim();
             }else{
-                return "Unknown Profile"
+                return "Unknown Profile";
             }
         },
         url(){

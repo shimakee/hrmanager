@@ -35,6 +35,9 @@ export default {
     margin: 0;
     grid-row: 1/2;
     grid-column: 1/-1;
+    background-color: rgb(6, 11, 80);
+    color:beige;
+    padding: 0px 10px; 
 }
 .tab-input{
     grid-row: 1/2;

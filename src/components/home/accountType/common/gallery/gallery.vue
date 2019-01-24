@@ -1,6 +1,14 @@
 <template>
     <div> 
-        <h3>Carder Post, news and announcement</h3>
+        GAllery
+        <ul>
+            <li v-for="(pic, key) in pics" :key="key" class="card-pic">
+                <img :src="'http://localhost/file/photo/me?name='+pic.filename" :alt="pic.filename" srcset="">
+                <p class="description">
+                    {{pic.filename}}
+                </p>
+            </li>
+        </ul>
         
     </div>
 </template>

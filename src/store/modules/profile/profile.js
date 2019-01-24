@@ -21,12 +21,28 @@ const mutations = {
     }
 }
 const actions = {
-    getProfile:({dispatch})=>{
+    getProfile:({getters, dispatch, commit})=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/profile/me', method:'get', data:null}) //TODO: change depending on account type
             .then(res=>{
+                let pics;
+                if(res.data.pics){
+                    pics = res.data.pics;
+                }else{
+                    pics = [];
+                }
+
+                //save to storage
+                if(getters.getAllowStorage){//TODO: change to cookie
+                    localStorage.setItem('profile', JSON.stringify(res.data));
+                    localStorage.setItem('pics', JSON.stringify(pics));
+                }
+                
+                //save to state
+                commit('setProfile', res.data);
+                commit('setPics', pics);
+
                 resolve(res.data);
-                console.trace('response data', res.data);
             }).catch(err=>{
                 reject(err);
             });

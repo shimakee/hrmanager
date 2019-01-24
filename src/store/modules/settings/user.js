@@ -1,16 +1,48 @@
 import {router} from '../../../main';
 
 const state = {
+    username:null,
+    accountType:null,
+    pics:null
 }
 const getters = {
+    getUsername:(state)=>{//get data on state
+        return state.username;
+    },
+    getAccountType:(state)=>{
+        return state.accountType;
+    },
+    getPics:(state)=>{
+        return state.pics;
+    }
 }
 const mutations = {
+    setUsername:(state, payload)=>{//set data on state
+        state.username = payload;
+    },
+    setAccountType:(state, payload)=>{//set token on state
+        state.accountType = payload;
+    },
+    setPics:(state, payload)=>{
+        state.pics = payload;
+    },
 }
 const actions = {
-    getUser:({commit, dispatch})=>{
+    getUser:({state, commit, dispatch})=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/user/me', method: 'get', data: null})
                 .then(res=>{
+
+                    if(state.allowLocalStorage){//TODO: change to cookie
+                        //save to localstorage
+                        localStorage.setItem("username", res.username);
+                        localStorage.setItem("accountType", res.accountType);
+                    }
+
+                    //save to state
+                    commit("setUsername", res.username);
+                    commit("setAccountType", res.accountType);
+
                     resolve(res);
                 }).catch(err=>{
                     reject(err);

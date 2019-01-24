@@ -50,20 +50,15 @@ export default {
             const stateAccount = this.$store.getters.getAccountType;
             let accountType = stateAccount || localAccount;
 
-            if(!accountType){
+            if(accountType){
+                return accountType;
+            }else{
                 this.$store.dispatch('getUser').then(res=>{
-                        //save username
-                        localStorage.setItem("accountType", res.accountType);
-                        this.$store.commit("setAccountType", res.accountType);
-                        //save account type
-                        localStorage.setItem("username", res.username);
-                        this.$store.commit("setUsername", res.username);
 
-                        accountType = res.accountType;
-                    });
+                    return res.accountType;
+                });
             }
 
-            return accountType;
         }
     },
     methods:{

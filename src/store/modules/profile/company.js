@@ -1,31 +1,56 @@
 
 
 const state = {
-    company:null
+    company:null,
+    tradename: null
 }
 const getters = {
     getCompany:(state)=>{
         return state.company;
+    },
+    getTradename:(state)=>{
+        return state.tradename;
     }
 }
 const mutations = {
     setCompany:(state, payload)=>{
         state.company = payload;
+    },
+    setTradename:(state, payload)=>{
+        state.tradename = payload;
     }
 }
 const actions = {
-    getCompany:({dispatch})=>{
+    getCompany:({getters, commit, dispatch})=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/company/me', method:'get', data:null}) //TODO: change depending on account type
             .then(res=>{
+                let pics; 
+                if(res.data.pics){
+                    pics = res.data.pics;
+                }else{
+                    pics = [];
+                }
+
+                //save to storage
+                if(getters.getAllowStorage){ //TODO: change to cookie
+                    localStorage.setItem('company', JSON.stringify(res.data)); //save to localstorage
+                    localStorage.setItem('tradename', res.data.tradename);
+                    localStorage.setItem('pics', JSON.stringify(pics));
+                }
+                
+                //save to state
+                commit('setCompany', res.data);
+                commit('setTradename', res.data.tradename);
+                commit('setPics', pics);
+
                 resolve(res.data);
-                console.trace('response data', res.data);
             }).catch(err=>{
                 reject(err);
             });
         });
     },
-    updateProfile:({dispatch}, payload)=>{
+    updateCompany:({dispatch}, payload)=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/company/me', method: 'put', data: payload})
                 .then(res=>{

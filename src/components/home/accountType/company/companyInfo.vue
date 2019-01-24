@@ -44,34 +44,34 @@ export default {
             const stateCompany = this.$store.getters.getCompany;
             let company = stateCompany || cachedCompany;
 
-            if(!company){
+            if(company){
+                return company
+            }else{
                 this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
-                    this.$store.commit('setCompany', res);//save to state
-                    localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
 
-                    company = res;
+                    return res;
                 });
             }
-
-            return company;
         },
         tradename(){
             let company = this.company;
+            
+            if(company){
+                return this.company.tradename;
+            }else{
+                const cachedTradename = JSON.parse(localStorage.getItem('tradename'));
+                const stateTradename = this.$store.getters.getTradename;
+                let tradename = stateTradename || cachedTradename;
 
-            // if(!company){
-            //     const cachedCompany = JSON.parse(localStorage.getItem('company'));
-            //     const stateCompany = this.$store.getters.getCompany;
-            //     company = stateCompany || cachedCompany;
+                if(tradename){
+                    return tradename;
+                }else{
+                    this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
 
-            // }
-
-            // if(company){
-            //     return this.company.tradename;
-            // }else{
-            //     return "Tradename";
-            // }
-
-            return company.tradename;
+                        return res.tradename;
+                    });
+                }
+            }
         },
         url(){
             const cachedCompany = JSON.parse(localStorage.getItem('company'));

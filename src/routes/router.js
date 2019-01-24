@@ -19,6 +19,7 @@ import Register from '../components/landingPage/components/register';
 import HomeContentContainer from '../components/home/accountType/homeContentContainer';
 import HomeDefaulContent from '../components/home/accountType/common/homeDefaultContent';
 import Actions from '../components/home/accountType/common/actions';
+import Gallery from '../components/home/accountType/common/gallery/gallery';
 
 //Home - profile
 import ProfileInfo from '../components/home/accountType/profile/profileInfo';
@@ -153,16 +154,18 @@ export const routes = [
                         children:[
                             {path: "", 
                                 components:{
+                                    editProfile: EditProfile,
+                                    editRelatives: EditRelatives,
+                    
+                                    editAddress: Address,
+                                    contact: Contact,
+                                    editGov: EditGov,
+
                                     default: DeleteAccount,
                                     editPic: EditPic,
                                     changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,
-                                    editProfile: EditProfile,
-                                    editRelatives: EditRelatives,
-                                    editAddress: Address,
-                                    contact: Contact,
-                                    editGov: EditGov
                                 }
                             }
                         ]
@@ -170,7 +173,7 @@ export const routes = [
                     },
                     {path:"gallery", name:"gallery",
                         components:{
-                            default: HomeDefaulContent
+                            default: Gallery
                         }
                         // ,
                         // children:[

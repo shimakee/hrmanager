@@ -53,7 +53,7 @@ export default {
 
             
             if(username && password){
-                this.$store.dispatch('login', this.user)
+                this.$store.dispatch('sendLogin', this.user)
                     .then(res=>{
                         //clear messages
                         this.$store.commit('setInfoMessage', null);

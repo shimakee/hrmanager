@@ -15,23 +15,17 @@ Vue.use(Vuex);
     
 export const store = new Vuex.Store({
     state:{
-        username:null,
-        data:null, //data to be rendered
         token:null, //response token obtained
-        accountType:null,
         timeout: null, //autologout feature countdown
         resetToken: null, //token data for reseting account
-        pics:null,
         errorMessage: null,
-        infoMessage: null
+        infoMessage: null,
+        allowLocalStorage: true //if true stores & check localstorage before sending get requests
 
     },
     getters:{
-        getUsername:(state)=>{//get data on state
-            return state.username;
-        },
-        getData:(state)=>{//get data on state
-            return state.data;
+        getAllowStorage:(state)=>{
+            return state.allowLocalStorage;
         },
         getToken:(state)=>{//get token header on response
             return state.token;
@@ -39,14 +33,8 @@ export const store = new Vuex.Store({
         hasToken:(state)=>{ //return boolean without exposing token
             return state.token !== null;
         },
-        getAccountType:(state)=>{
-            return state.accountType;
-        },
         getResetToken:(state)=>{
             return state.resetToken;
-        },
-        getPics:(state)=>{
-            return state.pics;
         },
         getErrorMessage:(state)=>{
             return state.errorMessage;
@@ -58,33 +46,18 @@ export const store = new Vuex.Store({
 
     },
     mutations:{//mutate state
-        // setLoginStatus(state, payload = false){
-        //     state.loginStatus = payload;
-        // },
-        setUsername:(state, payload)=>{//set data on state
-            state.username = payload;
-        },
-        setData:(state, payload)=>{//set data on state
-            state.data = payload;
-        },
         clearAuthData:(state)=>{
             state.data = null;
             state.token = null;
         },
-        setToken:(state, payload)=>{//set token on state
-            state.token = payload;
-        },
-        setAccountType:(state, payload)=>{//set token on state
-            state.accountType = payload;
-        },
         setLogoutTime:(state, payload)=>{
             state.timeout = payload;
         },
+        setToken:(state, payload)=>{//set token on state
+            state.token = payload;
+        },
         setResetToken:(state, payload)=>{
             state.resetToken = payload;
-        },
-        setPics:(state, payload)=>{
-            state.pics = payload;
         },
         setErrorMessage:(state, payload)=>{
             state.errorMessage = payload;
@@ -95,17 +68,9 @@ export const store = new Vuex.Store({
         
     },
     actions:{ //can be used for async task like sending data to DB
-        autoSetData:({commit, getters})=>{//TODO change to autoLogin
-            let data = getters.getData;
-            let localData = localStorage.getItem('data');
-
-            if(!data && localData){
-                commit('setData', JSON.parse(localData));
-            }
-
-            if(!localData && data){
-                localStorage.setItem('data', JSON.stringify(data)); //TODO refactor to use vuex actions
-            }
+        maintainData:({dispatch}, payload)=>{
+            //TODO: this pulls data from backend based on account type, commits them to state and storage;
+            //NOTE* this action should remove components from individually loading their own data;
         },
         sendCommit:({state}, payload)=>{
             return  new Promise((resolve, reject)=>{
