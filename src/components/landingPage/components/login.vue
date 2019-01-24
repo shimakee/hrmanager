@@ -11,7 +11,9 @@
                 <input type="password" v-model="user.password" placeholder="Password">
             </div>
             <a @click.prevent="submitReset">Forgot Password?</a>
-            <button class="btn primary" @click.prevent="submitLogin">Send</button>
+
+            <button v-if="!loginSubmitted" class="btn primary" @click.prevent="submitLogin">Send</button>
+            <span v-else class="info">Submitting...</span>
 
             <br>
             <span class="error" v-if="errorMessage">
@@ -48,6 +50,7 @@ export default {
         submitLogin(){
             this.loginSubmitted=true;
             
+            //TODO:clientside form validation
             const username = this.user.username;
             const password = this.user.password;
 
@@ -69,6 +72,7 @@ export default {
                         this.$store.commit('setErrorMessage', err.response.statusText);
                     });
             }else{
+                this.loginSubmitted=false;
                 //TODO: change to switch statement
                 //clientside validation
                 if(!username && !password){//error no input
@@ -111,6 +115,9 @@ export default {
                 this.$store.commit('setErrorMessage', 'Input required on username.');
             }
         }
+    },
+    mounted(){
+        this.$store.dispatch('clearDIsplayMessages');
     }
 }
 </script>

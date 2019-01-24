@@ -16,6 +16,7 @@ export default {
       }
   },
   created(){
+    //TODO: auto set state, cookie, and storage - or maybe in home component
       this.$store.dispatch('autoLogin');
   }
 }

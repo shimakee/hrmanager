@@ -1548,3 +1548,4 @@
 {"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2019-01-24T06:04:30.032Z"}
 {"level":"info","message":"listening on port 80...","timestamp":"2019-01-24T06:04:30.032Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2019-01-24T06:04:32.196Z"}
+{"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2019-01-24T07:09:01.583Z"}

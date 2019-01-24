@@ -38,7 +38,13 @@
                 </select>
             </div>
 
-            <button class="btn primary" @click.prevent="submit">Send</button>
+            <button v-if="!submitted" class="btn primary" @click.prevent="submit">Send</button>
+            <span v-else class="info">{{infoMessage}}</span>
+
+            <br>
+            <span class="error" v-if="errorMessage">
+                {{errorMessage}}
+            </span>
 
         </form>
     </div>
@@ -76,25 +82,55 @@ export default {
         submit(){
             this.submitted = true;
 
+            //set info and error messages
+            this.$store.commit('setInfoMessage', "Submitting...");
+            this.$store.commit('setErrorMessage', null);
+
             this.$store.dispatch('register', this.identity)
                 .then(res=>{
-                    console.log(res);
+
+                    this.$store.commit('setInfoMessage', null);
+                    this.$store.commit('setErrorMessage', null);
 
                     this.$router.push('/home');
                 }).catch(err=>{
                     this.submitted = false
-                    console.log(err);
 
                     //display error message
-                    console.log('signup failed');
+                    this.$store.commit('setErrorMessage', "Registration failed.");
                 });
         }
     },
     computed:{
+        errorMessage(){
+            return this.$store.getters.getErrorMessage;
+        },
+        infoMessage(){
+            return this.$store.getters.getInfoMessage;
+        }
+    },
+    mounted(){
+        this.$store.dispatch('clearDIsplayMessages');
     }
 }
 </script>
 <style scoped>
+.info{
+    color: rgb(45, 236, 19);
+    font-family: sans-serif;
+    text-shadow: 0px 0px 1px rgb(6, 11, 80);
+    font-weight: bolder;
+    text-align: center;
+    grid-column: 1/-1;
+}
+.error{
+    color: rgb(240, 16, 54);
+    font-family: sans-serif;
+    text-shadow: 0px 0px 1px rgb(6, 11, 80);
+    font-weight: bolder;
+    text-align: center;
+    grid-column: 1/-1;
+}
 .register-form{
     display:grid;
     grid-template-columns: 1fr;

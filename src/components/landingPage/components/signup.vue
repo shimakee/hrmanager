@@ -53,7 +53,9 @@
                 </select>
             </div>
 
-            <button class="btn primary" @click.prevent="submit">Send</button>
+            <button v-if="!submitted" class="btn primary" @click.prevent="submit">Send</button>
+            <span v-else class="info">{{infoMessage}}</span>
+            <span v-if="errorMessage" class="error">{{errorMessage}}</span>
 
         </form>
     </div>
@@ -86,29 +88,117 @@ export default {
             submitted: false
         }
     },
-    methods:{
-        submit(){
-            this.submitted = true;
-
-            this.$store.dispatch('signup', this.identity)
-                .then(res=>{
-                    console.log(res);
-
-                    this.$router.push('/home');
-                }).catch(err=>{
-                    this.submitted = false
-                    console.log(err);
-
-                    //display error message
-                    console.log('signup failed');
-                });
+    computed:{
+        errorMessage(){
+            return this.$store.getters.getErrorMessage;
+        },
+        infoMessage(){
+            return this.$store.getters.getInfoMessage;
         }
     },
-    computed:{
+    methods:{
+        submit(){
+            this.submitted = true; 
+            // const form = this.identity;
+            // let missing = [];
+            // let required = ['username', 'password', 'passConfirm', 'email', 'first', 'last', 'gender', 'civilStatus']
+
+            //set info and error messages
+            this.$store.commit('setInfoMessage', "Submitting...");
+            this.$store.commit('setErrorMessage', null);
+
+            //TODO: do a better clientside form validation
+            // for (const key in form) {
+            //     if (form.hasOwnProperty(key)) {
+            //         const element = form[key];
+
+            //         if(typeof element === "object"){
+            //             for (const k in element) {
+            //                 if (element.hasOwnProperty(k)) {
+            //                     const e = element[k];
+
+            //                     if(typeof e === 'object'){
+
+            //                         for (const y in e) {
+            //                             if (e.hasOwnProperty(y)) {
+            //                                 const x = e[y];
+                                            
+            //                                 if(!x && required.includes(y)){
+            //                                     missing.push(y);
+            //                                 }
+            //                             }
+            //                         }
+
+            //                     }else{
+            //                         if(!e && required.includes(k)){
+            //                             missing.push(k);
+            //                         }
+            //                     }
+
+            //                 }
+            //             }
+            //         }else{
+            //             if(!element && required.includes(key)){
+            //                 missing.push(key);
+            //             }
+            //         }
+                    
+            //     }
+            // }
+
+            // if(missing.length >= 1){
+            //     this.submitted = false
+            //     let error = "";
+
+            //     missing.forEach(element => {
+            //         error += " " + element;
+            //     });
+            //     error += " are required."
+            //     error.trim();
+
+            //     this.$store.commit('setErrorMessage', error);
+            // }else{
+                this.$store.dispatch('signup', this.identity)
+                    .then(res=>{
+                        
+                        //clear error message
+                        this.$store.commit('setInfoMessage', null);
+                        this.$store.commit('setErrorMessage', null);
+                        this.$router.push('/home');
+                    }).catch(err=>{
+                        this.submitted = false
+    
+                        //display error message
+                        this.$store.commit('setErrorMessage', "Signup failed.");
+                        this.$store.commit('setInfoMessage', null);
+                    });
+            // }
+
+        }
+    },
+    mounted(){
+        this.$store.dispatch('clearDIsplayMessages');
     }
 }
 </script>
 <style scoped>
+
+.info{
+    color: rgb(45, 236, 19);
+    font-family: sans-serif;
+    text-shadow: 0px 0px 1px rgb(6, 11, 80);
+    font-weight: bolder;
+    text-align: center;
+    grid-column: 1/-1;
+}
+.error{
+    color: rgb(240, 16, 54);
+    font-family: sans-serif;
+    text-shadow: 0px 0px 1px rgb(6, 11, 80);
+    font-weight: bolder;
+    text-align: center;
+    grid-column: 1/-1;
+}
 .signup-form{
     display:grid;
     grid-template-columns: 1fr;
