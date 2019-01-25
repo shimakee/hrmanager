@@ -27,10 +27,13 @@ const actions = {
                     resolve(res);
 
             }).catch(err=>{
-                //TODO - interpret error first before returning reject 
-                console.log('Store login failed', err);
+                //TODO - interpret error first before returning reject
+                
+                //for component to display error message
+                err.response = {
+                    statusText: "Connection error, problem sending request."
+                };
 
-                commit('setErrorMessage', "Connection error, problem sending request.");
                 //return false with error message
                 reject(err);
             });
@@ -75,11 +78,7 @@ const actions = {
         //get - necessary info - based on account type
         switch (accountType) {
             case 'profile':
-                //get profile info
                 dispatch('getProfile').then(res=>{//get new profile data from backend
-                    //REMOVED: already done in getProfile action
-                    // commit('setProfile', res);//save to state
-                    // localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
                 });
 
                 break;
@@ -87,14 +86,6 @@ const actions = {
             case 'company':
                 //get company info
                 dispatch('getCompany').then(res=>{//get new profile data from backend
-                    //REMOVED: already in getCompany actions
-                    // commit('setCompany', res);//save to state
-                    // localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
-
-                    // pics = res.pics
-                    // //save pics
-                    // commit('setPics', pics);
-                    // localStorage.setItem('pics', JSON.stringify(pics));
                 });
                 
                 break;
@@ -114,7 +105,6 @@ const actions = {
     autoLogin:({commit, getters, dispatch})=>{//TODO: check that token is authentic - or change to cookie
         let token = getters.hasToken;
         let localStorageToken = localStorage.getItem('token');
-
 
         //router handles the login - it checks the state and localStorage
         if(!token && localStorageToken){

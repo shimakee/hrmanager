@@ -47,7 +47,10 @@ export default {
         }
     }
     ,created(){
-        this.$store.dispatch('autoLogout'); 
+        this.$store.dispatch('maintainData')
+            .then(res=>{
+                this.$store.dispatch('autoLogin');
+            });
     }
 }
 </script>

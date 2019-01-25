@@ -28,20 +28,20 @@ const mutations = {
     },
 }
 const actions = {
-    getUser:({state, commit, dispatch})=>{
+    getUser:({getters, commit, dispatch})=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/user/me', method: 'get', data: null})
                 .then(res=>{
 
-                    if(state.allowLocalStorage){//TODO: change to cookie
+                    if(getters.allowStorage){//TODO: change to cookie
                         //save to localstorage
-                        localStorage.setItem("username", res.username);
-                        localStorage.setItem("accountType", res.accountType);
+                        localStorage.setItem("username", res.data.username);
+                        localStorage.setItem("accountType", res.data.accountType);
                     }
 
                     //save to state
-                    commit("setUsername", res.username);
-                    commit("setAccountType", res.accountType);
+                    commit("setUsername", res.data.username);
+                    commit("setAccountType", res.data.accountType);
 
                     resolve(res);
                 }).catch(err=>{

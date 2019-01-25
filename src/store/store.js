@@ -68,15 +68,22 @@ export const store = new Vuex.Store({
         
     },
     actions:{ //can be used for async task like sending data to DB
-        clearDIsplayMessages:({commit})=>{
+        clearDisplayMessages:({commit})=>{
             
             //display error message
             commit('setErrorMessage', null);
             commit('setInfoMessage', null);
         },
-        maintainData:({dispatch}, payload)=>{
-            //TODO: this pulls data from backend based on account type, commits them to state and storage;
+        maintainData:({getters, commit, dispatch}, payload)=>{//this pulls data from backend based on account type, commits them to state and storage;
+            //TODO: change to cookies instead of localStorage
             //NOTE* this action should remove components from individually loading their own data;
+            
+            dispatch('getUser')
+            .then(res=>{
+
+                dispatch('login', res);
+            });
+
         },
         sendCommit:({state}, payload)=>{
             return  new Promise((resolve, reject)=>{

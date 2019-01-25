@@ -33,15 +33,6 @@ export default {
                 vm.to = url;
         }
     }
-    ,beforeMount(){
-        // let path = window.location.pathname; //get path
-        
-        // if(path == '/login'){
-        //     this.to = 'signup';
-        // }else if(path = '/signup'){
-        //     this.to = 'login';
-        // }
-    }
 }
 </script>
 <style scoped>

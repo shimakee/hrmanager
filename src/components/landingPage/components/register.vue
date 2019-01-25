@@ -109,8 +109,8 @@ export default {
             return this.$store.getters.getInfoMessage;
         }
     },
-    mounted(){
-        this.$store.dispatch('clearDIsplayMessages');
+    beforeMount(){
+        this.$store.dispatch('clearDisplayMessages');
     }
 }
 </script>

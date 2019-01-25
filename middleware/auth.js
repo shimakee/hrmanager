@@ -1,5 +1,6 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const isObjectId = require('../util/tools').validate.isObjectId;
 
 //TODO: //role.isAllowed
 
@@ -17,6 +18,15 @@ const auth = {
             const decoded = jwt.verify(token, config.get('token'));
 
             req.user = decoded;
+
+            //profile must be an object id; - TODO: no longer needed - but left just incase
+            // if(!isObjectId(decoded.profile)){
+            //     if(isObjectId(decoded.profile._id)){
+            //         req.user.profile = decoded.profile._id;
+            //     }else{
+            //         throw Error('No object id to attach to profile authentication middleware.');
+            //     }
+            // }
 
             next();
         }catch(ex){

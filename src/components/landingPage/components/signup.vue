@@ -176,8 +176,8 @@ export default {
 
         }
     },
-    mounted(){
-        this.$store.dispatch('clearDIsplayMessages');
+    beforeMount(){
+        this.$store.dispatch('clearDisplayMessages');
     }
 }
 </script>

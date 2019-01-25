@@ -213,10 +213,21 @@ router.route('/reset').post(async (req,res,next)=>{//TODO: send email
 
 //get username
 router.route('/me').get(auth.isAuth, async (req,res,next)=>{
-    let user = await User.findById(req.user._id).populate('profile').populate('company').populate('employment._id').exec();
+    // let user = await User.findById(req.user._id).populate('profile').populate('company').populate('employment._id').exec();
+    let user = await User.findById(req.user._id).exec();
+
+    const token = user.genAuthToken();//generate token
+    const decode = User.getTokenTime(token); //decode token info
+    const expireDate = new Date(decode.exp * 1000); //set expiration
+
+    return res.status(200)
+        .header(config.get('token_header'), token)
+        .header('exp', decode.exp)
+        .cookie('token', token, {expires: expireDate, signed: true})
+        .send(user.response());
 
     //change to pick instead of omit - err in the side of safety
-    return res.status(200).send(_.omit(user.toObject(), ['_id', 'profile._id', 'password' ]));
+    // return res.status(200).send(_.omit(user.toObject(), ['_id', 'profile._id', 'password' ]));
 
 
 //edit username

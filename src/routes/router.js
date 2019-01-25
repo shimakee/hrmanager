@@ -50,16 +50,16 @@ import googlemaps from '../store/modules/googlemaps/googlemaps';
 export const routes = [
     {path:'/login', component: LandingPage,
         beforeEnter:(to, from, next)=>{//check authentication status
-            const token = store.getters.hasToken;
-            const localToken = localStorage.getItem('token');
-            let accountType = store.getters.accountType; //check javascript for account type
-            if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+            // const token = store.getters.hasToken;
+            // const localToken = localStorage.getItem('token');
+            // let accountType = store.getters.accountType; //check javascript for account type
+            // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
 
-            if(token || localToken && accountType){
-                next({name:'home'});//if already logged in - redirect to home page
-            }else{
+            // if(token || localToken && accountType){
+            //     next({name:'home'});//if already logged in - redirect to home page
+            // }else{
                 next();
-            }
+            // }
         },
         children:[
             {path:'', name:'login', component: Login},
@@ -67,29 +67,29 @@ export const routes = [
             {path:'/register', name:'register', component: Register},
             {path:'/reset', component: Reset,
                 beforeEnter:(to, from, next)=>{
-                    const resetToken = to.query.token;//check that it has query token
-                    if(!resetToken){
-                            next(from.path);//return previous path if no token
-                    }else{
-                        store.commit('setResetToken', resetToken); //commit reset token
+                    // const resetToken = to.query.token;//check that it has query token
+                    // if(!resetToken){
+                    //         next(from.path);//return previous path if no token
+                    // }else{
+                    //     store.commit('setResetToken', resetToken); //commit reset token
                         next();
-                    }
+                    // }
                 }
             }
         ]
     }
     ,{path:'/',
         beforeEnter:(to, from, next)=>{
-            const token = store.getters.hasToken;
-            const localToken = localStorage.getItem('token');
-            let accountType = store.getters.accountType; //check javascript for account type
-            if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+            // const token = store.getters.hasToken;
+            // const localToken = localStorage.getItem('token');
+            // let accountType = store.getters.accountType; //check javascript for account type
+            // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
 
-            if(token || localToken){//check auth
+            // if(token || localToken){//check auth
                 next();
-            }else{
-                next({name: 'login'});//no auth return to login
-            }
+            // }else{
+            //     next({name: 'login'});//no auth return to login
+            // }
         },
         component: Home,
         children:[
@@ -125,15 +125,15 @@ export const routes = [
             //==================================================PROFILE
             {path:'/profile', 
                 beforeEnter:(to,from,next)=>{//only proceed if account type is profile
-                    let accountType = store.getters.accountType; //check javascript for account type
-                    if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+                    // let accountType = store.getters.accountType; //check javascript for account type
+                    // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
-                    if(!accountType || accountType !== 'profile'){
-                        console.trace('account', accountType);
-                        next({name:'login'});//no account type invalid login redirect to login
-                    }else{
+                    // if(!accountType || accountType !== 'profile'){
+                    //     console.trace('account', accountType);
+                    //     next({name:'login'});//no account type invalid login redirect to login
+                    // }else{
                         next();
-                    }
+                    // }
                 }, 
                 components: {
                     default: HomeContentContainer,
@@ -300,14 +300,14 @@ export const routes = [
             //these will be put to children
             {path:'/settings', component: Settings, //TODO: settings show based on account type
                 beforeEnter:(to, from, next)=>{
-                    const token = store.getters.hasToken;
-                    const localToken = localStorage.getItem('token');
+                    // const token = store.getters.hasToken;
+                    // const localToken = localStorage.getItem('token');
 
-                    if(token || localToken){//check auth
+                    // if(token || localToken){//check auth
                         next();
-                    }else{
-                        next({name: 'login'});//no auth return to login
-                    }
+                    // }else{
+                    //     next({name: 'login'});//no auth return to login
+                    // }
                 },
                 children:[
                     {path:'/', name:'settings', redirect:'account'},

@@ -56,7 +56,7 @@ export default {
 
             
             if(username && password){
-                this.$store.dispatch('sendLogin', this.user)
+                this.$store.dispatch('sendLogin', this.user)//send login
                     .then(res=>{
                         //clear messages
                         this.$store.commit('setInfoMessage', null);
@@ -67,9 +67,11 @@ export default {
                     }).catch(err=>{
                         this.loginSubmitted=false;
     
-                        //display error message
-                        console.log('login vue failed', err.response);
-                        this.$store.commit('setErrorMessage', err.response.statusText);
+                        if(err.response){
+                            //display error message
+                            console.log('login vue failed', err.response);
+                            this.$store.commit('setErrorMessage', err.response.statusText);
+                        }
                     });
             }else{
                 this.loginSubmitted=false;
@@ -116,8 +118,8 @@ export default {
             }
         }
     },
-    mounted(){
-        this.$store.dispatch('clearDIsplayMessages');
+    beforeMount(){
+        this.$store.dispatch('clearDisplayMessages');
     }
 }
 </script>
