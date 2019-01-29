@@ -1,45 +1,43 @@
 <template>
-    <!-- <div> -->
-        <div class="profile">
-            <div class="container">
-                <div class="avatar-container">
-                    <img class="avatar" :src='url' :alt="fullName">
-                </div>
-                <p class="description">{{fullName}}</p>
+    <div class="profile">
+        <div class="container">
+            <div class="avatar-container">
+                <img class="avatar" :src='url' :alt="fullName">
             </div>
+            <p class="description">{{fullName}}</p>
+        </div>
 
-                <!-- TODO make into individual components -->
-            <ul class="info">
-                <li v-for="(value, property) in profile" v-bind:key="property"> <!--loop through profile properties-->
+            <!-- TODO make into individual components -->
+        <ul class="info">
+            <li v-for="(value, property) in profile" v-bind:key="property"> <!--loop through profile properties-->
 
-                    <span v-if="typeof value === 'object'"><!--loop property if property is another object-->
-                        <span v-if="value && property === 'email'"><!--only show if it has value && special case for email-->
-                            {{property}}:   <span v-for="(object, prop) in value" v-bind:key="prop">
-                                                <span v-if="object.main === true"> <!--only show main email-->
-                                                    {{object.address}}
-                                                </span>
+                <span v-if="typeof value === 'object'"><!--loop property if property is another object-->
+                    <span v-if="value && property === 'email'"><!--only show if it has value && special case for email-->
+                        {{property}}:   <span v-for="(object, prop) in value" v-bind:key="prop">
+                                            <span v-if="object.main === true"> <!--only show main email-->
+                                                {{object.address}}
                                             </span>
-                        </span>
-                        <span v-else>
-                            <span v-if="value && typeof value === 'string'"><!--only show if it has value-->
-                                {{property}}:   <span v-for="(item, k) in value" v-bind:key="k">
-                                                    {{item}}
-                                                </span>
-                            </span>
-                        </span>
-                    </span>
-                    <span v-else-if="value && property == 'birthdate'"> <!--handling date string-->
-                        {{property}}: {{parseBirthdate(value)}}
+                                        </span>
                     </span>
                     <span v-else>
                         <span v-if="value && typeof value === 'string'"><!--only show if it has value-->
-                            {{property}} : {{value}}
+                            {{property}}:   <span v-for="(item, k) in value" v-bind:key="k">
+                                                {{item}}
+                                            </span>
                         </span>
                     </span>
-                </li>     
-            </ul>
-        </div>
-    <!-- </div> -->
+                </span>
+                <span v-else-if="value && property == 'birthdate'"> <!--handling date string-->
+                    {{property}}: {{parseBirthdate(value)}}
+                </span>
+                <span v-else>
+                    <span v-if="value && typeof value === 'string'"><!--only show if it has value-->
+                        {{property}} : {{value}}
+                    </span>
+                </span>
+            </li>     
+        </ul>
+    </div>
 </template>
 <script>
 export default {

@@ -18,21 +18,20 @@ import Register from '../components/landingPage/components/register';
 //Home - others to do after profile
 import HomeContentContainer from '../components/home/accountType/homeContentContainer';
 import HomeDefaulContent from '../components/home/accountType/common/homeDefaultContent';
-import Actions from '../components/home/accountType/common/actions';
+import Actions from '../components/home/accountType/actions';
+import Info from '../components/home/accountType/info';
 import Gallery from '../components/home/accountType/common/gallery/gallery';
 
 //Home - profile
-import ProfileInfo from '../components/home/accountType/profile/profileInfo';
 import ProfileAccount from '../components/home/accountType/profile/profileAccount';
     //Home - profile - settings
-    import EditProfile from '../components/home/accountType/profile/editProfile';
+    import EditProfile from '../components/home/accountType/profile/profileEdit';
     import EditRelatives from '../components/home/accountType/common/editRelatives';
     import Address from '../components/home/accountType/common/address/address';
     import Contact from '../components/home/accountType/common/contact/contact';
     import EditGov from '../components/home/accountType/common/editGov';
 
 //home - company
-import CompanyInfo from '../components/home/accountType/company/companyInfo';
 
 
 //Settings -todo sort out
@@ -50,16 +49,14 @@ import googlemaps from '../store/modules/googlemaps/googlemaps';
 export const routes = [
     {path:'/login', component: LandingPage,
         beforeEnter:(to, from, next)=>{//check authentication status
-            // const token = store.getters.hasToken;
-            // const localToken = localStorage.getItem('token');
-            // let accountType = store.getters.accountType; //check javascript for account type
-            // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+            const TOKEN = localStorage.getItem('token'); //TODO; check cookie - instead of localStorage - or send request fortoken;
+            const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
 
-            // if(token || localToken && accountType){
-            //     next({name:'home'});//if already logged in - redirect to home page
-            // }else{
+            if(TOKEN && ACCOUNT_TYPE){
+                next({name:'home'});//if already logged in - redirect to home page
+            }else{
                 next();
-            // }
+            }
         },
         children:[
             {path:'', name:'login', component: Login},
@@ -67,42 +64,42 @@ export const routes = [
             {path:'/register', name:'register', component: Register},
             {path:'/reset', component: Reset,
                 beforeEnter:(to, from, next)=>{
-                    // const resetToken = to.query.token;//check that it has query token
-                    // if(!resetToken){
-                    //         next(from.path);//return previous path if no token
-                    // }else{
-                    //     store.commit('setResetToken', resetToken); //commit reset token
+                    const RESET_TOKEN = to.query.token;//check that it has query token
+                    if(!RESET_TOKEN){
+                            next(from.path);//return previous path if no token
+                    }else{
+                        store.commit('setResetToken', RESET_TOKEN); //commit reset token
                         next();
-                    // }
+                    }
                 }
             }
         ]
     }
     ,{path:'/',
         beforeEnter:(to, from, next)=>{
-            // const token = store.getters.hasToken;
-            // const localToken = localStorage.getItem('token');
-            // let accountType = store.getters.accountType; //check javascript for account type
+            const TOKEN = localStorage.getItem('token');
+            // let accountType = store.getters.getAccountType; //check javascript for account type
             // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
 
-            // if(token || localToken){//check auth
+            if(TOKEN){//check auth
                 next();
-            // }else{
-            //     next({name: 'login'});//no auth return to login
-            // }
+            }else{
+                next({name: 'login'});//no auth return to login
+            }
         },
         component: Home,
         children:[
             {path:'', name:'home', //index page - sort by account type - redirect
                 beforeEnter:(to,from,next)=>{
-                    let accountType = store.getters.accountType; //check javascript for account type
-                    if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+                    const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
+                    const TOKEN = localStorage.getItem('token');
+                    // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
-                    if(!accountType){
+                    if(!ACCOUNT_TYPE || !TOKEN){
                         next({name:'error'});//no account type invalid login redirect to login
                     }else{
-
-                        switch (accountType) { //push based on account type
+                        console.log(ACCOUNT_TYPE);
+                        switch (ACCOUNT_TYPE) { //push based on account type
                             case "profile":
                                 next({name:'profile'});
                                 break;
@@ -125,19 +122,19 @@ export const routes = [
             //==================================================PROFILE
             {path:'/profile', 
                 beforeEnter:(to,from,next)=>{//only proceed if account type is profile
-                    // let accountType = store.getters.accountType; //check javascript for account type
+                    const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
                     // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
-                    // if(!accountType || accountType !== 'profile'){
-                    //     console.trace('account', accountType);
-                    //     next({name:'login'});//no account type invalid login redirect to login
-                    // }else{
+                    if(!ACCOUNT_TYPE || ACCOUNT_TYPE !== 'profile'){
+                        console.trace('account', ACCOUNT_TYPE);
+                        next({name:'login'});//no account type invalid login redirect to login
+                    }else{
                         next();
-                    // }
+                    }
                 }, 
                 components: {
                     default: HomeContentContainer,
-                    info: ProfileInfo,
+                    info: Info,
                     actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
@@ -244,11 +241,11 @@ export const routes = [
             //==================================================COMPANY
             {path:'/company',  
                 beforeEnter:(to,from,next)=>{//only proceed if account type is company
-                    let accountType = store.getters.accountType; //check javascript for account type
-                    if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+                    const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
+                    // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
             
-                    if(!accountType || accountType !== 'company'){
-                        console.trace('account', accountType);
+                    if(!ACCOUNT_TYPE || ACCOUNT_TYPE !== 'company'){
+                        console.trace('account', ACCOUNT_TYPE);
                         next({name:'login'});//no account type invalid login redirect to login
                     }else{
                         next();
@@ -256,7 +253,7 @@ export const routes = [
                 }, 
                 components: {
                     default: HomeContentContainer,
-                    info: CompanyInfo,
+                    info: Info,
                     actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
@@ -300,14 +297,13 @@ export const routes = [
             //these will be put to children
             {path:'/settings', component: Settings, //TODO: settings show based on account type
                 beforeEnter:(to, from, next)=>{
-                    // const token = store.getters.hasToken;
-                    // const localToken = localStorage.getItem('token');
+                    const TOKEN = localStorage.getItem('token');
 
-                    // if(token || localToken){//check auth
+                    if(TOKEN){//check auth
                         next();
-                    // }else{
-                    //     next({name: 'login'});//no auth return to login
-                    // }
+                    }else{
+                        next({name: 'login'});//no auth return to login
+                    }
                 },
                 children:[
                     {path:'/', name:'settings', redirect:'account'},

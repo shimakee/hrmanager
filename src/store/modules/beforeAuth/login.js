@@ -64,6 +64,10 @@ const actions = {
         commit('setAccountType', payload.data.accountType);
         commit('setUsername', payload.data.username);
         commit('setToken', token);
+        //save and commit other common data as necessary
+        //address
+        //contact
+        //government
         
         //save to storage
         if(getters.getAllowStorage){
@@ -73,6 +77,11 @@ const actions = {
             //response body
             localStorage.setItem('username', payload.data.username);
             localStorage.setItem('accountType', payload.data.accountType);
+
+            //TODO: to implement - not yet doing anything with the data
+            localStorage.setItem('address', payload.data.address);
+            localStorage.setItem('contact', payload.data.contact);
+            localStorage.setItem('government', payload.data.government);
         }
 
         //get - necessary info - based on account type

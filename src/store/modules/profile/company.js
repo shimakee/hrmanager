@@ -37,12 +37,20 @@ const actions = {
                     localStorage.setItem('company', JSON.stringify(res.data)); //save to localstorage
                     localStorage.setItem('tradename', res.data.tradename);
                     localStorage.setItem('pics', JSON.stringify(pics));
+                    //TODO: to implement - not yet doing anything with the data
+                    localStorage.setItem('businesses', JSON.stringify(res.data.businesses));
+                    localStorage.setItem('employees', JSON.stringify(res.data.employees));
+                    localStorage.setItem('owner', JSON.stringify(res.data.owner));
                 }
                 
                 //save to state
                 commit('setCompany', res.data);
                 commit('setTradename', res.data.tradename);
                 commit('setPics', pics);
+                //save and commit other data when neccessarry
+                //businesses
+                //employees
+                //owner
 
                 resolve(res.data);
             }).catch(err=>{
