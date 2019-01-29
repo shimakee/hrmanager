@@ -44,6 +44,12 @@ const actions = {
 
                 resolve(res.data);
             }).catch(err=>{
+                
+                if(!err.response){//for component to display error message
+                    err.response = {
+                        statusText: "Connection error, problem sending profile request."
+                    };
+                }
                 reject(err);
             });
         });
@@ -54,6 +60,13 @@ const actions = {
                 .then(res=>{
                     resolve(res);
                 }).catch(err=>{
+
+                    if(!err.response){//for component to display error message
+                        err.response = {
+                            statusText: "Connection error, problem sending profile request."
+                        };
+                    }
+
                     reject(err);
                 });
         });

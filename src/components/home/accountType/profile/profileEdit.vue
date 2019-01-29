@@ -1,42 +1,64 @@
 <template>
+
     <div>
+        <div class="editButton" @click="editChange()">
+            <span v-if="edit">
+                Cancel
+            </span>
+            <span v-else>
+                Edit
+            </span>
+        </div>
         <form class="form-container">
             <div class="form-group">
                 <div class="label-group">
-                    <label class="input">Gender</label>
-                    <select v-model="formProfile.civilStatus" id="">
+                    <label class="input">Gender: </label>
+                    <select v-if="edit" v-model="formProfile.civilStatus" id="">
                         <option value="single">Single</option>
                         <option value="married">Married</option>
                         <option value="divorced">Divorced</option>
                         <option value="annulled">Annuled</option>
                         <option value="widowed">Widowed</option>
                     </select>
+                    <span v-if="!edit">
+                        {{formProfile.civilStatus }} 
+                    </span>
                 </div>
                 
                 <div class="label-group">
-                    <label>Birthdate</label>
-                    <input type="date" v-model="formProfile.birthdate">
+                    <label>Birthdate: </label>
+                    <input v-if="edit" type="date" v-model="formProfile.birthdate">
+                    <span v-if="!edit">
+                        {{parseBirthdate(formProfile.birthdate)}}
+                    </span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="form-group">
-                    <div>
-                        <label>male</label>
+                    <div v-if="!edit">
+                        <label>Gender: </label>
+                        {{formProfile.gender}}
+                    </div>
+                    <div v-if="edit">
+                        <label>Male</label>
                         <input type="radio" v-model="formProfile.gender" value="male">
                     </div>
-                    <div>
-                        <label>female</label>
+                    <div v-if="edit">
+                        <label>Female</label>
                         <input type="radio" v-model="formProfile.gender" value="female">
                     </div>
                 </div>
                 <div class="label-group">
-                    <label>Nationality</label>
-                    <input type="text" v-model="formProfile.nationality" placeholder="nationality">
+                    <label>Nationality: </label>
+                    <input v-if="edit" type="text" v-model="formProfile.nationality" placeholder="nationality">
+                    <span v-if="!edit">
+                        {{ formProfile.nationality}}
+                    </span>
                 </div>
             </div>
 
-            <div class="input-group">
+            <div v-if="edit" class="input-group">
                 <input type="text" v-model="formProfile.name.first" placeholder="first">
                 <input type="text" v-model="formProfile.name.middle" placeholder="middle">
                 <input type="text" v-model="formProfile.name.last" placeholder="last">
@@ -44,8 +66,15 @@
                 <input v-if="formProfile.gender === 'female' && formProfile.civilStatus !== 'single'"
                     type="text" v-model="formProfile.name.maiden" placeholder="maiden">
             </div>
+            <div v-if="!edit" class="input-group">
+                <span>{{formProfile.name.first}}</span>
+                <span>{{formProfile.name.middle}}</span>
+                <span>{{formProfile.name.last}}</span>
+                <span>{{formProfile.name.suffix}}</span>
+                <span v-if="formProfile.gender === 'female' && formProfile.civilStatus !== 'single'">{{formProfile.name.maiden}}</span>
+            </div>
 
-            <button @click.prevent="submit">Send</button>
+            <button v-if="edit" @click.prevent="submit">Send</button>
 
             <br>
             <span class="error" v-if="errorMessage">
@@ -69,24 +98,30 @@ export default {
                         civilStatus: "single",
                         nationality:"",
                         gender: "male",
-                        birthdate:""}
+                        birthdate: "10/18/1989"},
+            edit: false
         }
     },
     methods:{
         submit(){
 
+            //TODO: validation
+
             this.$store.dispatch('updateProfile', this.formProfile) //TODO: unit by account type - updateAccount information
                 .then(response=>{
                     this.$store.dispatch('getProfile')
                         .then(res=>{
-                            localStorage.setItem('profile', JSON.stringify(res));
-                            this.$store.commit('setProfile', res);
+                            // localStorage.setItem('profile', JSON.stringify(res));
+                            // this.$store.commit('setProfile', res);
+                            
+                            this.edit = false;
+                            //clear info and error messages
+                            this.$store.dispatch('clearDisplayMessages');
                     });
                     
                 }).catch(err=>{
-                    
-
-                    this.$store.commit('setErrorMessage', 'Account update failed. Invalid input.');
+                    // this.$store.commit('setErrorMessage', 'Account update failed. Invalid input.');
+                    this.$store.commit('setErrorMessage', err.response.statusText);
                 });
         },
         giveFormValue(data){
@@ -104,7 +139,19 @@ export default {
 
                     this.formProfile.nationality = data.nationality;
                     this.formProfile.gender = data.gender;
-                    this.formProfile.birthdate = data.birthdate;
+                    this.formProfile.birthdate = this.parseBirthdate(data.birthdate);
+        },
+        parseBirthdate(birthdate){
+            let date = new Date(birthdate);
+
+            const month = date.getMonth()+1; //zero based
+            const day = date.getDate();
+            const year = date.getFullYear();
+
+            return `${year}-${month}-${day}`; //use this format to be compatible with input format
+        },
+        editChange(){
+            this.edit = !this.edit;
         }
     },
     computed:{
@@ -134,6 +181,8 @@ export default {
             //assign value to form
             this.giveFormValue(profile);
         }
+
+        this.$store.dispatch('clearDisplayMessages');
     }
 }
 </script>
@@ -147,6 +196,12 @@ export default {
 
 
 /*==========================FORM===================================*/
+.editButton span{
+    float: right;
+    color: blue;
+    cursor: pointer;
+    padding: 0 10px;
+}
 .form-container{
     display:grid;
     grid-template-columns: 1fr;
@@ -180,6 +235,9 @@ export default {
 }
 .input{
     max-width: fit-content;
+}
+form input, form select {
+    font-size: 20px;
 }
 
 
