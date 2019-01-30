@@ -192,7 +192,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
 }).post(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Profile.validateAddress(req.body);
-    if(error){return res.status(400).send({message: 'Bad request.'});}
+    if(error){return res.status(400).send({message: 'Bad request.', error: error});}
 
     //check profile exist
     let profile = await Profile.findById(req.user.profile).exec();

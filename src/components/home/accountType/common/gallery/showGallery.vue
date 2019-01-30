@@ -69,7 +69,7 @@ div{
 
 /*======= Gallery format ====*/
 .highlight{
-    border: 3px rgb(59, 71, 231) solid;
+    outline: 3px rgb(59, 71, 231) solid;
 }
 ul{
     list-style-type: none;

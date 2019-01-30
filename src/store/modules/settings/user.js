@@ -3,7 +3,8 @@ import {router} from '../../../main';
 const state = {
     username:null,
     accountType:null,
-    pics:null
+    pics:null,
+    address:null //TODO: move less conflict
 }
 const getters = {
     getUsername:(state)=>{//get data on state
@@ -14,6 +15,9 @@ const getters = {
     },
     getPics:(state)=>{
         return state.pics;
+    },
+    getAddress:(state)=>{
+        return state.address;
     }
 }
 const mutations = {
@@ -26,6 +30,9 @@ const mutations = {
     setPics:(state, payload)=>{
         state.pics = payload;
     },
+    setAddress:(state, payload)=>{
+        state.address = payload;
+    }
 }
 const actions = {
     getUser:({getters, commit, dispatch})=>{
@@ -81,7 +88,6 @@ const actions = {
 
     },
     deletePic:({dispatch}, payload)=>{
-        console.log('payload', payload);
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:`/file/photo/me?name=${payload}`, method:'delete', data: null})
                 .then(res=>{
@@ -93,6 +99,32 @@ const actions = {
                     reject(err);
                 });
             });
+    },
+    getAddress:({getters, dispatch})=>{
+        const ACCOUNT_TYPE = getters.getAccountType;
+
+        return new Promise((resolve, reject)=>{
+
+            dispatch('sendCommit', {url:`/${ACCOUNT_TYPE}/me/address`, method:'get', data: null}) //TODO: change to get address depending on account type
+                .then(res=>{
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    addAddress:({getters, state, dispatch}, payload)=>{
+        const ACCOUNT_TYPE = getters.getAccountType;
+
+        return new Promise((resolve, reject)=>{
+
+            dispatch('sendCommit', {url:`/${ACCOUNT_TYPE}/me/address`, method:'post', data: payload}) //TODO: change to add address depending on account type
+                .then(res=>{
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
     }
 
 }

@@ -227,8 +227,8 @@ function validateAddress(data){
         province: Joi.string().max(100).regex(regex.common).allow(''),
         zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
         position:{
-            lat: Joi.number().max(85).min(-85).allow(''),
-            lng: Joi.number().max(180).min(-180).allow('')
+            lat: Joi.number().max(85).min(-85).allow('', null),
+            lng: Joi.number().max(180).min(-180).allow('', null)
         }
     });
 

@@ -1,8 +1,8 @@
 <template>
     <div>
         <h2>Address</h2>
-        <show-address   :editable="true"
-                        :showMap="true"
+        <show-address v-if="address"   :editable="true"
+                        :showMap="false"
                         :address="address" 
                         :editAddress="editAddress"/>
         <add-address :showMap="false"/>
@@ -45,20 +45,23 @@ export default {
             }
 
             return results;
+        },
+        accountType(){
+            return this.$store.getters.getAccountType;
         }
     }
-    ,beforeMount(){
-        let localAddress = JSON.parse(localStorage.getItem('address'));
+    // ,beforeMount(){
+    //     let localAddress = JSON.parse(localStorage.getItem('address'));
 
-        if(localAddress){
-            this.$store.commit('setAddress', localAddress);
-        }else{
-            this.$store.dispatch('getAddress').then(res=>{
-                localStorage.setItem('address', JSON.stringify(res));
-                this.$store.commit('setAddress', res);
-            });
-        }
-    }
+    //     if(localAddress){
+    //         this.$store.commit('setAddress', localAddress);
+    //     }else{
+    //         this.$store.dispatch('getAddress').then(res=>{
+    //             localStorage.setItem('address', JSON.stringify(res));
+    //             this.$store.commit('setAddress', res);
+    //         });
+    //     }
+    // }
 }
 </script>
 <style scoped>

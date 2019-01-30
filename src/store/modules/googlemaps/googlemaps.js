@@ -17,6 +17,9 @@ const getters = {
     getMarkers:(state)=>{
         return state.googleMap.markers;
     },
+    // getCurrentPosition:(state)=>{ //not yet needed
+    //     return state.googleMap.currentPosition;
+    // },
     getPosition:(state)=>{
         return state.googleMap.position;
     },
@@ -37,6 +40,7 @@ const mutations = {
         });
 
         state.googleMap.markers.push(marker);
+        // markers.push(marker);
     },
     setMap:(state, payload)=>{
         state.googleMap.map = new google.maps.Map(

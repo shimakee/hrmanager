@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Address add</h2>
-        <form>
+        <!-- <form>
             <input type="checkbox" v-model="addressModel.main" value="true">
             <input type="text" v-model="addressModel.description" placeholder="address description">
             <br>
@@ -11,12 +11,54 @@
             <input type="text" v-model="addressModel.country" placeholder="country">
             <input type="number" v-model="addressModel.zipcode" placeholder="zipcode">
 
-            <google-maps    :showMap="showMap"
+            <button @click.prevent="submit">send</button>
+        </form> -->
+
+         <form class="form-container">
+            <div class="form-group">
+                    <span class="label-group">
+                        <input type="checkbox" v-model="addressModel.main" value="true">
+                        <label>Main address</label>
+                    </span>
+                    <span class="label-group">
+                        <label>Description: </label>
+                        <input type="text" v-model="addressModel.description" placeholder="address description">
+                    </span>
+            </div>
+            <div>
+                <label class="label-group">
+                    <label>Street: </label>
+                    <input type="text" v-model="addressModel.street" placeholder="street">
+                </label>
+            </div>
+            <div class="form-group">
+                <span class="label-group">
+                    <label>City: </label>
+                    <input type="text" v-model="addressModel.city" placeholder="city">
+                </span>
+                <span class="label-group">
+                    <label>Province: </label>
+                    <input type="text" v-model="addressModel.province" placeholder="province">
+                </span>
+            </div>
+            
+            <div class="input-group">
+                <label class="label-group">
+                    <label>Country: </label>
+                    <input type="text" v-model="addressModel.country" placeholder="country">
+                </label>
+                <label class="label-group">
+                    <label>Zipcode: </label>
+                    <input type="number" v-model="addressModel.zipcode" placeholder="zipcode">
+                </label>
+            </div>
+
+            <!-- <google-maps    :showMap="showMap"
                             :selector="'mapForm'"
                             :label="addressModel.description" 
                             :editable="true" 
                             @update:position="addressModel.position = $event.position"
-                            @update:address="setAddressModel"/>
+                            @update:address="setAddressModel"/> -->
 
             <button @click.prevent="submit">send</button>
         </form>
@@ -26,12 +68,12 @@
 import Maps from "../../../../parts/googleMap";
 
 export default {
-    props:{
-        showMap: {default: true, type: Boolean}
-    }
-    ,components:{
-        "google-maps":Maps
-    },
+    // props:{
+    //     showMap: {default: true, type: Boolean}
+    // },
+    // components:{
+    //     "google-maps":Maps
+    // },
     data(){
         return {
             addressModel:{main: false,
@@ -62,13 +104,7 @@ export default {
 
             this.$store.dispatch('addAddress', this.addressModel)//submit to backend
                 .then(response=>{
-
-                    this.$store.dispatch('getAddress')//get new set of address
-                        .then(res=>{
-
-                            localStorage.setItem('address', JSON.stringify(res));
-                            this.$store.commit('setAddress', res);
-                    });
+                    this.$store.dispatch('getProfile'); //to update the computed pics array
 
                     this.clearAddressModel();//empty form
                 });
@@ -86,5 +122,73 @@ export default {
 <style scoped>
 #map, #map2, #map3{
     height:500px;
+}
+
+/*==========================FORM===================================*/
+ul{
+    max-width: 1000px;
+}
+.editButton span{
+    float: right;
+    color: blue;
+    cursor: pointer;
+    padding: 0 10px;
+}
+.form-container{
+    display:grid;
+    grid-template-columns: 1fr;
+    /* justify-content: center;
+    align-content: center; */
+    grid-row-gap: 10px;
+    padding: 0px;
+    margin:0px;
+}
+.form-container button{
+    align-self: center;
+    justify-self: center;
+}
+.form-group{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    /* margin: 5px 0; */
+}
+.input-group{   
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+    grid-gap: 10px;
+    /* margin: 5px 0; */
+}
+.label-group{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    /* align-content: center;
+    justify-content: center; */
+}
+.form-group .input-group{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.input{
+    max-width: fit-content;
+}
+form input, form select {
+    font-size: 20px;
+    text-align: center;
+}
+
+
+@media (max-width: 700px) { /*mobile*/
+    .label-group,
+    .form-group{
+        grid-template-columns: 1fr;
+    }
+    ul{
+        padding: 0px;
+        margin: 0px;
+    }
+    .input-group{   
+        grid-template-columns: 1fr;
+    }
 }
 </style>

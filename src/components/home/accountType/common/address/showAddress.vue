@@ -3,61 +3,97 @@
         <h2>Address show</h2>
 
         <ul>
-            <li v-for="(item, key) in address" v-bind:key="key" class="card-address">
+            <li v-for="(item, key) in address" v-bind:key="key" class="card-address"
+                @click="chooseItem(item._id)" :class="{highlight: item._id == itemActive}">
                 
                 <!--only show form if allowed as editable & in edit mode-->
                 <!--TODO create slotable form card-->
-                <div v-if="editAddress[key] && editable">
-                    <form>
-                        <input type="checkbox" v-model="item.main" value="true">
-                        <input type="text" v-model="item.description" placeholder="address description">
-                        <input type="text" v-model="item.street" placeholder="street">
-                        <input type="text" v-model="item.city" placeholder="city">
-                        <input type="text" v-model="item.province" placeholder="province">
-                        <input type="text" v-model="item.country" placeholder="country">
-                        <input type="number" v-model="item.zipcode" placeholder="zipcode">
-
+                <div v-if="item._id == itemActive && itemEdit" class="card-content">
+                    <form class="form-container">
+                        <div class="form-group">
+                                <span class="label-group">
+                                    <input type="checkbox" v-model="item.main" value="true">
+                                    <label>Main address</label>
+                                </span>
+                                <span class="label-group">
+                                    <label>Description: </label>
+                                    <input type="text" v-model="item.description" placeholder="address description">
+                                </span>
+                        </div>
+                        <div>
+                            <label class="label-group">
+                                <label>Street: </label>
+                                <input type="text" v-model="item.street" placeholder="street">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <span class="label-group">
+                                <label>City: </label>
+                                <input type="text" v-model="item.city" placeholder="city">
+                            </span>
+                            <span class="label-group">
+                                <label>Province: </label>
+                                <input type="text" v-model="item.province" placeholder="province">
+                            </span>
+                        </div>
                         
-                        <google-maps    :selector="'map'+key"
+                        <div class="input-group">
+                            <label class="label-group">
+                                <label>Country: </label>
+                                <input type="text" v-model="item.country" placeholder="country">
+                            </label>
+                            <label class="label-group">
+                                <label>Zipcode: </label>
+                                <input type="number" v-model="item.zipcode" placeholder="zipcode">
+                            </label>
+                        </div>
+                        
+                        <!-- <google-maps :selector="'map'+key"
                                         :showMap="showMap"
                                         :label="item.description" 
                                         :editable="true" 
                                         :position="item.position" 
                                         @update:position="item.position = $event.position"
-                                        @update:address="setItem(item, $event)"/>
+                                        @update:address="setItem(item, $event)"/> -->
+
                         <button @click.prevent="updateAddress(item), editAddress[key] = false">send</button>
                     </form>
                 </div>
 
                 <!--show address cards-->
                 <!--TODO create slotable address card-->
-                <div v-else>
-                    {{item.main}} {{key}}
+                <div v-else :class="{mainAddress: item.main == true}" class="card-content center">
+                    <!-- {{item.main}} {{key}} -->
+                    <!-- <input type="checkbox" name="main" :checked="item.main == true"> -->
                     <h3>{{item.description}}</h3>
                     <p> {{item.street}} , {{item.city}} </p>
                     <p> {{item.zipcode}} {{item.province}} </p>
                     <p> {{item.country}} </p>
-
-                     <!--only show edit button if editable-->
-                    <button v-if="editable"
-                            @click="editAddress[key] = true">Edit</button>
-
-                    <button @click="deleteAddress(item._id)">Delete</button>
                     
-                     <google-maps   :selector="'map'+key"
-                                    :showMap="showMap"
-                                    :label="item.description" 
-                                    :editable="false" 
-                                    :position="item.position"/>
-                    
+                     <!-- <google-maps   :selector="'map'+key"
+                            :showMap="showMap"
+                            :label="item.description" 
+                            :editable="false" 
+                            :position="item.position"/> -->
                 </div>
+
+                <!--only show edit button if editable-->
+                <span class="edit"
+                    v-if="editable && !itemEdit && itemActive == item._id"
+                    @click="itemEdit = true">Edit</span>
+                <span class="edit"
+                    v-if="editable && itemEdit && itemActive == item._id"
+                    @click="itemEdit = false">Cancel</span>
+                <span class="delete"
+                    v-if="!itemEdit && itemActive == item._id"
+                    @click="deleteAddress(item._id)">X</span>
             </li>
         </ul>
 
     </div>
 </template>
 <script>
-import Maps from "../../../../parts/googleMap";
+// import Maps from "../../../../parts/googleMap";
 
 export default {
     props:{
@@ -65,10 +101,10 @@ export default {
         editable:{default: false, type: Boolean}, //determines if you are able to edit the address here
         address:{type: Array}, //array of address to show
         editAddress:{type:Object} //on edit boolean pair for each address
-    }
-    ,components:{
-        "google-maps":Maps
     },
+    // components:{
+    //     "google-maps":Maps
+    // },
     data(){
         return {
             addressModel:{main: false,
@@ -81,7 +117,9 @@ export default {
                         position:{
                             lat: null,
                             lng: null
-                        }}
+                        }},
+            itemActive: null,
+            itemEdit: false
         }
     },
     methods:{
@@ -91,6 +129,7 @@ export default {
                     this.$store.dispatch('getAddress').then(res=>{
                         localStorage.setItem('address', JSON.stringify(res));
                         this.$store.commit('setAddress', res);
+                        this.itemEdit = false;
                     });
                 }).catch(err=>{
                     console.log('err', err);
@@ -107,19 +146,142 @@ export default {
                 console.log('err', err);
             });
         },
-        setItem(item, event){//set new values for auto address from googlemaps
-            if(event.address.route){item.street = event.address.route.long_name;}
-            if(event.address.city){item.city = event.address.city.long_name;}
-            if(event.address.province){item.province = event.address.province.long_name;}
-            if(event.address.country){item.country = event.address.country.long_name;}
-            if(event.address.zipcode){item.zipcode = event.address.zipcode.long_name;}
-            else{item.zipcode = "";}
+        // setItem(item, event){//set new values for auto address from googlemaps
+        //     if(event.address.route){item.street = event.address.route.long_name;}
+        //     if(event.address.city){item.city = event.address.city.long_name;}
+        //     if(event.address.province){item.province = event.address.province.long_name;}
+        //     if(event.address.country){item.country = event.address.country.long_name;}
+        //     if(event.address.zipcode){item.zipcode = event.address.zipcode.long_name;}
+        //     else{item.zipcode = "";}
+        // },
+        chooseItem(item){
+            // this.itemEdit = false;
+            this.itemActive = item;
         }
     }
 }
 </script>
 <style scoped>
+
+/*====highlight======*/
+
+.highlight{
+    outline: 3px rgb(59, 71, 231) solid;
+}
+.edit{
+    color: blue;
+    text-shadow: 0 0 3px white;
+    /* float: right; */
+    bottom: 10px;
+    right: 30px;
+    position:absolute;
+    cursor: pointer;
+}
+.delete{
+    color: white;
+    text-shadow: 0 0 3px white;
+    /* float: right; */
+    top: -15px;
+    right: -10px;
+    position:absolute;
+    background-color: rgb(224, 68, 68);
+    padding: 5px 5px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/*=====card======*/
+li.card-address{
+    list-style: none;
+    position: relative;
+    margin: 20px;
+}
+.card-content{
+    padding: 10px;
+    /* text-align: center; */
+}
+/*=====main address=====*/
+.mainAddress h3, .mainAddress p,
+.card-content h3, .card-content p{
+    margin: 10px;
+}
+.mainAddress{
+    background-color: lightgrey;
+    color: white;
+    text-shadow: 0 0 3px black;
+}
 #map, #map2, #map3{
     height:500px;
+}
+.center{
+    text-align: center;
+}
+
+/*==========================FORM===================================*/
+ul{
+    max-width: 1000px;
+}
+.editButton span{
+    float: right;
+    color: blue;
+    cursor: pointer;
+    padding: 0 10px;
+}
+.form-container{
+    display:grid;
+    grid-template-columns: 1fr;
+    /* justify-content: center;
+    align-content: center; */
+    grid-row-gap: 10px;
+    padding: 0px;
+    margin:0px;
+}
+.form-container button{
+    align-self: center;
+    justify-self: center;
+}
+.form-group{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    /* margin: 5px 0; */
+}
+.input-group{   
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+    grid-gap: 10px;
+    /* margin: 5px 0; */
+}
+.label-group{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    /* align-content: center;
+    justify-content: center; */
+}
+.form-group .input-group{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.input{
+    max-width: fit-content;
+}
+form input, form select {
+    font-size: 20px;
+    text-align: center;
+}
+
+
+@media (max-width: 700px) { /*mobile*/
+    .label-group,
+    .form-group{
+        grid-template-columns: 1fr;
+    }
+    ul{
+        padding: 0px;
+        margin: 0px;
+    }
+    .input-group{   
+        grid-template-columns: 1fr;
+    }
 }
 </style>

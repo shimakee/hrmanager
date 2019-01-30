@@ -1,23 +1,16 @@
 
 
 const state = {
-    profile:null,
-    address:null //TODO: move less conflict
+    profile:null
 }
 const getters = {
     getProfile:(state)=>{
         return state.profile;
-    },
-    getAddress:(state)=>{
-        return state.address;
     }
 }
 const mutations = {
     setProfile:(state, payload)=>{
         state.profile = payload;
-    },
-    setAddress:(state, payload)=>{
-        state.address = payload;
     }
 }
 const actions = {
@@ -32,15 +25,18 @@ const actions = {
                     pics = [];
                 }
 
+                //save to state
+                commit('setProfile', res.data);
+                commit('setPics', pics);
+                commit('setAddress', res.data.address);
+
                 //save to storage
                 if(getters.getAllowStorage){//TODO: change to cookie
                     localStorage.setItem('profile', JSON.stringify(res.data));
                     localStorage.setItem('pics', JSON.stringify(pics));
+                    localStorage.setItem('address', JSON.stringify(res.data.address));
                 }
                 
-                //save to state
-                commit('setProfile', res.data);
-                commit('setPics', pics);
 
                 resolve(res.data);
             }).catch(err=>{
@@ -67,26 +63,6 @@ const actions = {
                         };
                     }
 
-                    reject(err);
-                });
-        });
-    },
-    getAddress:({dispatch})=>{
-        return new Promise((resolve, reject)=>{
-            dispatch('sendCommit', {url:'/profile/me/address', method:'get', data: null}) //TODO: change to get address depending on account type
-                .then(res=>{
-                    resolve(res.data);
-                }).catch(err=>{
-                    reject(err);
-                });
-        });
-    },
-    addAddress:({dispatch}, payload)=>{
-        return new Promise((resolve, reject)=>{
-            dispatch('sendCommit', {url:'/profile/me/address', method:'post', data: payload}) //TODO: change to add address depending on account type
-                .then(res=>{
-                    resolve(res.data);
-                }).catch(err=>{
                     reject(err);
                 });
         });

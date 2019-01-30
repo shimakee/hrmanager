@@ -199,6 +199,9 @@ export default {
     .slideLeft{
         transform: translateX(0%);
     }
+    .tab{
+        max-width: 400px;
+    }
  }
 
  /*===========================transitions===========================*/
