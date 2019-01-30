@@ -79,6 +79,20 @@ const actions = {
                 });
         });
 
+    },
+    deletePic:({dispatch}, payload)=>{
+        console.log('payload', payload);
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/file/photo/me?name=${payload}`, method:'delete', data: null})
+                .then(res=>{
+                    resolve(res);
+                }).catch(err=>{
+                    if(!err.response){
+                        err.response = {statusText:"Error: could not send delete request."}
+                    }
+                    reject(err);
+                });
+            });
     }
 
 }

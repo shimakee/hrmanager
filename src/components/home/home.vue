@@ -49,7 +49,11 @@ export default {
     ,created(){
         this.$store.dispatch('maintainData')
             .then(res=>{
+                console.log('maintained data.');
                 this.$store.dispatch('autoLogin');
+            }).catch(err=>{
+                console.log('there was an error.');
+                this.$store.dispatch('logout');
             });
     }
 }

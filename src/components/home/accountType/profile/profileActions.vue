@@ -25,7 +25,7 @@
             <accordion>
                 <h3 slot="title">Account</h3>
                 <ul slot="content">
-                    <li><router-link to="account">General</router-link></li>
+                    <!-- <li><router-link to="account">General</router-link></li> -->
                     <li><router-link to="settings">Settings</router-link></li>
                     <li><a href="#" @click.prevent="logout()">Logout</a></li>
                 </ul>

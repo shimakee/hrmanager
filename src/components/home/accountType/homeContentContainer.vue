@@ -1,6 +1,6 @@
 <template>
     <div class="profile">
-            <h2>{{accountType}}</h2>
+            <!-- <h2>{{accountType}}</h2> -->
             <router-view /> 
 
             <!-- restructure folder, expose the vue components used as pages, hide components based on account type. staff, company and profile-->

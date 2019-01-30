@@ -1,54 +1,98 @@
 <template>
     <div> 
-        GAllery
-        <ul>
-            <li v-for="(pic, key) in pics" :key="key" class="card-pic">
-                <img :src="'http://localhost/file/photo/me?name='+pic.filename" :alt="pic.filename" srcset="">
-                <p class="description">
-                    {{pic.filename}}
-                </p>
-            </li>
-        </ul>
+        <h3>Upload</h3>
+        <form>
+            <input type="file" @change="fileSelected">
+            <input type="text" v-model="form.imgName">
+            <button @click.prevent="submit()">Upload</button>
+        </form>
+
+        <br>
+        <span class="error" v-if="errorMessage">
+            {{errorMessage}}
+        </span>
+        <span class="info" v-if="infoMessage">
+            {{infoMessage}}
+        </span>
+
+        <!--GALLERY-->
+        <show-gallery></show-gallery>
+        
+        
         
     </div>
 </template>
 <script>
-export default {
-    computed:{
-        pics(){
-            let pics = this.$store.getters.getPics;
+import ShowGallery from "./showGallery";
 
-            if(!pics){
-                pics = JSON.parse(localStorage.getItem("pics"));
+export default {
+    components:{
+        "show-gallery": ShowGallery
+    },
+    data(){
+        return{
+            form:{
+                imgField:null,
+                imgName: 'Image name'
             }
-            
-            return pics;
         }
+    },
+    computed:{
+        // pics(){ //TODO: make na new component for gallery
+        //     let pics = this.$store.getters.getPics;
+
+        //     if(!pics){
+        //         pics = JSON.parse(localStorage.getItem("pics"));
+        //     }
+            
+        //     return pics;
+        // },
+        errorMessage(){
+            return this.$store.getters.getErrorMessage;
+        },
+        infoMessage(){
+            return this.$store.getters.getInfoMessage;
+        }
+    },
+    methods:{
+        submit(){
+            const data = this.form;
+            // let confirm = window.confirm('Delete account?');
+            // if(confirm){
+            // }
+                if(!data){
+                    this.$store.commit('setInfoMessage', 'Error: no file was attached.');
+                }else{
+                    this.$store.dispatch('uploadPic', {url:'/file/photo/me', file: data})
+                        .then(res=>{
+                            this.$store.commit('setInfoMessage', res.data.message);
+
+                            this.$store.dispatch('getProfile'); //to update the computed pics array
+
+                        }).catch(err=>{ 
+                            this.$store.commit('setErrorMessage', err.response.statusText);
+                        });
+                }
+        },
+        fileSelected(e){//attach file to data
+            const file = e.target.files[0];
+            this.form.imgField = file;
+        }
+    },
+    mounted(){
+        this.$store.dispatch('clearDisplayMessages');
     }
 }
 </script>
 <style scoped>
-ul{
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-    grid-gap: 10px;
-    padding: 0;
-}
- ul li.card-pic{
-     background-color: cornsilk;
-     display: grid;
-     grid-template-columns: 1fr;
-     justify-items: center;
-     align-items: center;
- }
 
-li.card-pic img{
-    width: 100%;
+.error{
+    color: red;
+    text-align: center;
 }
-li.card-pic p{
-    font-size: 1em;
-    padding: 0;
-    margin: 12px 0;
+.info{
+    color:white;
+    text-align: center;
 }
+
 </style>

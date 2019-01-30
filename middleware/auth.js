@@ -46,7 +46,7 @@ const auth = {
     cors:function(req, res, next){
         const corsUrl = config.get('corsUrl');
         res.header("Access-Control-Allow-Origin", corsUrl); // to control cors vie env variables
-        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELTE, OPTIONS");
+        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
         res.header("Access-Control-Allow-Credentials", 'true');
         res.header("Access-Control-Allow-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp`);
         res.header("Access-Control-Expose-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp`);

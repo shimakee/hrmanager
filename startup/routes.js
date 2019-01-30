@@ -11,8 +11,6 @@ const marketingRoutes = require('../routes/marketing');
 const errorHandler = require('../middleware/err');
 
 module.exports = function(app){
-    app.use(express.json());//using body parser
-
     app.use('/user', userRoutes);//using routes
     app.use('/profile', profileRoutes);//profile routes
     app.use('/file', fileRoutes); //file routes

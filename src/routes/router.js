@@ -21,6 +21,7 @@ import HomeDefaulContent from '../components/home/accountType/common/homeDefault
 import Actions from '../components/home/accountType/actions';
 import Info from '../components/home/accountType/info';
 import Gallery from '../components/home/accountType/common/gallery/gallery';
+import ShowGallery from '../components/home/accountType/common/gallery/showGallery';
 
 //Home - profile
 import ProfileAccount from '../components/home/accountType/profile/profileAccount';
@@ -38,7 +39,6 @@ import ProfileAccount from '../components/home/accountType/profile/profileAccoun
 import ChangePassword from '../components/settings/account/changePassword';
 import ChangeUsername from '../components/settings/account/changeUsername';
 import DeleteAccount from '../components/settings/account/deleteAccount';
-import EditPic from '../components/settings/account/editPic';
 
 //add - on temporary
 import Marketing from '../components/marketing/textblast';
@@ -159,7 +159,7 @@ export const routes = [
                                     editGov: EditGov,
 
                                     default: DeleteAccount,
-                                    editPic: EditPic,
+                                    editPic: ShowGallery,
                                     changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,
@@ -218,7 +218,7 @@ export const routes = [
                             {path:"",///profile/settings - main page - CONTENT - details
                                 components:{
                                     default: DeleteAccount,
-                                    editPic: EditPic,
+                                    editPic: ShowGallery,
                                     changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,
@@ -270,7 +270,7 @@ export const routes = [
                             {path:"", name:"companySettings",///profile/settings - main page - CONTENT - details
                                 components:{
                                     default: DeleteAccount,
-                                    editPic: EditPic,
+                                    editPic: ShowGallery,
                                     changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,

@@ -161,16 +161,17 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
 
 //delete profile picture using profile id
 }).delete(auth.isAuth, (req,res,next)=>{
+    let queryImgName = req.query.name;
 
     //check that there is a req.query
-    if(!req.query.name){ return res.status(400).send({message: "Bad request"});}
+    if(!queryImgName){return res.status(400).send({message: "Bad request. No parameters or body to delete."});}
 
-    //validate
-    let {error} = Joi.validate(req.query.name, Joi.string().regex(regex.imgName).required());
-    if(error){return res.status(400).send({message: "Bad request."})}
+    //validate - either have it in body or in params
+    let {error} = Joi.validate(queryImgName, Joi.string().regex(regex.imgName).required());
+    if(error){return res.status(400).send({message: "Bad request. Invalid parameters or body."})}
 
     //set file to delete
-    let fileToDelete = req.query.name;
+    let fileToDelete = queryImgName || bodyImgName;
     //establish path destination
     // let pathToFile = config.get('imgDestination') + req.user.profile;
     let pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
@@ -188,8 +189,8 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
 
         //delete file
         fs.unlink(pathToFile, async (err)=>{
-            if(!err){
-                //remove from database profile pics array
+            if(!err){//img delete sucess
+                //remove corresponding data from database profile pics array
                 let profile = await Profile.updateOne({_id: req.user.profile}, {$pull: {pics: {filename: file}}}).exec();
 
                 return res.status(200).send({message:"Success."});
@@ -202,6 +203,7 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
 }).get(auth.isAuth, (req,res,next)=>{
     //check that there is a req.query
     if(req.query.name){
+
         //establish file path
         let pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
         

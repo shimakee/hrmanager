@@ -116,7 +116,8 @@ export default {
                             
                             this.edit = false;
                             //clear info and error messages
-                            this.$store.dispatch('clearDisplayMessages');
+                            // this.$store.dispatch('clearDisplayMessages');
+                            this.$store.commit('setInfoMessage', res.data.message);
                     });
                     
                 }).catch(err=>{
@@ -190,6 +191,10 @@ export default {
 /*======INFO & ERROR message========*/
 .error{
     color: red;
+    text-align: center;
+}
+.info{
+    color:blue;
     text-align: center;
 }
 

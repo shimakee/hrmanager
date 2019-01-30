@@ -78,10 +78,15 @@ export const store = new Vuex.Store({
             //TODO: change to cookies instead of localStorage
             //NOTE* this action should remove components from individually loading their own data;
             
-            dispatch('getUser')
-            .then(res=>{
-
-                dispatch('login', res);
+            return new Promise((resolve, reject)=>{
+                dispatch('getUser')
+                .then(res=>{
+    
+                    dispatch('login', res);
+                    resolve(res);
+                }).catch(err=>{
+                    reject(err);
+                });
             });
 
         },
@@ -136,7 +141,14 @@ export const store = new Vuex.Store({
                 axios.post(payload.url, formData)
                     .then(res=>{
                         resolve(res);
+
                     }).catch((err)=>{
+
+                        if(!err.response){//for component to display error message
+                            err.response = {
+                                statusText: "Connection error, problem sending image upload request."
+                            };
+                        }
                         reject(err);
                     });
 

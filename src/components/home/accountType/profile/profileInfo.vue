@@ -54,9 +54,9 @@ export default {
     },
     computed:{
         profile(){
-            const stateProfile = this.$store.getters.getProfile;
-            const localProfile = JSON.parse(localStorage.getItem('profile'));
-            let profile = stateProfile || localProfile;
+            let profile = this.$store.getters.getProfile;
+            // const localProfile = JSON.parse(localStorage.getItem('profile'));
+            // let profile = stateProfile || localProfile;
 
             if(!profile){
                 this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
@@ -91,15 +91,13 @@ export default {
             }
         },
         url(){
-            const localPic = JSON.parse(localStorage.getItem('pics'));
-            const statePic = this.$store.getters.getPic;
-            let pics = statePic || localPic;
+            const PICS = this.$store.getters.getPics;
+            const DEFAULT_URL = 'https://picsum.photos/100/100/?random';
             let url;
-            const defaultUrl = 'https://picsum.photos/100/100/?random';
 
-            if(pics){
+            if(PICS){
                 //find main picture
-                const pic = pics.find(element=>{
+                const pic = PICS.find(element=>{
                     if(element.main == true || element.main == 'true'){
                         return element;
                     }
@@ -110,11 +108,11 @@ export default {
                 if(pic){
                     url = `${baseUrl}/file/photo/me?name=${pic.filename}`;
                 }else{
-                    url = defaultUrl;
+                    url = DEFAULT_URL;
                 }
 
             }else{
-                url =  defaultUrl;
+                url =  DEFAULT_URL;
             }
 
             return url;

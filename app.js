@@ -10,12 +10,12 @@ const winston = require('winston');
 require('./startup/log')();//logging
 require('./startup/config')();//config
 require('./startup/db')(app);//database
-require('./startup/util')(app);//routes & middleware use
+require('./startup/util')(app, express);//body parsers and cookie parsers
 app.use(express.static(__dirname));//using directory to serve static index file for vue
 app.use('/public', express.static(__dirname+'/assets/public'));//give static files in public assets folder
 
 require('./startup/routes')(app);//routes & middleware use
-require('./startup/utilities')();//tools & utilities like validation
+// require('./startup/utilities')();//tools & utilities like validation
 
 
 app.use('*', express.static(__dirname));//catch all
