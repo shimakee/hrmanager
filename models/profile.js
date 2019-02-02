@@ -224,7 +224,7 @@ function validateAddress(data){
         street:Joi.string().max(255).regex(regex.address).allow(''),
         city:Joi.string().max(50).regex(regex.common).allow(''),
         country:Joi.string().max(50).regex(regex.common).allow(''),
-        province: Joi.string().max(100).regex(regex.common).allow(''),
+        province: Joi.string().max(100).regex(regex.uncommon).allow(''),
         zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
         position:{
             lat: Joi.number().max(85).min(-85).allow('', null),

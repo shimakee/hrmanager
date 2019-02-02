@@ -47,6 +47,8 @@ export default {
         }
     }
     ,created(){
+        this.$store.dispatch('geoLocate');
+
         this.$store.dispatch('maintainData')
             .then(res=>{
                 console.log('maintained data.');

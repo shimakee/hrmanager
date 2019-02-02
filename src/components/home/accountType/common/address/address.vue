@@ -1,11 +1,14 @@
 <template>
     <div>
         <h2>Address</h2>
-        <show-address v-if="address"   :editable="true"
-                        :showMap="false"
-                        :address="address" 
-                        :editAddress="editAddress"/>
-        <add-address :showMap="false"/>
+        <add-address :showMap="true"
+                        :autoLocate="autoLocate"/>
+        <show-address v-if="address"
+                        :autoLocate="autoLocate"
+                        :autoAddress="true"
+                        :editable="true"
+                        :showMap="true"
+                        :address="address"/>
 
     </div>
 </template>
@@ -20,7 +23,6 @@ export default {
     },
     data(){
         return {
-            editAddress: {},
             addressModel:{main: false,
                         description:"",
                         street:"",
@@ -34,34 +36,18 @@ export default {
         }
     }
     ,computed:{
+        autoLocate(){
+            const AUTO_LOCATE = this.$store.getters.getAllowAutoLocate;
+            return AUTO_LOCATE;
+        },
         address(){
             let results = this.$store.getters.getAddress;
-
-            for (const key in results) {//assing key value pairs for editable
-                if (results.hasOwnProperty(key)) {
-                    const element = results[key];
-                    this.$set(this.editAddress, key, false);//using this.$set so that it will be observable and component wil rerender
-                }
-            }
-
             return results;
         },
         accountType(){
             return this.$store.getters.getAccountType;
         }
     }
-    // ,beforeMount(){
-    //     let localAddress = JSON.parse(localStorage.getItem('address'));
-
-    //     if(localAddress){
-    //         this.$store.commit('setAddress', localAddress);
-    //     }else{
-    //         this.$store.dispatch('getAddress').then(res=>{
-    //             localStorage.setItem('address', JSON.stringify(res));
-    //             this.$store.commit('setAddress', res);
-    //         });
-    //     }
-    // }
 }
 </script>
 <style scoped>

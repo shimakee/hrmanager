@@ -11,6 +11,10 @@
                         {{pic.filename}}
                     </p>
                 </div>
+
+                <span v-if="pic.filename == activePic && pic.main == false"
+                    class="edit"
+                    @click="setAsMain(pic)">Set as main</span>
             </li>
         </ul>
     </div>
@@ -34,6 +38,19 @@ export default {
         }
     },
     methods:{
+        setAsMain(pic){
+            this.$store.dispatch('updatePic', pic._id)
+                .then(res=>{
+                    console.log("update pic", pic._id);
+                    this.$store.commit('setInfoMessage', res.data.message);
+
+                    this.$store.dispatch('getProfile'); //to update the computed pics array
+                }).catch(err=>{
+                    console.log(err);
+                    this.$store.commit('setInfoMessage', err.response.statusText);
+                });
+
+        },
         deletePic(pic){
             const confirm = window.confirm(`Delete ${pic.filename}?`);
 
@@ -66,7 +83,12 @@ export default {
 div{
     margin: 1em;
 }
-
+.edit{
+    color: blue;
+}
+.edit:hover {
+    font-weight: bolder;
+}
 /*======= Gallery format ====*/
 .highlight{
     outline: 3px rgb(59, 71, 231) solid;

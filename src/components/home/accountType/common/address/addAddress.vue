@@ -1,18 +1,6 @@
 <template>
     <div>
         <h2>Address add</h2>
-        <!-- <form>
-            <input type="checkbox" v-model="addressModel.main" value="true">
-            <input type="text" v-model="addressModel.description" placeholder="address description">
-            <br>
-            <input type="text" v-model="addressModel.street" placeholder="street">
-            <input type="text" v-model="addressModel.city" placeholder="city">
-            <input type="text" v-model="addressModel.province" placeholder="province">
-            <input type="text" v-model="addressModel.country" placeholder="country">
-            <input type="number" v-model="addressModel.zipcode" placeholder="zipcode">
-
-            <button @click.prevent="submit">send</button>
-        </form> -->
 
          <form class="form-container">
             <div class="form-group">
@@ -25,12 +13,12 @@
                         <input type="text" v-model="addressModel.description" placeholder="address description">
                     </span>
             </div>
-            <div>
+            <!-- <div> -->
                 <label class="label-group">
                     <label>Street: </label>
                     <input type="text" v-model="addressModel.street" placeholder="street">
                 </label>
-            </div>
+            <!-- </div> -->
             <div class="form-group">
                 <span class="label-group">
                     <label>City: </label>
@@ -42,7 +30,7 @@
                 </span>
             </div>
             
-            <div class="input-group">
+            <div class="form-group">
                 <label class="label-group">
                     <label>Country: </label>
                     <input type="text" v-model="addressModel.country" placeholder="country">
@@ -52,13 +40,30 @@
                     <input type="number" v-model="addressModel.zipcode" placeholder="zipcode">
                 </label>
             </div>
+            
 
-            <!-- <google-maps    :showMap="showMap"
-                            :selector="'mapForm'"
-                            :label="addressModel.description" 
-                            :editable="true" 
-                            @update:position="addressModel.position = $event.position"
-                            @update:address="setAddressModel"/> -->
+
+            <div class="label-group">
+                <span class="input-group">
+                    <!-- <label class="input-group"> -->
+                        <label>Latitude: </label>
+                        <input type="text" v-model="addressModel.position.lat" placeholder="country">
+                    <!-- </label> -->
+                    <!-- <label class="input-group"> -->
+                        <label>Longitude: </label>
+                        <input type="number" v-model="addressModel.position.lng" placeholder="zipcode">
+                    <!-- </label> -->
+                </span>
+                <google-maps    class="addressMap"
+                                :showMap="showMap"
+                                :selector="'addresMap'"
+                                :label="addressModel.description" 
+                                :editable="true"
+                                :autoLocate="autoLocate"
+                                @update:position="addressModel.position = $event.position"
+                                @update:address="setAddressModel"
+                />
+            </div>
 
             <button @click.prevent="submit">send</button>
         </form>
@@ -68,12 +73,13 @@
 import Maps from "../../../../parts/googleMap";
 
 export default {
-    // props:{
-    //     showMap: {default: true, type: Boolean}
-    // },
-    // components:{
-    //     "google-maps":Maps
-    // },
+    props:{
+        showMap: {default: true, type: Boolean},
+        autoLocate: {default: false, type: Boolean}
+    },
+    components:{
+        "google-maps":Maps
+    },
     data(){
         return {
             addressModel:{main: false,
@@ -110,18 +116,22 @@ export default {
                 });
         },
         setAddressModel(event){//autofill form based on googlemap marker
-            if(event.address.route.long_name){ this.addressModel.street = event.address.route.long_name;}
-            if(event.address.city.long_name){ this.addressModel.city = event.address.city.long_name;}
-            if(event.address.province.long_name){ this.addressModel.province = event.address.province.long_name;}
-            if(event.address.country.long_name){ this.addressModel.country = event.address.country.long_name;}
-            if(event.address.zipcode.long_name){ this.addressModel.zipcode = event.address.zipcode.long_name;}
+            if(event.address.route){ this.addressModel.street = event.address.route.long_name;}
+            if(event.address.city){ this.addressModel.city = event.address.city.long_name;}
+            if(event.address.province){ this.addressModel.province = event.address.province.long_name;}
+            if(event.address.country){ this.addressModel.country = event.address.country.long_name;}
+            if(event.address.zipcod){ this.addressModel.zipcode = event.address.zipcode.long_name;}
         }
     }
 }
 </script>
 <style scoped>
+.addressMap{
+    height: 300px;
+}
 #map, #map2, #map3{
-    height:500px;
+    width: 100%;
+    /* height:500px; */
 }
 
 /*==========================FORM===================================*/

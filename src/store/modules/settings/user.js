@@ -87,6 +87,19 @@ const actions = {
         });
 
     },
+    updatePic:({dispatch}, payload)=>{
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/file/photo/me?id=${payload}`, method:'put', data: null})
+                .then(res=>{
+                    resolve(res);
+                }).catch(err=>{
+                    if(!err.response){
+                        err.response = {statusText:"Error: could not send update request."}
+                    }
+                    reject(err);
+                });
+            });
+    },
     deletePic:({dispatch}, payload)=>{
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:`/file/photo/me?name=${payload}`, method:'delete', data: null})

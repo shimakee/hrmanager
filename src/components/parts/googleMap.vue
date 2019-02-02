@@ -1,7 +1,7 @@
 <template>
-    <div>
-            <div v-if="showMap" class="mapComponent" :id="selector"></div>
-    </div>
+    <!-- <div> -->
+        <div v-if="showMap" class="mapComponent" :id="selector"></div>
+    <!-- </div> -->
 </template>
 <script>
 import axios from "axios";
@@ -12,11 +12,11 @@ export default {
         showMap:{default: true, type: Boolean},
         autoLocate:{default: true, type: Boolean},//perform location detection via geolocate
         autoAddress:{default: true, type: Boolean},//emit to parent address object
-        selector: String,
+        selector: {default: 'googleMap', type: String}, //unique tag for the map - to make each map component unique or the same
         position: Object, //lat lng object to be used by default
-        label:{default: 'Location', type: String}, //label on the marker
         editable: {default: false, type: Boolean}, //be able to add/remove markers
-        markerLimit: {default: 1, type: Number}
+        label:{default: 'Location', type: String}, //label on the marker
+        markerLimit: {default: 1, type: Number} //total number of markers to place
     },
     data(){
         return {
@@ -32,15 +32,20 @@ export default {
             if(vm.markers.length < vm.markerLimit){//limit the number of markers to add
                 let marker = new google.maps.Marker({position: data.position, map: data.map, label: label});
     
-                if(vm.editable){//only available if edit is true
-                    marker.addListener('click', function(){//to individually remove marker upon click
+                marker.addListener('click', function(){//to individually remove marker upon click
+                    if(vm.editable){//only available if edit is true
                         this.setMap(null);
                         let index = vm.markers.indexOf(this);
                         vm.markers.splice(index, 1);
-                    });
-                }
+
+                        vm.emitPosition({lat: null, //emit null position upon marker removal
+                            lng: null});
+                    }
+                });
 
                 this.markers.push(marker);//add marker to markers array
+                
+
 
                 let lat = marker.getPosition().lat();
                 let lng = marker.getPosition().lng();
@@ -94,11 +99,11 @@ export default {
             return new Promise((resolve, reject)=>{
 
                 if(navigator.geolocation){//check if available
-                    navigator.geolocation.getCurrentPosition(res=>{
-                        resolve(res);
-                    }, err=>{
-                        reject(err);
-                    });
+                        navigator.geolocation.getCurrentPosition(res=>{
+                            resolve(res);
+                        }, err=>{
+                            reject(err);
+                        });
                 }else{
                     reject({Error: "GeoLocation disabled or unavailable."});
                 }
@@ -110,13 +115,19 @@ export default {
     }
     ,mounted(){
         let vm = this;
+        const DEFAULT_POSIION = {lat: 7, lng: 125}; //fallback value (mindanao philippines)
 
         if(vm.showMap){//only execute if showmap is enabled
-            let defaulPosition = {lat: 37, lng: 125}; //fallback value
+            let position = DEFAULT_POSIION;
+            if(vm.position){
+                if(vm.position.lat && vm.position.lng){
+                    position = vm.position;
+                }
+            }
 
             vm.map = new google.maps.Map(
                         document.querySelector('#'+vm.selector), {
-                            center: vm.position || defaulPosition, //prop position takes priority over default and current position
+                            center: position, //prop position takes priority over default and current position
                             scrollwheel: true,
                             zoom: 8
                             ,scaleControl: true
@@ -127,10 +138,13 @@ export default {
                     });
 
             //setting position marker if available
-            if(vm.position){
+            if(vm.position && vm.position.lat && vm.position.lng){
                 vm.setMarker({position: vm.position, map: vm.map});
             }else{//prop position takes priority over geolocation
-                if(vm.autoLocate){
+                
+                const AUTO_LOCATE = this.$store.getters.getAllowAutoLocate;//geolocation allowed by client
+
+                if(vm.autoLocate && AUTO_LOCATE){//geolocate allowed on component level and client level
                     vm.geolocatePosition() //getting geolocation
                         .then(position=>{
                             const lat = position.coords.latitude;
@@ -144,18 +158,14 @@ export default {
                 }
             }
 
-            if(vm.editable){ //adding markers option
-                vm.map.addListener('click', function(event){
+            vm.map.addListener('click', function(event){
+                if(vm.editable){//only available if edit is true
                     vm.setMarker({position: event.latLng, map: vm.map});
-                });
-            }
+                }
+            });
         }
     }
 }
 </script>
 <style scoped>
-.mapComponent{
-    height:300px;
-    width: 600px;
-}
 </style>

@@ -18,6 +18,7 @@
         <!--GALLERY-->
         <show-gallery></show-gallery>
         
+        <!--TODO: EDIT gallery - to be able to choose main profile picture-->
         
         
     </div>

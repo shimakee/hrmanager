@@ -47,17 +47,34 @@
                                 <input type="number" v-model="item.zipcode" placeholder="zipcode">
                             </label>
                         </div>
-                        
-                        <!-- <google-maps :selector="'map'+key"
-                                        :showMap="showMap"
-                                        :label="item.description" 
-                                        :editable="true" 
-                                        :position="item.position" 
-                                        @update:position="item.position = $event.position"
-                                        @update:address="setItem(item, $event)"/> -->
 
-                        <button @click.prevent="updateAddress(item), editAddress[key] = false">send</button>
+                        <div class="input-group">
+                            <label class="label-group">
+                                <label>Latitude: </label>
+                                <input type="number" v-model="item.position.lat" placeholder="Latitude">
+                            </label>
+                            <label class="label-group">
+                                <label>Longitude: </label>
+                                <input type="number" v-model="item.position.lng" placeholder="Longitude">
+                            </label>
+                        </div>
+
+                        <button @click.prevent="updateAddress(item)">send</button>
+                        <span class="edit"
+                            v-if="editable && itemEdit && itemActive == item._id"
+                            @click="itemEdit = false">Cancel</span>
                     </form>
+
+                    <!-- <google-maps   class="showMap"
+                                :selector="'mapEdit'+item._id"
+                                :showMap="showMap"
+                                :label="item.description" 
+                                :editable="editable" 
+                                :position="item.position"
+                                :autoLocate="autoLocate"
+                                @update:position="item.position = (itemEdit ? $event.position: addressModel.position)"
+                                @update:address="setItem(item, $event)"
+                            /> -->
                 </div>
 
                 <!--show address cards-->
@@ -69,21 +86,25 @@
                     <p> {{item.street}} , {{item.city}} </p>
                     <p> {{item.zipcode}} {{item.province}} </p>
                     <p> {{item.country}} </p>
-                    
-                     <!-- <google-maps   :selector="'map'+key"
-                            :showMap="showMap"
-                            :label="item.description" 
-                            :editable="false" 
-                            :position="item.position"/> -->
-                </div>
-
-                <!--only show edit button if editable-->
-                <span class="edit"
+                    <p v-if="item.position && item.position.lat && item.position.lng"> lat: {{item.position.lat}}, lng: {{item.position.lng}}</p>
+                    <span class="edit"
                     v-if="editable && !itemEdit && itemActive == item._id"
                     @click="itemEdit = true">Edit</span>
-                <span class="edit"
-                    v-if="editable && itemEdit && itemActive == item._id"
-                    @click="itemEdit = false">Cancel</span>
+
+                </div>
+
+                <google-maps   class="showMap"
+                            :selector="'mapShow'+item._id"
+                            :showMap="showMap"
+                            :label="item.description" 
+                            :editable="allowEdit" 
+                            :position="item.position"
+                            :autoLocate="autoLocate"
+                            @update:position="item.position = (itemEdit ? $event.position: addressModel.position)"
+                            @update:address="setItem(item, $event)"
+                        />
+
+                <!--only show edit button if editable-->
                 <span class="delete"
                     v-if="!itemEdit && itemActive == item._id"
                     @click="deleteAddress(item._id)">X</span>
@@ -93,18 +114,28 @@
     </div>
 </template>
 <script>
-// import Maps from "../../../../parts/googleMap";
+import Maps from "../../../../parts/googleMap";
 
 export default {
     props:{
-        showMap:{default: true, type:Boolean},
+        showMap:{default: false, type:Boolean},
         editable:{default: false, type: Boolean}, //determines if you are able to edit the address here
         address:{type: Array}, //array of address to show
-        editAddress:{type:Object} //on edit boolean pair for each address
+        autoLocate:{default: false, type: Boolean}, //activate geolocation
+        autoAddress:{default: false, type: Boolean} //allow change input value on address based on googlemap marker
     },
-    // components:{
-    //     "google-maps":Maps
-    // },
+    components:{
+        "google-maps":Maps
+    },
+    computed:{
+        allowEdit(){
+            if(this.editable && this.itemEdit){//only set markers if editable is true and component is on edit mode
+                return true
+            }else{
+                return false
+            }
+        }
+    },
     data(){
         return {
             addressModel:{main: false,
@@ -146,14 +177,16 @@ export default {
                 console.log('err', err);
             });
         },
-        // setItem(item, event){//set new values for auto address from googlemaps
-        //     if(event.address.route){item.street = event.address.route.long_name;}
-        //     if(event.address.city){item.city = event.address.city.long_name;}
-        //     if(event.address.province){item.province = event.address.province.long_name;}
-        //     if(event.address.country){item.country = event.address.country.long_name;}
-        //     if(event.address.zipcode){item.zipcode = event.address.zipcode.long_name;}
-        //     else{item.zipcode = "";}
-        // },
+        setItem(item, event){//set new values for auto address from googlemaps
+            if(this.itemEdit && this.autoAddress){
+                if(event.address.route){item.street = event.address.route.long_name;}
+                if(event.address.city){item.city = event.address.city.long_name;}
+                if(event.address.province){item.province = event.address.province.long_name;}
+                if(event.address.country){item.country = event.address.country.long_name;}
+                if(event.address.zipcode){item.zipcode = event.address.zipcode.long_name;}
+                else{item.zipcode = "";}
+            }
+        },
         chooseItem(item){
             // this.itemEdit = false;
             this.itemActive = item;
@@ -162,6 +195,10 @@ export default {
 }
 </script>
 <style scoped>
+.showMap{
+    height: 300px;
+
+}
 
 /*====highlight======*/
 
@@ -172,10 +209,14 @@ export default {
     color: blue;
     text-shadow: 0 0 3px white;
     /* float: right; */
-    bottom: 10px;
-    right: 30px;
-    position:absolute;
+    /* bottom: 10px; */
+    /* right: 30px; */
+    /* position:absolute; */
     cursor: pointer;
+    /* background: white; */
+    padding: 5px;
+    /* font-weight: bolder; */
+    text-align: center;
 }
 .delete{
     color: white;

@@ -10,6 +10,7 @@ import profile from './modules/profile/profile';//importing modules
 import company from './modules/profile/company';//importing modules
 
 import googlemaps from './modules/googlemaps/googlemaps';//googlemaps module
+import { type } from 'os';
 
 Vue.use(Vuex);
     
@@ -20,13 +21,11 @@ export const store = new Vuex.Store({
         resetToken: null, //token data for reseting account
         errorMessage: null,
         infoMessage: null,
+        allowAutoLocate: false,
         allowLocalStorage: true //if true stores & check localstorage before sending get requests
 
     },
     getters:{
-        getAllowStorage:(state)=>{
-            return state.allowLocalStorage;
-        },
         getToken:(state)=>{//get token header on response
             return state.token;
         },
@@ -41,6 +40,12 @@ export const store = new Vuex.Store({
         },
         getInfoMessage:(state)=>{
             return state.infoMessage;
+        },
+        getAllowStorage:(state)=>{
+            return state.allowLocalStorage;
+        },
+        getAllowAutoLocate:(state)=>{
+            return state.allowAutoLocate;
         }
 
 
@@ -64,19 +69,53 @@ export const store = new Vuex.Store({
         },
         setInfoMessage:(state, payload)=>{
             state.infoMessage = payload;
+        },
+        setAllowAutoLocate:(state, payload)=>{
+            if(typeof payload == 'boolean'){
+                state.allowAutoLocate = payload;
+            }else if(typeof payload == 'string'){
+
+                if(payload == "true"){
+                    state.allowAutoLocate = true;
+                }else if(payload == 'false'){
+                    state.allowAutoLocate = false;
+                }else{
+                    console.log('Erro: could not set allow auto locate.');
+                }
+            }else{
+                console.log('Error: could not set auto locate. Invalid type.');
+            }
         }
         
     },
     actions:{ //can be used for async task like sending data to DB
+        geoLocate:({commit})=>{
+            const AUTO_LOCATE = localStorage.getItem('autoLocate');
+
+            if(!AUTO_LOCATE){
+                const CONFIRM = window.confirm("Allow device to get your location?");
+
+                if(CONFIRM){
+                    commit('setAllowAutoLocate', true);
+                    localStorage.setItem('autoLocate', true);
+                }else{
+                    commit('setAllowAutoLocate', false);
+                    localStorage.setItem('autoLocate', false);
+                }
+            }
+        },
         clearDisplayMessages:({commit})=>{
             
             //display error message
             commit('setErrorMessage', null);
             commit('setInfoMessage', null);
         },
-        maintainData:({getters, commit, dispatch}, payload)=>{//this pulls data from backend based on account type, commits them to state and storage;
+        maintainData:({commit, dispatch}, payload)=>{//this pulls data from backend based on account type, commits them to state and storage;
             //TODO: change to cookies instead of localStorage
             //NOTE* this action should remove components from individually loading their own data;
+            const ALLOW_AUTO_LOCATE = localStorage.getItem('autoLocate');
+
+            commit('setAllowAutoLocate', ALLOW_AUTO_LOCATE);
             
             return new Promise((resolve, reject)=>{
                 dispatch('getUser')

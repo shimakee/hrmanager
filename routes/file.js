@@ -13,6 +13,7 @@ const User = require("../models/user");
 //validator
 const   Joi         = require('joi');
         Joi.objectId = require('joi-objectid')(Joi);
+const   isObjectId = require('../util/tools').validate.isObjectId;
 //file handler
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -233,6 +234,28 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
 
     }else{
         res.status(400).send({message: "Bad request."});
+    }
+}).put(auth.isAuth, async (req,res,next)=>{
+    let queryId = req.query.id;
+
+    //check that there is a req.query
+    if(!queryId && isObjectId(queryId)){return res.status(400).send({message: "Bad request. No parameters or Invalid query id"});}
+
+    //validate
+    // let {error} = Joi.validate(queryId, Joi.string().regex(regex.imgName).required());
+    // if(error){return res.status(400).send({message: "Bad request. Invalid parameters or body."})}
+
+    // if(req.body.main == true || req.body.main == "true"){//set everything else to false
+        await Profile.updateOne({_id: req.user.profile}, {$set: {"pics.$[].main": false}}).exec();
+    // }
+    
+    let result = await Profile.updateOne({_id: req.user.profile, "pics._id": queryId}, {$set: {"pics.$.main": true}}).exec();//set one as main
+
+    console.log(result);
+    if(result.nModified <= 0){
+        res.status(404).send({message: "Pics not found."});
+    }else{
+        res.status(200).send(result);
     }
 });
 
