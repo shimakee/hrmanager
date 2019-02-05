@@ -305,7 +305,17 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
     //OPTIONAL: before adding check contact length and deny add instead of slicing and auto deleting last entry
     //add contact
     let profile = await Profile.updateOne({_id: req.user.profile}, {$push:{ contact: {$each:[req.body], $position: 0, $slice: 3}}}).exec();
+    // let profile = await Profile.updateOne({_id: req.user.profile}, {$push:{ contact: {$each:[req.body], $position: 0}}}).exec();
     // let profile = await task.run({useMongoose: true});
+    
+    let profileInfo = await Profile.findById({_id: req.user.profile}).exec();
+    let contactMain = profileInfo.contact.find(element=>{//check that there is atleast One main contact
+        return element.main == true;
+    });
+
+    if(!contactMain){ //no main contact - set position 0 as main
+        await Profile.updateOne({_id: req.user.profile}, {$set: {"contact.0.main": true}}).exec();
+     }
 
     if(profile.nModified <= 0){
         res.status(404).send({message: "could not add"});
@@ -318,10 +328,10 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Profile.validateContact(req.body);
     if(error){
-        return res.status(400).send({message: 'Bad request.'});}
+        return res.status(400).send({message: 'Bad request.', error: error});}
 
     if(!req.query.id){
-        res.status(400).send({message: "Bad request."});
+        res.status(400).send({message: "Bad request. No id passed"});
     }else{
         let id = req.query.id;
 
@@ -333,6 +343,15 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
         }
         
         let result = await Profile.updateOne({_id: req.user.profile, "contact._id": id}, {$set: {"contact.$": req.body}}).exec();
+
+        let profileInfo = await Profile.findById({_id: req.user.profile}).exec();
+        let contactMain = profileInfo.contact.find(element=>{ //check if there is atleast one main contact
+            return element.main == true;
+        });
+
+        if(!contactMain){ //no main contact - set position 0 as main
+            await Profile.updateOne({_id: req.user.profile}, {$set: {"contact.0.main": true}}).exec();
+        }
 
         if(result.nModified <= 0){
             res.status(404).send({message: "Contact not found."});
@@ -353,6 +372,15 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
         if(error){return res.status(400).send(error);}
         
         let result = await Profile.updateOne({_id: req.user.profile, "contact._id": id}, {$pull: {contact: {_id: id}}}).exec();
+
+        let profileInfo = await Profile.findById({_id: req.user.profile}).exec();
+        let contactMain = profileInfo.contact.find(element=>{//check that there is atleast one main contact
+            return element.main == true;
+        });
+
+        if(!contactMain){ //no main contact - set position 0 as main
+            await Profile.updateOne({_id: req.user.profile}, {$set: {"contact.0.main": true}}).exec();
+        }
 
         if(result.nModified <= 0){
             res.status(404).send({message: "Contact not found."});

@@ -65,18 +65,25 @@ router.route('/signup').post(async (req,res,next)=>{//need further testing :TODO
     //TODO: create pre-formated email template - with just the body and title to be filled
     //format email to be sent
    let  mailOption = {
-        from: `"PC Master race 👻" <no-reply@what.com>`, // sender address
+        from: `"HuReOn 👻" <no-reply@MasterKenneth.com>`, // sender address
         to: email.address, // list of receivers
         subject: 'Email confirmation and account activation', // Subject line
         // text: 'Hello world?', // plain text body
-        html: `<b>Hello world?</b><br>
+        html: `
         <h1>url token for user ${newUser.username}</h1>
         <a target="_blank" rel="noopener noreferrer" href="${protocol}://${domainName}/user/activate?token=${token}">Follow link</a>` // html body
     };
 
     //might not AWAIT for email
     //send link via email - low time validity
-    let sendStatus = await tools.email.send(mailOption);
+    tools.email.send(mailOption) //removed await to send email while processed
+        .then(res=>{
+            console.log('email response', res);
+        }).catch(err=>{
+            
+            console.log('email error response', err);
+        });
+    // let sendStatus = await tools.email.send(mailOption)
     // console.log("sendStatus", sendStatus);
     const expireDate = new Date(decode.exp * 1000); //set expiration
     
@@ -94,18 +101,19 @@ router.route('/activate').get(async (req,res,next)=>{
         res.status(400).send({message: 'Bad request. No token.'});
     }else{
         let decoded = User.verifyToken(token);
-        
         if(!decoded.isValid){
             res.status(400).send({message: 'Bad request. Invalid token.'});
         }else{
             
-            const user = await User.findOne({_id: decoded.info._id}).exec();//username exist
+            // const user = await User.findOne({_id: decoded.info._id}).exec();//username exist
+            const user = await User.findByIdAndUpdate({_id: decoded.info._id}, {$set: {activity: true}}).exec();//username exist
             if(!user) {return res.status(404).send({message: 'Bad request. User does not exist'});}
 
-            user.activity = true;
-            await user.save();
+            // user.activity = true;
+            // await user.save();
 
-            res.status(200).redirect('/login');
+            // res.status(200).redirect('/login');
+            res.status(200).redirect(`${protocol}://${domainName}/login`);
         }
     }
 });

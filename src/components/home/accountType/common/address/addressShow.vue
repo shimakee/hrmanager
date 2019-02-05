@@ -62,7 +62,7 @@
                         <button @click.prevent="updateAddress(item)">send</button>
                         <span class="edit"
                             v-if="editable && itemEdit && itemActive == item._id"
-                            @click="itemEdit = false">Cancel</span>
+                            @click="cancelEdit">Cancel</span>
                     </form>
 
                     <!-- <google-maps   class="showMap"
@@ -138,13 +138,14 @@ export default {
     },
     data(){
         return {
-            addressModel:{main: false,
-                        description:"",
-                        street:"",
-                        city:"",
-                        country: "",
-                        province:"",
-                        zipcode:"",
+            addressModel:{
+                        // main: false,
+                        // description:"",
+                        // street:"",
+                        // city:"",
+                        // country: "",
+                        // province:"",
+                        // zipcode:"",
                         position:{
                             lat: null,
                             lng: null
@@ -154,28 +155,30 @@ export default {
         }
     },
     methods:{
-        updateAddress(data){ //TODO move this in store dispatch action
-            this.$store.dispatch('sendCommit', {url:`/profile/me/address?id=${data._id}`, method: 'put', data: data})//TODO move to store as dispatch action
-                .then(response=>{
+        updateAddress(data){
+            this.$store.dispatch('updateAddress', data)
+                .then(res=>{
+                    this.itemEdit = false;
+
                     this.$store.dispatch('getAddress').then(res=>{
-                        localStorage.setItem('address', JSON.stringify(res));
-                        this.$store.commit('setAddress', res);
-                        this.itemEdit = false;
+                        this.$store.commit('setInfoMessage', res.data.message);
                     });
                 }).catch(err=>{
-                    console.log('err', err);
+                    console.log(err);
+
+                    this.$store.commit('setErrorMessage', err.response.statusText);
                 });
         },
-        deleteAddress(data){//move this in store dispatch action
-            this.$store.dispatch('sendCommit', {url:`/profile/me/address?id=${data}`, method:'delete', data:null} )
-            .then(response=>{
-                this.$store.dispatch('getAddress').then(res=>{
-                        localStorage.setItem('address', JSON.stringify(res));
-                        this.$store.commit('setAddress', res);
+        deleteAddress(data){
+            this.$store.dispatch('deleteAddress', data)
+                .then(res=>{
+                    this.$store.dispatch('getAddress').then(res=>{
+                        this.$store.commit('setInfoMessage', "Success");
                     });
-            }).catch(err=>{
-                console.log('err', err);
-            });
+                }).catch(err=>{
+                    
+                    this.$store.commit('setErrorMessage', err.response.statusText);
+                });
         },
         setItem(item, event){//set new values for auto address from googlemaps
             if(this.itemEdit && this.autoAddress){
@@ -190,6 +193,10 @@ export default {
         chooseItem(item){
             // this.itemEdit = false;
             this.itemActive = item;
+        },
+        cancelEdit(){
+            this.itemEdit = false;
+            this.$store.dispatch('getProfile'); //to update the computed address array -TODO: base it on account type
         }
     }
 }
@@ -262,6 +269,13 @@ li.card-address{
 ul{
     max-width: 1000px;
 }
+/* ul{
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+    grid-gap: 10px;
+    padding: 0;
+} */
 .editButton span{
     float: right;
     color: blue;

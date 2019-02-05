@@ -5,30 +5,33 @@
             <!--TODO create component for input-->
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" v-model="identity.user.username" placeholder="Username">
+                <input type="text" v-model="identity.user.username" placeholder="Username" required>
             </div>
 
             <div class="input-group">
                 <!-- <div class="input-group"> -->
                     <label for="password">Password</label>
-                    <input type="password" v-model="identity.user.password" placeholder="Password">
+                    <input type="password" v-model="identity.user.password" placeholder="Password" required>
                 <!-- </div> -->
                 <!-- <div class="input-group"> -->
                     <!-- <label for="passConfirm">password confrim</label> -->
-                    <input type="password" v-model="identity.user.passConfirm" placeholder="Confirm password">
+                    <input type="password" v-model="identity.user.passConfirm" placeholder="Confirm password" required>
                 <!-- </div> -->
             </div>
 
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="text" v-model="identity.profile.email.address" placeholder="Email address">
+                <input type="text" v-model="identity.profile.email.address" placeholder="Email address" required>
+                
+                    <label>Birthdate: </label>
+                    <input type="date" v-model="identity.profile.birthdate" placeholder="1989-10-18" required>
             </div>
 
              <div class="input-group">
                 <label for="fullname">Full name</label>
-                <input type="text" v-model="identity.profile.name.first" placeholder="First">
+                <input type="text" v-model="identity.profile.name.first" placeholder="First" required>
                 <input type="text" v-model="identity.profile.name.middle" placeholder="Middle">
-                <input type="text" v-model="identity.profile.name.last" placeholder="Last">
+                <input type="text" v-model="identity.profile.name.last" placeholder="Last" required>
                 <input type="text" v-model="identity.profile.name.suffix" placeholder="Suffix">
             </div>
 
@@ -75,6 +78,7 @@ export default {
                 profile:{
                     email:{main:true,
                         address:''},
+                    birthdate: null,
                     name:{
                         first:'',
                         middle:'',

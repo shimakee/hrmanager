@@ -23,6 +23,9 @@ export default {
                 console.log("delete canceled.");
             }
         }
+    },
+    mounted(){
+        this.$store.dispatch('clearDisplayMessages');
     }
 
 }

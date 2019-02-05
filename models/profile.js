@@ -242,11 +242,12 @@ function validateAddress(data){
 function validateContact(data){
 
     const contactSchema = Joi.object().keys({ //to be tested
+        _id: Joi.objectId().allow(''),
         main: Joi.boolean().allow(''),
-        description:Joi.string().max(25).regex(regex.common),
-        countryCode:Joi.number().integer().positive().max(999999).allow(''),
-        areaCode:Joi.number().integer().positive().max(999999).allow(''),
-        number:Joi.number().integer().positive().max(999999999999999)
+        description:Joi.string().max(25).regex(regex.common).required(),
+        countryCode:Joi.number().integer().positive().max(999999).allow('', null),
+        areaCode:Joi.number().integer().positive().max(999999).allow('', null),
+        number:Joi.number().integer().positive().max(999999999999999).required()
     });
 
     return contactSchema.validate(data, {presence:'optional'});

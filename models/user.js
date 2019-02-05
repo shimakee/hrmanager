@@ -110,7 +110,7 @@ user.methods.genAuthToken = function(time = '1h'){//object to insert inside toke
 }
 
 user.methods.response = function(){//uniformed user info response to return to client
-    return _.pick(this,['username', 'accountType']);
+    return _.pick(this,["activity", 'username', 'accountType']);
 }
 
 // const skipInit = process.env.NODE_ENV === 'test';

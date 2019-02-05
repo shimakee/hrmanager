@@ -2,5 +2,7 @@
     "db": {"name": "deleon_hrmanager_TEST",
         "uri":"mongodb://localhost/deleon_hrmanager_test"},
     "hostName":"localhost",
-    "protocolEmail":"http"
+    "protocol":"http",
+    "protocolEmail":"http",
+    "domainName":"localhost:8080"
 }

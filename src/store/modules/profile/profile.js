@@ -29,12 +29,16 @@ const actions = {
                 commit('setProfile', res.data);
                 commit('setPics', pics);
                 commit('setAddress', res.data.address);
+                commit('setContact', res.data.contact);
 
                 //save to storage
                 if(getters.getAllowStorage){//TODO: change to cookie
                     localStorage.setItem('profile', JSON.stringify(res.data));
                     localStorage.setItem('pics', JSON.stringify(pics));
+                    //common data
                     localStorage.setItem('address', JSON.stringify(res.data.address));
+                    localStorage.setItem('contact', JSON.stringify(res.data.contact));
+                    localStorage.setItem('government', JSON.stringify(res.data.government));
                 }
                 
 

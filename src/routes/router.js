@@ -23,13 +23,20 @@ import Info from '../components/home/accountType/info';
 import Gallery from '../components/home/accountType/common/gallery/gallery';
 import ShowGallery from '../components/home/accountType/common/gallery/showGallery';
 
+import CompanyAccount from '../components/home/accountType/company/companyAccount';
+import EditCompany from '../components/home/accountType/company/companyEdit';
+
 //Home - profile
 import ProfileAccount from '../components/home/accountType/profile/profileAccount';
     //Home - profile - settings
     import EditProfile from '../components/home/accountType/profile/profileEdit';
     import EditRelatives from '../components/home/accountType/common/editRelatives';
     import Address from '../components/home/accountType/common/address/address';
+    import AddressShow from '../components/home/accountType/common/address/addressShow';
+    import AddressAdd from '../components/home/accountType/common/address/addressAdd';
     import Contact from '../components/home/accountType/common/contact/contact';
+    import ContactShow from '../components/home/accountType/common/contact/contactShow';
+    import ContactAdd from '../components/home/accountType/common/contact/contactAdd';
     import EditGov from '../components/home/accountType/common/editGov';
 
 //home - company
@@ -146,23 +153,15 @@ export const routes = [
                     {path:"account",
                         components:{
                             default: ProfileAccount
-                        }
-                        ,
-                        children:[
-                            {path: "", 
+                        },children:[
+                            {path: "", name: "account",
                                 components:{
                                     editProfile: EditProfile,
                                     editRelatives: EditRelatives,
-                    
-                                    editAddress: Address,
                                     contact: Contact,
-                                    editGov: EditGov,
-
-                                    default: DeleteAccount,
-                                    editPic: ShowGallery,
-                                    changeUsername: ChangeUsername,
-                                    changePassword: ChangePassword,
-                                    deleteAccount: DeleteAccount,
+                                    contactAdd: ContactAdd,
+                                    contactShow: ContactShow,
+                                    editGov: EditGov
                                 }
                             }
                         ]
@@ -186,30 +185,32 @@ export const routes = [
                         components:{
                             default: Address
                         }
-                        // ,
-                        // children:[
-                        //     {path: "", name:"address",
-                        //         components:{
-                        //             default: HomeDefaulContent
-                        //         }
-                        //     }
-                        // ]
+                        ,
+                        children:[
+                            {path: "", name:"address",
+                                components:{
+                                    addressShow: AddressShow,
+                                    addressAdd: AddressAdd
+                                }
+                            }
+                        ]
 
                     },
-                    {path:"contact", name:"contact",
-                        components:{
-                            default: HomeDefaulContent
-                        }
-                        // ,
-                        // children:[
-                        //     {path: "", name:"address",
-                        //         components:{
-                        //             default: HomeDefaulContent
-                        //         }
-                        //     }
-                        // ]
+                    // {path:"contact", name:"contact",
+                    //     components:{
+                    //         default: Contact
+                    //     }
+                    //     ,
+                    //     children:[
+                    //         {path: "", name:"contact",
+                    //             components:{
+                    //                 contactShow: ContactShow,
+                    //                 contactAdd: ContactAdd
+                    //             }
+                    //         }
+                    //     ]
 
-                    },
+                    // },
                     {path:"settings", ///profile/settings - CONTENT
                         components:{
                             default: Settings
@@ -257,31 +258,55 @@ export const routes = [
                     actions: Actions
                 },
                 children:[ //this is where the content goes - its children will be the content details
-                    {path:"", name: "company", //landing page for profile
+                    {path:"", name: "company", //landing page for company
                         components:{
                             default: HomeDefaulContent
                         }
                     },
-                    {path:"settings", ///profile/settings - CONTENT
+                    {path:"account",
                         components:{
-                            default: Settings
-                        },
-                        children:[
-                            {path:"", name:"companySettings",///profile/settings - main page - CONTENT - details
+                            default: CompanyAccount
+                        },children:[
+                            {path: "", name: "account",
                                 components:{
-                                    default: DeleteAccount,
-                                    editPic: ShowGallery,
-                                    changeUsername: ChangeUsername,
-                                    changePassword: ChangePassword,
-                                    deleteAccount: DeleteAccount,
-                                    editProfile: EditProfile,
-                                    editRelatives: EditRelatives,
-                                    editAddress: Address,
+                                    editCompany: EditCompany,
                                     contact: Contact,
+                                    contactAdd: ContactAdd,
+                                    contactShow: ContactShow,
                                     editGov: EditGov
                                 }
                             }
                         ]
+
+                    },
+                    {path:"gallery", name:"gallery",
+                        components:{
+                            default: Gallery
+                        }
+                        // ,
+                        // children:[
+                        //     {path: "", name:"gallery",
+                        //         components:{
+                        //             default: HomeDefaulContent
+                        //         }
+                        //     }
+                        // ]
+
+                    },
+                    {path:"address", name:"address",
+                        components:{
+                            default: Address
+                        }
+                        ,
+                        children:[
+                            {path: "", name:"address",
+                                components:{
+                                    addressShow: AddressShow,
+                                    addressAdd: AddressAdd
+                                }
+                            }
+                        ]
+
                     },
                     {path:"marketing",
                         components:{

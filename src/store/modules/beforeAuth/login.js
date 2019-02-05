@@ -64,6 +64,7 @@ const actions = {
         commit('setAccountType', payload.data.accountType);
         commit('setUsername', payload.data.username);
         commit('setToken', token);
+        commit('setActivity', payload.data.activity);
         //save and commit other common data as necessary - on account type
         //address - profile done
         
@@ -79,6 +80,7 @@ const actions = {
             //response body
             localStorage.setItem('username', payload.data.username);
             localStorage.setItem('accountType', payload.data.accountType);
+            localStorage.setItem('activity', payload.data.activity);
 
             //TODO: to implement - not yet doing anything with the data
             localStorage.setItem('address', JSON.stringify(payload.data.address));

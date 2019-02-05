@@ -1,24 +1,7 @@
 <template>
     <div>
-        <h2>Contacts</h2>
-        <form>
-            <div class="formGroup">
-                <label>name:</label>
-                <input type="checkbox" v-model="contactModel.main" value="true">
-                <input type="text" v-model="contactModel.description" placeholder="contact description">
-                <input type="number" v-model="contactModel.countryCode" placeholder="country code">
-                <input type="number" v-model="contactModel.areaCode" placeholder="area code">
-                <input type="number" v-model="contactModel.number" placeholder="number">
-            </div>
-
-            <button @click="addContact">Add Contact</button>
-        </form>
-
-        <ul>
-            <li v-for="(item, key) in contacts" v-bind:key="key">
-                {{item}}
-            </li>
-        </ul>
+        <router-view name="contactAdd"/>
+        <router-view name="contactShow"/>
     </div>
 </template>
 <script>

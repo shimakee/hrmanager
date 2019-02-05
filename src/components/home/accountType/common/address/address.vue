@@ -1,26 +1,35 @@
 <template>
     <div>
-        <h2>Address</h2>
-        <add-address :showMap="true"
+        <router-view name="addressAdd"
+                    :showMap="true"
+                    :autoLocate="autoLocate"/>
+        <router-view name="addressShow"
+                    v-if="address"
+                    :autoLocate="autoLocate"
+                    :autoAddress="true"
+                    :editable="true"
+                    :showMap="true"
+                    :address="address" />
+        <!-- <add-address    :showMap="true"
                         :autoLocate="autoLocate"/>
         <show-address v-if="address"
                         :autoLocate="autoLocate"
                         :autoAddress="true"
                         :editable="true"
                         :showMap="true"
-                        :address="address"/>
+                        :address="address"/> -->
 
     </div>
 </template>
 <script>
-import ShowAddress from "./showAddress";
-import AddAddress from "./addAddress";
+// import ShowAddress from "./showAddress";
+// import AddAddress from "./addAddress";
 
 export default {
-    components:{
-        "show-address":ShowAddress,
-        "add-address":AddAddress
-    },
+    // components:{
+    //     "show-address":ShowAddress,
+    //     "add-address":AddAddress
+    // },
     data(){
         return {
             addressModel:{main: false,

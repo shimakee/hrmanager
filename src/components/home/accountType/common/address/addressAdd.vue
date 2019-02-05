@@ -2,7 +2,7 @@
     <div>
         <h2>Address add</h2>
 
-         <form class="form-container">
+         <form v-if="addAddress" class="form-container">
             <div class="form-group">
                     <span class="label-group">
                         <input type="checkbox" v-model="addressModel.main" value="true">
@@ -43,17 +43,6 @@
             
 
 
-            <div class="label-group">
-                <span class="input-group">
-                    <!-- <label class="input-group"> -->
-                        <label>Latitude: </label>
-                        <input type="text" v-model="addressModel.position.lat" placeholder="country">
-                    <!-- </label> -->
-                    <!-- <label class="input-group"> -->
-                        <label>Longitude: </label>
-                        <input type="number" v-model="addressModel.position.lng" placeholder="zipcode">
-                    <!-- </label> -->
-                </span>
                 <google-maps    class="addressMap"
                                 :showMap="showMap"
                                 :selector="'addresMap'"
@@ -63,10 +52,23 @@
                                 @update:position="addressModel.position = $event.position"
                                 @update:address="setAddressModel"
                 />
+            <div class="input-group">
+                <span class="form-group">
+                    <label class="label-group">
+                        <label>Latitude: </label>
+                        <input type="text" v-model="addressModel.position.lat" placeholder="country">
+                    </label>
+                    <label class="label-group">
+                        <label>Longitude: </label>
+                        <input type="number" v-model="addressModel.position.lng" placeholder="zipcode">
+                    </label>
+                </span>
             </div>
 
             <button @click.prevent="submit">send</button>
         </form>
+        <button v-if="addAddress" @click="addAddressChange">Cancel</button>
+        <button v-if="!addAddress" @click="addAddressChange">Add Address</button>
     </div>
 </template>
 <script>
@@ -92,11 +94,15 @@ export default {
                         position:{
                             lat: null,
                             lng: null
-                        }}
+                        }},
+            addAddress: false
                     
         }
     },
     methods:{
+        addAddressChange(){
+            this.addAddress = !this.addAddress;
+        },
         clearAddressModel(){
             this.addressModel.main = false;
             this.addressModel.description = "";
@@ -134,6 +140,13 @@ export default {
     /* height:500px; */
 }
 
+.mapPosition{
+    /* position: absolute; */
+    /* bottom:  50px; */
+    opacity: .5;
+    max-width: 200px;
+}
+
 /*==========================FORM===================================*/
 ul{
     max-width: 1000px;
@@ -152,6 +165,7 @@ ul{
     grid-row-gap: 10px;
     padding: 0px;
     margin:0px;
+    position: relative;
 }
 .form-container button{
     align-self: center;

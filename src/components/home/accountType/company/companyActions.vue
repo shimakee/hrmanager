@@ -10,7 +10,7 @@
                     <li><router-link to="account">information</router-link></li>
                     <li><router-link to="gallery">Photos</router-link></li> <!--this is currently used as the default content-->
                     <li><router-link to="address">Address</router-link></li>
-                    <li><router-link to="contact">Contact</router-link></li>
+                    <!-- <li><router-link to="contact">Contact</router-link></li> -->
                 </ul>
             </accordion>
             <!-- <accordion>

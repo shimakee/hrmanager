@@ -28,13 +28,22 @@ export default {
 
             this.$store.dispatch('changePassword', this.password)
                 .then(res=>{
-
                     this.submitted = true;
-                }).catch(err=>{
                     
+                    this.$store.dispatch('maintainData');
+                    this.$store.commit('setInfoMessage', "Password changed.");
+                    this.$store.commit('setErrorMessage', null);
+                }).catch(err=>{
                     this.submitted = false;
+
+                    
+                    this.$store.commit('setInfoMessage', null);
+                    this.$store.commit('setErrorMessage', err.response.statusText);
                 });
         }
+    },
+    mounted(){
+        this.$store.dispatch('clearDisplayMessages');
     }
 }
 </script>

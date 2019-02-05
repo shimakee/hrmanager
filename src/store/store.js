@@ -16,6 +16,7 @@ Vue.use(Vuex);
     
 export const store = new Vuex.Store({
     state:{
+        activity: false,
         token:null, //response token obtained
         timeout: null, //autologout feature countdown
         resetToken: null, //token data for reseting account
@@ -26,6 +27,9 @@ export const store = new Vuex.Store({
 
     },
     getters:{
+        getActivity:(state)=>{
+            return state.activity;
+        },
         getToken:(state)=>{//get token header on response
             return state.token;
         },
@@ -51,6 +55,9 @@ export const store = new Vuex.Store({
 
     },
     mutations:{//mutate state
+        setActivity:(state, payload)=>{
+            state.activity = payload;
+        },
         clearAuthData:(state)=>{
             state.data = null;
             state.token = null;
@@ -113,6 +120,8 @@ export const store = new Vuex.Store({
         maintainData:({commit, dispatch}, payload)=>{//this pulls data from backend based on account type, commits them to state and storage;
             //TODO: change to cookies instead of localStorage
             //NOTE* this action should remove components from individually loading their own data;
+
+            //setting autolocate - to not ask again even if refreshed
             const ALLOW_AUTO_LOCATE = localStorage.getItem('autoLocate');
 
             commit('setAllowAutoLocate', ALLOW_AUTO_LOCATE);

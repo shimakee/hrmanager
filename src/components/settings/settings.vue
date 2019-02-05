@@ -7,6 +7,10 @@
                 <router-view></router-view>
                 <router-view name="changeUsername"></router-view>
                 <router-view name="changePassword"></router-view>
+
+                <span class="error">{{errorMessage}}</span>
+                <span class="infoMessage">{{infoMessage}}</span>
+
             </div>
         </accordion>
         <!-- <accordion>
@@ -43,9 +47,24 @@ export default {
     
     components:{
         "accordion": Accordion
+    },
+    computed:{
+        errorMessage(){
+            return this.$store.getters.getErrorMessage;
+        },
+        infoMessage(){
+            return this.$store.getters.getInfoMessage;
+        }
     }
 }
 </script>
 <style scoped>
-
+.error{
+    color:red;
+    font-weight: bolder;
+}
+.infoMessage{
+    color:green;
+    font-weight: bolder;
+}
 </style>

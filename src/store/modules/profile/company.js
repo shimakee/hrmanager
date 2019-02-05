@@ -31,6 +31,13 @@ const actions = {
                 }else{
                     pics = [];
                 }
+                
+                //save to state
+                commit('setCompany', res.data);
+                commit('setTradename', res.data.tradename);
+                commit('setPics', pics);
+                commit('setAddress', res.data.address);
+                commit('setContact', res.data.contact);
 
                 //save to storage
                 if(getters.getAllowStorage){ //TODO: change to cookie
@@ -41,12 +48,11 @@ const actions = {
                     localStorage.setItem('businesses', JSON.stringify(res.data.businesses));
                     localStorage.setItem('employees', JSON.stringify(res.data.employees));
                     localStorage.setItem('owner', JSON.stringify(res.data.owner));
+                    //common data
+                    localStorage.setItem('address', JSON.stringify(res.data.address));
+                    localStorage.setItem('contact', JSON.stringify(res.data.contact));
+                    localStorage.setItem('government', JSON.stringify(res.data.government));
                 }
-                
-                //save to state
-                commit('setCompany', res.data);
-                commit('setTradename', res.data.tradename);
-                commit('setPics', pics);
                 //save and commit other data when neccessarry
                 //businesses
                 //employees
