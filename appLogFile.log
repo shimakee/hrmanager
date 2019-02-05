@@ -555,3 +555,11 @@
 {"level":"info","message":"using database deleon_hrmanager","timestamp":"2019-02-05T17:05:06.986Z"}
 {"level":"info","message":"listening on port 80...","timestamp":"2019-02-05T17:05:06.986Z"}
 {"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2019-02-05T17:05:09.066Z"}
+{"level":"info","message":"Database deleon_hrmanager closed.","timestamp":"2019-02-05T17:49:40.811Z"}
+{"level":"info","message":"Using uri:mongodb://localhost/deleon_hrmanager_test","timestamp":"2019-02-05T17:50:21.340Z"}
+{"level":"info","message":"NODE_ENV: production","timestamp":"2019-02-05T17:50:21.842Z"}
+{"level":"info","message":"App: My web App","timestamp":"2019-02-05T17:50:21.842Z"}
+{"level":"info","message":"using database deleon_hrmanager","timestamp":"2019-02-05T17:50:21.842Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2019-02-05T17:50:21.843Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2019-02-05T17:50:23.943Z"}
+{"level":"info","message":"Database deleon_hrmanager closed.","timestamp":"2019-02-05T17:50:57.709Z"}
