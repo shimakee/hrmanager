@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <div class="editButton" @click="editChange()">
+        <div class="editButton" @click="edit = !edit">
             <span v-if="edit">
                 Cancel
             </span>
@@ -9,73 +9,23 @@
                 Edit
             </span>
         </div>
-        <form class="form-container">
-            <div class="form-group">
-                <div class="label-group">
-                    <label class="input">Gender: </label>
-                    <select v-if="edit" v-model="formProfile.civilStatus" id="">
-                        <option value="single">Single</option>
-                        <option value="married">Married</option>
-                        <option value="divorced">Divorced</option>
-                        <option value="annulled">Annuled</option>
-                        <option value="widowed">Widowed</option>
-                    </select>
-                    <span v-if="!edit">
-                        {{formProfile.civilStatus }} 
-                    </span>
-                </div>
-                
-                <div class="label-group">
-                    <label>Birthdate: </label>
-                    <input v-if="edit" type="date" v-model="formProfile.birthdate">
-                    <span v-if="!edit">
-                        {{parseBirthdate(formProfile.birthdate)}}
-                    </span>
-                </div>
-            </div>
+        <form v-if="edit" class="form-container">
 
-            <div class="form-group">
-                <div class="form-group">
-                    <div v-if="!edit">
-                        <label>Gender: </label>
-                        {{formProfile.gender}}
-                    </div>
-                    <div v-if="edit">
-                        <label>Male</label>
-                        <input type="radio" v-model="formProfile.gender" value="male">
-                    </div>
-                    <div v-if="edit">
-                        <label>Female</label>
-                        <input type="radio" v-model="formProfile.gender" value="female">
-                    </div>
-                </div>
-                <div class="label-group">
-                    <label>Nationality: </label>
-                    <input v-if="edit" type="text" v-model="formProfile.nationality" placeholder="nationality">
-                    <span v-if="!edit">
-                        {{ formProfile.nationality}}
-                    </span>
-                </div>
-            </div>
-
-            <div v-if="edit" class="input-group">
-                <input type="text" v-model="formProfile.name.first" placeholder="first">
-                <input type="text" v-model="formProfile.name.middle" placeholder="middle">
-                <input type="text" v-model="formProfile.name.last" placeholder="last">
-                <input type="text" v-model="formProfile.name.suffix" placeholder="suffix">
-                <input v-if="formProfile.gender === 'female' && formProfile.civilStatus !== 'single'"
-                    type="text" v-model="formProfile.name.maiden" placeholder="maiden">
-            </div>
-            <div v-if="!edit" class="input-group">
-                <span>{{formProfile.name.first}}</span>
-                <span>{{formProfile.name.middle}}</span>
-                <span>{{formProfile.name.last}}</span>
-                <span>{{formProfile.name.suffix}}</span>
-                <span v-if="formProfile.gender === 'female' && formProfile.civilStatus !== 'single'">{{formProfile.name.maiden}}</span>
-            </div>
-
+            <input type="text" v-model="formCompany.tradename">
+            <input type="text" v-model="formCompany.ownershipType">
             <button v-if="edit" @click.prevent="submit">Send</button>
 
+        </form>
+        <div v-if="!edit">
+            <li class="card"
+                v-if="key == 'tradename' || key == 'ownershipType'" 
+                v-for="(value, key) in company" v-bind:key="key">
+                <p v-if="key == 'tradename' || key == 'ownershipType'">{{key}}: {{value}}</p>
+
+            </li>
+            <!-- <p>Tradename: {{tradename}}</p>
+            <p>Owenership type: {{ownershipType}}</p> -->
+        </div>
             <br>
             <span class="error" v-if="errorMessage">
                 {{errorMessage}}
@@ -83,22 +33,14 @@
             <span class="info" v-if="infoMessage">
                 {{infoMessage}}
             </span>
-        </form>
     </div>
 </template>
 <script>
 export default {
     data(){
         return {
-            formProfile:{ name:{first: "",
-                                middle: "",
-                                maiden:"",
-                                last: "",
-                                suffix: "" },
-                        civilStatus: "single",
-                        nationality:"",
-                        gender: "male",
-                        birthdate: "1989/10/18"},
+            formCompany:{ tradename: "",
+                        ownershipType: ""},
             edit: false
         }
     },
@@ -107,9 +49,9 @@ export default {
 
             //TODO: validation
 
-            this.$store.dispatch('updateProfile', this.formProfile) //TODO: unit by account type - updateAccount information
+            this.$store.dispatch('updateCompany', this.formCompany) //TODO: unit by account type - updateAccount information
                 .then(response=>{
-                    this.$store.dispatch('getProfile')
+                    this.$store.dispatch('getCompany')
                         .then(res=>{
                             // localStorage.setItem('profile', JSON.stringify(res));
                             // this.$store.commit('setProfile', res);
@@ -117,48 +59,33 @@ export default {
                             this.edit = false;
                             //clear info and error messages
                             // this.$store.dispatch('clearDisplayMessages');
-                            this.$store.commit('setInfoMessage', res.data.message);
+                            this.$store.commit('setInfoMessage',"Success");
+                            this.$store.commit('setErrorMessage', null);
                     });
                     
                 }).catch(err=>{
                     // this.$store.commit('setErrorMessage', 'Account update failed. Invalid input.');
+                    this.$store.commit('setInfoMessage',null);
                     this.$store.commit('setErrorMessage', err.response.statusText);
                 });
         },
         giveFormValue(data){
-            
-                    this.formProfile.civilStatus = data.civilStatus;
-                    let name = this.formProfile.name;
 
-                    for (const key in this.formProfile.name) {
-                        if (this.formProfile.name.hasOwnProperty(key)) {
-                            const element = this.formProfile.name[key];
-                            
-                            name[key] = data.name[key];
-                        }
-                    }
-
-                    this.formProfile.nationality = data.nationality;
-                    this.formProfile.gender = data.gender;
-                    this.formProfile.birthdate = this.parseBirthdate(data.birthdate);
-        },
-        parseBirthdate(birthdate){
-            let date = new Date(birthdate);
-
-            const month = date.getMonth()+1; //zero based
-            const day = date.getDate();
-            const year = date.getFullYear();
-
-            return `${year}-${month}-${day}`; //use this format to be compatible with input format
-        },
-        editChange(){
-            this.edit = !this.edit;
+                    this.formCompany.tradename = data.tradename;
+                    this.formCompany.ownershipType = data.ownershipType;
         }
     },
     computed:{
-        profile(){
-            return this.$store.getters.getProfile;
+        company(){
+            return this.$store.getters.getCompany;
         },
+        // ownershipType(){
+        //     const company = this.$store.getters.getCompany;
+        //     return company.ownershipType;
+        // },
+        // tradename(){
+        //     return this.$store.getters.getTradename;
+        // },
         errorMessage(){
             return this.$store.getters.getErrorMessage;
         },
@@ -167,10 +94,10 @@ export default {
         }
     },
     mounted(){
-        let profile = this.$store.getters.getProfile; //get information
+        let company = this.$store.getters.getCompany; //get information
 
-        if(!profile){
-            this.$store.dispatch('getProfile') 
+        if(!company){
+            this.$store.dispatch('getCompany') 
                 .then(res=>{
                     // localStorage.setItem('profile', JSON.stringify(res));
                     // this.$store.commit('setProfile', res);
@@ -180,7 +107,7 @@ export default {
             });
         }else{
             //assign value to form
-            this.giveFormValue(profile);
+            this.giveFormValue(company);
         }
 
         this.$store.dispatch('clearDisplayMessages');
@@ -188,6 +115,9 @@ export default {
 }
 </script>
 <style scoped>
+.card{
+    list-style: none;
+}
 /*======INFO & ERROR message========*/
 .error{
     color: red;

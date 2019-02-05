@@ -356,7 +356,14 @@ router.route('/register').post(async (req,res,next)=>{
 
     //might not AWAIT for email
     //send link via email - low time validity
-    let sendStatus = await tools.email.send(mailOption);
+    // let sendStatus = await tools.email.send(mailOption);
+    tools.email.send(mailOption)
+        .then(res=>{
+            
+            console.log('email registration response', res);
+        }).catch(err=>{
+            console.log('registration error', err);
+        });
     // console.log("sendStatus", sendStatus);
     const expireDate = new Date(decode.exp * 1000); //set expiration
     

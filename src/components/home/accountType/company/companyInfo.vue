@@ -40,80 +40,70 @@
 export default {
     computed:{
         company(){
-            const cachedCompany = JSON.parse(localStorage.getItem('company'));
-            const stateCompany = this.$store.getters.getCompany;
-            let company = stateCompany || cachedCompany;
+            // const cachedCompany = JSON.parse(localStorage.getItem('company'));
+            // const stateCompany = this.$store.getters.getCompany;
+            return this.$store.getters.getCompany;
+            // let company = stateCompany || cachedCompany;
 
-            if(company){
-                return company
-            }else{
-                this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
+            // if(company){
+            //     return company
+            // }else{
+            //     this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
 
-                    return res;
-                });
-            }
+            //         return res;
+            //     });
+            // }
         },
         tradename(){
-            let company = this.company;
+            return this.$store.getters.getTradename;
+            // let company = this.company;
             
-            if(company){
-                return this.company.tradename;
-            }else{
-                const cachedTradename = JSON.parse(localStorage.getItem('tradename'));
-                const stateTradename = this.$store.getters.getTradename;
-                let tradename = stateTradename || cachedTradename;
+            // if(company){
+            //     return this.company.tradename;
+            // }else{
+            //     const cachedTradename = JSON.parse(localStorage.getItem('tradename'));
+            //     const stateTradename = this.$store.getters.getTradename;
+            //     let tradename = stateTradename || cachedTradename;
 
-                if(tradename){
-                    return tradename;
-                }else{
-                    this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
+            //     if(tradename){
+            //         return tradename;
+            //     }else{
+            //         this.$store.dispatch('getCompany').then(res=>{//get new company data from backend
 
-                        return res.tradename;
-                    });
-                }
-            }
+            //             return res.tradename;
+            //         });
+            //     }
+            // }
         },
         url(){
-            const cachedCompany = JSON.parse(localStorage.getItem('company'));
-            const stateCompany = this.$store.getters.getCompany;
-            let company = stateCompany || cachedCompany;
+            
+            const PICS = this.$store.getters.getPics;
+            const DEFAULT_URL = 'https://picsum.photos/100/100/?random';
             let url;
 
-            if(company && company.pics){
-                const pic = company.pics.find(element=>{//find main picture
+            if(PICS){
+                //find main picture
+                const pic = PICS.find(element=>{
                     if(element.main == true || element.main == 'true'){
                         return element;
                     }
                 });
 
-                if(pic){
-                    url = `/file/photo/me?name=${pic.filename}`;
-                }
-                // else{
-                //     url = 'https://picsum.photos/100/100/?random';
-                // }
+                const baseUrl = 'http://localhost'//TODO:to be removed on production
 
-            }
-            if(!url){
-                url = 'https://picsum.photos/100/100/?random';
+                if(pic){
+                    url = `${baseUrl}/file/photo/me?name=${pic.filename}`;
+                }else{
+                    url = DEFAULT_URL;
+                }
+
+            }else{
+                url =  DEFAULT_URL;
             }
 
             return url;
         }
     }
-    // ,created(){
-    //     let localCompany = JSON.parse(localStorage.getItem('company'));//get profile data saved on local storage
-
-    //     if(localCompany){
-    //         this.$store.commit('setCompany', localCompany);//save localstorage profile to state
-
-    //     }else{
-    //         this.$store.dispatch('getCompany').then(res=>{//get new profile data from backend
-    //             this.$store.commit('setCompany', res);//save to state
-    //             localStorage.setItem('company', JSON.stringify(res)); //save to localstorage
-    //         });
-    //     }
-    // }
 }
 </script>
 <style scoped>

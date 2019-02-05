@@ -68,7 +68,7 @@ export default {
                         .then(res=>{
                             this.$store.commit('setInfoMessage', res.data.message);
 
-                            this.$store.dispatch('getProfile'); //to update the computed pics array
+                            this.$store.dispatch('maintainData'); //to update the computed pics array
 
                         }).catch(err=>{ 
                             this.$store.commit('setErrorMessage', err.response.statusText);

@@ -19,7 +19,12 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
         //create picture path using account type and profile id
-        let destination = config.get('imgDestination') + `/${req.user.accountType}/${req.user.profile}`;
+        let destination;
+        if(req.user.accountType == 'profile'){
+            destination = config.get('imgDestination') + `/${req.user.accountType}/${req.user.profile}`;
+        }else if(req.user.accountType == 'company'){
+            destination = config.get('imgDestination') + `/${req.user.accountType}/${req.user.company}`;
+        }
         let destinationArray = destination.split(/[\\\/]{1,2}/);
         let pathConcat = '';
 
@@ -163,6 +168,7 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
 //delete profile picture using profile id
 }).delete(auth.isAuth, (req,res,next)=>{
     let queryImgName = req.query.name;
+    let pathToFile;
 
     //check that there is a req.query
     if(!queryImgName){return res.status(400).send({message: "Bad request. No parameters or body to delete."});}
@@ -175,7 +181,12 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     let fileToDelete = queryImgName || bodyImgName;
     //establish path destination
     // let pathToFile = config.get('imgDestination') + req.user.profile;
-    let pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
+    
+    if(req.user.accountType == 'profile'){
+        pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
+    }else if(req.user.accountType == 'company'){
+        pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.company;
+    }
 
     //open image destination directory
     fs.readdir(pathToFile, (err, files)=>{
@@ -192,7 +203,12 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
         fs.unlink(pathToFile, async (err)=>{
             if(!err){//img delete sucess
                 //remove corresponding data from database profile pics array
-                let profile = await Profile.updateOne({_id: req.user.profile}, {$pull: {pics: {filename: file}}}).exec();
+                if(req.user.accountType == "profile"){
+                    await Profile.updateOne({_id: req.user.profile}, {$pull: {pics: {filename: file}}}).exec();
+                }
+                if(req.user.accountType == "company"){
+                    await Company.updateOne({_id: req.user.company}, {$pull: {pics: {filename: file}}}).exec();
+                }
 
                 return res.status(200).send({message:"Success."});
             }else{
@@ -206,7 +222,12 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     if(req.query.name){
 
         //establish file path
-        let pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
+        let pathToFile;
+        if(req.user.accountType == 'profile'){
+            pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.profile;
+        }else if(req.user.accountType == 'company'){
+            pathToFile = config.get('imgDestination') +'/'+ req.user.accountType +'/'+req.user.company;
+        }
         
         //validate format of query
         let {error} = Joi.validate(req.query.name, Joi.string().regex(regex.imgName).required());
@@ -237,6 +258,7 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     }
 }).put(auth.isAuth, async (req,res,next)=>{
     let queryId = req.query.id;
+    let result;
 
     //check that there is a req.query
     if(!queryId && isObjectId(queryId)){return res.status(400).send({message: "Bad request. No parameters or Invalid query id"});}
@@ -246,12 +268,17 @@ router.route('/photo/me').post(auth.isAuth, upload.single('imgField'), (req,res,
     // if(error){return res.status(400).send({message: "Bad request. Invalid parameters or body."})}
 
     // if(req.body.main == true || req.body.main == "true"){//set everything else to false
-        await Profile.updateOne({_id: req.user.profile}, {$set: {"pics.$[].main": false}}).exec();
+        if(req.user.accountType == 'profile'){
+            await Profile.updateOne({_id: req.user.profile}, {$set: {"pics.$[].main": false}}).exec();
+            result = await Profile.updateOne({_id: req.user.profile, "pics._id": queryId}, {$set: {"pics.$.main": true}}).exec();//set one as main
+        }
+        if(req.user.accountType == 'company'){
+            await Company.updateOne({_id: req.user.company}, {$set: {"pics.$[].main": false}}).exec();
+            result = await Company.updateOne({_id: req.user.company, "pics._id": queryId}, {$set: {"pics.$.main": true}}).exec();//set one as main
+        }
     // }
     
-    let result = await Profile.updateOne({_id: req.user.profile, "pics._id": queryId}, {$set: {"pics.$.main": true}}).exec();//set one as main
 
-    console.log(result);
     if(result.nModified <= 0){
         res.status(404).send({message: "Pics not found."});
     }else{

@@ -96,6 +96,7 @@ export default {
                     this.$store.commit('setErrorMessage', null);
 
                     this.$store.dispatch('getContact');
+                    this.itemEdit = false;
 
                 }).catch(err=>{
                     this.$store.commit('setInfoMessage', null);

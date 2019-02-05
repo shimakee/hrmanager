@@ -181,7 +181,7 @@ export const routes = [
                         // ]
 
                     },
-                    {path:"address", name:"address",
+                    {path:"address",
                         components:{
                             default: Address
                         }
@@ -293,7 +293,7 @@ export const routes = [
                         // ]
 
                     },
-                    {path:"address", name:"address",
+                    {path:"address",
                         components:{
                             default: Address
                         }
@@ -307,6 +307,27 @@ export const routes = [
                             }
                         ]
 
+                    },
+                    {path:"settings", ///profile/settings - CONTENT
+                        components:{
+                            default: Settings
+                        },
+                        children:[
+                            {path:"",///profile/settings - main page - CONTENT - details
+                                components:{
+                                    default: DeleteAccount,
+                                    editPic: ShowGallery,
+                                    changeUsername: ChangeUsername,
+                                    changePassword: ChangePassword,
+                                    deleteAccount: DeleteAccount,
+                                    editProfile: EditProfile,
+                                    editRelatives: EditRelatives,
+                                    editAddress: Address,
+                                    contact: Contact,
+                                    editGov: EditGov
+                                }
+                            }
+                        ]
                     },
                     {path:"marketing",
                         components:{

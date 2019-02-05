@@ -31,8 +31,10 @@ var company = new Schema({
         position: {type: String}}],
     businesses: [{business: {type: ObjId, ref: 'Business'}}],
     picDir: {type: String}, //by default is already set at config - no need to save it yet
-    pics:[{filename: {type: String},
+    pics:[{main: {type: Boolean, default: false},
+        filename: {type: String},
         path: {type: String},
+        destination: String,
         encoding: {type: String},
         mimetype: {type: String},
         size: {type: Number}}],
@@ -52,8 +54,8 @@ var company = new Schema({
                 province: {type:String},
                 zipcode: {type: Number, min: 1000, max: 9999},
                 position:{
-                lat:{type: Number},
-                lng: {type:Number}
+                        lat:{type: Number},
+                        lng: {type:Number}
                 }}],
         government: [{key: {type: String},  
                 info: {type: String}}],
@@ -223,28 +225,30 @@ function validateAddress(data){
             street:Joi.string().max(255).regex(regex.address).allow(''),
             city:Joi.string().max(50).regex(regex.common).allow(''),
             country:Joi.string().max(50).regex(regex.common).allow(''),
-            province: Joi.string().max(100).regex(regex.common).allow(''),
+            province: Joi.string().max(100).regex(regex.uncommon).allow(''),
             zipcode:Joi.number().positive().integer().min(1000).max(9999).allow(''),
             position:{
-                lat: Joi.number().max(85).min(-85).allow(''),
-                lng: Joi.number().max(180).min(-180).allow('')
+                lat: Joi.number().max(85).min(-85).allow('', null),
+                lng: Joi.number().max(180).min(-180).allow('', null)
             }
         });
     
         const profileSchema = Joi.object().keys({//to be tested
-            address: Joi.array().max(3).unique('street').items(addressSchema.required()).single().required()
+            address:Joi.array().max(3).unique('street').items(addressSchema).single()
         });
     
-        return profileSchema.validate(data);
+        return addressSchema.validate(data, {presence:'optional'});
     }
 
     function validateContact(data){
 
         const contactSchema = Joi.object().keys({ //to be tested
+                
+                _id: Joi.objectId().allow(''),
             main: Joi.boolean().allow(''),
             description:Joi.string().max(25).regex(regex.common),
-            countryCode:Joi.number().integer().positive().max(999999).allow(''),
-            areaCode:Joi.number().integer().positive().max(999999).allow(''),
+            countryCode:Joi.number().integer().positive().max(999999).allow('', null),
+            areaCode:Joi.number().integer().positive().max(999999).allow('', null),
             number:Joi.number().integer().positive().max(999999999999999)
         });
     

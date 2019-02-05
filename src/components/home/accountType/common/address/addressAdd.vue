@@ -116,7 +116,7 @@ export default {
 
             this.$store.dispatch('addAddress', this.addressModel)//submit to backend
                 .then(response=>{
-                    this.$store.dispatch('getProfile'); //to update the computed pics array
+                    this.$store.dispatch('maintainData'); //to update the computed pics array
 
                     this.clearAddressModel();//empty form
                 });

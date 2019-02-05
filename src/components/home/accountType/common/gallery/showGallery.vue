@@ -44,7 +44,7 @@ export default {
                     console.log("update pic", pic._id);
                     this.$store.commit('setInfoMessage', res.data.message);
 
-                    this.$store.dispatch('getProfile'); //to update the computed pics array
+                    this.$store.dispatch('maintainData'); //to update the computed pics array
                 }).catch(err=>{
                     console.log(err);
                     this.$store.commit('setInfoMessage', err.response.statusText);
@@ -60,7 +60,7 @@ export default {
                         console.log("deletePIc", pic.filename);
                         this.$store.commit('setInfoMessage', res.data.message);
 
-                        this.$store.dispatch('getProfile'); //to update the computed pics array
+                        this.$store.dispatch('maintainData'); //to update the computed pics array
                     }).catch(err=>{
                         console.log(err);
                         this.$store.commit('setInfoMessage', err.response.statusText);

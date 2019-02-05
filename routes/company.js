@@ -103,15 +103,15 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
             await Company.updateOne({_id: req.user.company}, {$set: {"address.$[].main": false}}).exec();
         }
     
-        let address = req.body.address
-        //check if array
-        if(!Array.isArray(req.body.address)){
-                address = [address]
-        }
+        // let address = req.body.address
+        // //check if array
+        // if(!Array.isArray(req.body.address)){
+        //         address = [address]
+        // }
 
         //OPTIONAL: before adding check address length and deny add instead of slicing and auto deleting last entry
         //if address length is 0 make this entry true
-        company = await Company.updateOne({_id: req.user.company}, {$push:{ address: {$each:address, $position: 0, $slice: 3}}}).exec();
+        company = await Company.updateOne({_id: req.user.company}, {$push: {address: {$each:[req.body], $position: 0, $slice: 3}}}).exec();
         // let profile = await task.run({useMongoose: true});
     
         if(company.nModified <= 0){
@@ -138,7 +138,7 @@ router.route('/me/address').get(auth.isAuth, async (req,res,next)=>{
                 await Company.updateOne({_id: req.user.company}, {$set: {"address.$[].main": false}}).exec();
             }
             
-            let result = await Company.updateOne({_id: req.user.company, "address._id": id}, {$set: {"address.$": req.body.address}}).exec();
+            let result = await Company.updateOne({_id: req.user.company, "address._id": id}, {$set: {"address.$": req.body}}).exec();
     
             if(result.nModified <= 0){
                 res.status(404).send({message: "Address not found."});
@@ -214,6 +214,15 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
         let company = await Company.updateOne({_id: req.user.company}, {$push:{ contact: {$each:[req.body], $position: 0, $slice: 3}}}).exec();
         // let company = await task.run({useMongoose: true});
 
+        let companyInfo = await Company.findById({_id: req.user.company}).exec();
+        let contactMain = companyInfo.contact.find(element=>{//check that there is atleast One main contact
+                return element.main == true;
+        });
+
+        if(!contactMain){ //no main contact - set position 0 as main
+                await Company.updateOne({_id: req.user.company}, {$set: {"contact.0.main": true}}).exec();
+        }
+
         if(company.nModified <= 0){
                 res.status(404).send({message: "could not add"});
         }else{
@@ -224,10 +233,10 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
 }).put(auth.isAuth, async (req, res,next)=>{
 
         let {error} = Company.validateContact(req.body);
-        if(error){return res.status(400).send({message: 'Bad request.'});}
+        if(error){return res.status(400).send({message: 'Bad request.', error: error});}
 
         if(!req.query.id){
-                res.status(400).send({message: "Bad request."});
+                res.status(400).send({message: "Bad request. no query id."});
         }else{
                 let id = req.query.id;
 
@@ -239,6 +248,15 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
                 }
                 
                 let result = await Company.updateOne({_id: req.user.company, "contact._id": id}, {$set: {"contact.$": req.body}}).exec();
+
+                let companyInfo = await Company.findById({_id: req.user.company}).exec();
+                let contactMain = companyInfo.contact.find(element=>{//check that there is atleast One main contact
+                        return element.main == true;
+                });
+
+                if(!contactMain){ //no main contact - set position 0 as main
+                        await Company.updateOne({_id: req.user.company}, {$set: {"contact.0.main": true}}).exec();
+                }
 
                 if(result.nModified <= 0){
                         res.status(404).send({message: "Contact not found."});
@@ -259,6 +277,15 @@ router.route('/me/contact').get(auth.isAuth, async (req,res,next)=>{
                 if(error){return res.status(400).send(error);}
                 
                 let result = await Company.updateOne({_id: req.user.company, "contact._id": id}, {$pull: {contact: {_id: id}}}).exec();
+
+                let companyInfo = await Company.findById({_id: req.user.company}).exec();
+                let contactMain = companyInfo.contact.find(element=>{//check that there is atleast One main contact
+                        return element.main == true;
+                });
+
+                if(!contactMain){ //no main contact - set position 0 as main
+                        await Company.updateOne({_id: req.user.company}, {$set: {"contact.0.main": true}}).exec();
+                }
 
                 if(result.nModified <= 0){
                         res.status(404).send({message: "Contact not found."});
