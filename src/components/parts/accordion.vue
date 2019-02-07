@@ -67,5 +67,8 @@ export default {
 }
 .accordion-tab input:checked~ .tab-content{
     max-height:max-content;
+    max-height:fit-content;
+    max-height:intrinsic;
+    max-height:fit-available;
 }
 </style>

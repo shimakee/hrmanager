@@ -44,7 +44,8 @@ const actions = {
         let token_header = nameSpace.token_header//app token header name used
         let token_expire = nameSpace.token_expire//app token expiration name used
         //account tpye
-        const accountType = payload.data.accountType;
+        const accountType = payload.data.accountType || localStorage.getItem('accountType');
+        console.log('acct type', accountType);
         let pics;
         
         //TODO: check cookie as well
@@ -57,8 +58,8 @@ const actions = {
         }
 
         //TODO: find better solution than local storage - use cookies perhaps?
-        const token = payload.headers[token_header];
-        const dateExpire = new Date(payload.headers[token_expire]* 1000); // multiplies seconds by miliseconds
+        const token = payload.headers[token_header] || localStorage.getItem('token');
+        const dateExpire = new Date(payload.headers[token_expire]* 1000) || localStorage.getItem('exp'); // multiplies seconds by miliseconds
 
         //save to state
         commit('setAccountType', payload.data.accountType);
