@@ -62,7 +62,8 @@ export default {
                         this.$store.commit('setErrorMessage', null);
                         this.$store.commit('setInfoMessage', res.data.message);
                         //reroute to home page
-                        this.$router.push({name:'home'});
+                        // this.$router.push({name:'home'});
+                        this.$router.go('/home');
                         console.log('login vue sucess');
                     }).catch(err=>{
                         this.loginSubmitted=false;
