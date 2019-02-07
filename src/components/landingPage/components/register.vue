@@ -92,9 +92,9 @@ export default {
                     this.$store.commit('setInfoMessage', null);
                     this.$store.commit('setErrorMessage', null);
 
-                    // this.$router.push('/home');
+                    this.$router.push('/home');
                     
-                    this.$router.go('/home');
+                    // this.$router.go('/home');
                 }).catch(err=>{
                     
                     this.submitted = false

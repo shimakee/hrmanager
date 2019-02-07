@@ -168,8 +168,8 @@ export default {
                         //clear error message
                         this.$store.commit('setInfoMessage', null);
                         this.$store.commit('setErrorMessage', null);
-                        // this.$router.push('/home');
-                        this.$router.go('/home');
+                        this.$router.push('/home');
+                        // this.$router.go('/home');
                     }).catch(err=>{
                         this.submitted = false
                         console.log(err.response)
