@@ -82,7 +82,7 @@ user.statics.verifyToken = function(token){
     try{
         decoded = jwt.verify(token, config.get('token'));
     }catch(ex){
-        return {isValid: false, error: {message: 'JWT invalid.'}, info: null};
+        return {isValid: false, error: {message: 'JWT invalid.'}, info: decoded};
     }
     return {isValid:true, error: null, info: decoded}
 }

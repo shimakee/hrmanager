@@ -1,7 +1,7 @@
 <template>
     <div class="actions">
         <profile-actions v-if="accountType == 'profile'"></profile-actions>
-        <profile-actions v-if="accountType == 'company'"></profile-actions>
+        <company-actions v-if="accountType == 'company'"></company-actions>
         <!-- <profile-actions v-if="accountType == 'staff'"></profile-actions> -->
 
     </div>

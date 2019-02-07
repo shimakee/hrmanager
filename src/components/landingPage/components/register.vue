@@ -95,6 +95,7 @@ export default {
                     this.$router.push('/home');
                 }).catch(err=>{
                     this.submitted = false
+                    console.log(err);
 
                     //display error message
                     this.$store.commit('setErrorMessage', "Registration failed.");

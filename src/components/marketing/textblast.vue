@@ -2,20 +2,48 @@
     <div class="marketing">
         <H1>Marketing</H1>
         <form id="csvForm">
-        <input type="file" id="csvFile"
-         accept=".csv">
-        <button type="submit" @click.prevent="submit()">Send</button>
-      </form>
+            <input type="file" id="csvFile"
+            accept=".csv">
+            <button type="submit" @click.prevent="submit()">Send</button>
+        </form>
+
+        <hr>
+        <br>
+
+        <form id="sms">
+            <label>Number: </label>
+            <input type="text" v-model="sms.tasks[0].to" id="" placeholder="Number">
+            <label>Message: </label>
+            <textarea v-model="sms.tasks[0].sms" cols="30" rows="10" placeholder="Message"></textarea>
+
+            
+            <button type="submit" @click.prevent="sendSMS()">Send</button>
+        </form>
     </div>
 </template>
 <script>
 export default {
     data(){
         return{
-            csvFile: null
+            csvFile: null,
+            sms: {task_num:1,
+                tasks:[
+                    {tid: 9228384,
+                    to: null,
+                    sms:""}
+                ]}
+
         }
     }
     ,methods:{
+        sendSMS(){
+            this.$store.dispatch('sendCommit',  {url: '/marketing/textblast', method:'post', data: this.sms})
+                .then(res=>{
+                    console.trace(res);
+                }).catch(err=>{ 
+                    console.trace(err);
+                });
+        },
         submit(){
             const file = document.querySelector('#csvFile').files;//get file
             this.handleFiles(file);//handle file
@@ -167,4 +195,10 @@ export default {
 }
 </script>
 <style scoped>
+#sms{
+    display: grid;
+    /* max-width: 600px; */
+    align-content: center;
+    justify-content: center;
+}
 </style>
