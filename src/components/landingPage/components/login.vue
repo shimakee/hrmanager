@@ -59,8 +59,8 @@ export default {
                 this.$store.dispatch('sendLogin', this.user)//send login
                     .then(res=>{
                         //clear messages
-                        this.$store.commit('setInfoMessage', null);
                         this.$store.commit('setErrorMessage', null);
+                        this.$store.commit('setInfoMessage', res.data.message);
                         //reroute to home page
                         this.$router.push({name:'home'});
                         console.log('login vue sucess');
@@ -69,8 +69,8 @@ export default {
     
                         if(err.response){
                             //display error message
-                            console.log('login vue failed', err.response);
-                            this.$store.commit('setErrorMessage', err.response.statusText);
+                            this.$store.commit('setInfoMessage', null);
+                            this.$store.commit('setErrorMessage', err.response.data.message);
                         }
                     });
             }else{

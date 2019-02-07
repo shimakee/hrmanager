@@ -98,7 +98,8 @@ export default {
                     console.log(err);
 
                     //display error message
-                    this.$store.commit('setErrorMessage', "Registration failed.");
+                    this.$store.commit('setInfoMessage', null);
+                    this.$store.commit('setErrorMessage', err.response.data.message);
                 });
         }
     },

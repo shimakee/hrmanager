@@ -171,9 +171,9 @@ export default {
                         this.$router.push('/home');
                     }).catch(err=>{
                         this.submitted = false
-    
+                        console.log(err.response)
                         //display error message
-                        this.$store.commit('setErrorMessage', "Signup failed.");
+                        this.$store.commit('setErrorMessage', err.response.data.message);
                         this.$store.commit('setInfoMessage', null);
                     });
             // }
