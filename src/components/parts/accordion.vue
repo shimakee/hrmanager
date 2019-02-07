@@ -66,7 +66,6 @@ export default {
     margin: 0;
 }
 .accordion-tab input:checked~ .tab-content{
-    max-height:fit-content;
-    /* overflow-y: scroll; */
+    max-height:max-content;
 }
 </style>
