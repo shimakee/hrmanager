@@ -54,7 +54,7 @@ export default {
                 console.log('maintained data.');
                 this.$store.dispatch('autoLogin');
             }).catch(err=>{
-                console.log('there was an error.');
+                console.log('there was an error.', error);
                 this.$store.dispatch('logout');
             });
     }
