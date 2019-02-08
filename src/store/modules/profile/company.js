@@ -82,6 +82,25 @@ const actions = {
                     reject(err);
                 });
         });
+    },
+    findCompany:({dispatch}, payload)=>{
+        let query="";
+        if(payload.name){
+            query=`?name=${payload.name}`;
+        }
+        if(payload.id){
+            query=`?id=${payload.id}`;
+        }
+
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`company/find${query}`, method:'get', data: null})
+                .then(res=>{
+                    //TODO: commit search results
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
     }
 }
 

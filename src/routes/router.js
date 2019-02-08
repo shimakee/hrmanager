@@ -23,8 +23,8 @@ import Info from '../components/home/accountType/info';
 import Gallery from '../components/home/accountType/common/gallery/gallery';
 import ShowGallery from '../components/home/accountType/common/gallery/showGallery';
 
-import CompanyAccount from '../components/home/accountType/company/companyAccount';
-import EditCompany from '../components/home/accountType/company/companyEdit';
+//common
+import Explore from '../components/home/accountType/common/explore';
 
 //Home - profile
 import ProfileAccount from '../components/home/accountType/profile/profileAccount';
@@ -40,7 +40,8 @@ import ProfileAccount from '../components/home/accountType/profile/profileAccoun
     import EditGov from '../components/home/accountType/common/editGov';
 
 //home - company
-
+import CompanyAccount from '../components/home/accountType/company/companyAccount';
+    import EditCompany from '../components/home/accountType/company/companyEdit';
 
 //Settings -todo sort out
 import ChangePassword from '../components/settings/account/changePassword';
@@ -190,6 +191,20 @@ export const routes = [
                                 }
                             }
                         ]
+
+                    },
+                    {path:"explore", name:"explre",
+                        components:{
+                            default: Explore
+                        }
+                        // ,
+                        // children:[
+                        //     {path: "", name:"gallery",
+                        //         components:{
+                        //             default: HomeDefaulContent
+                        //         }
+                        //     }
+                        // ]
 
                     },
                     // {path:"contact", name:"contact",

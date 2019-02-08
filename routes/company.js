@@ -603,7 +603,40 @@ router.route('/me/owner').get(auth.isAuth, async (req,res,next)=>{
 });
 
 
+//get profile email
+router.get('/find').get(auth.isAuth, async (req,res,next)=>{
+        let queryId = req.query.id; //search by id
+        let queryName = req.query.name; //search by name
 
+        // let company = await Company.findById(req.user.company).exec();
+        // if(!company){return res.status(404).send({message: "could not locate company information"});}
+        
+        if(!queryId && !queryName){
+                let company = await Company.find().exec();
+                if(!company){return res.status(404).send({message: "could not locate company information"});}
+
+                res.status(200).send(company);
+        }else if(queryId){
+                let {error} = Company.validateId({id: queryId});
+                if(error){return res.status(400).send(error);}
+
+                
+                let company = await Company.findById(queryId).exec();
+                if(!company){return res.status(404).send({message: "could not locate company information"});}
+
+                res.status(200).send(company);
+        }else if(queryName){
+                // let {error} = Company.validateId({id: id});//TODO: validate
+                // if(error){return res.status(400).send(error);}
+
+                let company = await Company.find({tradename:  new RegExp(queryName, "i")}).exec();
+                if(!company){return res.status(404).send({message: "could not locate company information"});}
+
+                res.status(200).send(company);
+        }
+
+        //add profile email 1 by 1
+});
 
 //TODO: post a job
 //TODO: crud employees
