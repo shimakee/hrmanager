@@ -54,20 +54,7 @@ export default {
     },
     computed:{
         profile(){
-            let profile = this.$store.getters.getProfile;
-            // const localProfile = JSON.parse(localStorage.getItem('profile'));
-            // let profile = stateProfile || localProfile;
-
-            if(!profile){
-                this.$store.dispatch('getProfile').then(res=>{//get new profile data from backend
-                    this.$store.commit('setProfile', res);//save to state
-                    localStorage.setItem('profile', JSON.stringify(res)); //save to localstorage
-
-                    profile = res;
-                });
-            }
-
-            return profile;
+            return this.$store.getters.getProfile;
         },
         fullName(){
             let profile = this.profile

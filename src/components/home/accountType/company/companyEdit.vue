@@ -79,13 +79,6 @@ export default {
         company(){
             return this.$store.getters.getCompany;
         },
-        // ownershipType(){
-        //     const company = this.$store.getters.getCompany;
-        //     return company.ownershipType;
-        // },
-        // tradename(){
-        //     return this.$store.getters.getTradename;
-        // },
         errorMessage(){
             return this.$store.getters.getErrorMessage;
         },

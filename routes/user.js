@@ -224,15 +224,17 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
     // let user = await User.findById(req.user._id).populate('profile').populate('company').populate('employment._id').exec();
     let user = await User.findById(req.user._id).exec();
 
-    const token = user.genAuthToken();//generate token
-    const decode = User.getTokenTime(token); //decode token info
-    const expireDate = new Date(decode.exp * 1000); //set expiration
+    // const token = user.genAuthToken();//generate token
+    // const decode = User.getTokenTime(token); //decode token info
+    // const expireDate = new Date(decode.exp * 1000); //set expiration
 
-    return res.status(200)
-        .header(config.get('token_header'), token)
-        .header('exp', decode.exp)
-        .cookie('token', token, {expires: expireDate, signed: true})
-        .send(user.response());
+    // return res.status(200)
+    //     .header(config.get('token_header'), token)
+    //     .header('exp', decode.exp)
+    //     .cookie('token', token, {expires: expireDate, signed: true})
+    //     .send(user.response());
+
+    res.status(200).send(user.response());
 
     //change to pick instead of omit - err in the side of safety
     // return res.status(200).send(_.omit(user.toObject(), ['_id', 'profile._id', 'password' ]));
@@ -374,5 +376,34 @@ router.route('/register').post(async (req,res,next)=>{
                 .cookie('token', token, {expires: expireDate, signed: true})
                 .send(newUser.response());//return sucess
 
+});
+
+router.route('/validate/token').get(auth.isAuth, async (req,res,next)=>{
+
+    const tokenHeader = req.header(config.get('token_header'));
+    const tokenCookie = req.signedCookies.token;
+        
+        if(!tokenHeader && !tokenCookie){return res.status(401).send({message: 'Access denied - no token provided'})}
+
+        try{
+            let token = tokenHeader || tokenCookie;
+        
+            const decoded = jwt.verify(token, config.get('token'));
+
+            req.user = decoded;
+
+            //profile must be an object id; - TODO: no longer needed - but left just incase
+            // if(!isObjectId(decoded.profile)){
+            //     if(isObjectId(decoded.profile._id)){
+            //         req.user.profile = decoded.profile._id;
+            //     }else{
+            //         throw Error('No object id to attach to profile authentication middleware.');
+            //     }
+            // }
+
+            res.send({message: 'token valid', decoded: decoded});
+        }catch(ex){
+            res.status(400).send({message: 'this is an Invalid token', error: ex});
+        }
 });
 module.exports = router;

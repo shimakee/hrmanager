@@ -31,26 +31,15 @@ instance.interceptors.response.use(response=>{
     if(response.headers[nameSpace.token_header]){//save token header
         //place token in store && local storage
         let token = response.headers[nameSpace.token_header];
-        localStorage.setItem('token', token);
+        store.commit('setToken', token);
     }
     if(response.headers[nameSpace.token_expire]){
-
-        console.log('old expire', localStorage.getItem('exp'));//remove on production
-        
-        //place expiration date in local storage
         const expire = new Date(response.headers[nameSpace.token_expire]* 1000);
-        localStorage.setItem('exp', expire);
 
-        console.log('new expire', expire);//remove on production
+        store.commit('setExp', expire);
         store.dispatch('autoLogout');//re-initialize autologout every request
     }
 
-    // //place data in local storage
-    // if(response.data){
-    //     console.log('data saved.');
-    //     store.commit('setData', response.data);
-    //     localStorage.setItem('data', JSON.stringify(response.data));
-    // }
     return new Promise((resolve, reject)=>{
         resolve(response);
     });

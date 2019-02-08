@@ -29,30 +29,39 @@ const actions = {
                 if(res.data.pics){
                     pics = res.data.pics;
                 }else{
-                    pics = [];
+                    pics = [] ;
                 }
-                
-                //save to state
-                commit('setCompany', res.data);
-                commit('setTradename', res.data.tradename);
-                commit('setPics', pics);
-                commit('setAddress', res.data.address);
-                commit('setContact', res.data.contact);
+
+                let company = res.data;
+                let tradename = res.data.tradename;
+                let address = res.data.address;
+                let contact = res.data.contact;
 
                 //save to storage
                 if(getters.getAllowStorage){ //TODO: change to cookie
-                    localStorage.setItem('company', JSON.stringify(res.data)); //save to localstorage
-                    localStorage.setItem('tradename', res.data.tradename);
+                    localStorage.setItem('company', JSON.stringify(company)); //save to localstorage
+                    localStorage.setItem('tradename', tradename);
                     localStorage.setItem('pics', JSON.stringify(pics));
                     //TODO: to implement - not yet doing anything with the data
                     localStorage.setItem('businesses', JSON.stringify(res.data.businesses));
                     localStorage.setItem('employees', JSON.stringify(res.data.employees));
                     localStorage.setItem('owner', JSON.stringify(res.data.owner));
                     //common data
-                    localStorage.setItem('address', JSON.stringify(res.data.address));
-                    localStorage.setItem('contact', JSON.stringify(res.data.contact));
+                    localStorage.setItem('address', JSON.stringify(address));
+                    localStorage.setItem('contact', JSON.stringify(contact));
                     localStorage.setItem('government', JSON.stringify(res.data.government));
                 }
+
+                // if(!pics){
+                //     pics = localStorage.getItem('pics');
+                // }
+
+                //save to state
+                commit('setCompany', company);
+                commit('setTradename', tradename);
+                commit('setPics', pics);
+                commit('setAddress', address);
+                commit('setContact', contact);
                 //save and commit other data when neccessarry
                 //businesses
                 //employees

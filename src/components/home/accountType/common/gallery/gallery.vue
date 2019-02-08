@@ -58,9 +58,7 @@ export default {
     methods:{
         submit(){
             const data = this.form;
-            // let confirm = window.confirm('Delete account?');
-            // if(confirm){
-            // }
+            
                 if(!data){
                     this.$store.commit('setInfoMessage', 'Error: no file was attached.');
                 }else{

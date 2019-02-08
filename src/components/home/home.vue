@@ -49,13 +49,12 @@ export default {
     ,created(){
         this.$store.dispatch('geoLocate');
 
-        this.$store.dispatch('maintainData')
+        this.$store.dispatch('maintainData')//maintain login status
             .then(res=>{
                 console.log('maintained data.');
-                this.$store.dispatch('autoLogin');
             }).catch(err=>{
-                console.log('there was an error.', error);
                 this.$store.dispatch('logout');
+                console.log('there was an error.');
             });
     }
 }

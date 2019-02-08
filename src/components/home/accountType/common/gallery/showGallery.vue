@@ -29,11 +29,6 @@ export default {
     computed:{
         pics(){ //TODO: make na new component for gallery
             let pics = this.$store.getters.getPics;
-            console.log('this is the pics', pics);
-            if(!pics){
-                pics = JSON.parse(localStorage.getItem("pics"));
-            }
-            
             return pics;
         }
     },

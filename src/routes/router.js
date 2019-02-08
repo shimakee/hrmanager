@@ -56,8 +56,8 @@ import googlemaps from '../store/modules/googlemaps/googlemaps';
 export const routes = [
     {path:'/login', component: LandingPage,
         beforeEnter:(to, from, next)=>{//check authentication status
-            const TOKEN = localStorage.getItem('token'); //TODO; check cookie - instead of localStorage - or send request fortoken;
-            const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
+            const TOKEN = store.getters.getToken;
+            const ACCOUNT_TYPE = store.getters.getAccountType;
 
             if(TOKEN && ACCOUNT_TYPE){
                 next({name:'home'});//if already logged in - redirect to home page
@@ -84,9 +84,7 @@ export const routes = [
     }
     ,{path:'/',
         beforeEnter:(to, from, next)=>{
-            const TOKEN = localStorage.getItem('token');
-            // let accountType = store.getters.getAccountType; //check javascript for account type
-            // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+            const TOKEN = store.getters.getToken;
 
             if(TOKEN){//check auth
                 next();
@@ -98,9 +96,8 @@ export const routes = [
         children:[
             {path:'', name:'home', //index page - sort by account type - redirect
                 beforeEnter:(to,from,next)=>{
-                    const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
-                    const TOKEN = localStorage.getItem('token');
-                    // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+                    const TOKEN = store.getters.getToken;
+                    const ACCOUNT_TYPE = store.getters.getAccountType;
             
                     if(!ACCOUNT_TYPE || !TOKEN){
                         next({name:'error'});//no account type invalid login redirect to login
@@ -129,8 +126,7 @@ export const routes = [
             //==================================================PROFILE
             {path:'/profile', 
                 beforeEnter:(to,from,next)=>{//only proceed if account type is profile
-                    const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
-                    // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+                    const ACCOUNT_TYPE = store.getters.getAccountType;
             
                     if(!ACCOUNT_TYPE || ACCOUNT_TYPE !== 'profile'){
                         console.trace('account', ACCOUNT_TYPE);
@@ -242,8 +238,7 @@ export const routes = [
             //==================================================COMPANY
             {path:'/company',  
                 beforeEnter:(to,from,next)=>{//only proceed if account type is company
-                    const ACCOUNT_TYPE = localStorage.getItem('accountType'); //check javascript for account type
-                    // if(!accountType){ accountType = localStorage.getItem('accountType');} //check localstorage for account type
+                    const ACCOUNT_TYPE = store.getters.getAccountType;
             
                     if(!ACCOUNT_TYPE || ACCOUNT_TYPE !== 'company'){
                         console.trace('account', ACCOUNT_TYPE);
@@ -343,7 +338,7 @@ export const routes = [
             //these will be put to children
             {path:'/settings', component: Settings, //TODO: settings show based on account type
                 beforeEnter:(to, from, next)=>{
-                    const TOKEN = localStorage.getItem('token');
+                    const TOKEN = store.getters.getToken;
 
                     if(TOKEN){//check auth
                         next();

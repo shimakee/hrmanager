@@ -47,15 +47,19 @@ const actions = {
             dispatch('sendCommit', {url:'/user/me', method: 'get', data: null})
                 .then(res=>{
 
+                    let accountType = res.data.accountType;
+                    let username = res.data.username;
+
+                    
                     if(getters.allowStorage){//TODO: change to cookie
                         //save to localstorage
-                        localStorage.setItem("username", res.data.username);
-                        localStorage.setItem("accountType", res.data.accountType);
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("accountType", accountType);
                     }
-
+                    
                     //save to state
-                    commit("setUsername", res.data.username);
-                    commit("setAccountType", res.data.accountType);
+                    commit("setUsername", username);
+                    commit("setAccountType", accountType);
 
                     resolve(res);
                 }).catch(err=>{

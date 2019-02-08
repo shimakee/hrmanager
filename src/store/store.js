@@ -18,12 +18,13 @@ export const store = new Vuex.Store({
     state:{
         activity: false,
         token:null, //response token obtained
+        exp: null,
         timeout: null, //autologout feature countdown
         resetToken: null, //token data for reseting account
         errorMessage: null,
         infoMessage: null,
         allowAutoLocate: false,
-        allowLocalStorage: true //if true stores & check localstorage before sending get requests
+        allowLocalStorage: false //if true stores & check localstorage before sending get requests
 
     },
     getters:{
@@ -32,6 +33,9 @@ export const store = new Vuex.Store({
         },
         getToken:(state)=>{//get token header on response
             return state.token;
+        },
+        getExp:(state)=>{
+            return state.exp;
         },
         hasToken:(state)=>{ //return boolean without exposing token
             return state.token !== null;
@@ -70,6 +74,9 @@ export const store = new Vuex.Store({
         },
         setResetToken:(state, payload)=>{
             state.resetToken = payload;
+        },
+        setExp:(state, payload)=>{
+            state.exp = payload;
         },
         setErrorMessage:(state, payload)=>{
             state.errorMessage = payload;
@@ -117,7 +124,16 @@ export const store = new Vuex.Store({
             commit('setErrorMessage', null);
             commit('setInfoMessage', null);
         },
-        maintainData:({commit, dispatch}, payload)=>{//this pulls data from backend based on account type, commits them to state and storage;
+        validateToken:({dispatch})=>{
+
+            dispatch('sendCommit', {url:`/validate/token`, method:'get', dataL:null})
+                .then(res=>{
+                    console.log(res);
+                }).catch(err=>{ 
+                    console.log(err);
+                });
+        },
+        maintainData:({getters, commit, dispatch}, payload)=>{//this pulls data from backend based on account type, commits them to state and storage;
             //TODO: change to cookies instead of localStorage
             //NOTE* this action should remove components from individually loading their own data;
 
@@ -129,7 +145,7 @@ export const store = new Vuex.Store({
             return new Promise((resolve, reject)=>{
                 dispatch('getUser')
                 .then(res=>{
-    
+
                     dispatch('login', res);
                     resolve(res);
                 }).catch(err=>{

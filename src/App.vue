@@ -14,9 +14,6 @@ export default {
   data(){
     return{
       }
-  },
-  created(){
-      this.$store.dispatch('autoLogin');
   }
 }
 </script>

@@ -46,18 +46,7 @@ export default {
     },
     computed:{
         accountType(){
-            const localAccount = localStorage.getItem("accountType");
-            const stateAccount = this.$store.getters.getAccountType;
-            let accountType = stateAccount || localAccount;
-
-            if(accountType){
-                return accountType;
-            }else{
-                this.$store.dispatch('getUser').then(res=>{
-
-                    return res.accountType;
-                });
-            }
+            return this.$store.getters.getAccountType;
 
         }
     },

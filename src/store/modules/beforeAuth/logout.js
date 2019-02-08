@@ -14,26 +14,25 @@ const actions = {
 
         router.replace({path: '/login'});
     },
-    autoLogout:({state, commit, dispatch})=>{
+    autoLogout:({getters, state, commit, dispatch})=>{
         //token
         let token = getters.hasToken;
-        let localStorageToken = localStorage.getItem('token');
         //dates
         let now = new Date();
-        let exp = localStorage.getItem('exp');
+        let exp = getters.getExp;
         let expire = new Date(exp);
         //expiration
         let timeLeft = expire - now;
+        let {timeout} = state;//get store timeout state
+
 
         if(!exp || timeLeft <= 0){dispatch('logout')} //logout when invalid time or time expired
-        if(!token && !localStorageToken){dispatch('logout')} //logout when no token
+        if(!token){dispatch('logout')} //logout when no token
 
-        const {timeout} = state;//get store timeout state
 
         if(timeout){ //if existing timeout - clear it
             clearTimeout(timeout);
         }
-        
         let newTime = setTimeout(()=>{//create new time
             dispatch('logout');
         }, timeLeft);

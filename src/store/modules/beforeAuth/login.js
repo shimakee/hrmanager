@@ -22,10 +22,9 @@ const actions = {
         return new Promise((resolve,reject)=>{
             dispatch('sendCommit', {url:'/user/login', method:'post', data: payload})
                 .then(res=>{
+
                     dispatch('login', res);
-
                     resolve(res);
-
             }).catch(err=>{
                 //TODO - interpret error first before returning reject
                 
@@ -41,31 +40,25 @@ const actions = {
     },
     login:( {state, getters, commit, dispatch}, payload)=>{
         //headers
-        let token_header = nameSpace.token_header//app token header name used
-        let token_expire = nameSpace.token_expire//app token expiration name used
+        // let token_header = nameSpace.token_header//app token header name used
+        // let token_expire = nameSpace.token_expire//app token expiration name used
         //account tpye
-        const accountType = payload.data.accountType || localStorage.getItem('accountType');
-        console.log('acct type', accountType);
+        const accountType = payload.data.accountType;
         let pics;
         
         //TODO: check cookie as well
         //validation
-        if(!payload.headers[token_header]){//check token
-            throw Error('No Token passed');
-        }
-        if(!payload.headers[token_expire]){//check expiration time
-            throw Error('No token expiration date');
-        }
+        // if(!payload.headers[token_header]){//check token
+        //     throw Error('No Token passed');
+        // }
+        // if(!payload.headers[token_expire]){//check expiration time
+        //     throw Error('No token expiration date');
+        // }
 
         //TODO: find better solution than local storage - use cookies perhaps?
-        const token = payload.headers[token_header] || localStorage.getItem('token');
-        const dateExpire = new Date(payload.headers[token_expire]* 1000) || localStorage.getItem('exp'); // multiplies seconds by miliseconds
+        // const token = payload.headers[token_header];
+        // const dateExpire = new Date(payload.headers[token_expire]* 1000); // multiplies seconds by miliseconds
 
-        //save to state
-        commit('setAccountType', payload.data.accountType);
-        commit('setUsername', payload.data.username);
-        commit('setToken', token);
-        commit('setActivity', payload.data.activity);
         //save and commit other common data as necessary - on account type
         //address - profile done
         
@@ -76,8 +69,8 @@ const actions = {
         //save to storage
         if(getters.getAllowStorage){
             //response header
-            localStorage.setItem('token', token);
-            localStorage.setItem('exp', dateExpire);
+            // localStorage.setItem('token', token);
+            // localStorage.setItem('exp', dateExpire);
             //response body
             localStorage.setItem('username', payload.data.username);
             localStorage.setItem('accountType', payload.data.accountType);
@@ -88,6 +81,13 @@ const actions = {
             localStorage.setItem('contact', JSON.stringify(payload.data.contact));
             localStorage.setItem('government', JSON.stringify(payload.data.government));
         }
+
+        //save to state
+        commit('setAccountType', payload.data.accountType);
+        commit('setUsername', payload.data.username);
+        // commit('setToken', token);
+        // commit('setExp', dateExpire);
+        commit('setActivity', payload.data.activity);
 
         //get - necessary info - based on account type
         switch (accountType) {
@@ -115,21 +115,6 @@ const actions = {
         }
 
         dispatch('autoLogout');
-    },
-    autoLogin:({commit, getters, dispatch})=>{//TODO: check that token is authentic - or change to cookie
-        let token = getters.hasToken;
-        let localStorageToken = localStorage.getItem('token');
-
-        //router handles the login - it checks the state and localStorage
-        if(!token && localStorageToken){
-            commit('setToken', localStorageToken);
-        }
-        if(!localStorageToken && token){
-
-            if(getters.getAllowStorage){//TODO:change to cookie
-                localStorage.setItem('token', token);
-            }
-        }
     }
 }
 

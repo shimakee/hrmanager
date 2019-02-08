@@ -111,9 +111,6 @@ export default {
                 .then(response=>{
                     this.$store.dispatch('getProfile')
                         .then(res=>{
-                            // localStorage.setItem('profile', JSON.stringify(res));
-                            // this.$store.commit('setProfile', res);
-                            
                             this.edit = false;
                             //clear info and error messages
                             // this.$store.dispatch('clearDisplayMessages');
@@ -121,7 +118,6 @@ export default {
                     });
                     
                 }).catch(err=>{
-                    // this.$store.commit('setErrorMessage', 'Account update failed. Invalid input.');
                     this.$store.commit('setErrorMessage', err.response.statusText);
                 });
         },

@@ -1,11 +1,12 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const isObjectId = require('../util/tools').validate.isObjectId;
+const User = require('../models/user');
 
 //TODO: //role.isAllowed
 
 const auth = {
-    isAuth: function(req,res,next){
+    isAuth: async function(req,res,next){
         
         const tokenHeader = req.header(config.get('token_header'));
         const tokenCookie = req.signedCookies.token;
@@ -14,10 +15,20 @@ const auth = {
 
         try{
             let token = tokenHeader || tokenCookie;
-        
             const decoded = jwt.verify(token, config.get('token'));
 
             req.user = decoded;
+
+            let user = await User.findById(req.user._id).exec();
+
+            const newToken = user.genAuthToken();//generate new token
+            const decode = User.getTokenTime(newToken); //decode token info
+            const expireDate = new Date(decode.exp * 1000); //set expiration
+
+            //add info to header
+            res.header(config.get('token_header'), newToken)
+            .header('exp', decode.exp)
+            .cookie('token', newToken, {expires: expireDate, signed: true});
 
             //profile must be an object id; - TODO: no longer needed - but left just incase
             // if(!isObjectId(decoded.profile)){
@@ -30,7 +41,7 @@ const auth = {
 
             next();
         }catch(ex){
-            res.status(400).send({message: 'Invalid token'});
+            res.status(401).send({message: 'Invalid token'});
         }
     },
     isAccountType: function(accountType){

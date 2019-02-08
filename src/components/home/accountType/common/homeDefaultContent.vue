@@ -6,17 +6,6 @@
 </template>
 <script>
 export default {
-    computed:{
-        pics(){
-            let pics = this.$store.getters.getPics;
-
-            if(!pics){
-                pics = JSON.parse(localStorage.getItem("pics"));
-            }
-            
-            return pics;
-        }
-    }
 }
 </script>
 <style scoped>
