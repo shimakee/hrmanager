@@ -40,6 +40,13 @@ instance.interceptors.response.use(response=>{
         store.dispatch('autoLogout');//re-initialize autologout every request
     }
 
+    if(response.headers['accountType']){
+        const accountType = response.headers['accountType'];
+
+        store.commit('setAccountType', accountType);
+    }
+
+
     return new Promise((resolve, reject)=>{
         resolve(response);
     });

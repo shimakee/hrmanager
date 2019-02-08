@@ -28,6 +28,7 @@ const auth = {
             //add info to header
             res.header(config.get('token_header'), newToken)
             .header('exp', decode.exp)
+            .header('accountType', req.user.accountType)
             .cookie('token', newToken, {expires: expireDate, signed: true});
 
             //profile must be an object id; - TODO: no longer needed - but left just incase
@@ -59,8 +60,8 @@ const auth = {
         res.header("Access-Control-Allow-Origin", corsUrl); // to control cors vie env variables
         res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
         res.header("Access-Control-Allow-Credentials", 'true');
-        res.header("Access-Control-Allow-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp`);
-        res.header("Access-Control-Expose-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp`);
+        res.header("Access-Control-Allow-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp, accountType`);
+        res.header("Access-Control-Expose-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization, ${config.get('token_header')}, exp, accountType`);
         next();
     }
 }

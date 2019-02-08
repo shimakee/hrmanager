@@ -39,38 +39,11 @@ const actions = {
         });
     },
     login:( {state, getters, commit, dispatch}, payload)=>{
-        //headers
-        // let token_header = nameSpace.token_header//app token header name used
-        // let token_expire = nameSpace.token_expire//app token expiration name used
-        //account tpye
         const accountType = payload.data.accountType;
-        let pics;
-        
-        //TODO: check cookie as well
-        //validation
-        // if(!payload.headers[token_header]){//check token
-        //     throw Error('No Token passed');
-        // }
-        // if(!payload.headers[token_expire]){//check expiration time
-        //     throw Error('No token expiration date');
-        // }
-
-        //TODO: find better solution than local storage - use cookies perhaps?
-        // const token = payload.headers[token_header];
-        // const dateExpire = new Date(payload.headers[token_expire]* 1000); // multiplies seconds by miliseconds
-
-        //save and commit other common data as necessary - on account type
-        //address - profile done
-        
-        //contact
-        //government
-                        
+        let pics;     
         
         //save to storage
         if(getters.getAllowStorage){
-            //response header
-            // localStorage.setItem('token', token);
-            // localStorage.setItem('exp', dateExpire);
             //response body
             localStorage.setItem('username', payload.data.username);
             localStorage.setItem('accountType', payload.data.accountType);
@@ -85,8 +58,6 @@ const actions = {
         //save to state
         commit('setAccountType', payload.data.accountType);
         commit('setUsername', payload.data.username);
-        // commit('setToken', token);
-        // commit('setExp', dateExpire);
         commit('setActivity', payload.data.activity);
 
         //get - necessary info - based on account type
@@ -115,6 +86,8 @@ const actions = {
         }
 
         dispatch('autoLogout');
+
+        router.push({name:'home'});
     }
 }
 

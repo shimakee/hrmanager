@@ -33,6 +33,15 @@ export default {
                 vm.to = url;
         }
     }
+    ,created(){
+        this.$store.dispatch('maintainData')//maintain login status
+            .then(res=>{
+                console.log('maintained data.');
+            }).catch(err=>{
+                this.$store.dispatch('logout');
+                console.log('there was an error.');
+            });
+    }
 }
 </script>
 <style scoped>

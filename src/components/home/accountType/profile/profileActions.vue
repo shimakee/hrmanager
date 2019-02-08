@@ -13,6 +13,13 @@
                     <!-- <li><router-link to="contact">Contact</router-link></li> -->
                 </ul>
             </accordion>
+            <accordion>
+                <h3 slot="title">Explore</h3>
+                <ul slot="content">
+                    <li><router-link to="explore">Find Company</router-link></li>
+                    <li><router-link to="work">Work history</router-link></li>
+                </ul>
+            </accordion>
             <!-- <accordion>
                 <h3 slot="title">Settings</h3>
                 <ul slot="content">
