@@ -1,19 +1,40 @@
 <template>
     <div>
-        <router-view name="contactAdd"/>
-        <router-view name="contactShow"/>
+        <h1>Main Contact</h1>
+        <!-- <router-view name="contactAdd"/>
+        <router-view name="contactShow" 
+            :editable="editable"
+            :contacts="contacts"/> -->
+
+            <contact-add />
+            <contact-show :editable="editable" 
+                :contacts="contacts" />
     </div>
 </template>
 <script>
+import ContactAdd from './contactAdd';
+import ContactShow from './contactShow';
+
 export default {
+    props:{
+        editable:{type: Boolean, default: false}
+    },
+    components:{
+        "contact-show": ContactShow,
+        "contact-add": ContactAdd
+    },
     data(){
         return {
             contactModel:{main: "",
                         description:"",
                         countryCode:"",
                         areaCode:"",
-                        number:""},
-            contacts:[]
+                        number:""}
+        }
+    },
+    computed:{
+        contacts(){
+            return this.$store.getters.getContact;
         }
     },
     methods:{
@@ -21,23 +42,6 @@ export default {
             event.preventDefault();
 
             //axios store action
-        },
-        addContact(event){
-            event.preventDefault();
-
-            this.contacts.push({
-                main:this.contactModel.main,
-                description:this.contactModel.description,
-                countryCode:this.contactModel.countryCode,
-                areaCode:this.contactModel.areaCode,
-                number:this.contactModel.number
-            });
-
-            this.contactModel.main = ""
-            this.contactModel.description = ""
-            this.contactModel.countryCode = ""
-            this.contactModel.areaCode = ""
-            this.contactModel.number = ""
         }
     }
 }

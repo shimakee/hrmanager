@@ -24,7 +24,8 @@ export const store = new Vuex.Store({
         errorMessage: null,
         infoMessage: null,
         allowAutoLocate: false,
-        allowLocalStorage: false //if true stores & check localstorage before sending get requests
+        allowLocalStorage: false, //if true stores & check localstorage before sending get requests
+        exploreResult: null
 
     },
     getters:{
@@ -54,6 +55,9 @@ export const store = new Vuex.Store({
         },
         getAllowAutoLocate:(state)=>{
             return state.allowAutoLocate;
+        },
+        getExploreResult:(state)=>{
+            return state.exploreResult;
         }
 
 
@@ -99,6 +103,9 @@ export const store = new Vuex.Store({
             }else{
                 console.log('Error: could not set auto locate. Invalid type.');
             }
+        },
+        setExploreResult:(state, payload)=>{
+            state.exploreResult = payload;
         }
         
     },

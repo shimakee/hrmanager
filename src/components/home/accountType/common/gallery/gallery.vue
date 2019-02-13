@@ -16,7 +16,7 @@
         </span>
 
         <!--GALLERY-->
-        <show-gallery></show-gallery>
+        <show-gallery :pics="pics" :editable="true"></show-gallery>
         
         <!--TODO: EDIT gallery - to be able to choose main profile picture-->
         
@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import ShowGallery from "./showGallery";
+import ShowGallery from "./galleryShow";
 
 export default {
     components:{
@@ -39,15 +39,10 @@ export default {
         }
     },
     computed:{
-        // pics(){ //TODO: make na new component for gallery
-        //     let pics = this.$store.getters.getPics;
-
-        //     if(!pics){
-        //         pics = JSON.parse(localStorage.getItem("pics"));
-        //     }
-            
-        //     return pics;
-        // },
+        pics(){ //TODO: make na new component for gallery
+            let pics = this.$store.getters.getPics;
+            return pics;
+        },
         errorMessage(){
             return this.$store.getters.getErrorMessage;
         },

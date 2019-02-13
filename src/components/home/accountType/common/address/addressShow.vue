@@ -1,94 +1,31 @@
 <template>
     <div>
-        <h2>Address show</h2>
-
         <ul>
             <li v-for="(item, key) in address" v-bind:key="key" class="card-address"
                 @click="chooseItem(item._id)" :class="{highlight: item._id == itemActive}">
                 
                 <!--only show form if allowed as editable & in edit mode-->
                 <!--TODO create slotable form card-->
-                <div v-if="item._id == itemActive && itemEdit" class="card-content">
-                    <form class="form-container">
-                        <div class="form-group">
-                                <span class="label-group">
-                                    <input type="checkbox" v-model="item.main" value="true">
-                                    <label>Main address</label>
-                                </span>
-                                <span class="label-group">
-                                    <label>Description: </label>
-                                    <input type="text" v-model="item.description" placeholder="address description">
-                                </span>
-                        </div>
-                        <div>
-                            <label class="label-group">
-                                <label>Street: </label>
-                                <input type="text" v-model="item.street" placeholder="street">
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <span class="label-group">
-                                <label>City: </label>
-                                <input type="text" v-model="item.city" placeholder="city">
-                            </span>
-                            <span class="label-group">
-                                <label>Province: </label>
-                                <input type="text" v-model="item.province" placeholder="province">
-                            </span>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label class="label-group">
-                                <label>Country: </label>
-                                <input type="text" v-model="item.country" placeholder="country">
-                            </label>
-                            <label class="label-group">
-                                <label>Zipcode: </label>
-                                <input type="number" v-model="item.zipcode" placeholder="zipcode">
-                            </label>
-                        </div>
+                <div v-if="item._id == itemActive && itemEdit && editable" class="card-content">
+                    <!-- <form class="form-container"> -->
 
-                        <div class="input-group">
-                            <label class="label-group">
-                                <label>Latitude: </label>
-                                <input type="number" v-model="item.position.lat" placeholder="Latitude">
-                            </label>
-                            <label class="label-group">
-                                <label>Longitude: </label>
-                                <input type="number" v-model="item.position.lng" placeholder="Longitude">
-                            </label>
-                        </div>
+                        <address-form :item="item"
+                            :updateAddress="updateAddress"/>
 
-                        <button @click.prevent="updateAddress(item)">send</button>
+                        <!-- <button @click.prevent="updateAddress(item)">send</button> -->
                         <span class="edit"
-                            v-if="editable && itemEdit && itemActive == item._id"
+                            v-if="editable && itemEdit && itemActive == item._id && editable"
                             @click="cancelEdit">Cancel</span>
-                    </form>
-
-                    <!-- <google-maps   class="showMap"
-                                :selector="'mapEdit'+item._id"
-                                :showMap="showMap"
-                                :label="item.description" 
-                                :editable="editable" 
-                                :position="item.position"
-                                :autoLocate="autoLocate"
-                                @update:position="item.position = (itemEdit ? $event.position: addressModel.position)"
-                                @update:address="setItem(item, $event)"
-                            /> -->
+                    <!-- </form> -->
                 </div>
 
                 <!--show address cards-->
                 <!--TODO create slotable address card-->
                 <div v-else :class="{mainAddress: item.main == true}" class="card-content center">
-                    <!-- {{item.main}} {{key}} -->
-                    <!-- <input type="checkbox" name="main" :checked="item.main == true"> -->
-                    <h3>{{item.description}}</h3>
-                    <p> {{item.street}} , {{item.city}} </p>
-                    <p> {{item.zipcode}} {{item.province}} </p>
-                    <p> {{item.country}} </p>
-                    <p v-if="item.position && item.position.lat && item.position.lng"> lat: {{item.position.lat}}, lng: {{item.position.lng}}</p>
+                        <address-detail :item="item" />
+
                     <span class="edit"
-                    v-if="editable && !itemEdit && itemActive == item._id"
+                    v-if="editable && !itemEdit && itemActive == item._id && editable"
                     @click="itemEdit = true">Edit</span>
 
                 </div>
@@ -106,7 +43,7 @@
 
                 <!--only show edit button if editable-->
                 <span class="delete"
-                    v-if="!itemEdit && itemActive == item._id"
+                    v-if="!itemEdit && itemActive == item._id && editable"
                     @click="deleteAddress(item._id)">X</span>
             </li>
         </ul>
@@ -115,6 +52,8 @@
 </template>
 <script>
 import Maps from "../../../../parts/googleMap";
+import AddressDetail from "./addressDetail";
+import AddressForm from "./addressForm";
 
 export default {
     props:{
@@ -125,7 +64,9 @@ export default {
         autoAddress:{default: false, type: Boolean} //allow change input value on address based on googlemap marker
     },
     components:{
-        "google-maps":Maps
+        "google-maps":Maps,
+        "address-detail": AddressDetail,
+        "address-form": AddressForm
     },
     computed:{
         allowEdit(){

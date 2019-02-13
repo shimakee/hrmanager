@@ -3,7 +3,7 @@
         <h3>Gallery</h3>
         <ul>
             <li @click="choosePic(pic)" v-for="(pic, key) in pics" :key="key" class="card-pic" :class="{highlight: pic.filename == activePic}">
-                <span class="delete" @click="deletePic(pic)" v-if="pic.filename == activePic">X</span>
+                <span class="delete" @click="deletePic(pic)" v-if="pic.filename == activePic && editable">X</span>
                 <img :src="'http://localhost/file/photo/me?name='+pic.filename" :alt="pic.filename" srcset="">
                 
                 <div class="description">
@@ -12,7 +12,7 @@
                     </p>
                 </div>
 
-                <span v-if="pic.filename == activePic && pic.main == false"
+                <span v-if="pic.filename == activePic && pic.main == false && editable"
                     class="edit"
                     @click="setAsMain(pic)">Set as main</span>
             </li>
@@ -21,15 +21,13 @@
 </template>
 <script>
 export default {
+    props:{
+        pics:{type: Array},
+        editable:{type: Boolean, default: false}
+    },
     data(){
         return {
             activePic: null
-        }
-    },
-    computed:{
-        pics(){ //TODO: make na new component for gallery
-            let pics = this.$store.getters.getPics;
-            return pics;
         }
     },
     methods:{

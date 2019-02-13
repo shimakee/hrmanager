@@ -116,9 +116,9 @@ export default {
 
             this.$store.dispatch('addAddress', this.addressModel)//submit to backend
                 .then(response=>{
+                    this.clearAddressModel();//empty form
                     this.$store.dispatch('maintainData'); //to update the computed pics array
 
-                    this.clearAddressModel();//empty form
                 });
         },
         setAddressModel(event){//autofill form based on googlemap marker

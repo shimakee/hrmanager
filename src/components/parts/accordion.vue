@@ -3,7 +3,7 @@
         <!-- <ul class="accordion-container" > -->
             <li class="accordion-tab">
                 <span class="tab-title"><slot name="title"></slot></span>
-                <input type="radio" name="tab-input" class="tab-input">
+                <input :type="inputType" name="tab-input" class="tab-input">
                 
                 <span class="tab-content"><slot name="content"></slot></span>
             </li>
@@ -14,7 +14,8 @@
 <script>
 export default {
     props:{
-        items: Object
+        items: Object,
+        inputType: {default: 'radio', type: String}
     }
 }
 </script>

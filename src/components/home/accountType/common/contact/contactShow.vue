@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h2>Contacts</h2>
         <ul class="contact-gallery">
             <li v-for="(item, key) in contacts" v-bind:key="key"
                 class="contact-card"
@@ -8,78 +7,49 @@
                 @click="itemActive = item._id">
 
 
-                <div    v-if="itemEdit && itemActive == item._id"
-                        class="contact-form">
-                    <form class="form-container">
-                            <span :class="{main: item.main, notMain: !item.main}"
-                                    @click="item.main = !item.main"></span>
-                            <br>
-                        <div class="input-group">
-                            <!-- <label>Main contact: </label> -->
-                            <!-- <input type="checkbox" v-model="item.main" value="true"> -->
+                
+                <contact-form  v-if="itemEdit && itemActive == item._id  && editable"
+                        :item="item" 
+                        :submit="submit"
+                        />
 
-                            <label>Description: </label>
-                            <input type="text" v-model="item.description" placeholder="contact description">
-                        </div>
-                        <div class="input-group">
-                            <label>Country code: </label>
-                            <input type="number" v-model="item.countryCode" placeholder="country code">
-
-                        </div>
-                        <div class="input-group">
-                            <label>Area code: </label>
-                            <input type="number" v-model="item.areaCode" placeholder="area code">
-
-                        </div>
-                        <div class="input-group">
-
-                            <label>Number: </label>
-                            <input type="number" v-model="item.number" placeholder="number">
-                        </div>
-
-                        <button @click.prevent="submit(item)">Update</button>  
-                    </form>
-                </div>
-
-                <div    v-else 
-                        class="contact-content">
-
-                    
-                    <span :class="{main: item.main, notMain: !item.main}"></span>
-                    <br>
-                    <!-- <p>{{item.main}}</p> -->
-                    <!-- <p>{{item._id}}</p> -->
-                    <p v-if="item.description">Description: {{item.description}}</p>
-                    <p v-if="item.countryCode">Country code: {{item.countryCode}}</p>
-                    <p v-if="item.areaCode">Area code: {{item.areaCode}}</p>
-                    <p v-if="item.number">Number: {{item.number}}</p>
-                </div>
+                <contact-detail v-else :item="item" 
+                        />
 
                 <span class="delete"
-                        v-if="itemActive == item._id"
+                        v-if="itemActive == item._id && editable"
                         @click="deleteContact(item)">X</span>
+
                 <span class="edit"
-                        v-if="!itemEdit && itemActive == item._id"
+                        v-if="!itemEdit && itemActive == item._id && editable"
                         @click="itemEdit = true">Edit</span>
                 <span class="edit"
-                        v-if="itemEdit && itemActive == item._id"
+                        v-if="itemEdit && itemActive == item._id  && editable"
                         @click="itemEdit = false">Cancel</span>
             </li>
         </ul>
     </div>
 </template>
 <script>
+import ContactDetail from './contactDetail';
+import ContactForm from './contactForm';
+
 export default {
+    props:{
+        editable: {type: Boolean, default: false},
+        contacts: {type: Array}
+    },
+    components:{
+        "contact-detail": ContactDetail,
+        "contact-form": ContactForm
+    },
     data(){
         return{
-            itemEdit: false,
-            itemActive: null
+            itemActive: null,
+            itemEdit: false
         }
     },
     computed:{
-        contacts(){
-            return this.$store.getters.getContact;
-        },
         infoMessage(){
             return this.$store.getters.getInfoMessage;
         },
@@ -151,17 +121,19 @@ export default {
 ul{
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-gap: 10px;
     padding: 0;
+    justify-content: center;
 }
 li.contact-card{
     background-color: grey;
-    padding: 15px 20px 10px 20px;
+    padding: 5px 0px 5px 15px;
     position: relative;
     /* margin: 10px; */
     max-width: fit-content;
     min-width: 250px;
+    justify-items: center;
 }
 li .edit{
     position:absolute;
@@ -237,3 +209,6 @@ form input, form select {
 }
 
 </style>
+
+
+

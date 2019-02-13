@@ -607,35 +607,46 @@ router.route('/me/owner').get(auth.isAuth, async (req,res,next)=>{
 router.get('/find').get(auth.isAuth, async (req,res,next)=>{
         let queryId = req.query.id; //search by id
         let queryName = req.query.name; //search by name
-
+        let company;
         // let company = await Company.findById(req.user.company).exec();
         // if(!company){return res.status(404).send({message: "could not locate company information"});}
         
         if(!queryId && !queryName){
-                let company = await Company.find().exec();
-                if(!company){return res.status(404).send({message: "could not locate company information"});}
+                company = await Company.find().exec();
+                if(!company){return res.status(404).send({message: "could not locate any ompany information"});}
 
-                res.status(200).send(company);
+                // res.status(200).send(_.pick(company, ['authenticated', 'tradename', 'ownershipType', 'email', 'contact', 'address', 'businesses', 'government']));
         }else if(queryId){
                 let {error} = Company.validateId({id: queryId});
                 if(error){return res.status(400).send(error);}
 
                 
-                let company = await Company.findById(queryId).exec();
-                if(!company){return res.status(404).send({message: "could not locate company information"});}
+                company = await Company.findById(queryId).exec();
+                if(!company){return res.status(404).send({message: "could not locate company information by id"});}
 
-                res.status(200).send(company);
+                // res.status(200).send(_.pick(company, ['authenticated', 'tradename', 'ownershipType', 'email', 'contact', 'address', 'businesses', 'government']));
         }else if(queryName){
                 // let {error} = Company.validateId({id: id});//TODO: validate
                 // if(error){return res.status(400).send(error);}
 
-                let company = await Company.find({tradename:  new RegExp(queryName, "i")}).exec();
-                if(!company){return res.status(404).send({message: "could not locate company information"});}
+                company = await Company.find({tradename:  new RegExp(queryName, "i")}).exec();
+                if(!company){return res.status(404).send({message: "could not locate company information by tradename"});}
 
-                res.status(200).send(company);
         }
+        let results = [];
+        const companyProperties = ['authenticated','tradename', 'ownershipType', 'contact', 'address', 'email', 'contact', 'businesses', 'pics']
 
-        //add profile email 1 by 1
+        if(Array.isArray(company)){
+                company.forEach(element => {
+                        let result = _.pick(element,companyProperties);
+                        results.push(result);
+                });
+        }else{
+                let result = _.pick(company,companyProperties);
+                results.push(result);
+        }
+        
+        res.status(200).send(results);
 });
 
 //TODO: post a job

@@ -4,6 +4,8 @@
 
         <input type="text" v-model="searchQuery" placeholder="Search">
         <button @click.prevent="search()">Search</button>
+
+        <router-view />
         
     </div>
 </template>
@@ -11,13 +13,16 @@
 export default {
     data(){
         return {
-            searchQuery: null
+            searchQuery: null,
+            result: null
         }
     },
     methods:{
         search(){
             this.$store.dispatch('findCompany', {name: this.searchQuery})//TODO: by id
                 .then(res=>{
+                    this.$store.commit('setExploreResult', res);
+                    this.result = res;
                     console.log(res)
 ;                }).catch(err=>{ 
                     console.log(err);

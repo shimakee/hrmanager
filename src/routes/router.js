@@ -21,10 +21,13 @@ import HomeDefaulContent from '../components/home/accountType/common/homeDefault
 import Actions from '../components/home/accountType/actions';
 import Info from '../components/home/accountType/info';
 import Gallery from '../components/home/accountType/common/gallery/gallery';
-import ShowGallery from '../components/home/accountType/common/gallery/showGallery';
+import GalleryShow from '../components/home/accountType/common/gallery/galleryShow';
 
 //common
-import Explore from '../components/home/accountType/common/explore';
+import Explore from '../components/home/accountType/common/explore/explore';
+import ExploreShow from '../components/home/accountType/common/explore/exploreShow';
+import ContactDetail from '../components/home/accountType/common/contact/contactDetail';
+import AddressDetail from '../components/home/accountType/common/address/addressDetail';
 
 //Home - profile
 import ProfileAccount from '../components/home/accountType/profile/profileAccount';
@@ -151,7 +154,7 @@ export const routes = [
                         components:{
                             default: ProfileAccount
                         },children:[
-                            {path: "", name: "account",
+                            {path: "",
                                 components:{
                                     editProfile: EditProfile,
                                     editRelatives: EditRelatives,
@@ -164,7 +167,7 @@ export const routes = [
                         ]
 
                     },
-                    {path:"gallery", name:"gallery",
+                    {path:"gallery",
                         components:{
                             default: Gallery
                         }
@@ -179,12 +182,11 @@ export const routes = [
 
                     },
                     {path:"address",
-                        components:{
-                            default: Address
-                        }
+                        component: Address,
+                        props:{editable: true}
                         ,
                         children:[
-                            {path: "", name:"address",
+                            {path: "",
                                 components:{
                                     addressShow: AddressShow,
                                     addressAdd: AddressAdd
@@ -193,18 +195,27 @@ export const routes = [
                         ]
 
                     },
-                    {path:"explore", name:"explre",
+                    {path:"explore",
                         components:{
                             default: Explore
                         }
-                        // ,
-                        // children:[
-                        //     {path: "", name:"gallery",
-                        //         components:{
-                        //             default: HomeDefaulContent
-                        //         }
-                        //     }
-                        // ]
+                        ,
+                        children:[
+                            {path: "",
+                                components:{
+                                    default: ExploreShow,
+                                },
+                                children:[
+                                    {path: "",
+                                        components:{
+                                            addressShow: AddressShow,
+                                            contactShow: ContactShow,
+                                            galleryShow: GalleryShow
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
 
                     },
                     // {path:"contact", name:"contact",
@@ -230,7 +241,7 @@ export const routes = [
                             {path:"",///profile/settings - main page - CONTENT - details
                                 components:{
                                     default: DeleteAccount,
-                                    editPic: ShowGallery,
+                                    editPic: GalleryShow,
                                     changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,
@@ -277,7 +288,7 @@ export const routes = [
                         components:{
                             default: CompanyAccount
                         },children:[
-                            {path: "", name: "account",
+                            {path: "",
                                 components:{
                                     editCompany: EditCompany,
                                     contact: Contact,
@@ -289,7 +300,7 @@ export const routes = [
                         ]
 
                     },
-                    {path:"gallery", name:"gallery",
+                    {path:"gallery",
                         components:{
                             default: Gallery
                         }
@@ -309,7 +320,7 @@ export const routes = [
                         }
                         ,
                         children:[
-                            {path: "", name:"address",
+                            {path: "",
                                 components:{
                                     addressShow: AddressShow,
                                     addressAdd: AddressAdd
@@ -326,7 +337,7 @@ export const routes = [
                             {path:"",///profile/settings - main page - CONTENT - details
                                 components:{
                                     default: DeleteAccount,
-                                    editPic: ShowGallery,
+                                    editPic: GalleryShow,
                                     changeUsername: ChangeUsername,
                                     changePassword: ChangePassword,
                                     deleteAccount: DeleteAccount,

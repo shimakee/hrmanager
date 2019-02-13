@@ -12,7 +12,7 @@ module.exports = function(app, express){
     //cookieparser
     app.use(cookieParser(config.get('cookieSecret')));
     //allow cors
-    // app.use(cors);
+    app.use(cors);
 
     //validators
     Joi.objectId = require('joi-objectid')(Joi);//initialize to allow objectID validation
