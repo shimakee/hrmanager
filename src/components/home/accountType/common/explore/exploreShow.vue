@@ -1,7 +1,5 @@
 <template>
     <div> 
-        <h3>Explore</h3>
-
         <ul><!--//iterate over array-->
             <li v-for="(value, key) in exploreResult" v-bind:key="key"
                 @click.prevent="itemActive = value.tradename"
@@ -67,7 +65,7 @@
                     </accordion>
 
                 </div>
-                <Button @click.prevent="apply">Apply</Button>
+                <button @click.prevent="apply(value._id)">Apply</button>
             </li>
         </ul>
         
@@ -96,8 +94,13 @@ export default {
         }
     },
     methods:{
-        apply(){
-            console.log('applied');
+        apply(companyId){
+            this.$store.dispatch('applyToCompany', companyId)
+                .then(res=>{
+                    console.log('applied');
+                }).catch(err=>{
+                    console.log('applied failed');
+                });
         }
     }
 }
@@ -122,6 +125,7 @@ ul{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-gap: 20px;
+    padding: 0;
 }
 ul li.explore-card{
     padding: 10px;

@@ -157,7 +157,7 @@ export default {
         display: none;
     }
     .view-container{
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 4fr;
     }
     
     .slideRight,
@@ -189,7 +189,7 @@ export default {
 @media (min-width: 1024px) { /*Laptop & tvs*/
     .view-container{
         display:grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 4fr;
         font-size: 20px;
     }
     .content{

@@ -123,6 +123,7 @@ module.exports = mongoose.model('Employee', employee);
 
 function validate(data){
     const infoSchema = Joi.object().keys({
+        _id: Joi.objectId().required(),
         class: Joi.string().max(1020).regex(regex.address).required(),
         date: Joi.date().min('1-1-1900').max('now').required(),
         remarks: Joi.string().max(510).regex(regex.address).allow('')

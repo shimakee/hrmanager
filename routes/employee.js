@@ -45,7 +45,7 @@ router.get('/scout/company').get(auth.isAuth, async (req,res,next)=>{
 
         }
         let results = [];
-        const companyProperties = ['authenticated','tradename', 'ownershipType', 'contact', 'address', 'email', 'contact', 'businesses', 'pics']
+        const companyProperties = ['_id','authenticated','tradename', 'ownershipType', 'contact', 'address', 'email', 'contact', 'businesses', 'pics']
 
         if(Array.isArray(company)){
                 company.forEach(element => {
@@ -60,42 +60,16 @@ router.get('/scout/company').get(auth.isAuth, async (req,res,next)=>{
         res.status(200).send(results);
 });
 
-// //profile - scout company all or by query.companyId
-// router.route('/scout/company').get(auth.isAuth, auth.isAccountType('profile'), async(req,res,next)=>{
-
-//         //check a company exist
-//         let companies = await Company.find().exec();
-//         if(!companies){return res.status(404).send({message:'Could not locate any companies'});}
-
-//         //check if query parameter is passed for company id
-//         if(!req.query.companyId){
-
-//                 //TODO: filter search
-//                 //return all companies
-//                 console.log(companies);
-//                 res.status(200).send(companies);
-//         }else{
-//                 const companyId = req.query.companyId;
-//                 //check id passed is valid object id
-//                 if(!validate.isObjectId(companyId)){ return res.status(400).send({message:"Bad request invalid id."});}
-
-//                 let company = await Company.findById(companyId).exec();
-//                 if(company){
-//                         return res.status(200).send(company);
-//                 }else{
-//                         return res.status(404).send({message: "could not locate id."})
-//                 }
-
-//         }
-
-
-// });
-
 //profile - apply company - change url or read body for status of application?
 router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async (req,res,next)=>{
 
         const profileId = req.user.profile; 
-        const companyId= req.query.companyId;
+        let companyId;
+        if(req.body){
+                companyId = req.body.companyId;
+        }else if(req.query){
+                companyId = req.query.companyId;
+        }
 
         //check that an id is passed
         if(companyId){
@@ -113,7 +87,7 @@ router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async
 
                 //create applied date now
                 let now = new Date(Date.now());
-                let appliedInfo = {_id: tools.get.objectId(), class: "applied", date: now}
+                let appliedInfo = {_id: tools.get.objectId().toString(), class: "applied", date: now}
 
                 //start a task
                 let task = Fawn.Task();
@@ -143,7 +117,7 @@ router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async
 
                         //validate record
                         let {error} = Employee.validate(newRecord);
-                        if(error){return res.status(400).send({message: 'Bad request.', error: error});}
+                        if(error){return res.status(400).send({message: 'Bad request, Inserting record', error: error});}
 
                         let newEmployee = new Employee(newRecord);
 

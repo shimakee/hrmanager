@@ -101,6 +101,22 @@ const actions = {
                     reject(err);
                 });
         });
+    },
+    applyToCompany:({dispatch}, payload)=>{
+        let query = `?companyId=${payload}`; // if using queries
+        const CompanyId = payload; //if using request body
+
+        return new Promise((resolve, reject)=>{
+            // dispatch('sendCommit', {url:`employment/me/apply${query}`, method:'post', data: {companyId: CompanyId}}) //apply both
+            // dispatch('sendCommit', {url:`employment/me/apply${query}`, method:'post', data: null}) //query only
+            dispatch('sendCommit', {url:`employment/me/apply`, method:'post', data: {companyId: CompanyId}}) //body only
+                .then(res=>{
+                    //TODO: commit search results
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
     }
 }
 
