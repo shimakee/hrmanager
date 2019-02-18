@@ -127,8 +127,9 @@ ul{
     justify-content: center;
 }
 li.contact-card{
-    background-color: grey;
+    /* background-color: grey; */
     padding: 5px 0px 5px 15px;
+    margin:3px;
     position: relative;
     /* margin: 10px; */
     max-width: fit-content;

@@ -16,37 +16,80 @@ const validate = tools.validate;
 const moment = require('moment');
 
 
+//profile - scout company all or by query.companyId or by company tradename
+router.get('/scout/company').get(auth.isAuth, async (req,res,next)=>{
+        let queryId = req.query.id; //search by id
+        let queryName = req.query.name; //search by name
+        let company;
+        
+        if(!queryId && !queryName){
+                company = await Company.find().exec();
+                if(!company){return res.status(404).send({message: "could not locate any ompany information"});}
 
-//profile - scout company all or by query.companyId
-router.route('/scout/company').get(auth.isAuth, auth.isAccountType('profile'), async(req,res,next)=>{
+                // res.status(200).send(_.pick(company, ['authenticated', 'tradename', 'ownershipType', 'email', 'contact', 'address', 'businesses', 'government']));
+        }else if(queryId){
+                let {error} = Company.validateId({id: queryId});
+                if(error){return res.status(400).send(error);}
 
-        //check a company exist
-        let companies = await Company.find().exec();
-        if(!companies){return res.status(404).send({message:'Could not locate any companies'});}
+                
+                company = await Company.findById(queryId).exec();
+                if(!company){return res.status(404).send({message: "could not locate company information by id"});}
 
-        //check if query parameter is passed for company id
-        if(!req.query.companyId){
+                // res.status(200).send(_.pick(company, ['authenticated', 'tradename', 'ownershipType', 'email', 'contact', 'address', 'businesses', 'government']));
+        }else if(queryName){
+                // let {error} = Company.validateId({id: id});//TODO: validate
+                // if(error){return res.status(400).send(error);}
 
-                //TODO: filter search
-                //return all companies
-                console.log(companies);
-                res.status(200).send(companies);
-        }else{
-                const companyId = req.query.companyId;
-                //check id passed is valid object id
-                if(!validate.isObjectId(companyId)){ return res.status(400).send({message:"Bad request invalid id."});}
-
-                let company = await Company.findById(companyId).exec();
-                if(company){
-                        return res.status(200).send(company);
-                }else{
-                        return res.status(404).send({message: "could not locate id."})
-                }
+                company = await Company.find({tradename:  new RegExp(queryName, "i")}).exec();
+                if(!company){return res.status(404).send({message: "could not locate company information by tradename"});}
 
         }
+        let results = [];
+        const companyProperties = ['authenticated','tradename', 'ownershipType', 'contact', 'address', 'email', 'contact', 'businesses', 'pics']
 
-
+        if(Array.isArray(company)){
+                company.forEach(element => {
+                        let result = _.pick(element,companyProperties);
+                        results.push(result);
+                });
+        }else{
+                let result = _.pick(company,companyProperties);
+                results.push(result);
+        }
+        
+        res.status(200).send(results);
 });
+
+// //profile - scout company all or by query.companyId
+// router.route('/scout/company').get(auth.isAuth, auth.isAccountType('profile'), async(req,res,next)=>{
+
+//         //check a company exist
+//         let companies = await Company.find().exec();
+//         if(!companies){return res.status(404).send({message:'Could not locate any companies'});}
+
+//         //check if query parameter is passed for company id
+//         if(!req.query.companyId){
+
+//                 //TODO: filter search
+//                 //return all companies
+//                 console.log(companies);
+//                 res.status(200).send(companies);
+//         }else{
+//                 const companyId = req.query.companyId;
+//                 //check id passed is valid object id
+//                 if(!validate.isObjectId(companyId)){ return res.status(400).send({message:"Bad request invalid id."});}
+
+//                 let company = await Company.findById(companyId).exec();
+//                 if(company){
+//                         return res.status(200).send(company);
+//                 }else{
+//                         return res.status(404).send({message: "could not locate id."})
+//                 }
+
+//         }
+
+
+// });
 
 //profile - apply company - change url or read body for status of application?
 router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async (req,res,next)=>{

@@ -239,3 +239,9 @@
 {"message":"Could not create directory:assets/uploads/profile/5c5bdeda7cc2390a3cd43c13","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads\\profile"},"level":"info","timestamp":"2019-02-13T08:04:15.191Z"}
 {"message":"Could not create directory:assets/uploads/profile/5c5bdeda7cc2390a3cd43c13","error":{"errno":-4075,"code":"EEXIST","syscall":"mkdir","path":"C:\\Users\\deleo\\OneDrive\\Webdev\\projects\\gsm\\assets\\uploads"},"level":"info","timestamp":"2019-02-13T08:04:15.192Z"}
 {"level":"info","message":"Database deleon_hrmanager_TEST closed.","timestamp":"2019-02-13T08:10:58.340Z"}
+{"level":"info","message":"Using uri:mongodb://localhost/deleon_hrmanager_test","timestamp":"2019-02-18T03:30:42.310Z"}
+{"level":"info","message":"NODE_ENV: test","timestamp":"2019-02-18T03:30:42.935Z"}
+{"level":"info","message":"App: My web App","timestamp":"2019-02-18T03:30:42.935Z"}
+{"level":"info","message":"using database deleon_hrmanager_TEST","timestamp":"2019-02-18T03:30:42.935Z"}
+{"level":"info","message":"listening on port 80...","timestamp":"2019-02-18T03:30:42.936Z"}
+{"level":"info","message":"Rolled back unfinished transactions..","timestamp":"2019-02-18T03:30:45.079Z"}

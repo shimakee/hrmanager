@@ -93,7 +93,7 @@ const actions = {
         }
 
         return new Promise((resolve, reject)=>{
-            dispatch('sendCommit', {url:`company/find${query}`, method:'get', data: null})
+            dispatch('sendCommit', {url:`employment/scout/company${query}`, method:'get', data: null})
                 .then(res=>{
                     //TODO: commit search results
                     resolve(res.data);

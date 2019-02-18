@@ -22,6 +22,7 @@ import Actions from '../components/home/accountType/actions';
 import Info from '../components/home/accountType/info';
 import Gallery from '../components/home/accountType/common/gallery/gallery';
 import GalleryShow from '../components/home/accountType/common/gallery/galleryShow';
+import EmailShow from '../components/home/accountType/common/email/emailShow';
 
 //common
 import Explore from '../components/home/accountType/common/explore/explore';
@@ -210,7 +211,8 @@ export const routes = [
                                         components:{
                                             addressShow: AddressShow,
                                             contactShow: ContactShow,
-                                            galleryShow: GalleryShow
+                                            galleryShow: GalleryShow,
+                                            emailShow: EmailShow
                                         }
                                     }
                                 ]

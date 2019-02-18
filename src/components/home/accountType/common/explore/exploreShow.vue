@@ -3,7 +3,10 @@
         <h3>Explore</h3>
 
         <ul><!--//iterate over array-->
-            <li v-for="(value, key) in exploreResult" v-bind:key="key">
+            <li v-for="(value, key) in exploreResult" v-bind:key="key"
+                @click.prevent="itemActive = value.tradename"
+                :class="{chosen: itemActive == value.tradename}"
+                class="explore-card">
 
                 <div v-for="(v, k) in value" v-bind:key="k"><!-- iterate over object-->
                     <h3 v-if="k =='tradename'">{{v}}</h3>
@@ -42,9 +45,9 @@
                         :inputType="'checkbox'">
                         <h3 slot="title">Email</h3>
                         <div slot="content">
-                            <span v-for="(email, emailKey) in v" v-bind:key="emailKey">
-                                {{email}}
-                            </span>
+                            <router-view
+                            name="emailShow"
+                            :emails="v" />
                         </div>
                     </accordion>
 
@@ -64,7 +67,7 @@
                     </accordion>
 
                 </div>
-                <Button>Apply</Button>
+                <Button @click.prevent="apply">Apply</Button>
             </li>
         </ul>
         
@@ -86,10 +89,23 @@ export default {
             const AUTO_LOCATE = this.$store.getters.getAllowAutoLocate;
             return AUTO_LOCATE;
         }
+    },
+    data(){
+        return{
+            itemActive: null
+        }
+    },
+    methods:{
+        apply(){
+            console.log('applied');
+        }
     }
 }
 </script>
 <style scoped>
+.chosen{
+    outline: solid 3px blue;
+}
 .authenticated, .unauthenticated{
     border-radius: 50px;
     padding:10px;
@@ -107,7 +123,7 @@ ul{
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-gap: 20px;
 }
-/* ul li{
-    margin
-} */
+ul li.explore-card{
+    padding: 10px;
+}
 </style>

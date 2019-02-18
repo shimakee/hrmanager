@@ -29,7 +29,7 @@ const user = new Schema({
     username: {type: String,min:8, max:30, required: [true, "Username required"], unique: true, dropDups: true},
     password: {type: String,max:1024, required: [true, "Password required"]},
     profile: {type: ObjId, ref: 'Profile'},
-    employment: [{_id:{type: ObjId, ref: 'Employee'}}],
+    employment: [{_id:{type: ObjId, ref: 'Employee'}}], //this should be in profile TODO: move this to profile - including the routes
     // customer: [{type: ObjId, ref: 'Customer'}] // this should be in company or business - better in business
     company: {type: ObjId, ref: "Company"},
     //role: [{type: ObjId, ref:'Role'}] //access control
