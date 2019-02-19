@@ -25,8 +25,7 @@ export const store = new Vuex.Store({
         infoMessage: null,
         allowAutoLocate: false,
         allowLocalStorage: false, //if true stores & check localstorage before sending get requests
-        exploreResult: null
-
+        exploreResult: null, // search result
     },
     getters:{
         getActivity:(state)=>{

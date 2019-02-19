@@ -2,7 +2,10 @@
 
 const state = {
     company:null,
-    tradename: null
+    tradename: null,
+    companiesSearched: null,
+
+
 }
 const getters = {
     getCompany:(state)=>{
@@ -10,6 +13,9 @@ const getters = {
     },
     getTradename:(state)=>{
         return state.tradename;
+    },
+    getCompaniesSearched:(state)=>{
+        return state.companiesSearched;
     }
 }
 const mutations = {
@@ -18,6 +24,9 @@ const mutations = {
     },
     setTradename:(state, payload)=>{
         state.tradename = payload;
+    },
+    setCompaniesSearched:(state, payload)=>{
+        state.companiesSearched = payload;
     }
 }
 const actions = {
@@ -83,7 +92,7 @@ const actions = {
                 });
         });
     },
-    findCompany:({dispatch}, payload)=>{
+    findCompany:({dispatch, commit}, payload)=>{
         let query="";
         if(payload.name){
             query=`?name=${payload.name}`;
@@ -93,31 +102,16 @@ const actions = {
         }
 
         return new Promise((resolve, reject)=>{
-            dispatch('sendCommit', {url:`employment/scout/company${query}`, method:'get', data: null})
+            dispatch('sendCommit', {url:`/employment/scout/company${query}`, method:'get', data: null})
                 .then(res=>{
                     //TODO: commit search results
+                    commit('setCompaniesSearched', res.data);
                     resolve(res.data);
                 }).catch(err=>{
                     reject(err);
                 });
         });
     },
-    applyToCompany:({dispatch}, payload)=>{
-        let query = `?companyId=${payload}`; // if using queries
-        const CompanyId = payload; //if using request body
-
-        return new Promise((resolve, reject)=>{
-            // dispatch('sendCommit', {url:`employment/me/apply${query}`, method:'post', data: {companyId: CompanyId}}) //apply both
-            // dispatch('sendCommit', {url:`employment/me/apply${query}`, method:'post', data: null}) //query only
-            dispatch('sendCommit', {url:`employment/me/apply`, method:'post', data: {companyId: CompanyId}}) //body only
-                .then(res=>{
-                    //TODO: commit search results
-                    resolve(res.data);
-                }).catch(err=>{
-                    reject(err);
-                });
-        });
-    }
 }
 
 export default{

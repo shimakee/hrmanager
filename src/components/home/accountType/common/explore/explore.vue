@@ -19,14 +19,14 @@ export default {
     },
     methods:{
         search(){
-            this.$store.dispatch('findCompany', {name: this.searchQuery})//TODO: by id
-                .then(res=>{
-                    this.$store.commit('setExploreResult', res);
-                    this.result = res;
-                    console.log(res)
-;                }).catch(err=>{ 
-                    console.log(err);
-                });
+            const AccountType = this.$store.getters.getAccountType;
+            if(AccountType == "profile"){
+                this.$store.dispatch('findCompany', {name: this.searchQuery});//TODO: by id
+            }else if(AccountType == "company"){
+                this.$store.dispatch('findProfile', {name: this.searchQuery});//TODO: by id
+            }else{
+                //staff
+            }
         }
     }
 }

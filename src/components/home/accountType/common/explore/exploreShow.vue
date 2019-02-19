@@ -2,13 +2,15 @@
     <div> 
         <ul><!--//iterate over array-->
             <li v-for="(value, key) in exploreResult" v-bind:key="key"
-                @click.prevent="itemActive = value.tradename"
                 :class="{chosen: itemActive == value.tradename}"
                 class="explore-card">
 
+                <!--TODO: separate pecialized and common components like goc, address, email, contact-->
                 <div v-for="(v, k) in value" v-bind:key="k"><!-- iterate over object-->
-                    <h3 v-if="k =='tradename'">{{v}}</h3>
-                    <p v-if="k =='ownershipType'">Ownership type: {{v}}</p>
+                    <h3 v-if="k =='tradename'
+                         && accountType == 'profile'">{{v}}</h3>
+                    <p v-if="k =='ownershipType'
+                         && accountType == 'profile'">Ownership type: {{v}}</p>
 
                     <span v-if="k == 'authenticated'" :class="{authenticated: v, unauthenticated: !v}">
 
@@ -49,7 +51,7 @@
                         </div>
                     </accordion>
 
-                    <span v-if="k=='businesses' && v.length > 0">
+                    <span v-if="k=='businesses' && v.length > 0 && accountType == 'profile'">
                         <p> {{k}} : {{v}} </p>
                     </span>
 
@@ -64,8 +66,24 @@
                         </div>
                     </accordion>
 
+                    <!--TODO: generate card for personal details-->
+                    <span v-if="v.length > 0 && k == 'birthdate' || k == 'civilStatus' || k == 'gender' || k == 'name' || k == 'relatives'">
+                            {{k}}: {{v}}    
+                    </span>
+
                 </div>
-                <button @click.prevent="apply(value._id)">Apply</button>
+                <span v-if="accountType == 'profile'">
+                    <button v-if="!hasApplied(value._id)"
+                        @click.prevent="apply(value._id)">Apply</button>
+                    <button v-if="hasApplied(value._id)"
+                        @click.prevent="cancelApplication(value._id)">Cancel Application</button>
+                </span>
+                <span v-if="accountType == 'company'">
+                    <button >Scout</button> <!--Scout employee-->
+                    <button >Accept</button> <!--Accept employee if already applied-->
+                    <button >Decline</button> <!--Decline employee if already applied-->
+                    <button >Cancel Recruitment</button> <!--Cancel recruitment of employee-->
+                </span>
             </li>
         </ul>
         
@@ -80,8 +98,22 @@ export default {
         "accordion": Accordion
     },
     computed:{
-        exploreResult(){
-            return this.$store.getters.getExploreResult;
+        accountType(){
+            return this.$store.getters.getAccountType;
+        },
+        companiesApplied(){
+            return this.$store.getters.getCompaniesEmployed;
+        },
+        exploreResult(){//according to account type
+            const AccountType = this.$store.getters.getAccountType;
+            if(AccountType == "profile"){
+                return this.$store.getters.getCompaniesSearched;
+            }else if(AccountType == "company"){
+                return this.$store.getters.getProfilesSearched;
+                console.log('company search result');
+            }else{
+                //staff
+            }
         },
         autoLocate(){
             const AUTO_LOCATE = this.$store.getters.getAllowAutoLocate;
@@ -90,17 +122,49 @@ export default {
     },
     data(){
         return{
-            itemActive: null
+            itemActive: null,
+            employers: null
         }
     },
     methods:{
         apply(companyId){
             this.$store.dispatch('applyToCompany', companyId)
                 .then(res=>{
+                    this.$store.dispatch('getEmployers');
                     console.log('applied');
                 }).catch(err=>{
                     console.log('applied failed');
                 });
+        },
+        cancelApplication(companyId){
+            this.$store.dispatch('cancelApplication', companyId)
+                .then(res=>{
+                    this.$store.dispatch('getEmployers');
+                    console.log('canceled application');
+                }).catch(err=>{
+                    console.log('cancel failed failed');
+                });
+        },
+        hasApplied(companyId){
+            let companiesApplied = this.$store.getters.getCompaniesEmployed;
+            
+            for (let i = 0; i < companiesApplied.length; i++) {
+                const element = companiesApplied[i]._id;
+                if(companyId == element.company){
+                    return true;
+                }else{
+                    continue;
+                }
+            }
+
+            return false;
+        }
+    },
+    beforeMount(){
+        const AccountType = this.$store.getters.getAccountType;
+
+        if(AccountType == 'profile'){
+            this.$store.dispatch('getEmployers');
         }
     }
 }

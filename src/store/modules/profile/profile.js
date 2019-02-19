@@ -1,16 +1,30 @@
 
 
 const state = {
-    profile:null
+    profile:null,
+    companiesEmployed: null,
+    profilesSearched: null
 }
 const getters = {
     getProfile:(state)=>{
         return state.profile;
+    },
+    getCompaniesEmployed:(state)=>{
+        return state.companiesEmployed;
+    },
+    getProfilesSearched:(state)=>{
+        return state.profilesSearched;
     }
 }
 const mutations = {
     setProfile:(state, payload)=>{
         state.profile = payload;
+    },
+    setCompaniesEmployed:(state, payload)=>{
+        state.companiesEmployed = payload;
+    },
+    setProfilesSearched:(state, payload)=>{
+        state.profilesSearched = payload;
     }
 }
 const actions = {
@@ -71,6 +85,63 @@ const actions = {
                         };
                     }
 
+                    reject(err);
+                });
+        });
+    },
+    findProfile:({dispatch, commit}, payload)=>{
+        let query="";
+        if(payload.name){
+            query=`?name=${payload.name}`;
+        }
+        // if(payload.id){
+        //     query=`?profileId=${payload.id}`;
+        // }
+
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/employment/scout/profile${query}`, method:'get', data: null})
+                .then(res=>{
+                    //TODO: commit search results
+                    commit('setProfilesSearched', res.data);
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    getEmployers:({dispatch, commit})=>{
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:'/employment/me/employers', method:'get', data: null})
+                .then(res=>{
+                    commit('setCompaniesEmployed', res.data);
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    applyToCompany:({dispatch}, payload)=>{
+        let query = `?companyId=${payload}`;
+
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/employment/me/apply${query}`, method:'get', data: null})
+                .then(res=>{
+                    //TODO: commit search results
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    cancelApplication:({dispatch}, payload)=>{
+        let query = `?companyId=${payload}`;
+        
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/employment/me/apply${query}`, method:'put', data: null})
+                .then(res=>{
+                    //TODO: commit search results
+                    resolve(res.data);
+                }).catch(err=>{
                     reject(err);
                 });
         });

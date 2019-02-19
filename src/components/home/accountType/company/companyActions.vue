@@ -14,6 +14,13 @@
                     <!-- <li><router-link to="contact">Contact</router-link></li> -->
                 </ul>
             </accordion>
+            <accordion>
+                <h3 slot="title">Explore</h3>
+                <ul slot="content">
+                    <li><router-link to="explore">Find Company</router-link></li>
+                    <li><router-link to="work">Company history</router-link></li>
+                </ul>
+            </accordion>
             <!-- <accordion>
                 <h3 slot="title">Settings</h3>
                 <ul slot="content">
@@ -61,7 +68,7 @@ export default {
 <style scoped>
 .links a, a:active, a:hover, a:visited{
     /* color: black; */
-    font-size: 1.5em;
+    font-size: 1.1em;
 }
 .show{
     display: grid;

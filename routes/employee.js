@@ -17,7 +17,7 @@ const moment = require('moment');
 
 
 //profile - scout company all or by query.companyId or by company tradename
-router.get('/scout/company').get(auth.isAuth, async (req,res,next)=>{
+router.route('/scout/company').get(auth.isAuth, async (req,res,next)=>{
         let queryId = req.query.id; //search by id
         let queryName = req.query.name; //search by name
         let company;
@@ -47,12 +47,12 @@ router.get('/scout/company').get(auth.isAuth, async (req,res,next)=>{
         let results = [];
         const companyProperties = ['_id','authenticated','tradename', 'ownershipType', 'contact', 'address', 'email', 'contact', 'businesses', 'pics']
 
-        if(Array.isArray(company)){
+        if(Array.isArray(company)){//if mulitple array result
                 company.forEach(element => {
                         let result = _.pick(element,companyProperties);
                         results.push(result);
                 });
-        }else{
+        }else{//if single object result
                 let result = _.pick(company,companyProperties);
                 results.push(result);
         }
@@ -61,15 +61,10 @@ router.get('/scout/company').get(auth.isAuth, async (req,res,next)=>{
 });
 
 //profile - apply company - change url or read body for status of application?
-router.route('/me/apply').post(auth.isAuth, auth.isAccountType('profile'), async (req,res,next)=>{
+router.route('/me/apply').get(auth.isAuth, auth.isAccountType('profile'), async (req,res,next)=>{
 
         const profileId = req.user.profile; 
-        let companyId;
-        if(req.body){
-                companyId = req.body.companyId;
-        }else if(req.query){
-                companyId = req.query.companyId;
-        }
+        let companyId = req.query.companyId;
 
         //check that an id is passed
         if(companyId){
@@ -421,10 +416,10 @@ router.route('/me/employers').get(auth.isAuth, auth.isAccountType('profile'), as
         //check user exist
         let user = await User.findById(req.user._id)
         .populate('employment._id')
-        .populate({ path: 'employment._id', 
-                populate:{path:'profile'}})
-        .populate({ path: 'employment._id', 
-                populate:{path:'company'}})
+        // .populate({ path: 'employment._id', 
+        //         populate:{path:'profile'}})
+        // .populate({ path: 'employment._id', 
+        //         populate:{path:'company'}})
         .exec();
 
         if(!user){return res.status(404).send({message: "could not locate profile information"});}
@@ -461,27 +456,46 @@ router.route('/me/employers').get(auth.isAuth, auth.isAccountType('profile'), as
 //company - scout profiles - all or by query.profileId
 router.route('/scout/profile').get(auth.isAuth, auth.isAccountType('company'), async(req,res,next)=>{
 
-        //check a profile exist
-        let profiles = await Profile.find().exec();
-        if(!profiles){return res.status(404).send({message:'Could not locate any companies'});}
-
         //check if query parameter is passed for company id
-        if(!req.query.profileId){
-
+        if(!req.query.profileId && !req.query.name){
+                let profiles = await Profile.find().exec();
+                if(!profiles){return res.status(404).send({message:'Could not locate any profile'});}
+                
                 //TODO: filter search
                 //return all profiles
                 res.status(200).send(profiles);
         }else{
-                const profileId = req.query.profileId;
-                //check id passed is valid object id
-                if(!validate.isObjectId(profileId)){ return res.status(400).send({message:"Bad request invalid id."});}
+                const queryId = req.query.profileId;
+                const queryName = req.query.name;
+                if(queryId){
+                        //check id passed is valid object id
+                        if(!validate.isObjectId(queryId)){ return res.status(400).send({message:"Bad request invalid id."});}
 
-                let profile = await Profile.findById(profileId).exec();
-                if(profile){
-                        return res.status(200).send(profile);
-                }else{
-                        return res.status(404).send({message: "could not locate id."})
+                        let profile = await Profile.findById(queryId).exec();
+                        if(profile){
+                                return res.status(200).send(profile);
+                        }else{
+                                return res.status(404).send({message: "could not locate id."})
+                        }
+
+                }else if(queryName){
+                        //validate name query
+
+                        let profile = await Profile.find({$or:[
+                                                        {"name.first":  new RegExp(queryName, "i")},
+                                                        {"name.middle":  new RegExp(queryName, "i")},
+                                                        {"name.last":  new RegExp(queryName, "i")},
+                                                        {"name.maiden":  new RegExp(queryName, "i")},
+                                                        {"name.suffix":  new RegExp(queryName, "i")}
+                                                        ]}).exec();
+                        if(profile){
+                                return res.status(200).send(profile);
+                        }else{
+                                return res.status(404).send({message: "could not locate company information by tradename"});
+                        }
+
                 }
+
 
         }
 

@@ -331,6 +331,30 @@ export const routes = [
                         ]
 
                     },
+                    {path:"explore",
+                        components:{
+                            default: Explore
+                        }
+                        ,
+                        children:[
+                            {path: "",
+                                components:{
+                                    default: ExploreShow,
+                                },
+                                children:[
+                                    {path: "",
+                                        components:{
+                                            addressShow: AddressShow,
+                                            contactShow: ContactShow,
+                                            galleryShow: GalleryShow,
+                                            emailShow: EmailShow
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+
+                    },
                     {path:"settings", ///profile/settings - CONTENT
                         components:{
                             default: Settings
