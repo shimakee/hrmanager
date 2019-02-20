@@ -67,9 +67,21 @@
                     </accordion>
 
                     <!--TODO: generate card for personal details-->
-                    <span v-if="v.length > 0 && k == 'birthdate' || k == 'civilStatus' || k == 'gender' || k == 'name' || k == 'relatives'">
-                            {{k}}: {{v}}    
+                    <span v-if="k == 'birthdate'">
+                            <p><b>{{k}}:</b> {{parseBirthdate(v)}} </p>   
                     </span>
+                    <span v-if="k == 'name'" v-for="(n,o) in v">
+                            <p><b>{{o}}:</b> {{n}}</p>
+                    </span>
+                    <span v-if="k == 'civilStatus'">
+                            <p><b>{{k}}:</b> {{v}} </p>   
+                    </span>
+                    <span v-if="k == 'gender'">
+                            <p><b>{{k}}:</b> {{v}} </p>   
+                    </span>
+                    <!-- <span v-if="v.length > 0 && k == 'birthdate' || k == 'civilStatus' || k == 'gender' || k == 'name' || k == 'relatives'">
+                            {{k}}: {{v}}    
+                    </span> -->
 
                 </div>
                 <span v-if="accountType == 'profile'">
@@ -158,7 +170,18 @@ export default {
             }
 
             return false;
-        }
+        },
+        parseBirthdate(birthdate){
+            let date = new Date(birthdate);
+
+           
+            const month =  date.toLocaleString('en-us', { month: 'long' });
+            // const month = date.getMonth()+1; //zero based
+            const day = date.getDate();
+            const year = date.getFullYear();
+
+            return `${month} ${day},${year}`; //use this format to be compatible with input format
+        },
     },
     beforeMount(){
         const AccountType = this.$store.getters.getAccountType;
@@ -193,5 +216,8 @@ ul{
 }
 ul li.explore-card{
     padding: 10px;
+}
+span p{
+    margin: 3px;
 }
 </style>

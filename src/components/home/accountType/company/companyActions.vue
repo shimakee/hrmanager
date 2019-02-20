@@ -17,7 +17,7 @@
             <accordion>
                 <h3 slot="title">Explore</h3>
                 <ul slot="content">
-                    <li><router-link to="explore">Find Company</router-link></li>
+                    <li><router-link to="explore">Scout Profile</router-link></li>
                     <li><router-link to="work">Company history</router-link></li>
                 </ul>
             </accordion>
