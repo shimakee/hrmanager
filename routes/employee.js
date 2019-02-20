@@ -76,7 +76,7 @@ router.route('/me/apply').get(auth.isAuth, auth.isAccountType('profile'), async 
                 let company = await Company.findById(companyId).exec();
                 if(!company){return res.status(400).send({message: 'Bad request'});}
                 
-                //check that you are not yet applied or hired into the company
+                //check that you have employee data existing
                 let employee = await Employee.findOne({company: companyId, profile: profileId}).exec();
                 let employeeId;
 
@@ -87,6 +87,7 @@ router.route('/me/apply').get(auth.isAuth, auth.isAccountType('profile'), async 
                 //start a task
                 let task = Fawn.Task();
 
+                //use existing employment data and update
                 if(employee){
                         //check status if hired or applied
                         if(employee.status == "applied" || employee.status == "hired" || employee.status == 'recruited' || employee.status == 'accepted'){
@@ -136,8 +137,6 @@ router.route('/me/apply').get(auth.isAuth, auth.isAccountType('profile'), async 
                                 return el;
                         }
                 });
-                
-                
                 
                 //if employee doesnt exist already
                 if(!resultCompany){
@@ -508,8 +507,8 @@ router.route('/me/employees').get(auth.isAuth, auth.isAccountType('company'), as
         //check company exist
         let company = await Company.findById(req.user.company)
         .populate('employees.employee')
-        .populate({ path: 'employees.employee', 
-                populate:{path:'profile'}})
+        // .populate({ path: 'employees.employee', 
+        //         populate:{path:'profile'}})
         .exec();
 
         if(!company){return res.status(404).send({message: "could not locate company information"});}
@@ -558,15 +557,15 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
     //check that profile exist
     let profile = await Profile.findById(profileId).exec();
     if(!profile){return res.status(404).send({message: "Could not locate profile"})}
-
+    //check if employment exist
     let employeeExist = await Employee.findOne({company: companyId, profile: profileId}).exec();
 
     const task = Fawn.Task();
     //create applied date now
     let now = new Date(Date.now());
-    let appliedInfo = {_id: tools.get.objectId(), class: "recruited", date: now}
+    let appliedInfo = {_id: tools.get.objectId().toString(), class: "recruited", date: now}
 
-    //use current instead
+    //use current instead if already existing
     if(employeeExist){
             if(employeeExist.status == 'applied' || employeeExist.status == 'hired' || employeeExist.status == 'recruited' || employeeExist.status == 'accepted'){
                 return res.status(200).send({message: `employee status is already ${employeeExist.status}.`});

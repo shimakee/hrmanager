@@ -4,6 +4,7 @@ const state = {
     company:null,
     tradename: null,
     companiesSearched: null,
+    employees: null
 
 
 }
@@ -16,6 +17,9 @@ const getters = {
     },
     getCompaniesSearched:(state)=>{
         return state.companiesSearched;
+    },
+    getEmployees:(state)=>{
+        return state.employees;
     }
 }
 const mutations = {
@@ -27,6 +31,9 @@ const mutations = {
     },
     setCompaniesSearched:(state, payload)=>{
         state.companiesSearched = payload;
+    },
+    setEmployees:(state, payload)=>{
+        state.employees = payload;
     }
 }
 const actions = {
@@ -92,6 +99,17 @@ const actions = {
                 });
         });
     },
+    getEmployees:({dispatch, commit})=>{
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:'/employment/me/employees', method: 'get', data: null})
+                .then(res=>{
+                    commit('setEmployees',res.data);
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
     findCompany:({dispatch, commit}, payload)=>{
         let query="";
         if(payload.name){
@@ -112,6 +130,30 @@ const actions = {
                 });
         });
     },
+    recruitProfile:({dispatch}, payload)=>{
+        let query = `?profileId=${payload}`;
+        
+            return new Promise((resolve, reject)=>{
+                dispatch('sendCommit', {url:`/employment/me/recruit${query}`, method:'post', data: null})
+                    .then(res=>{
+                        resolve(res.data);
+                    }).catch(err=>{
+                        reject(err);
+                    });
+            });
+    },
+    cancelRecruitment:({dispatch}, payload)=>{
+        let query = `?profileId=${payload}`;
+        
+            return new Promise((resolve, reject)=>{
+                dispatch('sendCommit', {url:`/employment/me/recruit${query}`, method:'put', data: null})
+                    .then(res=>{
+                        resolve(res.data);
+                    }).catch(err=>{
+                        reject(err);
+                    });
+            });
+    }
 }
 
 export default{

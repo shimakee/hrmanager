@@ -2,7 +2,6 @@
     <div> 
         <ul><!--//iterate over array-->
             <li v-for="(value, key) in exploreResult" v-bind:key="key"
-                :class="{chosen: itemActive == value.tradename}"
                 class="explore-card">
 
                 <!--TODO: separate pecialized and common components like goc, address, email, contact-->
@@ -86,15 +85,20 @@
                 </div>
                 <span v-if="accountType == 'profile'">
                     <button v-if="!hasApplied(value._id)"
-                        @click.prevent="apply(value._id)">Apply</button>
+                        @click.prevent="apply(value._id)">Apply</button><!--Apply to Company-->
+
                     <button v-if="hasApplied(value._id)"
-                        @click.prevent="cancelApplication(value._id)">Cancel Application</button>
+                        @click.prevent="cancelApplication(value._id)">Cancel Application</button><!--Cancel application to company-->
                 </span>
                 <span v-if="accountType == 'company'">
-                    <button >Scout</button> <!--Scout employee-->
-                    <button >Accept</button> <!--Accept employee if already applied-->
-                    <button >Decline</button> <!--Decline employee if already applied-->
-                    <button >Cancel Recruitment</button> <!--Cancel recruitment of employee-->
+                    <button v-if="!hasApplied(value._id)"
+                        @click.prevent="recruit(value._id)">Recruit</button> <!--Recruit Profile-->
+
+                    <button v-if="hasApplied(value._id)"
+                        @click.prevent="cancelRecruitment(value._id)">Cancel Recruitment</button> <!--Cancel recruitment of profile-->
+
+                    <!-- <button >Accept</button> <!--Accept employee if already applied or accept employer offer if recruited-->
+                    <!-- <button >Decline</button> <!--Decline employee if already applied or decline employer offer if recruited-->
                 </span>
             </li>
         </ul>
@@ -113,16 +117,16 @@ export default {
         accountType(){
             return this.$store.getters.getAccountType;
         },
-        companiesApplied(){
-            return this.$store.getters.getCompaniesEmployed;
-        },
+        // companiesApplied(){
+        //     return this.$store.getters.getCompaniesEmployed;
+        // },
         exploreResult(){//according to account type
             const AccountType = this.$store.getters.getAccountType;
+
             if(AccountType == "profile"){
                 return this.$store.getters.getCompaniesSearched;
             }else if(AccountType == "company"){
                 return this.$store.getters.getProfilesSearched;
-                console.log('company search result');
             }else{
                 //staff
             }
@@ -132,41 +136,65 @@ export default {
             return AUTO_LOCATE;
         }
     },
-    data(){
-        return{
-            itemActive: null,
-            employers: null
-        }
-    },
     methods:{
         apply(companyId){
             this.$store.dispatch('applyToCompany', companyId)
                 .then(res=>{
                     this.$store.dispatch('getEmployers');
-                    console.log('applied');
                 }).catch(err=>{
-                    console.log('applied failed');
+                    console.log('Apply failed');
                 });
         },
         cancelApplication(companyId){
             this.$store.dispatch('cancelApplication', companyId)
                 .then(res=>{
                     this.$store.dispatch('getEmployers');
-                    console.log('canceled application');
                 }).catch(err=>{
-                    console.log('cancel failed failed');
+                    console.log('Cancel application failed');
                 });
         },
-        hasApplied(companyId){
-            let companiesApplied = this.$store.getters.getCompaniesEmployed;
+        recruit(profileId){
+            console.log('recruit', profileId);
+            this.$store.dispatch('recruitProfile', profileId)
+                .then(res=>{
+                    this.$store.dispatch('getEmployees');
+                }).catch(err=>{
+                    console.log('Recruitment failed', err);
+                });
+        },
+        cancelRecruitment(profileId){
+            this.$store.dispatch('cancelRecruitment', profileId)
+                .then(res=>{
+                    this.$store.dispatch('getEmployees');
+                }).catch(err=>{
+                    console.log('Cancel recruitment failed', err);
+                });
+        },
+        hasApplied(valueId){
+            const AccountType = this.accountType;
+            let employment;
+
+            if(AccountType == 'profile'){
+                employment = this.$store.getters.getEmployers;
+            }
+            if(AccountType == 'company'){
+                employment = this.$store.getters.getEmployees;
+            }
             
-            for (let i = 0; i < companiesApplied.length; i++) {
-                const element = companiesApplied[i]._id;
-                if(companyId == element.company){
-                    return true;
-                }else{
-                    continue;
+            for (let i = 0; i < employment.length; i++) {//see if company id is in list of employers
+                const element = employment[i];
+                if(AccountType == 'profile'){
+                    if(valueId == element._id.company){
+                        return true
+                    }
                 }
+                if(AccountType == 'company'){
+                    if(valueId == element.employee.profile){
+                        return true;
+                    }
+                }
+
+                continue;
             }
 
             return false;
@@ -188,14 +216,13 @@ export default {
 
         if(AccountType == 'profile'){
             this.$store.dispatch('getEmployers');
+        }else if(AccountType == 'company'){
+            this.$store.dispatch('getEmployees');
         }
     }
 }
 </script>
 <style scoped>
-.chosen{
-    outline: solid 3px blue;
-}
 .authenticated, .unauthenticated{
     border-radius: 50px;
     padding:10px;

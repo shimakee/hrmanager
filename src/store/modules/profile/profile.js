@@ -2,15 +2,15 @@
 
 const state = {
     profile:null,
-    companiesEmployed: null,
+    employers: null,
     profilesSearched: null
 }
 const getters = {
     getProfile:(state)=>{
         return state.profile;
     },
-    getCompaniesEmployed:(state)=>{
-        return state.companiesEmployed;
+    getEmployers:(state)=>{
+        return state.Employers;
     },
     getProfilesSearched:(state)=>{
         return state.profilesSearched;
@@ -20,8 +20,8 @@ const mutations = {
     setProfile:(state, payload)=>{
         state.profile = payload;
     },
-    setCompaniesEmployed:(state, payload)=>{
-        state.companiesEmployed = payload;
+    setEmployers:(state, payload)=>{
+        state.Employers = payload;
     },
     setProfilesSearched:(state, payload)=>{
         state.profilesSearched = payload;
@@ -113,7 +113,7 @@ const actions = {
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/employment/me/employers', method:'get', data: null})
                 .then(res=>{
-                    commit('setCompaniesEmployed', res.data);
+                    commit('setEmployers', res.data);
                     resolve(res.data);
                 }).catch(err=>{
                     reject(err);
