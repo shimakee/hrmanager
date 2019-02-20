@@ -184,16 +184,15 @@ export default {
             for (let i = 0; i < employment.length; i++) {//see if company id is in list of employers
                 const element = employment[i];
                 if(AccountType == 'profile'){
-                    if(valueId == element._id.company){
+                    if(valueId == element.company){
                         return true
                     }
                 }
                 if(AccountType == 'company'){
-                    if(valueId == element.employee.profile){
+                    if(valueId == element.profile){
                         return true;
                     }
                 }
-
                 continue;
             }
 
@@ -215,9 +214,9 @@ export default {
         const AccountType = this.$store.getters.getAccountType;
 
         if(AccountType == 'profile'){
-            this.$store.dispatch('getEmployers');
+            this.$store.dispatch('getRecruiters');
         }else if(AccountType == 'company'){
-            this.$store.dispatch('getEmployees');
+            this.$store.dispatch('getApplicants');
         }
     }
 }

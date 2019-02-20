@@ -99,9 +99,20 @@ const actions = {
                 });
         });
     },
-    getEmployees:({dispatch, commit})=>{
+    getEmployees:({dispatch, commit})=>{//can be set to specific employee - only searcher user employment list
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/employment/me/employees', method: 'get', data: null})
+                .then(res=>{
+                    commit('setEmployees',res.data);
+                    resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    getApplicants:({dispatch, commit})=>{ //searches all employee model - more reliable in getting employment data
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:'/employment/me/applied', method: 'get', data: null})
                 .then(res=>{
                     commit('setEmployees',res.data);
                     resolve(res.data);

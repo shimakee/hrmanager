@@ -32,7 +32,7 @@ router.route('/me/recruited').get(auth.isAuth, auth.isAccountType('profile'), as
                const element = employeeExist[i];
 
                let employee = employment.find(e=>{//data is in employment list
-               return e._id == element._id;
+                        return e._id.toString() == element._id.toString();
                });
 
                if(!employee){//if it doesnt exist insert it into user employment list
@@ -497,15 +497,15 @@ router.route('/me/applied').get(auth.isAuth, auth.isAccountType('company'), asyn
                 const element = employeeExist[i];
                 
                 let employee = employment.find(e=>{//data is in employment list
-                        return e._id == element._id;
+                        return e._id.toString() == element._id.toString();
                 });
-
+                
                 if(!employee){//if it doesnt exist insert it into user employment list
-                        console.log(`employee${i}`, element._id);
                         toInclude.push({_id: element._id});
+                }else{
+                        continue;
                 }
         }
-
         //push all unincluded data into list;
         let result = User.updateOne({_id: req.user._id},  {$push:{ employment: {$each: toInclude, $position: 0, $slice: 50}}}).exec(); //TODO: relove 50 limit
 
