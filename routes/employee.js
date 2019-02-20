@@ -16,6 +16,38 @@ const validate = tools.validate;
 const moment = require('moment');
 
 
+
+//get companies - recruited the profile
+router.route('/me/recruited').get(auth.isAuth, auth.isAccountType('profile'), async(req,res,next)=>{
+        //find all employment involved
+        let employeeExist = await Employee.find({$or: [{profile: req.user.profile, status:'applied'}, 
+        {profile: req.user.profile, status:'recruited'}]}).exec();
+
+       let user = await User.findById(req.user._id).exec();
+       let employment = user.employment;
+       let toInclude = [];
+
+       //check that all employee data is in employment list under user
+       for (let i = 0; i < employeeExist.length; i++) {
+               const element = employeeExist[i];
+
+               let employee = employment.find(e=>{//data is in employment list
+               return e._id == element._id;
+               });
+
+               if(!employee){//if it doesnt exist insert it into user employment list
+                       toInclude.push({_id: element._id});
+               }
+       }
+
+       //push all unincluded data into list;
+       let result = User.updateOne({_id: req.user._id},  {$push:{ employment: {$each: toInclude, $position: 0, $slice: 50}}}).exec(); //TODO: relove 50 limit
+
+       //return list
+       res.status(200).send(employeeExist);
+});
+
+
 //profile - scout company all or by query.companyId or by company tradename
 router.route('/scout/company').get(auth.isAuth, async (req,res,next)=>{
         let queryId = req.query.id; //search by id
@@ -449,8 +481,37 @@ router.route('/me/employers').get(auth.isAuth, auth.isAccountType('profile'), as
 
 });
 
-
 //company ---------------------------------------------------Company
+//get profile - applied to company
+router.route('/me/applied').get(auth.isAuth, auth.isAccountType('company'), async(req,res,next)=>{
+        //find all employment involved
+        let employeeExist = await Employee.find({$or: [{company: req.user.company, status:'applied'}, 
+                                                        {company: req.user.company, status:'recruited'}]}).exec();
+
+        let user = await User.findById(req.user._id).exec();
+        let employment = user.employment;
+        let toInclude = [];
+
+        //check that all employee data is in employment list under user
+        for (let i = 0; i < employeeExist.length; i++) {
+                const element = employeeExist[i];
+                
+                let employee = employment.find(e=>{//data is in employment list
+                        return e._id == element._id;
+                });
+
+                if(!employee){//if it doesnt exist insert it into user employment list
+                        console.log(`employee${i}`, element._id);
+                        toInclude.push({_id: element._id});
+                }
+        }
+
+        //push all unincluded data into list;
+        let result = User.updateOne({_id: req.user._id},  {$push:{ employment: {$each: toInclude, $position: 0, $slice: 50}}}).exec(); //TODO: relove 50 limit
+
+        //return list
+        res.status(200).send(employeeExist);
+});
 
 //company - scout profiles - all or by query.profileId
 router.route('/scout/profile').get(auth.isAuth, auth.isAccountType('company'), async(req,res,next)=>{
