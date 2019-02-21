@@ -84,21 +84,27 @@
 
                 </div>
                 <span v-if="accountType == 'profile'">
-                    <button v-if="!hasApplied(value._id)"
+                    <button v-if="!isEmployed(value._id) && employmentStatus(value._id) != 'recruited'"
                         @click.prevent="apply(value._id)">Apply</button><!--Apply to Company-->
 
-                    <button v-if="hasApplied(value._id)"
+                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'applied'"
                         @click.prevent="cancelApplication(value._id)">Cancel Application</button><!--Cancel application to company-->
+                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
+                        >Accept</button> <!--Accept employee if already recruited-->
+                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
+                        >Decline</button> <!--Decline employee if already recruited-->
                 </span>
                 <span v-if="accountType == 'company'">
-                    <button v-if="!hasApplied(value._id)"
+                    <button v-if="!isEmployed(value._id) && employmentStatus(value._id) != 'applied'"
                         @click.prevent="recruit(value._id)">Recruit</button> <!--Recruit Profile-->
 
-                    <button v-if="hasApplied(value._id)"
+                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
                         @click.prevent="cancelRecruitment(value._id)">Cancel Recruitment</button> <!--Cancel recruitment of profile-->
 
-                    <!-- <button >Accept</button> <!--Accept employee if already applied or accept employer offer if recruited-->
-                    <!-- <button >Decline</button> <!--Decline employee if already applied or decline employer offer if recruited-->
+                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'applied'"
+                        >Accept</button> <!--Accept employee if already applied-->
+                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'applied'"
+                        >Decline</button> <!--Decline employee if already applied-->
                 </span>
             </li>
         </ul>
@@ -170,7 +176,7 @@ export default {
                     console.log('Cancel recruitment failed', err);
                 });
         },
-        hasApplied(valueId){
+        isEmployed(valueId){
             const AccountType = this.accountType;
             let employment;
 
@@ -197,6 +203,34 @@ export default {
             }
 
             return false;
+        },
+        employmentStatus(valueId){ //returns employment status
+            const AccountType = this.accountType;
+            let employment;
+
+            if(AccountType == 'profile'){
+                employment = this.$store.getters.getEmployers;
+            }
+            if(AccountType == 'company'){
+                employment = this.$store.getters.getEmployees;
+            }
+            
+            for (let i = 0; i < employment.length; i++) {//see if company id is in list of employers
+                const element = employment[i];
+                if(AccountType == 'profile'){
+                    if(valueId == element.company){
+                        return element.status
+                    }
+                }
+                if(AccountType == 'company'){
+                    if(valueId == element.profile){
+                        return element.status;
+                    }
+                }
+                continue;
+            }
+
+            return null;
         },
         parseBirthdate(birthdate){
             let date = new Date(birthdate);
