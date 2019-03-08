@@ -337,6 +337,8 @@ router.route('/me/recruit/:status').post(auth.isAuth, auth.isAccountType('profil
                         
                         return res.status(200).send(error);
                 });
+        }else{
+                return res.status(400).send("Bad request invalid employment status.")
         }
 });
 
@@ -501,6 +503,7 @@ router.route('/me/applied').get(auth.isAuth, auth.isAccountType('company'), asyn
                 });
                 
                 if(!employee){//if it doesnt exist insert it into user employment list
+                        //TODO: check status?
                         toInclude.push({_id: element._id});
                 }else{
                         continue;
@@ -753,7 +756,110 @@ router.route('/me/recruit').post(auth.isAuth, auth.isAccountType('company'), asy
 
 });
 
+//decline/accept recruitment by company
+router.route('/me/applied/:status').post(auth.isAuth, auth.isAccountType('company'), async (req,res,next)=>{
 
+        if(!req.query.profileId){return res.status(400).send({message: "No query id passed"})}
+
+        const profileId = req.query.profileId;
+        const companyId = req.user.company;
+        const status = req.params.status;
+
+        //check that employment exist
+        let employment = await Employee.findOne({company: companyId, profile: profileId}).exec();
+        if(!employment){ return res.status(404).send({message: "Could not locate employment.", result: employment, profile: profileId, company: companyId});}
+
+        //check employement status - if recruited continue
+        if(employment.status == 'applied'){
+
+                //run task
+                let task = Fawn.Task();
+
+                //check that status is valid
+                // if(!Employee.isValidStatus(status)){ return res.status(400).send({message:'invalid url status'})}
+                if(status == 'accepted' || status == 'declined'){
+
+                        //change status into cancelled
+                        task.update('employees', {_id: employment._id}, {$set: {status: status}});
+                        
+                        //create applied date now
+                        let now = new Date(Date.now());
+                        let info = {_id: tools.get.objectId(), class: status, date: now}
+                        
+                        //push infoDate status - cancelled
+                        task.update('employees', {_id: employment._id}, {$push: {infoDate: {$each:[info], $position:0}}});
+                }
+                
+                //check user exist
+                const user = await User.findById(req.user._id).exec();
+                //check profile exist
+                // const profile = await Profile.findById(profileId).exec();
+
+                //remove employment from company and user and profile upon decline
+                if(status == 'declined'){
+
+                        //run as task - pull from employment under user - company
+                        task.update('users', {_id:user._id}, {$pull: {employment: {_id: employment._id}}});
+                        //run as task - pull from employment under user - profile
+                        task.update('users', {profile:profileId}, {$pull: {employment: {_id: employment._id}}});
+                        
+                        //run as task - pull from employment under company
+                        task.update('companies', {_id: companyId}, {$pull: {employees: {employee: employment._id}}});
+
+                //add employment to company and user and profile upon accept
+                }else if(status == 'accepted'){
+
+                        //check that id does not exist already in company
+                        let resultCompany = company.employees.find(el=>{
+                                if(String(el.employee) == String(employment._id)){
+                                        return el;
+                                }
+                        });
+                        //check that id does not exist already in user - company
+                        let user = await User.findOne({_id: req.user._id}).exec();
+                        let resultUser = user.employment.find(el=>{
+                                if(String(el._id) == String(employment._id)){
+                                        return el;
+                                }
+                        });
+                        //check it doesnt exist in user - profile
+                        let userProfile = await User.findOne({profile: profileId}).exec();
+                        let resultUserProfile = userProfile.employment.find(el=>{
+                                if(String(el._id) == String(employment._id)){
+                                        return el;
+                                }
+                        });
+                        
+                        //add employee to company employee list - as applicant
+                        //only add if it doesnt exist already
+                        if(!resultCompany){
+                                task.update('companies', {_id: companyId}, {$push:{ employees: {$each: [{employee: employment._id}], $position: 0, $slice: 50}}});
+                        }
+                        //add employee to user account 
+                        //only add if it doesnt exist already
+                        if(!resultUser){
+                                task.update('users', {_id: req.user._id}, {$push:{ employment: {$each: [{_id: employment._id}], $position: 0, $slice: 50}}});
+                        }
+                        //add employee to user account - profile 
+                        //only add if it doesnt exist already
+                        if(!resultUserProfile){
+                                task.update('users', {profile: profileId}, {$push:{ employment: {$each: [{_id: employment._id}], $position: 0, $slice: 50}}});
+                        }
+
+
+                }
+
+                task.run().then((result)=>{
+
+                        return res.status(200).send(result);
+                }, (error)=>{
+                        
+                        return res.status(200).send(error);
+                });
+        }else{
+                return res.status(400).send("Bad request invalid employment status.")
+        }
+});
 
 //company - hire TODO - salary upon hiring and location assigned
 router.route('/me/hire').post(auth.isAuth, auth.isAccountType('company'), async (req,res,next)=>{

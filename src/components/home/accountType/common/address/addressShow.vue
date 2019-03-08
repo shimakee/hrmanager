@@ -7,16 +7,13 @@
                 <!--only show form if allowed as editable & in edit mode-->
                 <!--TODO create slotable form card-->
                 <div v-if="item._id == itemActive && itemEdit && editable" class="card-content">
-                    <!-- <form class="form-container"> -->
 
                         <address-form :item="item"
                             :updateAddress="updateAddress"/>
 
-                        <!-- <button @click.prevent="updateAddress(item)">send</button> -->
                         <span class="edit"
                             v-if="editable && itemEdit && itemActive == item._id && editable"
                             @click="cancelEdit">Cancel</span>
-                    <!-- </form> -->
                 </div>
 
                 <!--show address cards-->

@@ -3,7 +3,8 @@
 const state = {
     profile:null,
     employers: null,
-    profilesSearched: null
+    profilesSearched: null,
+    recruiters: null
 }
 const getters = {
     getProfile:(state)=>{
@@ -14,6 +15,9 @@ const getters = {
     },
     getProfilesSearched:(state)=>{
         return state.profilesSearched;
+    },
+    getRecruiters:(state)=>{
+        return state.recruiters;
     }
 }
 const mutations = {
@@ -25,6 +29,9 @@ const mutations = {
     },
     setProfilesSearched:(state, payload)=>{
         state.profilesSearched = payload;
+    },
+    setRecruiters:(state, payload)=>{
+        state.recruiters = payload;
     }
 }
 const actions = {
@@ -102,7 +109,8 @@ const actions = {
             dispatch('sendCommit', {url:`/employment/scout/profile${query}`, method:'get', data: null})
                 .then(res=>{
                     //TODO: commit search results
-                    commit('setProfilesSearched', res.data);
+                    // commit('setProfilesSearched', res.data);
+                    commit('setExploreResult', res.data);
                     resolve(res.data);
                 }).catch(err=>{
                     reject(err);
@@ -124,7 +132,7 @@ const actions = {
         return new Promise((resolve, reject)=>{
             dispatch('sendCommit', {url:'/employment/me/recruited', method: 'get', data: null})
                 .then(res=>{
-                    commit('setEmployers',res.data);
+                    commit('setRecruiters',res.data);
                     resolve(res.data);
                 }).catch(err=>{
                     reject(err);
@@ -152,6 +160,30 @@ const actions = {
                 .then(res=>{
                     //TODO: commit search results
                     resolve(res.data);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    acceptRecruitment:({dispatch}, payload)=>{
+        let query = `?companyId=${payload}`;
+
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/employment/me/recruit/accepted${query}`, method:'post', data:null})
+                .then(res=>{
+                    resolve(res);
+                }).catch(err=>{
+                    reject(err);
+                });
+        });
+    },
+    declineRecruitment:({dispatch}, payload)=>{
+        let query = `?companyId=${payload}`;
+
+        return new Promise((resolve, reject)=>{
+            dispatch('sendCommit', {url:`/employment/me/recruit/declined${query}`, method:'post', data:null})
+                .then(res=>{
+                    resolve(res);
                 }).catch(err=>{
                     reject(err);
                 });

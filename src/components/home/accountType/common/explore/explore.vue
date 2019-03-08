@@ -5,7 +5,7 @@
         <input type="text" v-model="searchQuery" placeholder="Search">
         <button @click.prevent="search()">Search</button>
 
-        <router-view />
+        <router-view :searchQuery="searchQuery"/>
         
     </div>
 </template>

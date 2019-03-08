@@ -8,6 +8,7 @@ import logout from './modules/beforeAuth/logout';//importing modules
 import userSettings from './modules/settings/user';//importing modules
 import profile from './modules/profile/profile';//importing modules
 import company from './modules/profile/company';//importing modules
+import business from './modules/profile/business';//importing modules
 
 import googlemaps from './modules/googlemaps/googlemaps';//googlemaps module
 import { type } from 'os';
@@ -252,7 +253,8 @@ export const store = new Vuex.Store({
         userSettings,
         profile,
         company,
-        googlemaps
+        googlemaps,
+        business
     }
 });
 

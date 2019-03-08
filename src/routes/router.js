@@ -54,6 +54,8 @@ import DeleteAccount from '../components/settings/account/deleteAccount';
 
 //add - on temporary
 import Marketing from '../components/marketing/textblast';
+import Business from '../components/home/accountType/common/business/business';
+import Employees from '../components/home/accountType/common/employees/employees';
 
 //additional features
 import googlemaps from '../store/modules/googlemaps/googlemaps';
@@ -107,7 +109,6 @@ export const routes = [
                     if(!ACCOUNT_TYPE || !TOKEN){
                         next({name:'error'});//no account type invalid login redirect to login
                     }else{
-                        console.log(ACCOUNT_TYPE);
                         switch (ACCOUNT_TYPE) { //push based on account type
                             case "profile":
                                 next({name:'profile'});
@@ -375,6 +376,16 @@ export const routes = [
                                 }
                             }
                         ]
+                    },
+                    {path:"business", name: "business",
+                        components:{
+                            default: Business
+                        }
+                    },
+                    {path:"employees", name: "employees",
+                        components:{
+                            default: Employees
+                        }
                     },
                     {path:"marketing",
                         components:{

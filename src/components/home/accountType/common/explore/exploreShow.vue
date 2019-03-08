@@ -89,21 +89,28 @@
 
                     <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'applied'"
                         @click.prevent="cancelApplication(value._id)">Cancel Application</button><!--Cancel application to company-->
+
                     <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
+                        @click.prevent="acceptRecruitment(value._id)"
                         >Accept</button> <!--Accept employee if already recruited-->
+
                     <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
+                        @click.prevent="declineRecruitment(value._id)"
                         >Decline</button> <!--Decline employee if already recruited-->
                 </span>
                 <span v-if="accountType == 'company'">
-                    <button v-if="!isEmployed(value._id) && employmentStatus(value._id) != 'applied'"
-                        @click.prevent="recruit(value._id)">Recruit</button> <!--Recruit Profile-->
 
-                    <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
-                        @click.prevent="cancelRecruitment(value._id)">Cancel Recruitment</button> <!--Cancel recruitment of profile-->
+                        <button v-if="!isEmployed(value._id) && employmentStatus(value._id) != 'applied'"
+                            @click.prevent="recruit(value._id)">Recruit</button> <!--Recruit Profile-->
+
+                        <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'recruited'"
+                            @click.prevent="cancelRecruitment(value._id)">Cancel Recruitment</button> <!--Cancel recruitment of profile-->
 
                     <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'applied'"
+                        @click.prevent="acceptApplication(value._id)"
                         >Accept</button> <!--Accept employee if already applied-->
                     <button v-if="isEmployed(value._id) && employmentStatus(value._id) == 'applied'"
+                        @click.prevent="declineApplication(value._id)"
                         >Decline</button> <!--Decline employee if already applied-->
                 </span>
             </li>
@@ -114,39 +121,66 @@
 <script>
 
 import Accordion from "../../../../parts/accordion";
+import ExploreButton from "./exploreButton";
 
 export default {
+    // props:{
+    //     searchQuery:{type:String, default: ''}
+    // },
     components:{
-        "accordion": Accordion
+        "accordion": Accordion,
+        "explore-button": ExploreButton
     },
     computed:{
         accountType(){
             return this.$store.getters.getAccountType;
         },
-        // companiesApplied(){
-        //     return this.$store.getters.getCompaniesEmployed;
-        // },
         exploreResult(){//according to account type
-            const AccountType = this.$store.getters.getAccountType;
+            // const AccountType = this.$store.getters.getAccountType;
 
-            if(AccountType == "profile"){
-                return this.$store.getters.getCompaniesSearched;
-            }else if(AccountType == "company"){
-                return this.$store.getters.getProfilesSearched;
-            }else{
-                //staff
-            }
+            // if(AccountType == "profile"){
+            //     return this.$store.getters.getCompaniesSearched;
+            // }else if(AccountType == "company"){
+            //     return this.$store.getters.getProfilesSearched;
+            // }else{
+            //     //staff
+            // }
+
+            return this.$store.getters.getExploreResult;
         },
         autoLocate(){
             const AUTO_LOCATE = this.$store.getters.getAllowAutoLocate;
             return AUTO_LOCATE;
+        },
+        employment(){
+            const AccountType = this.accountType;
+            let employment;
+
+            if(AccountType == 'profile'){
+                return employment = this.$store.getters.getEmployers;
+            }
+            if(AccountType == 'company'){
+                return employment = this.$store.getters.getEmployees;
+            }
+        },
+        application(){
+            const AccountType = this.accountType;
+            let application;
+
+            if(AccountType == 'profile'){
+                return application = this.$store.getters.getRecruiters;
+            }
+            if(AccountType == 'company'){
+                return application = this.$store.getters.getApplicants;
+            }
         }
     },
     methods:{
         apply(companyId){
             this.$store.dispatch('applyToCompany', companyId)
                 .then(res=>{
-                    this.$store.dispatch('getEmployers');
+                    this.$store.dispatch('getRecruiters');
+                    // this.$store.dispatch('findCompany', {name: this.searchQuery});
                 }).catch(err=>{
                     console.log('Apply failed');
                 });
@@ -154,16 +188,34 @@ export default {
         cancelApplication(companyId){
             this.$store.dispatch('cancelApplication', companyId)
                 .then(res=>{
-                    this.$store.dispatch('getEmployers');
+                    this.$store.dispatch('getRecruiters');
+                    // this.$store.dispatch('findCompany', {name: this.searchQuery});
                 }).catch(err=>{
                     console.log('Cancel application failed');
                 });
         },
+        acceptRecruitment(profileId){
+            this.$store.dispatch('acceptRecruitment', profileId)
+                .then(res=>{
+                    
+                    this.$store.dispatch('getRecruiters');
+                }).catch(err=>{
+                    console.log("Application acceptance Failed", err);
+                });
+        },
+        declineRecruitment(profileId){
+            this.$store.dispatch('declineRecruitment', profileId)
+                .then(res=>{
+                    this.$store.dispatch('getRecruiters');
+                }).catch(err=>{
+                    console.log("Application acceptance Failed", err);
+                });
+        },
         recruit(profileId){
-            console.log('recruit', profileId);
             this.$store.dispatch('recruitProfile', profileId)
                 .then(res=>{
-                    this.$store.dispatch('getEmployees');
+                    this.$store.dispatch('getApplicants');
+                    // this.$store.dispatch('findProfile', {name: this.searchQuery});
                 }).catch(err=>{
                     console.log('Recruitment failed', err);
                 });
@@ -171,31 +223,55 @@ export default {
         cancelRecruitment(profileId){
             this.$store.dispatch('cancelRecruitment', profileId)
                 .then(res=>{
-                    this.$store.dispatch('getEmployees');
+                    this.$store.dispatch('getApplicants');
+                    // this.$store.dispatch('findProfile', {name: this.searchQuery});
                 }).catch(err=>{
                     console.log('Cancel recruitment failed', err);
                 });
         },
-        isEmployed(valueId){
-            const AccountType = this.accountType;
-            let employment;
+        acceptApplication(profileId){
+            this.$store.dispatch('acceptApplication', profileId)
+                .then(res=>{
+                    
+                    this.$store.dispatch('getApplicants');
+                }).catch(err=>{
+                    console.log("Application acceptance Failed", err);
+                });
+        },
+        declineApplication(profileId){
+            this.$store.dispatch('declineApplication', profileId)
+                .then(res=>{
+                    this.$store.dispatch('getApplicants');
+                }).catch(err=>{
+                    console.log("Application acceptance Failed", err);
+                });
+        },
+        parseBirthdate(birthdate){
+            let date = new Date(birthdate);
 
-            if(AccountType == 'profile'){
-                employment = this.$store.getters.getEmployers;
-            }
-            if(AccountType == 'company'){
-                employment = this.$store.getters.getEmployees;
-            }
+           
+            const month =  date.toLocaleString('en-us', { month: 'long' });
+            // const month = date.getMonth()+1; //zero based
+            const day = date.getDate();
+            const year = date.getFullYear();
+
+            return `${month} ${day},${year}`; //use this format to be compatible with input format
+        },
+        isEmployed(valueId){ //TODO: check employment if emoloyed
+            
+            const AccountType = this.accountType;
+            let employment = this.employment;
+            console.log('employment', employment)
             
             for (let i = 0; i < employment.length; i++) {//see if company id is in list of employers
                 const element = employment[i];
                 if(AccountType == 'profile'){
-                    if(valueId == element.company){
+                    if(valueId == element._id.company){
                         return true
                     }
                 }
                 if(AccountType == 'company'){
-                    if(valueId == element.profile){
+                    if(valueId == element.employee.profile){
                         return true;
                     }
                 }
@@ -204,16 +280,10 @@ export default {
 
             return false;
         },
-        employmentStatus(valueId){ //returns employment status
+        employmentStatus(valueId){ //returns employment status //TODO
             const AccountType = this.accountType;
-            let employment;
-
-            if(AccountType == 'profile'){
-                employment = this.$store.getters.getEmployers;
-            }
-            if(AccountType == 'company'){
-                employment = this.$store.getters.getEmployees;
-            }
+            let employment = this.employment;
+            console.log('employment', employment);
             
             for (let i = 0; i < employment.length; i++) {//see if company id is in list of employers
                 const element = employment[i];
@@ -231,26 +301,17 @@ export default {
             }
 
             return null;
-        },
-        parseBirthdate(birthdate){
-            let date = new Date(birthdate);
-
-           
-            const month =  date.toLocaleString('en-us', { month: 'long' });
-            // const month = date.getMonth()+1; //zero based
-            const day = date.getDate();
-            const year = date.getFullYear();
-
-            return `${month} ${day},${year}`; //use this format to be compatible with input format
-        },
+        }
     },
     beforeMount(){
         const AccountType = this.$store.getters.getAccountType;
 
-        if(AccountType == 'profile'){
+        if(AccountType == 'profile'){ //for status checking on search - if already applied or recruited
             this.$store.dispatch('getRecruiters');
+            this.$store.dispatch('getEmployers');
         }else if(AccountType == 'company'){
             this.$store.dispatch('getApplicants');
+            this.$store.dispatch('getEmployees');
         }
     }
 }
