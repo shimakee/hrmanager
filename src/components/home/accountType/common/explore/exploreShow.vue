@@ -50,9 +50,10 @@
                         </div>
                     </accordion>
 
-                    <span v-if="k=='businesses' && v.length > 0 && accountType == 'profile'">
+                    <!--TODO-->
+                    <!-- <span v-if="k=='businesses' && v.length > 0 && accountType == 'profile'">
                         <p> {{k}} : {{v}} </p>
-                    </span>
+                    </span> -->
 
                     <accordion v-if="k == 'pics' && v.length > 0"
                         :inputType="'checkbox'">
@@ -115,7 +116,6 @@
                 </span>
             </li>
         </ul>
-        
     </div>
 </template>
 <script>
@@ -154,13 +154,13 @@ export default {
         },
         employment(){
             const AccountType = this.accountType;
-            let employment;
 
             if(AccountType == 'profile'){
-                return employment = this.$store.getters.getEmployers;
+                console.log(AccountType);
+                return  this.$store.getters.getEmployers;
             }
             if(AccountType == 'company'){
-                return employment = this.$store.getters.getEmployees;
+                return  this.$store.getters.getEmployees;
             }
         },
         application(){
@@ -271,7 +271,7 @@ export default {
                     }
                 }
                 if(AccountType == 'company'){
-                    if(valueId == element.employee.profile){
+                    if(valueId == element.employee.profile._id){
                         return true;
                     }
                 }
@@ -308,7 +308,10 @@ export default {
 
         if(AccountType == 'profile'){ //for status checking on search - if already applied or recruited
             this.$store.dispatch('getRecruiters');
-            this.$store.dispatch('getEmployers');
+            this.$store.dispatch('getEmployers')
+                .then(res=>{
+                    console.log('employers', res);
+                })
         }else if(AccountType == 'company'){
             this.$store.dispatch('getApplicants');
             this.$store.dispatch('getEmployees');

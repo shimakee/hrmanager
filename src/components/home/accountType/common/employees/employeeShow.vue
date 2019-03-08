@@ -1,50 +1,42 @@
 <template>
     <ul>
-        <li  @click="chosen=business.business._id" v-for="(business, key) in businesses" v-bind:key="key">
-            <span @click="deleteBusiness(business.business)"
-                v-if="editActive && chosen == business.business._id" class="delete">X</span>
-
-            <business-detail v-if="!editActive || chosen != business.business._id" :business="business" />
-            <business-form v-if="editActive && chosen == business.business._id" :business="business" :submit="editBusiness" :class={chosen:editActive} />
-
-            <span  @click="editActive = !editActive" class="edit">
-                <span v-if="editActive && chosen == business.business._id"  >Cancel</span>
-                <span v-if="!editActive">Edit</span>
-            </span>
+        <li v-for="(value, key) in employees" v-bind:key="key"
+                class="explore-card">
+            <div v-for="(employee,k) in value.employee" v-bind:key="k">
+                <span v-if="k == 'status'">
+                    Status: {{employee.Status}}
+                </span>
+                <span v-if="k == 'assignment'">
+                    Assignment: {{employee.assignment}}
+                </span>
+                <span v-if="k == 'salary'">
+                    Salary: {{employee.salary}}
+                </span>
+                <div v-if="k == 'infoDate'">
+                    <li  v-for="(info, j) in employee" v-bind:key="j">
+                        Info date: {{info.date}}
+                        <br>
+                        Info action: {{info.class}}
+                    </li>
+                </div>
+            </div>
         </li>
     </ul>
 </template>
 <script>
-import BusinessDetail from "./businessDetail";
-import BusinessForm from "./businessForm";
+import Accordion from "../../../../parts/accordion";
 
 export default {
-    components:{
-       "business-detail": BusinessDetail, 
-       "business-form": BusinessForm 
-    },
-    data(){
-        return{
-            editActive: false,
-            chosen: null
-        }
-    },
     computed:{
-        businesses(){
-            return this.$store.getters.getBusinesses;
-        }
-    },
-    methods:{
-        editBusiness(business){
-            this.$store.dispatch("editBusiness", business);
+        employees(){
+            return this.$store.getters.getEmployees;
         },
-        deleteBusiness(business){
-            // console.log(business);
-            this.$store.dispatch("deleteBusiness", business);
+        accountType(){
+            return this.$store.getters.getAccountType;
         }
     },
     mounted(){
-        this.$store.dispatch("getBusinesses")
+        this.$store.dispatch("getEmployees")
             .then(res=>{
                 console.log(res);
             });

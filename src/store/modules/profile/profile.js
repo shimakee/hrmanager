@@ -11,7 +11,7 @@ const getters = {
         return state.profile;
     },
     getEmployers:(state)=>{
-        return state.Employers;
+        return state.employers;
     },
     getProfilesSearched:(state)=>{
         return state.profilesSearched;
@@ -25,7 +25,7 @@ const mutations = {
         state.profile = payload;
     },
     setEmployers:(state, payload)=>{
-        state.Employers = payload;
+        state.employers = payload;
     },
     setProfilesSearched:(state, payload)=>{
         state.profilesSearched = payload;

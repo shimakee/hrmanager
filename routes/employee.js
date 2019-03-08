@@ -55,7 +55,10 @@ router.route('/scout/company').get(auth.isAuth, async (req,res,next)=>{
         let company;
         
         if(!queryId && !queryName){
-                company = await Company.find().exec();
+                // company = await Company.find().exec();
+                company = await Company.find()
+                        .populate({path:'businesses.business',
+                        populate:{path:'business'}}).exec();
                 if(!company){return res.status(404).send({message: "could not locate any ompany information"});}
 
                 // res.status(200).send(_.pick(company, ['authenticated', 'tradename', 'ownershipType', 'email', 'contact', 'address', 'businesses', 'government']));
@@ -571,8 +574,8 @@ router.route('/me/employees').get(auth.isAuth, auth.isAccountType('company'), as
         //check company exist
         let company = await Company.findById(req.user.company)
         .populate('employees.employee')
-        // .populate({ path: 'employees.employee', 
-        //         populate:{path:'profile'}})
+        .populate({ path: 'employees.employee', 
+                populate:{path:'profile'}})
         .exec();
 
         if(!company){return res.status(404).send({message: "could not locate company information"});}

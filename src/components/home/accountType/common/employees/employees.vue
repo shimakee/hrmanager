@@ -1,22 +1,14 @@
 <template>
     <div>
-        <employees-add />
-        <employees-show />
-
+        <employee-show />
     </div>
 </template>
 <script>
-import EmployeesAdd from "./employeesDetail";
-import EmployeesShow from "./employeesShow";
+import EmployeeShow from "./employeeShow";
 
 export default {
-    props:{
-        editable:{type: Boolean, default: false},
-
-    },
     components:{
-        "business-add":BusinessAdd,
-        "business-show":BusinessShow
+        "employee-show":EmployeeShow
     }
     ,computed:{
         accountType(){

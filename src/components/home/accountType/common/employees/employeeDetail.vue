@@ -1,6 +1,7 @@
 <template>
     <div>
-            <span class="tradename">
+        {{employee}}
+            <!-- <span class="tradename">
                 <b>Tradename:</b> {{business.business.tradename}}
             </span>
             <div class="address">
@@ -21,14 +22,14 @@
                         <b>Zipcode:</b> {{business.business.address.zipcode}}
                     </div>
                 </span>
-            </div>
+            </div> -->
     </div>
 </template>
 <script>
 
 export default {
     props:{
-        business: {type: Object}
+        employee: {type: Object}
     }
 }
 </script>
