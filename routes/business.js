@@ -68,10 +68,10 @@ router.route('/me').get(auth.isAuth, async (req,res,next)=>{
 }).put(auth.isAuth, async (req,res,next)=>{
 
     let {error} = Business.validate(req.body);
-    if(error){return res.status(400).send({message: 'Bad request.'});}
+    if(error){return res.status(400).send({message: 'Bad request. Invalid entry.', error: error});}
 
     if(!req.query.id){
-            res.status(400).send({message: "Bad request."});
+            res.status(400).send({message: "Bad request. No query Id passed"});
     }else{
             let id = req.query.id;
 
