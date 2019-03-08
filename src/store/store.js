@@ -11,7 +11,6 @@ import company from './modules/profile/company';//importing modules
 import business from './modules/profile/business';//importing modules
 
 import googlemaps from './modules/googlemaps/googlemaps';//googlemaps module
-import { type } from 'os';
 
 Vue.use(Vuex);
     
