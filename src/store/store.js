@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from '../axios-auth';
-// import axios from '../axios';
+// import axios from '../axios-auth';
+import axios from '../axios';
 import signup from './modules/beforeAuth/signup';//importing modules
 import login from './modules/beforeAuth/login';//importing modules
 import logout from './modules/beforeAuth/logout';//importing modules
